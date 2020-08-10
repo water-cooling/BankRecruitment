@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="VideoSelectCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="345" height="117"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="345" height="117"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5s4-AY-4XJ">
+                        <rect key="frame" x="9.5" y="12" width="105" height="85"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="105" id="ORN-QC-p0E"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="66" id="SY0-To-96a"/>
+                            <constraint firstAttribute="height" constant="85" id="cIw-AV-QGY"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="fsg-Om-EdF"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="章节：1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a07-3g-zs3">
+                        <rect key="frame" x="124" y="77" width="51" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="51" id="dKb-J1-Npa"/>
+                            <constraint firstAttribute="height" constant="21" id="xBD-23-8zt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goz-Cf-463">
+                        <rect key="frame" x="199" y="77" width="90" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Aim-sV-PUA"/>
+                            <constraint firstAttribute="width" constant="90" id="T10-cS-xvk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微观经济学" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55T-hU-hhG">
+                        <rect key="frame" x="124" y="24" width="221" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="46" id="eRw-FL-Pi7"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDg-eg-Iqf">
+                        <rect key="frame" x="252" y="71.5" width="78" height="32.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="6"/>
+                        <state key="normal" title="去播放" backgroundImage="bg"/>
+                    </button>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="a07-3g-zs3" secondAttribute="bottom" constant="19" id="Az1-jQ-kbN"/>
+                <constraint firstAttribute="trailing" secondItem="55T-hU-hhG" secondAttribute="trailing" id="EYm-s9-ucq"/>
+                <constraint firstItem="5s4-AY-4XJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="9.5" id="JUM-Yt-cNx"/>
+                <constraint firstItem="goz-Cf-463" firstAttribute="leading" secondItem="a07-3g-zs3" secondAttribute="trailing" constant="24" id="NGs-AB-2ll"/>
+                <constraint firstItem="DDg-eg-Iqf" firstAttribute="centerY" secondItem="goz-Cf-463" secondAttribute="centerY" id="S5A-aC-TBK"/>
+                <constraint firstItem="55T-hU-hhG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="24" id="Uhn-Qb-LqH"/>
+                <constraint firstAttribute="trailing" secondItem="DDg-eg-Iqf" secondAttribute="trailing" constant="15" id="VMI-PA-0eC"/>
+                <constraint firstItem="55T-hU-hhG" firstAttribute="leading" secondItem="5s4-AY-4XJ" secondAttribute="trailing" constant="9.5" id="fM2-J9-xpM"/>
+                <constraint firstItem="5s4-AY-4XJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="12" id="jbZ-5y-osh"/>
+                <constraint firstItem="a07-3g-zs3" firstAttribute="centerY" secondItem="goz-Cf-463" secondAttribute="centerY" id="rlB-Ez-mmj"/>
+                <constraint firstItem="55T-hU-hhG" firstAttribute="leading" secondItem="a07-3g-zs3" secondAttribute="leading" id="t8e-3Q-xXf"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="345" height="117"/>
+            <connections>
+                <outlet property="chapterLabel" destination="a07-3g-zs3" id="14r-lj-1rb"/>
+                <outlet property="countLabel" destination="goz-Cf-463" id="HUa-fP-rgg"/>
+                <outlet property="videoBtn" destination="DDg-eg-Iqf" id="Yp4-Dw-QK1"/>
+                <outlet property="videoTypeImageView" destination="5s4-AY-4XJ" id="Hy4-ib-i3v"/>
+                <outlet property="videoTypeLabel" destination="55T-hU-hhG" id="MFg-Gg-3O7"/>
+            </connections>
+            <point key="canvasLocation" x="102.17391304347827" y="-31.808035714285712"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="bg" width="78" height="32.5"/>
+    </resources>
+</document>
