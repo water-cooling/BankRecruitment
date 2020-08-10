@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="KGk-i7-Jjw" customClass="OldExamsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="287" height="69"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2010年中国人民银行事业编制考试" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pss-U1-aKJ">
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="难度 5.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a74-KC-fEd">
+                        <color key="backgroundColor" red="0.1215686275" green="0.62352941179999999" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="8wk-H7-rHz"/>
+                            <constraint firstAttribute="width" constant="55" id="WbV-h2-0Qz"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已完成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ceq-Kz-2bn">
+                        <color key="backgroundColor" red="0.28235294119999998" green="0.82352941180000006" blue="0.62745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="teU-gz-Y3J"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="a74-KC-fEd" secondAttribute="bottom" constant="2" id="LKi-J0-yP1"/>
+                    <constraint firstItem="Pss-U1-aKJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="P04-tz-vcm"/>
+                    <constraint firstItem="a74-KC-fEd" firstAttribute="baseline" secondItem="ceq-Kz-2bn" secondAttribute="baseline" id="QdK-FA-ktB"/>
+                    <constraint firstItem="Pss-U1-aKJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="ayB-PQ-Mfe"/>
+                    <constraint firstItem="Pss-U1-aKJ" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="f8w-0P-yxx"/>
+                    <constraint firstItem="Pss-U1-aKJ" firstAttribute="leading" secondItem="a74-KC-fEd" secondAttribute="leading" id="tbT-FA-eeg"/>
+                    <constraint firstItem="ceq-Kz-2bn" firstAttribute="leading" secondItem="a74-KC-fEd" secondAttribute="trailing" constant="10" id="v87-f5-QmL"/>
+                    <constraint firstItem="a74-KC-fEd" firstAttribute="top" secondItem="Pss-U1-aKJ" secondAttribute="bottom" constant="7" id="xbL-PV-9Cz"/>
+                    <constraint firstItem="a74-KC-fEd" firstAttribute="firstBaseline" secondItem="ceq-Kz-2bn" secondAttribute="firstBaseline" id="ySa-xN-xCJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="compleleLabel" destination="ceq-Kz-2bn" id="Ixe-DC-FGf"/>
+                <outlet property="difficultyLabel" destination="a74-KC-fEd" id="pCU-xH-mqV"/>
+                <outlet property="oldExamLabel" destination="Pss-U1-aKJ" id="xNj-m4-dAU"/>
+            </connections>
+            <point key="canvasLocation" x="-94" y="33"/>
+        </tableViewCell>
+    </objects>
+</document>

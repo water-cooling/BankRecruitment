@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoViewController">
+            <connections>
+                <outlet property="tableView" destination="tcC-rA-srq" id="YOR-8U-14F"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tcC-rA-srq">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="eWe-wo-8J1"/>
+                        <outlet property="delegate" destination="-1" id="vZw-Oz-rnq"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tcC-rA-srq" secondAttribute="bottom" id="3Do-gx-ouA"/>
+                <constraint firstItem="tcC-rA-srq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="T3x-na-mAv"/>
+                <constraint firstAttribute="trailing" secondItem="tcC-rA-srq" secondAttribute="trailing" id="bSz-x3-K1F"/>
+                <constraint firstItem="tcC-rA-srq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qQK-p1-nIL"/>
+                <constraint firstItem="tcC-rA-srq" firstAttribute="bottom" secondItem="uj8-xD-8Xp" secondAttribute="bottom" priority="800" id="xQT-EM-JII"/>
+                <constraint firstItem="tcC-rA-srq" firstAttribute="top" secondItem="uj8-xD-8Xp" secondAttribute="top" priority="800" constant="-20" id="zwR-hQ-gSa"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="uj8-xD-8Xp"/>
+            <point key="canvasLocation" x="-165.5" y="39.5"/>
+        </view>
+    </objects>
+</document>

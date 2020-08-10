@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PayMethodTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="44.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBb-6E-72l">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="b0J-av-d0M"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付支付支" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IxY-Pn-d1F">
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="radio_normal" translatesAutoresizingMaskIntoConstraints="NO" id="iUr-rZ-ROk">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="Pbl-Cb-MvL"/>
+                            <constraint firstAttribute="height" constant="20" id="psA-ah-EVh"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="PBb-6E-72l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="0Dh-FA-sNX"/>
+                    <constraint firstItem="IxY-Pn-d1F" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Bhz-qR-88C"/>
+                    <constraint firstItem="iUr-rZ-ROk" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-4" id="Bpu-vd-rup"/>
+                    <constraint firstItem="IxY-Pn-d1F" firstAttribute="leading" secondItem="PBb-6E-72l" secondAttribute="trailing" constant="5" id="HcM-Fc-TDg"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="IxY-Pn-d1F" secondAttribute="bottom" constant="1" id="HxS-XX-wuU"/>
+                    <constraint firstItem="iUr-rZ-ROk" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LcR-b3-XKh"/>
+                    <constraint firstItem="PBb-6E-72l" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="hrE-e4-tKv"/>
+                    <constraint firstItem="PBb-6E-72l" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="teQ-yO-tNr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="logoImageView" destination="PBb-6E-72l" id="Ign-eF-gdT"/>
+                <outlet property="payTitleLabel" destination="IxY-Pn-d1F" id="bzq-V1-5l3"/>
+                <outlet property="selectImageView" destination="iUr-rZ-ROk" id="aeM-p8-cLM"/>
+            </connections>
+            <point key="canvasLocation" x="-108" y="-3"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="radio_normal" width="13" height="14"/>
+    </resources>
+</document>

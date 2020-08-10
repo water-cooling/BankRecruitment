@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserKnowViewController">
+            <connections>
+                <outlet property="textView" destination="WQr-h8-f6t" id="0Yb-aM-Faf"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-h8-f6t">
+                    <rect key="frame" x="20" y="10" width="345" height="646"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <string key="text">一、总则
+1.1 银行易考的所有权和运营权归南京东吴教育咨询有限公司所有。 
+1.2 用户在注册之前，应当仔细阅读本协议，并同意遵守本协议后方可成为注册用户。
+二、服务内容
+2.1 银行易考APP的具体内容由本公司根据实际情况提供。 
+三、用户帐号
+3.1  用户应自行诚信向本APP提供注册资料，用户提供的注册资料应准确有效，用户信息如有变动的，应及时更新资料。 
+3.2 用户注册成功后，将产生用户名和密码等账户信息，用户应谨慎合理的保存、使用其用户名和密码。
+四、隐私保护
+4.1 本APP不会对外公开或向第三方提供单个用户的注册资料。
+五、版权声明
+5.1 本APP的文字、图片等版权归南京东吴教育咨询有限公司所有，未经本站许可，不得任意转载。 
+5.2 本APP特有的标识、版面设计、编排方式等版权归南京东吴教育咨询有限公司所有，未经本站许可，不得任意复制或转载。 
+六、附则
+6.1 本协议解释权及修订权归南京东吴教育咨询有限公司所有。</string>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="qW3-Ac-tAF"/>
+                    </connections>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="WQr-h8-f6t" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="CfY-SH-Vcw"/>
+                <constraint firstItem="aRc-9A-rvM" firstAttribute="bottom" secondItem="WQr-h8-f6t" secondAttribute="bottom" priority="800" constant="11" id="D5x-95-u8y"/>
+                <constraint firstItem="WQr-h8-f6t" firstAttribute="top" secondItem="aRc-9A-rvM" secondAttribute="top" priority="800" constant="-54" id="EY1-hm-21v"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WQr-h8-f6t" secondAttribute="bottom" constant="11" id="Nq8-qC-ZlC"/>
+                <constraint firstItem="WQr-h8-f6t" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="cmA-Im-G2p"/>
+                <constraint firstAttribute="trailing" secondItem="WQr-h8-f6t" secondAttribute="trailing" constant="10" id="vaj-Py-Z8h"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="aRc-9A-rvM"/>
+            <point key="canvasLocation" x="-108.5" y="-43.5"/>
+        </view>
+    </objects>
+</document>

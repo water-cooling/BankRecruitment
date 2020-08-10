@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ExaminationPaperTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="117"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="通用就业能力测试通用就业" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwA-EB-csa">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="AP2-g2-0cI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$199" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="a1A-Uo-y7i">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="ghe-ll-4fR"/>
+                            <constraint firstAttribute="width" constant="74" id="sSE-Y0-ZJT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                        <color key="textColor" red="0.97647058819999999" green="0.28627450980000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程安排：2017.05.01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1l-Kd-5rq">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="GfS-kM-UQO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wJZ-ae-xHK">
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.98039215690000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="39" id="0B4-ff-Dwx"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参与人数1000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvI-b2-x05">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="142" id="Rmi-xf-vCA"/>
+                            <constraint firstAttribute="height" constant="21" id="TCN-bJ-9ZB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.45098039220000002" green="0.65098039220000004" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="停售时间还有10天" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13G-WO-juH">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="IQn-Y3-cCH"/>
+                            <constraint firstAttribute="width" constant="135" id="ucS-on-J4M"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.45098039220000002" green="0.65098039220000004" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="QwA-EB-csa" secondAttribute="trailing" constant="68" id="5rW-fB-m8B"/>
+                    <constraint firstItem="a1A-Uo-y7i" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="Br3-LH-fWc"/>
+                    <constraint firstItem="wJZ-ae-xHK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="HDA-DB-G8N"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="nvI-b2-x05" secondAttribute="bottom" constant="0.5" id="OSy-i1-blo"/>
+                    <constraint firstItem="nvI-b2-x05" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="YQ1-w2-TUU"/>
+                    <constraint firstItem="QwA-EB-csa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="ZO2-Yz-Lm2"/>
+                    <constraint firstItem="QwA-EB-csa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="d7Y-tj-M6f"/>
+                    <constraint firstItem="s1l-Kd-5rq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="42" id="dMa-lf-V9p"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="a1A-Uo-y7i" secondAttribute="trailing" constant="-7" id="emP-gc-jgi"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="s1l-Kd-5rq" secondAttribute="trailing" id="lto-ZN-i1M"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="wJZ-ae-xHK" secondAttribute="trailing" constant="-8" id="mcg-At-mgI"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="13G-WO-juH" secondAttribute="bottom" constant="1.5" id="oXQ-RP-XdX"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="13G-WO-juH" secondAttribute="trailing" id="qDZ-7x-0GO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="wJZ-ae-xHK" secondAttribute="bottom" constant="-8.5" id="sD2-qz-SsU"/>
+                    <constraint firstItem="s1l-Kd-5rq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="wXs-kh-xxR"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ExaminationPaperBuyNumberLabel" destination="nvI-b2-x05" id="XXG-3z-kSk"/>
+                <outlet property="ExaminationPaperClassPlanLabel" destination="s1l-Kd-5rq" id="lNj-tN-w9n"/>
+                <outlet property="ExaminationPaperLimitTimeLabel" destination="13G-WO-juH" id="PFw-c7-H82"/>
+                <outlet property="ExaminationPaperPriceLabel" destination="a1A-Uo-y7i" id="F5a-F0-XD7"/>
+                <outlet property="ExaminationPaperTitleLabel" destination="QwA-EB-csa" id="0ny-dv-Iam"/>
+            </connections>
+            <point key="canvasLocation" x="-288" y="-6"/>
+        </tableViewCell>
+    </objects>
+</document>

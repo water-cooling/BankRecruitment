@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="ExerciseHositoryTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国农业银行2017年度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtG-1X-KKV">
+                        <rect key="frame" x="15" y="10" width="291" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="PvY-mG-YCA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017.03.27" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWu-Tw-kVF">
+                        <rect key="frame" x="15" y="34" width="291" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.5490196078431373" green="0.62352941176470589" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ZWu-Tw-kVF" firstAttribute="top" secondItem="wtG-1X-KKV" secondAttribute="bottom" constant="3" id="D0R-zt-dcE"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ZWu-Tw-kVF" secondAttribute="bottom" constant="1" id="Nyv-op-cQT"/>
+                    <constraint firstItem="wtG-1X-KKV" firstAttribute="trailing" secondItem="ZWu-Tw-kVF" secondAttribute="trailing" id="SQK-dW-nXg"/>
+                    <constraint firstItem="wtG-1X-KKV" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bXJ-rV-fTl"/>
+                    <constraint firstItem="wtG-1X-KKV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="gTJ-hW-i8A"/>
+                    <constraint firstItem="wtG-1X-KKV" firstAttribute="leading" secondItem="ZWu-Tw-kVF" secondAttribute="leading" id="wfW-bY-tgE"/>
+                    <constraint firstItem="wtG-1X-KKV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="zZU-MD-ihE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ExerciseHositoryTimeLabel" destination="ZWu-Tw-kVF" id="UMd-zh-qiS"/>
+                <outlet property="ExerciseHositoryTitleLabel" destination="wtG-1X-KKV" id="djc-PM-VdS"/>
+            </connections>
+            <point key="canvasLocation" x="-135" y="20"/>
+        </tableViewCell>
+    </objects>
+</document>

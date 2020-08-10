@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WrongQuestionsSheetViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="42u-Vf-3Ha"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="152-QH-yIC">
+                    <rect key="frame" x="1" y="623" width="123" height="44"/>
+                    <color key="backgroundColor" red="0.25882352939999997" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="89U-KA-P17"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="错题分析">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ErrorAnalysisAction:" destination="-1" eventType="touchUpInside" id="Z6a-Wv-fsu"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8V-FX-Q1K">
+                    <rect key="frame" x="126" y="623" width="123" height="44"/>
+                    <color key="backgroundColor" red="0.25882352939999997" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="全部分析">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="allAnalysisAction:" destination="-1" eventType="touchUpInside" id="lzq-F9-Huf"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngh-Gf-IdJ">
+                    <rect key="frame" x="251" y="623" width="123" height="44"/>
+                    <color key="backgroundColor" red="0.25882352939999997" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="错题重做">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="ErrorReTryExamAction:" destination="-1" eventType="touchUpInside" id="Vko-YN-d7D"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="152-QH-yIC" firstAttribute="height" secondItem="j8V-FX-Q1K" secondAttribute="height" id="3JS-a9-c4y"/>
+                <constraint firstItem="j8V-FX-Q1K" firstAttribute="height" secondItem="ngh-Gf-IdJ" secondAttribute="height" id="439-9T-PLO"/>
+                <constraint firstItem="j8V-FX-Q1K" firstAttribute="width" secondItem="ngh-Gf-IdJ" secondAttribute="width" id="Byn-7H-Nsw"/>
+                <constraint firstItem="152-QH-yIC" firstAttribute="baseline" secondItem="j8V-FX-Q1K" secondAttribute="baseline" id="CPX-dE-cjy"/>
+                <constraint firstItem="j8V-FX-Q1K" firstAttribute="baseline" secondItem="ngh-Gf-IdJ" secondAttribute="baseline" id="Ebd-FR-7QV"/>
+                <constraint firstAttribute="trailing" secondItem="ngh-Gf-IdJ" secondAttribute="trailing" constant="1" id="KxH-gk-vi1"/>
+                <constraint firstItem="152-QH-yIC" firstAttribute="width" secondItem="j8V-FX-Q1K" secondAttribute="width" id="LOc-PW-ngN"/>
+                <constraint firstItem="152-QH-yIC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="1" id="M91-Mq-q9R"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="152-QH-yIC" secondAttribute="bottom" id="c68-ti-G1d"/>
+                <constraint firstItem="RIu-xH-kfl" firstAttribute="bottom" secondItem="152-QH-yIC" secondAttribute="bottom" priority="800" id="ghl-3s-EvU"/>
+                <constraint firstItem="j8V-FX-Q1K" firstAttribute="leading" secondItem="152-QH-yIC" secondAttribute="trailing" constant="2" id="ovy-Le-84U"/>
+                <constraint firstItem="j8V-FX-Q1K" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vxg-K6-K6d"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="RIu-xH-kfl"/>
+            <point key="canvasLocation" x="-1749.5" y="-49.5"/>
+        </view>
+    </objects>
+</document>

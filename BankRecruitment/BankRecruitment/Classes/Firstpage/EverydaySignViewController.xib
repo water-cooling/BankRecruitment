@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EverydaySignViewController">
+            <connections>
+                <outlet property="signButton" destination="cu6-bu-SDm" id="R2c-p2-YVu"/>
+                <outlet property="signDaysLabel" destination="uZ4-dI-nlA" id="w4A-AA-Jec"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qiandao_bg" translatesAutoresizingMaskIntoConstraints="NO" id="neP-Lg-Ove">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jgw-bF-8Kv">
+                    <rect key="frame" x="77.5" y="391.5" width="220" height="113"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="113" id="7Yr-Ip-bRc"/>
+                        <constraint firstAttribute="width" constant="220" id="qgE-IC-pPc"/>
+                    </constraints>
+                    <state key="normal" image="qiandao_pic"/>
+                    <connections>
+                        <action selector="DailyPracticeButtonAction:" destination="-1" eventType="touchUpInside" id="wkY-bi-vgT"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cu6-bu-SDm">
+                    <rect key="frame" x="76" y="311" width="223" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="gDq-QS-Vg9"/>
+                        <constraint firstAttribute="width" constant="223" id="njV-lT-loW"/>
+                    </constraints>
+                    <state key="normal" image="btn_lijiqiandao"/>
+                    <connections>
+                        <action selector="signButtonAction:" destination="-1" eventType="touchUpInside" id="CjS-cm-7AB"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="连续签到10天" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZ4-dI-nlA">
+                    <rect key="frame" x="91.5" y="361" width="192" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="192" id="ex9-9N-xmh"/>
+                        <constraint firstAttribute="height" constant="21" id="qHA-QJ-NZw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击每日一练，进入每日精选练习！连续签到15天免费获取银行招聘历年真题一本；连续签到30天免费获取银行招聘考试指定教材一本！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="QUj-xj-wkR">
+                    <rect key="frame" x="77.5" y="512.5" width="220" height="69.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="220" id="7Hl-EY-yKj"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="QUj-xj-wkR" secondAttribute="bottom" constant="85" id="3iO-Ma-Lwi"/>
+                <constraint firstAttribute="trailing" secondItem="neP-Lg-Ove" secondAttribute="trailing" id="C1p-Ob-hOQ"/>
+                <constraint firstItem="cu6-bu-SDm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Cc3-tA-o3L"/>
+                <constraint firstAttribute="bottom" secondItem="neP-Lg-Ove" secondAttribute="bottom" id="Fdp-OX-qrp"/>
+                <constraint firstItem="Jgw-bF-8Kv" firstAttribute="top" secondItem="uZ4-dI-nlA" secondAttribute="bottom" constant="9.5" id="Hef-ZX-Ppe"/>
+                <constraint firstItem="Jgw-bF-8Kv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="I6x-JH-BeR"/>
+                <constraint firstItem="uZ4-dI-nlA" firstAttribute="top" secondItem="cu6-bu-SDm" secondAttribute="bottom" constant="5" id="U8q-jv-yGB"/>
+                <constraint firstItem="QUj-xj-wkR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="V42-st-FP9"/>
+                <constraint firstItem="neP-Lg-Ove" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="VAL-kf-RD2"/>
+                <constraint firstItem="QUj-xj-wkR" firstAttribute="top" secondItem="Jgw-bF-8Kv" secondAttribute="bottom" constant="8" id="VpC-aR-F0K"/>
+                <constraint firstItem="cu6-bu-SDm" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="viZ-gZ-reA"/>
+                <constraint firstItem="neP-Lg-Ove" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xUk-EV-AYf"/>
+                <constraint firstItem="uZ4-dI-nlA" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zcV-I1-ORA"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <viewLayoutGuide key="safeArea" id="fhc-tc-9Nl"/>
+            <point key="canvasLocation" x="-93.5" y="10.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="btn_lijiqiandao" width="223" height="45"/>
+        <image name="qiandao_bg" width="375" height="667"/>
+        <image name="qiandao_pic" width="220" height="113"/>
+    </resources>
+</document>

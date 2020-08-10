@@ -1,0 +1,21 @@
+//
+//  PrefixHeader.pch
+//  BankRecruitment
+//
+//  Created by 夏建清 on 2017/3/27.
+//  Copyright © 2017年 LongLian. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+#import "LdCommon.h"
+#import "LLRequestClass.h"
+#import "UIView+Addition.h"
+#import "DefineConstant.h"
+#endif
+
+
+
+#endif /* PrefixHeader_pch */
