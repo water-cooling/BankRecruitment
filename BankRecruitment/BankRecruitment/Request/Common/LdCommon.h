@@ -43,12 +43,15 @@ const static NSString *APIKey = @"bd7a0d4add223891c4aee367f68961aa";
 //
 //内容区域背景色均为：＃ffffff
 
+//字体颜色均为：＃333333
+
+
 #define kColorBarGrayBackground UIColorFromHex(0xf3f3f3)
 #define kColorLineSepBackground UIColorFromHex(0xe6e6e6)
 #define kColorSelect UIColorFromHex(0x51a6ff)
 #define kColorNavigationBar [UIColor whiteColor]
 #define kColorDarkText UIColorFromHex(0x444444)
-
+#define kColorBlackText [UIColor colorWithHex:@"#333333"]
 
 #pragma mark--常用define
 //判断是否是IOS7以上系统

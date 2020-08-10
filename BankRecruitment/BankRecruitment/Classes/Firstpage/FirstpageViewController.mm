@@ -540,73 +540,67 @@
     [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if(section == 1)
-    {
-        return 50;
-    }
-    else
-    {
-        return 0.1;
-    }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+     if(section == 1){
+           return 154.5;
+       }
+       else{
+           return 131.5;
+       }
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    if(section == 0)
-    {
-        return 10;
-    }
-    else
-    {
-        return 0.1;
-    }
-}
-
-- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    if(section == 0)
-    {
-        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, 10)];
-        footerView.backgroundColor = [UIColor clearColor];
-        return footerView;
-    }
-    else
-    {
-        return nil;
-    }
-}
-
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if(section == 1)
-    {
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 45)];
-        view.backgroundColor = kColorBarGrayBackground;
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+        UIView *Headview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 154)];
+        Headview.backgroundColor = [UIColor colorWithHex:@"#F5F5F5"];
+    NSString *advStr = section == 1 ? @"sectionone": @"sectiontwo";
+        UIImageView *advImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:advStr]];
+        [Headview addSubview:advImg];
+    [advImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.right.equalTo(Headview);
+        make.left.equalTo(Headview).offset(16);
+        make.right.equalTo(Headview).offset(-16);
+        make.top.equalTo(Headview).offset(10);
+        make.height.mas_equalTo(section == 1 ? 83 : 60);
+    }];
+    UIView *moreView = [[UIView alloc] init];
+    moreView.backgroundColor = [UIColor colorWithHex:@"#FFFFFF"];
+    [Headview addSubview:moreView];
+    [moreView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(Headview);
+        make.top.equalTo(advImg.mas_bottom).offset(10);
+        make.height.mas_equalTo(50.5);
+    }];
+        UILabel *label1 = [[UILabel alloc] init];
+        label1.font = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
+        label1.textColor = kColorBlackText;
+        label1.text = section == 1 ? @"精选免费视频":@"最新招聘信息";
+        [moreView addSubview:label1];
+    [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(moreView).offset(15);
+    }];
+    
+     UIImageView *rightImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"calendar_btn_arrow_right"]];
+        [moreView addSubview:rightImg];
+    [rightImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(label1);
+        make.size.mas_equalTo(CGSizeMake(6, 11));
+        make.right.equalTo(moreView).offset(-12);
+    }];
         
-        UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, kScreenWidth-30, 20)];
-        label1.font = [UIFont systemFontOfSize:14];
-        label1.textColor = kColorDarkText;
-        label1.text = @"考点专项练习";
-        [view addSubview:label1];
-        
-        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(15, 28, kScreenWidth-30, 15)];
+      UILabel *label2 = [[UILabel alloc] init];
         label2.font = [UIFont systemFontOfSize:12];
-        label2.textColor = kColorDarkText;
-        label2.text = @"掌握核心考点 科学复习备考";
-        [view addSubview:label2];
+        label2.textAlignment = NSTextAlignmentRight;
+        label2.textColor = [UIColor colorWithHex:@"#999999"];
+        label2.text = @"更多精彩";
+        [moreView addSubview:label2];
+    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(rightImg.mas_left).offset(-6.5);
+        make.centerY.equalTo(label1);
+    }];
         
-        return view;
-    }
-    else
-    {
-        return nil;
-    }
+        return Headview;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0)
     {
         if(indexPath.row == 0)
