@@ -2752,7 +2752,7 @@
 					60F90BBA1E88F66000151728 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Z2F894585Y;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -3341,9 +3341,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CODE_SIGN_ENTITLEMENTS = Recruitment.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z2F894585Y;
 				ENABLE_BITCODE = NO;
 				EXECUTABLE_PREFIX = "";
@@ -3376,7 +3376,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.DongwuEducation.longlian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = DongwuAppstoreDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3390,7 +3390,7 @@
 				CODE_SIGN_ENTITLEMENTS = Recruitment.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z2F894585Y;
 				ENABLE_BITCODE = NO;
 				EXECUTABLE_PREFIX = "";
@@ -3423,7 +3423,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.DongwuEducation.longlian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = DongwuAppstoreDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
