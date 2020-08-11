@@ -41,7 +41,8 @@
 #import "BBAlertView.h"
 #import "InformationViewController.h"
 #import "FirstpageModule.h"
-
+#import "InviteTableViewCell.h"
+#import "VideoTypeModel.h"
 #define kHeadScrollHeight 150
 
 @interface FirstpageViewController ()<UITableViewDelegate, UITableViewDataSource, FirstTableCellHeadFunctionBtnFunc, FirstpageModulesFunctionBtnFunc, UISearchBarDelegate, UIWebViewDelegate, WSPageViewDataSource, WSPageViewDelegate>
@@ -50,20 +51,21 @@
 
 @property (nonatomic, copy) NSMutableArray *moduleList;
 @property (nonatomic, strong) NSMutableArray *outLineList;
+@property (nonatomic, strong) NSMutableArray *typeList;//获取视频list
 @property (nonatomic, assign) NSInteger tempOutLineCellNumber;
 @property (nonatomic, assign) NSInteger FirstCnt; //获取首页做题n题：FirstCnt   ；客户端限制取得的数量显示出来
 @property (nonatomic, assign) NSInteger OutlineCnt; //首页提纲n题：OutlineCnt
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
+@property (nonatomic, strong) dispatch_group_t group;
+@property (nonatomic, strong)  dispatch_queue_t queue;
 @end
 
 @implementation FirstpageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
-    NSLog(@"%@", self.navigationController.viewControllers);
-    
+    self.group = dispatch_group_create();
+       self.queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     self.moduleList = [NSMutableArray arrayWithCapacity:9];
     self.outLineList = [NSMutableArray arrayWithCapacity:9];
     self.FirstCnt = 20;
@@ -78,20 +80,29 @@
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     [self setupTableViewRefresh];
-    
-    [self NetworkGetFirstExaminPaper];
-    [self NetworkGetFirstPageModule];
+    [self getNetWork];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+-(void)getNetWork{
+      dispatch_group_async(self.group, self.queue, ^{
+              [self NetworkGetFirstPageModule];
+        });
+    dispatch_group_async(self.group, self.queue, ^{
+                [self NetworkGetVideoTypes];
+        });
+      dispatch_group_notify(self.group, self.queue, ^{
+          dispatch_async(dispatch_get_main_queue(), ^{
+              [self endTableRefreshing];
+              [self.tableView reloadData];
+          });
+      });
+}
+
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIColor colorWithHex:@"#FFFFFF"];
     [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    if(self.selectedIndexPath)
-    {
-        [self NetworkGetFreOutlineByIndexPath:self.selectedIndexPath];
-    }
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -186,8 +197,7 @@
     }
 }
 
-- (void)messageButtonPressed
-{
+- (void)messageButtonPressed{
     MineMessageViewController *vc = [[MineMessageViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -210,8 +220,7 @@
     [self performSelector:@selector(searchBarBecomeFirstResponder:) withObject:vc afterDelay:0.3];
 }
 
-- (void)searchBarBecomeFirstResponder:(SearchTitleViewController *)vc
-{
+- (void)searchBarBecomeFirstResponder:(SearchTitleViewController *)vc{
     [vc.searchBar becomeFirstResponder];
 }
 
@@ -466,8 +475,7 @@
     return nil;
 }
 
-- (void)outLineCellAction:(UIButton *)button
-{
+- (void)outLineCellAction:(UIButton *)button{
     OutlineModel *model = [self getModelOfOutLineSection:button.tag/10000 andRow:button.tag%10000];
     model.isSpread = !model.isSpread;
     [self.tableView reloadData];
@@ -475,8 +483,7 @@
 
 #pragma -mark UITableView Delegate
 #pragma mark 开始进入刷新状态
-- (void)setupTableViewRefresh
-{
+- (void)setupTableViewRefresh{
     __weak typeof(self) weakSelf = self;
     
     // 添加传统的上拉刷新
@@ -493,8 +500,7 @@
     self.tableView.footer.hidden = YES;
 }
 
-- (void)headerRereshing
-{
+- (void)headerRereshing{
     [self NetworkGetParam];
     [self NetworkGetFavoriteType];
     [self NetworkGetFirstContentsOutline];
@@ -526,8 +532,7 @@
     [self.tableView reloadData];
 }
 
-- (void)refreshSelectedBy:(OutlineModel *)refreshModel
-{
+- (void)refreshSelectedBy:(OutlineModel *)refreshModel{
     OutlineModel *selectedModel = [self getModelOfOutLineSection:self.selectedIndexPath.section andRow:self.selectedIndexPath.row];
     if([refreshModel.ID isEqualToString:selectedModel.ID])
     {
@@ -537,7 +542,6 @@
         selectedModel.errCount = refreshModel.errCount;
     }
     
-    [self.tableView reloadRowsAtIndexPaths:@[self.selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -604,29 +608,18 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section == 0)
-    {
-        if(indexPath.row == 0)
-        {
-            return 150;
-        }
-        else if(indexPath.row == 1)
-        {
+    if(indexPath.section == 0){
+            return 120;
+    }else if(indexPath.section == 1){
             return 90+72*((self.moduleList.count-1)/4);
-        }
-        else
-        {
-            return 0;
-        }
-    }
-    else
-    {
-        return 67;
+    }else if(indexPath.section == 2){
+        return 118.5;
+    }else{
+        return 44;
     }
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 4;
 }
 
@@ -634,8 +627,7 @@
     if(section <= 2){
         return 1;
     }else{
-        NSInteger number = [self getRowOfOutLinesByModel:self.outLineList[section-1]];
-        return number;
+        return 4;
     }
 }
 
@@ -652,7 +644,6 @@
                 [LdGlobalObj sharedInstanse].pageView.delegate = self;
                 [LdGlobalObj sharedInstanse].pageView.dataSource = self;
             }
-            
             return loc_cell;
         }else if(indexPath.section == 1){
             FirstpageModulesTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, FirstpageModulesTableViewCell, @"FirstpageModulesTableViewCell");
@@ -668,58 +659,9 @@
            loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return loc_cell;
         }else{
-        self.tempOutLineCellNumber = 0;
-        OutlineModel *model = [self getModelOfOutLineSection:indexPath.section andRow:indexPath.row];
-        
-        QuestionTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, QuestionTableViewCell, @"QuestionTableViewCell");
-        loc_cell.actionBtn.tag = indexPath.section*10000+indexPath.row;
-        [loc_cell.actionBtn addTarget:self action:@selector(outLineCellAction:) forControlEvents:UIControlEventTouchUpInside];
-        [loc_cell.actionBtn setImage:nil forState:UIControlStateNormal];
-        loc_cell.questionNumberLabel.hidden = YES;
-        loc_cell.questionTitleLabel.text = model.Name;
-        loc_cell.totelCountLabel.text = [NSString stringWithFormat:@"%@/%@",model.doCount, model.TCount];
-        
-        loc_cell.upLineView.hidden = NO;
-        loc_cell.downLineView.hidden = NO;
-        loc_cell.BottomLine.hidden = YES;
-        if(indexPath.row == 0)
-        {
-            loc_cell.upLineView.hidden = YES;
-        }
-        if(indexPath.row == ([tableView numberOfRowsInSection:indexPath.section]-1))
-        {
-            loc_cell.BottomLine.hidden = NO;
-            loc_cell.downLineView.hidden = YES;
-        }
-        
-        if(model.ceng == 0)
-        {
-            if(model.isSpread)
-            {
-                [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_minus"] forState:UIControlStateNormal];
-            }
-            else
-            {
-                [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_add"] forState:UIControlStateNormal];
-            }
-        }
-        else if(model.list_outlineinfo.count > 0)
-        {
-            if(model.isSpread)
-            {
-                [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_smallicon_minus"] forState:UIControlStateNormal];
-            }
-            else
-            {
-                [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_smallicon_add"] forState:UIControlStateNormal];
-            }
-        }
-        else
-        {
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_circle_blue"] forState:UIControlStateNormal];
-        }
-        
-        return loc_cell;
+       InviteTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, InviteTableViewCell, @"InviteTableViewCell");
+        loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                 return loc_cell;
     }
 }
 
@@ -1091,98 +1033,11 @@
         //ZB_Toast(@"失败");
     }];
 }
-
 /**
- 获取首页的大试卷，添加到已购买的数据库
+ 首页icon获取模块
  */
-- (void)NetworkGetFirstExaminPaper
-{
-    [LLRequestClass requestdoGetExaminByTypeInfo:@"首页" Success:^(id jsonData) {
-        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentArray);
-        if(contentArray.count > 0)
-        {
-            NSDictionary *contentDict = contentArray.firstObject;
-            NSString *result = [contentDict objectForKey:@"result"];
-            if([result isEqualToString:@"success"])
-            {
-                NSString *IsGet = contentDict[@"IsGet"];
-                [LdGlobalObj sharedInstanse].firstExaminPaperEID = contentDict[@"ID"];
-//                if(![IsGet isEqualToString:@"是"])
-//                {
-                    [self NetworkSendZeroPaySuccessByLinkID:contentDict[@"ID"] PaperName:contentDict[@"Name"]];
-//                }
-                return;
-            }
-        }
-        [self endTableRefreshing];
-    } failure:^(NSError *error) {
-        [self endTableRefreshing];
-        //ZB_Toast(@"失败");
-    }];
-}
-
-/**
- 提交支付信息  做题、提纲的一张大试卷，添加到已购买的数据库
- */
-- (void)NetworkSendZeroPaySuccessByLinkID:(NSString *)LinkID PaperName:(NSString *)PaperName
-{
-    [LLRequestClass requestSendZeroPaySuccessByLinkID:LinkID PType:@"试卷" Abstract:PaperName Success:^(id jsonData) {
-        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentArray);
-        if(contentArray.count > 0)
-        {
-            NSDictionary *contentDict = contentArray.firstObject;
-            NSString *result = [contentDict objectForKey:@"result"];
-            if([result isEqualToString:@"success"])
-            {
-                return;
-            }
-        }
-//        ZB_Toast(@"首页试卷没有自动购买成功");
-    } failure:^(NSError *error) {
-        ZB_Toast(@"失败");
-    }];
-}
-
-/**
- 提交支付信息  做题、提纲的一张大试卷，添加到已购买的数据库
- */
-- (void)NetworkGetFreOutlineByIndexPath:(NSIndexPath *)indexPath
-{
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    OutlineModel *model = [self getModelOfOutLineSection:indexPath.section andRow:indexPath.row];
-    [LLRequestClass requestdoGetFreOutlineByOID:model.ID Success:^(id jsonData) {
-        [SVProgressHUD dismiss];
-        NSDictionary *contentDict=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentDict);
-        NSString *result = [contentDict objectForKey:@"result"];
-        if([result isEqualToString:@"success"])
-        {
-            NSArray *contentArray = [contentDict objectForKey:@"list"];
-            NSMutableArray *list = [NSMutableArray arrayWithCapacity:9];
-            for(NSDictionary *dict in contentArray)
-            {
-                OutlineModel *model = [OutlineModel model];
-                [model setDataWithDic:dict];
-                [list addObject:model];
-                
-                [self refreshSelectedBy:model];
-            }
-        }
-        self.selectedIndexPath = nil;
-    } failure:^(NSError *error) {
-        //ZB_Toast(@"失败");
-        [SVProgressHUD dismiss];
-        self.selectedIndexPath = nil;
-    }];
-}
-
-/**
- 首页获取模块
- */
-- (void)NetworkGetFirstPageModule
-{
+- (void)NetworkGetFirstPageModule{
+    dispatch_group_enter(self.group);
     [LLRequestClass requestGetFirstPageModuleBySuccess:^(id jsonData) {
         NSDictionary *contentDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         NSLog(@"%@", contentDict);
@@ -1199,11 +1054,40 @@
             }
             
             self.moduleList = [NSMutableArray arrayWithArray:list];
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            dispatch_group_leave(self.group);
         }
     } failure:^(NSError *error) {
-        
+        dispatch_group_leave(self.group);
+
     }];
 }
+//获取推荐的视频
+- (void)NetworkGetVideoTypes{
+    dispatch_group_enter(self.group);
+    self.typeList = [NSMutableArray arrayWithCapacity:9];
+    [LLRequestClass requestGetVideoTypeBySuccess:^(id jsonData) {
+        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        NSLog(@"%@", contentArray);
+        if(contentArray.count > 0){
+            NSDictionary *contentDict = contentArray.firstObject;
+            NSString *result = [contentDict objectForKey:@"result"];
+            if([result isEqualToString:@"success"])
+            {
+                for(NSDictionary *dict in contentArray)
+                {
+                    VideoTypeModel *model = [VideoTypeModel model];
+                    [model setDataWithDic:dict];
+                    [self.typeList addObject:model];
+                }
+                
+            }
+
+        }
+        dispatch_group_leave(self.group);
+    } failure:^(NSError *error) {
+        dispatch_group_leave(self.group);
+    }];
+}
+
 
 @end
