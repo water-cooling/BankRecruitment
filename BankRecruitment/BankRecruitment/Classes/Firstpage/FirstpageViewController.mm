@@ -35,6 +35,7 @@
 #import "DataBaseManager.h"
 #import "NewsViewController.h"
 #import "FirstPageAdScrollTableViewCell.h"
+#import "VideoSelectTableViewCell.h"
 #import "EverydaySignViewController.h"
 #import "LianxiHisViewController.h"
 #import "BBAlertView.h"
@@ -98,8 +99,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)drawViews
-{
+- (void)drawViews{
     UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, Screen_Width-120, 29)];
     [searchBtn setBackgroundImage:[UIImage imageNamed:@"home_search_inputbox"] forState:UIControlStateNormal];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -541,14 +541,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-     if(section == 1){
+     if(section == 2){
            return 154.5;
-       }
-       else{
+       }else if (section == 3){
            return 131.5;
        }
+    return 0;
 }
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section > 1) {
         UIView *Headview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 154)];
         Headview.backgroundColor = [UIColor colorWithHex:@"#F5F5F5"];
     NSString *advStr = section == 1 ? @"sectionone": @"sectiontwo";
@@ -598,6 +599,8 @@
     }];
         
         return Headview;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -624,28 +627,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1 + self.outLineList.count;
+    return 4;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if(section == 0)
-    {
-        return 2;
-    }
-    else
-    {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(section <= 2){
+        return 1;
+    }else{
         NSInteger number = [self getRowOfOutLinesByModel:self.outLineList[section-1]];
         return number;
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.section == 0)
-    {
-        if(indexPath.row == 0)
-        {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 0){
+        
             FirstPageAdScrollTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, FirstPageAdScrollTableViewCell, @"FirstPageAdScrollTableViewCell");
             
             loc_cell.upImages = [LdGlobalObj sharedInstanse].advList;
@@ -658,9 +654,7 @@
             }
             
             return loc_cell;
-        }
-        if(indexPath.row == 1)
-        {
+        }else if(indexPath.section == 1){
             FirstpageModulesTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, FirstpageModulesTableViewCell, @"FirstpageModulesTableViewCell");
             
             loc_cell.functionBtnDictLists = self.moduleList;
@@ -669,14 +663,11 @@
             [loc_cell setupFunctionsPage:nil];
             
             return loc_cell;
-        }
-        else
-        {
-            return nil;
-        }
-    }
-    else
-    {
+        }else if(indexPath.section == 2){
+           VideoSelectTableViewCell *loc_cell = (VideoSelectTableViewCell *)ldGetTableCellWithStyle(tableView, @"VideoSelectTableViewCell", UITableViewCellStyleDefault);
+           loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return loc_cell;
+        }else{
         self.tempOutLineCellNumber = 0;
         OutlineModel *model = [self getModelOfOutLineSection:indexPath.section andRow:indexPath.row];
         
