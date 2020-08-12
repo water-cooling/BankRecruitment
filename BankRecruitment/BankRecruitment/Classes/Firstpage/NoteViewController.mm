@@ -59,7 +59,7 @@
     else
     {
         self.view.backgroundColor = [UIColor whiteColor];
-        [backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+        [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
         [saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "VideoTypeModel.h"
 @interface HomeVideoListTableViewCell : UITableViewCell
-
+@property(nonatomic,strong)NSMutableArray * dataArr;
+@property(nonatomic,copy)void(^PlayBlock)(VideoTypeModel *model);
 @end

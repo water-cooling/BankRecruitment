@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "VideoModel.h"
 @interface VideoSelectTableViewCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *videoTypeLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *videoTypeImageView;
 @property (nonatomic, strong) IBOutlet UILabel *chapterLabel;
 @property (nonatomic, strong) IBOutlet UILabel *countLabel;
+
 @end

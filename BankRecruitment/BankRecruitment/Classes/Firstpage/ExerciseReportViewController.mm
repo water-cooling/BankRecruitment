@@ -74,7 +74,7 @@
     self.title = self.DailyPracticeTitle;
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    [backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
@@ -146,7 +146,7 @@
     else
     {
         self.view.backgroundColor = kColorBarGrayBackground;
-        [backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+        [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
         [self.errorAnalysisButton setBackgroundColor:kColorNavigationBar];
         [self.errorAnalysisButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.allAnalysisButton setBackgroundColor:kColorNavigationBar];

@@ -40,14 +40,14 @@
     
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    [self.backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+    [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
     
     UIButton *backWebViewButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backWebViewButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    [backWebViewButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+    [backWebViewButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [backWebViewButton addTarget:self action:@selector(backWebButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backWebViewButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     

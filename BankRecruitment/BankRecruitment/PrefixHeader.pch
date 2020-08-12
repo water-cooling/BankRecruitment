@@ -15,7 +15,10 @@
 #import "UIView+Addition.h"
 #import "DefineConstant.h"
 #import "Masonry.h"
+#import "UIImageView+WebCache.h"
+#import "UIView+XLExtension.h"
 #endif
+
 
 
 

@@ -30,6 +30,8 @@ const static NSString *APIKey = @"bd7a0d4add223891c4aee367f68961aa";
 #define kexampleUserLongitude 114.213000
 #define kexampleUserLatitude 22.294959
 
+#define MJWeakSelf __weak typeof(self) weakSelf = self;
+
 #define UIColorFromHex(hex) [UIColor colorWithRed:((float)((hex & 0xFF0000) >> 16))/255.0 green:((float)((hex & 0xFF00) >> 8))/255.0 blue:((float)(hex & 0xFF))/255.0 alpha:1.0]
 
 #define LLLocalizedString(key) [[InternationalControl bundle] localizedStringForKey:key value:nil table:@"Localizable"]
@@ -52,6 +54,8 @@ const static NSString *APIKey = @"bd7a0d4add223891c4aee367f68961aa";
 #define kColorNavigationBar [UIColor whiteColor]
 #define kColorDarkText UIColorFromHex(0x444444)
 #define kColorBlackText [UIColor colorWithHex:@"#333333"]
+#define KColorBlueText [UIColor colorWithHex:@"#558CF4"]
+
 
 #pragma mark--常用define
 //判断是否是IOS7以上系统

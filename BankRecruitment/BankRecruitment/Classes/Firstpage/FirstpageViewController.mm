@@ -35,7 +35,7 @@
 #import "DataBaseManager.h"
 #import "NewsViewController.h"
 #import "FirstPageAdScrollTableViewCell.h"
-#import "VideoSelectTableViewCell.h"
+#import "HomeVideoListTableViewCell.h"
 #import "EverydaySignViewController.h"
 #import "LianxiHisViewController.h"
 #import "BBAlertView.h"
@@ -43,19 +43,15 @@
 #import "FirstpageModule.h"
 #import "InviteTableViewCell.h"
 #import "VideoTypeModel.h"
+#import "VideoViewController.h"
 #define kHeadScrollHeight 150
 
 @interface FirstpageViewController ()<UITableViewDelegate, UITableViewDataSource, FirstTableCellHeadFunctionBtnFunc, FirstpageModulesFunctionBtnFunc, UISearchBarDelegate, UIWebViewDelegate, WSPageViewDataSource, WSPageViewDelegate>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UISearchBar *searchBar;
-
-@property (nonatomic, copy) NSMutableArray *moduleList;
-@property (nonatomic, strong) NSMutableArray *outLineList;
+@property (nonatomic, copy) NSMutableArray *moduleList;//首页的8个图标
 @property (nonatomic, strong) NSMutableArray *typeList;//获取视频list
 @property (nonatomic, assign) NSInteger tempOutLineCellNumber;
-@property (nonatomic, assign) NSInteger FirstCnt; //获取首页做题n题：FirstCnt   ；客户端限制取得的数量显示出来
-@property (nonatomic, assign) NSInteger OutlineCnt; //首页提纲n题：OutlineCnt
-@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, strong) dispatch_group_t group;
 @property (nonatomic, strong)  dispatch_queue_t queue;
 @end
@@ -66,11 +62,6 @@
     [super viewDidLoad];
     self.group = dispatch_group_create();
        self.queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    self.moduleList = [NSMutableArray arrayWithCapacity:9];
-    self.outLineList = [NSMutableArray arrayWithCapacity:9];
-    self.FirstCnt = 20;
-    self.OutlineCnt = 20;
-    self.selectedIndexPath = nil;
     
     [self drawViews];
     
@@ -84,7 +75,14 @@
 }
 
 -(void)getNetWork{
-      dispatch_group_async(self.group, self.queue, ^{
+    dispatch_group_async(self.group, self.queue, ^{
+                [self NetworkGetFavoriteType];
+    });
+    dispatch_group_async(self.group, self.queue, ^{
+                 [self NetworkGetAllAdByIndex:9999];
+    });
+       
+    dispatch_group_async(self.group, self.queue, ^{
               [self NetworkGetFirstPageModule];
         });
     dispatch_group_async(self.group, self.queue, ^{
@@ -101,7 +99,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIColor colorWithHex:@"#FFFFFF"];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
   
 }
 
@@ -111,10 +109,11 @@
 }
 
 - (void)drawViews{
-    UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, Screen_Width-120, 29)];
-    [searchBtn setBackgroundImage:[UIImage imageNamed:@"home_search_inputbox"] forState:UIControlStateNormal];
+    UIButton *searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, Screen_Width-120, 25)];
     searchBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    searchBtn.titleLabel.textColor = [UIColor whiteColor];
+    searchBtn.backgroundColor = [UIColor colorWithHex:@"#F0F0F0"];
+    searchBtn.layer.cornerRadius = 12.5;
+    [searchBtn setTitleColor:[UIColor colorWithHex:@"#999999"] forState:UIControlStateNormal];
     [searchBtn setTitle:@"搜索题目" forState:UIControlStateNormal];
     searchBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     searchBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 27, 0, 0);
@@ -174,11 +173,12 @@
     [_messageButton addTarget:self action:@selector(messageButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [messageView addSubview:_messageButton];
     
-    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_messageButton.frame)-6.5, _messageButton.frame.origin.y-6.5, 13, 13)];
+    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_messageButton.frame)-8, _messageButton.frame.origin.y+5, 13, 13)];
     messageLabel.backgroundColor = [UIColor redColor];
     messageLabel.textColor = [UIColor whiteColor];
     messageLabel.font = [UIFont systemFontOfSize:10];
-    messageLabel.layer.cornerRadius = 10;
+    messageLabel.layer.cornerRadius = 7.5;
+    messageLabel.layer.masksToBounds = YES;
     messageLabel.textAlignment = NSTextAlignmentCenter;
     messageLabel.text = @"2";
     [messageView addSubview:messageLabel];
@@ -398,88 +398,6 @@
     return index;
 }
 
-- (OutlineModel *)getModelOfOutLineSection:(NSInteger)section andRow:(NSInteger)row
-{
-    OutlineModel *sctionModel = self.outLineList[section-1];
-    if(row == 0)
-    {
-        sctionModel.ceng = 0;
-        return sctionModel;
-    }
-    
-    NSInteger index = 1;
-    for(OutlineModel *model in sctionModel.list_outlineinfo)
-    {
-        if(row == index)
-        {
-            model.ceng = 1;
-            return model;
-        }
-        
-        index++;
-        if(model.isSpread)
-        {
-            for(OutlineModel *subModel in model.list_outlineinfo)
-            {
-                if(row == index)
-                {
-                    subModel.ceng = 2;
-                    return subModel;
-                }
-                
-                index++;
-                if(subModel.isSpread)
-                {
-                    for(OutlineModel *subSubModel in subModel.list_outlineinfo)
-                    {
-                        if(row == index)
-                        {
-                            subSubModel.ceng = 3;
-                            return subSubModel;
-                        }
-                        
-                        index++;
-                        if(subSubModel.isSpread)
-                        {
-                            for(OutlineModel *subSubSubModel in subSubModel.list_outlineinfo)
-                            {
-                                if(row == index)
-                                {
-                                    subSubSubModel.ceng = 4;
-                                    return subSubSubModel;
-                                }
-                                
-                                index++;
-                                if(subSubSubModel.isSpread)
-                                {
-                                    for(OutlineModel *subSubSubSubModel in subSubSubModel.list_outlineinfo)
-                                    {
-                                        if(row == index)
-                                        {
-                                            subSubSubSubModel.ceng = 5;
-                                            return subSubSubSubModel;
-                                        }
-                                        
-                                        index++;
-                                    }
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-        }
-    }
-    
-    return nil;
-}
-
-- (void)outLineCellAction:(UIButton *)button{
-    OutlineModel *model = [self getModelOfOutLineSection:button.tag/10000 andRow:button.tag%10000];
-    model.isSpread = !model.isSpread;
-    [self.tableView reloadData];
-}
 
 #pragma -mark UITableView Delegate
 #pragma mark 开始进入刷新状态
@@ -495,16 +413,11 @@
     [self.tableView addLegendHeaderWithRefreshingBlock:^{
         [weakSelf headerRereshing];
     }];
-    
-    [self headerRereshing];
     self.tableView.footer.hidden = YES;
 }
 
 - (void)headerRereshing{
-    [self NetworkGetParam];
-    [self NetworkGetFavoriteType];
-    [self NetworkGetFirstContentsOutline];
-    [self NetworkGetAllAdByIndex:9999];
+    [self getNetWork];
 }
 
 - (void)footerRereshing
@@ -527,22 +440,10 @@
     //self.tableView.footer.loadMoreButton.hidden = YES;
 }
 
-- (void)refreshTableView:(NSArray *)array
-{
+- (void)refreshTableView:(NSArray *)array{
     [self.tableView reloadData];
 }
 
-- (void)refreshSelectedBy:(OutlineModel *)refreshModel{
-    OutlineModel *selectedModel = [self getModelOfOutLineSection:self.selectedIndexPath.section andRow:self.selectedIndexPath.row];
-    if([refreshModel.ID isEqualToString:selectedModel.ID])
-    {
-        selectedModel.doCount = refreshModel.doCount;
-        selectedModel.noCount = refreshModel.noCount;
-        selectedModel.okCount = refreshModel.okCount;
-        selectedModel.errCount = refreshModel.errCount;
-    }
-    
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
      if(section == 2){
@@ -556,7 +457,7 @@
     if (section > 1) {
         UIView *Headview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 154)];
         Headview.backgroundColor = [UIColor colorWithHex:@"#F5F5F5"];
-    NSString *advStr = section == 1 ? @"sectionone": @"sectiontwo";
+    NSString *advStr = section == 2 ? @"sectionone": @"sectiontwo";
         UIImageView *advImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:advStr]];
         [Headview addSubview:advImg];
     [advImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -564,7 +465,7 @@
         make.left.equalTo(Headview).offset(16);
         make.right.equalTo(Headview).offset(-16);
         make.top.equalTo(Headview).offset(10);
-        make.height.mas_equalTo(section == 1 ? 83 : 60);
+        make.height.mas_equalTo(section == 2 ? 83 : 60);
     }];
     UIView *moreView = [[UIView alloc] init];
     moreView.backgroundColor = [UIColor colorWithHex:@"#FFFFFF"];
@@ -577,7 +478,7 @@
         UILabel *label1 = [[UILabel alloc] init];
         label1.font = [UIFont systemFontOfSize:17 weight:UIFontWeightBold];
         label1.textColor = kColorBlackText;
-        label1.text = section == 1 ? @"精选免费视频":@"最新招聘信息";
+        label1.text = section == 2 ? @"精选免费视频":@"最新招聘信息";
         [moreView addSubview:label1];
     [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(moreView).offset(15);
@@ -609,7 +510,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
-            return 120;
+            return 150;
     }else if(indexPath.section == 1){
             return 90+72*((self.moduleList.count-1)/4);
     }else if(indexPath.section == 2){
@@ -655,7 +556,20 @@
             
             return loc_cell;
         }else if(indexPath.section == 2){
-           VideoSelectTableViewCell *loc_cell = (VideoSelectTableViewCell *)ldGetTableCellWithStyle(tableView, @"VideoSelectTableViewCell", UITableViewCellStyleDefault);
+            HomeVideoListTableViewCell *loc_cell =[tableView dequeueReusableCellWithIdentifier:@"HomeVideoListTableViewCell"];
+            if (!loc_cell) {
+               loc_cell = [[HomeVideoListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HomeVideoListTableViewCell"];
+            }
+            if (self.typeList.count) {
+                loc_cell.dataArr = self.typeList;
+            }
+          MJWeakSelf
+            loc_cell.PlayBlock = ^(VideoTypeModel *model) {
+                VideoViewController *vc = [[VideoViewController alloc] init];
+                vc.typeModel = model;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                vc.hidesBottomBarWhenPushed = YES;
+            };
            loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return loc_cell;
         }else{
@@ -665,64 +579,11 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    if(indexPath.section != 0)
-    {
-        OutlineModel *model = [self getModelOfOutLineSection:indexPath.section andRow:indexPath.row];
-        if([[DataBaseManager sharedManager] getExamOperationListByOID:model.ID isFromOutLine:@"是"])
-        {
-            NSArray *examList = [[DataBaseManager sharedManager] getExamDetailListByOID:model.ID];
-            if(examList.count > 0)
-            {
-                DailyPracticeViewController *vc = [[DailyPracticeViewController alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;
-                vc.practiceList = [NSMutableArray arrayWithArray:examList];
-                vc.OID = model.ID;
-                vc.title = model.Name;
-                vc.isSaveUserOperation = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-                self.selectedIndexPath = indexPath;
-            }
-            else
-            {
-                [self NetworkGetOutlineTitleByOID:model.ID ExamTitle:model.Name];
-                self.selectedIndexPath = indexPath;
-            }
-        }
-        else
-        {
-            [self NetworkGetOutlineTitleByOID:model.ID ExamTitle:model.Name];
-            self.selectedIndexPath = indexPath;
-        }
-    }
+   
 }
-
-#pragma -mark Network
-- (void)NetworkGetParam
-{
-    [LLRequestClass requestGetParamBySuccess:^(id jsonData) {
-        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentArray);
-        if(contentArray.count > 0)
-        {
-            NSDictionary *contentDict = contentArray.firstObject;
-            NSString *result = [contentDict objectForKey:@"result"];
-            if([result isEqualToString:@"success"])
-            {
-                NSString *OutlineCntString = contentDict[@"OutlineCnt"];
-                self.OutlineCnt = OutlineCntString.integerValue;
-                NSString *FirstCntString = contentDict[@"FirstCnt"];
-                self.FirstCnt = FirstCntString.integerValue;
-            }
-        }
-        
-    } failure:^(NSError *error) {
-    }];
-}
-
 - (void)NetworkGetFavoriteType
 {
     [LLRequestClass requestGetTypeByIType:@"收藏类别" success:^(id jsonData) {
@@ -745,234 +606,7 @@
     }];
 }
 
-//教材提纲类别
-- (void)NetworkGetOutlineType
-{
-    [LLRequestClass requestGetTypeByIType:@"教材提纲" success:^(id jsonData) {
-        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentArray);
-        if(contentArray.count > 0)
-        {
-            NSDictionary *contentDict = contentArray.firstObject;
-            NSString *result = [contentDict objectForKey:@"result"];
-            if([result isEqualToString:@"success"])
-            {
-                [LdGlobalObj sharedInstanse].favoriteTypeArray = [NSMutableArray arrayWithArray:contentArray];
-            }
-        }
-        
-        [self endTableRefreshing];
-    } failure:^(NSError *error) {
-        [self endTableRefreshing];
-        //ZB_Toast(@"失败");
-    }];
-}
 
-/**
- 获取提纲目录
- */
-- (void)NetworkGetFirstContentsOutline
-{
-    [LLRequestClass requestdoGetFirstBySuccess:^(id jsonData) {
-        NSDictionary *contentDict=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentDict);
-        NSString *result = contentDict[@"result"];
-        if([result isEqualToString:@"success"])
-        {
-            [self.outLineList removeAllObjects];
-            NSArray *array = contentDict[@"list"];
-            for(NSDictionary *dict in array)
-            {
-                OutlineModel *model = [OutlineModel model];
-                [model setDataWithDic:dict];
-                [self.outLineList addObject:model];
-            }
-            
-            [self.tableView reloadData];
-        }
-        
-        [self endTableRefreshing];
-    } failure:^(NSError *error) {
-        [self endTableRefreshing];
-        //ZB_Toast(@"失败");
-    }];
-}
-
-/**
- 根据试卷ID获取试题的标题列表
-
- @param EID 试卷ID
- */
-- (void)NetworkGetExamTitlesByEID:(NSString *)EID ExamTitle:(NSString *)title
-{
-    NSLog(@"DailyPracticeViewController");
-    [SVProgressHUD showWithStatus:@"正在准备试题" maskType:SVProgressHUDMaskTypeClear];
-    [LLRequestClass requestGetExamTitleExByEID:EID Success:^(id jsonData) {
-        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentArray);
-        if(contentArray.count > 0)
-        {
-            NSDictionary *contentDict = contentArray.firstObject;
-            NSString *result = [contentDict objectForKey:@"result"];
-            if([result isEqualToString:@"success"])
-            {
-                //先过滤掉正确的，如果全部正确就全部显示，再判断是否小于FirstCnt
-                NSMutableArray *titleList = [NSMutableArray arrayWithCapacity:9];
-                for(NSDictionary *dict in contentArray)
-                {
-                    ExaminationTitleModel *model = [ExaminationTitleModel model];
-                    [model setDataWithDic:dict];
-                    if(![model.isOK isEqualToString:@"是"])
-                    {
-                        [titleList addObject:model];
-                    }
-                }
-                
-                if(titleList.count == 0)
-                {
-                    for(NSDictionary *dict in contentArray)
-                    {
-                        ExaminationTitleModel *model = [ExaminationTitleModel model];
-                        [model setDataWithDic:dict];
-                        [titleList addObject:model];
-                    }
-                }
-                
-                NSInteger limit = self.FirstCnt>titleList.count ? titleList.count : self.FirstCnt;
-                NSMutableArray *list = [NSMutableArray arrayWithCapacity:9];
-                for(int index=0; index<limit; index++)
-                {
-                    ExaminationTitleModel *model = titleList[index];
-                    NSDictionary *dict = [NSDictionary dictionaryWithObject:model.ID forKey:@"ID"];
-                    [list addObject:dict];
-                }
-                [self NetworkGetExamDetailListByTitleList:[NSArray arrayWithArray:list] ExamTitle:title OID:nil];
-                [self endTableRefreshing];
-                return;
-            }
-        }
-        [self endTableRefreshing];
-        [SVProgressHUD dismiss];
-        ZB_Toast(@"没有找到试卷");
-    } failure:^(NSError *error) {
-        //ZB_Toast(@"失败");
-        [self endTableRefreshing];
-        [SVProgressHUD dismiss];
-    }];
-}
-
-/**
- 根据提纲ID获取试题的标题列表
- 
- @param OID 提纲ID
- */
-- (void)NetworkGetOutlineTitleByOID:(NSString *)OID ExamTitle:(NSString *)title
-{
-    [SVProgressHUD showWithStatus:@"正在准备试题" maskType:SVProgressHUDMaskTypeClear];
-    [LLRequestClass requestGetOutlineTitleExByOID:OID tCount:(int)self.OutlineCnt*5 Success:^(id jsonData) {
-        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentArray);
-        if(contentArray.count > 0)
-        {
-            NSDictionary *contentDict = contentArray.firstObject;
-            NSString *result = [contentDict objectForKey:@"result"];
-            if([result isEqualToString:@"success"])
-            {
-                NSMutableArray *titleList = [NSMutableArray arrayWithCapacity:9];
-                for(NSDictionary *dict in contentArray)
-                {
-                    ExaminationTitleModel *model = [ExaminationTitleModel model];
-                    [model setDataWithDic:dict];
-                    if(![model.isOK isEqualToString:@"是"])
-                    {
-                        [titleList addObject:model];
-                    }
-                }
-                
-                if(titleList.count == 0)
-                {
-                    for(NSDictionary *dict in contentArray)
-                    {
-                        ExaminationTitleModel *model = [ExaminationTitleModel model];
-                        [model setDataWithDic:dict];
-                        [titleList addObject:model];
-                    }
-                }
-                
-                NSInteger limit = self.OutlineCnt>titleList.count ? titleList.count : self.OutlineCnt;
-                NSMutableArray *list = [NSMutableArray arrayWithCapacity:9];
-                for(int index=0; index<limit; index++)
-                {
-                    ExaminationTitleModel *model = titleList[index];
-                    NSDictionary *dict = [NSDictionary dictionaryWithObject:model.ID forKey:@"ID"];
-                    [list addObject:dict];
-                }
-                [self NetworkGetExamDetailListByTitleList:[NSArray arrayWithArray:list] ExamTitle:title OID:OID];
-                [self endTableRefreshing];
-                return;
-            }
-        }
-        [self endTableRefreshing];
-        [SVProgressHUD dismiss];
-        ZB_Toast(@"没有找到试卷");
-    } failure:^(NSError *error) {
-        //ZB_Toast(@"失败");
-        [self endTableRefreshing];
-        [SVProgressHUD dismiss];
-    }];
-}
-
-/**
- 根据试题ID获取试题列表
- 
- @param titleList 试题标题ID
- */
-- (void)NetworkGetExamDetailListByTitleList:(NSArray *)titleList ExamTitle:(NSString *)title OID:(NSString *)OID
-{
-    NSLog(@"DailyPracticeViewController");
-    [LLRequestClass requestGetExamDetailsByTitleList:titleList Success:^(id jsonData) {
-        NSDictionary *contentDict=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentDict);
-        NSString *result = contentDict[@"result"];
-        if([result isEqualToString:@"success"])
-        {
-            NSArray *array = contentDict[@"list"];
-            NSMutableArray *examList = [NSMutableArray arrayWithCapacity:9];
-            for(NSDictionary *dict in array)
-            {
-                ExamDetailModel *model = [ExamDetailModel model];
-                [model setDataWithDic:dict];
-                [examList addObject:model];
-            }
-            
-            if(examList.count > 0)
-            {
-                NSLog(@"DailyPracticeViewController");
-                DailyPracticeViewController *vc = [[DailyPracticeViewController alloc] init];
-                vc.hidesBottomBarWhenPushed = YES;
-                vc.practiceList = [NSMutableArray arrayWithArray:examList];
-                vc.OID = OID;
-                vc.title = title;
-                vc.isSaveUserOperation = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            else
-            {
-                ZB_Toast(@"没有找到试题");
-                [SVProgressHUD dismiss];
-            }
-            [self endTableRefreshing];
-            return;
-        }
-        [SVProgressHUD dismiss];
-        [self endTableRefreshing];
-        //ZB_Toast(@"失败");
-    } failure:^(NSError *error) {
-        [SVProgressHUD dismiss];
-        [self endTableRefreshing];
-        //ZB_Toast(@"失败");
-    }];
-}
 
 /**
  获取所有广告
@@ -1000,33 +634,6 @@
                 [self FirstPageAdScrollImageTap:index];
             }
         }
-        [self endTableRefreshing];
-    } failure:^(NSError *error) {
-        [self endTableRefreshing];
-        //ZB_Toast(@"失败");
-    }];
-}
-
-/**
- 做题按钮获取试题
- */
-- (void)NetworkGetZUOTIExamin
-{
-    NSLog(@"DailyPracticeViewController");
-    [LLRequestClass requestdoGetExaminByTypeInfo:@"首页" Success:^(id jsonData) {
-        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentArray);
-        if(contentArray.count > 0)
-        {
-            NSDictionary *contentDict = contentArray.firstObject;
-            NSString *result = [contentDict objectForKey:@"result"];
-            if([result isEqualToString:@"success"])
-            {
-                [self NetworkGetExamTitlesByEID:contentDict[@"ID"] ExamTitle:@"做题"];
-                return;
-            }
-        }
-        ZB_Toast(@"暂时没有找到试题哦");
         [self endTableRefreshing];
     } failure:^(NSError *error) {
         [self endTableRefreshing];

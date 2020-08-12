@@ -85,7 +85,7 @@
     [self.backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
-    [self.backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+    [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
 }
 
 - (void)drawCalendarAndTableView

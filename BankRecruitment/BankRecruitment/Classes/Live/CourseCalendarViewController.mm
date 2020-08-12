@@ -67,7 +67,7 @@
     }
     else
     {
-        [self.backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+        [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     }
 }
 
@@ -127,7 +127,7 @@
     }
     else
     {
-        [self.backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+        [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
         lineView.backgroundColor = kColorLineSepBackground;
         self.tableView.backgroundColor = [UIColor colorWithHex:@"#f6fafd"];
     }

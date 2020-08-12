@@ -1,262 +1,163 @@
 //
-//  LoginViewController.m
-//  BankRecruitment
+//  NewLoginViewController.m
+//  Recruitment
 //
-//  Created by 夏建清 on 2017/3/29.
-//  Copyright © 2017年 LongLian. All rights reserved.
+//  Created by yltx on 2020/8/12.
+//  Copyright © 2020 LongLian. All rights reserved.
 //
 
 #import "LoginViewController.h"
-#import "RegisterViewController.h"
-#import "GetSMSViewController.h"
-#import "TPKeyboardAvoidingScrollView.h"
+#import "LoginView.h"
+#import "RegisterView.h"
 #import "BindPhoneViewController.h"
-
-@interface LoginViewController ()<UITextFieldDelegate>
-@property (nonatomic, strong) IBOutlet UITextField *nameTextField;
-@property (nonatomic, strong) IBOutlet UITextField *passwordTextField;
-@property (nonatomic, strong) IBOutlet UIButton *showPasswordButton;
-@property (nonatomic, strong) IBOutlet UIButton *backButton;
-@property (nonatomic, strong) IBOutlet UIButton *weixinLoginButton;
-@property (nonatomic, strong) IBOutlet UILabel *moreLoginLabel;
-
+#import "GetSMSViewController.h"
+#import "BBAlertView.h"
+#import "UserKnowViewController.h"
+@interface LoginViewController ()
+@property (nonatomic, strong) UIImageView *imgLogo;
+@property (nonatomic, strong) UILabel *typeLab;
+@property (nonatomic, strong) UIButton *btnLogin;
+@property (nonatomic, strong) UIButton *btnRegister;
+@property (nonatomic, strong) LoginView *loginView;
+@property (nonatomic, strong) RegisterView *registView;
+@property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, assign) BOOL isLogin;
 @property (nonatomic, copy) NSString *pass;
+@property (nonatomic, strong) NSTimer *messageTimer;
+@property (nonatomic, assign) NSInteger messageTimerIndex;
+@property (nonatomic, copy) NSString *smsCodeString;
+@property (nonatomic, assign) BOOL isKnowUser;
 @end
 
 @implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
     [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+    self.navigationController.navigationBar.barTintColor = kColorBlackText;
+    [self initUI];
     
-    self.weixinLoginButton.layer.cornerRadius = 22;
-    self.weixinLoginButton.layer.masksToBounds = YES;
+    self.isLogin = YES;
+    // Do any additional setup after loading the view.
 }
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-    
-    if([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession]){
-        self.weixinLoginButton.hidden = NO;
-        self.moreLoginLabel.hidden = NO;
-    }else{
-        self.weixinLoginButton.hidden = YES;
-        self.moreLoginLabel.hidden = YES;
-    }
-    
-    if(!self.loginSuccessBlock)
-    {
-        self.backButton.hidden = YES;
-    }
-    
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *loginDict = [defaults objectForKey:@"userLoginDict"];
-    if(loginDict)
-    {
-        self.nameTextField.text = loginDict[@"userLoginname"];
-    }
+    [self. navigationController.navigationBar setHidden:YES];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self. navigationController.navigationBar setHidden:NO];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)initUI{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+       backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
+       [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
+       [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backButton];
+    [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(12);
+        make.top.equalTo(self.view).offset(StatusBarHeight+15);
+    }];
+        self.typeLab = [[UILabel alloc] init];
+        self.typeLab.font = [UIFont systemFontOfSize:16];
+        self.typeLab.textAlignment = NSTextAlignmentCenter;
+        self.typeLab.textColor = [UIColor colorWithHex:@"#333333"];
+        self.typeLab.text = @"登录";
+    [self.view addSubview:self.typeLab];
+    [self.typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.height.mas_equalTo(12);
+        make.top.equalTo(self.view).offset(StatusBarHeight+15);
+    }];
+        self.imgLogo = [[UIImageView alloc] init];
+        self.imgLogo.image = [UIImage imageNamed:@"logo"];
+    [self.view addSubview:self.imgLogo];
+           [_imgLogo mas_makeConstraints:^(MASConstraintMaker *make) {
+               make.centerX.equalTo(self.view.mas_centerX);
+               make.top.equalTo(self.typeLab.mas_bottom).offset(35.5);
+               make.width.mas_equalTo(61);
+               make.height.mas_equalTo(61);
+    }];
+    [self.view addSubview:self.btnLogin];
+    [self.btnLogin mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view.mas_centerX).offset(-47);
+        make.top.equalTo(self.imgLogo.mas_bottom).offset(38);
+    }];
+    [self.view addSubview:self.btnRegister];
+    [self.btnRegister mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.left.equalTo(self.view.mas_centerX).offset(47);
+          make.top.equalTo(self.imgLogo.mas_bottom).offset(38);
+      }];
+    self.lineView = [[UIView alloc]init];
+    self.lineView.backgroundColor = KColorBlueText;
+    [self.view addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.btnLogin);
+        make.top.equalTo(self.btnLogin.mas_bottom).offset(2);
+        make.size.mas_equalTo(CGSizeMake(12, 2));
+    }];
+    self.loginView = [[LoginView alloc]initWithFrame:CGRectMake(0, 180+StatusBarHeight, Screen_Width, Screen_Height-StatusBarHeight-180)];
+    [self.loginView.btnWeChat addTarget:self action:@selector(weChatAuth) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.btnLogin addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.btnForget addTarget:self action:@selector(forgerPwdAction) forControlEvents:UIControlEventTouchUpInside];
+
+    self.registView = [[RegisterView alloc]initWithFrame:CGRectMake(Screen_Width, 180+StatusBarHeight, Screen_Width, Screen_Height-180-StatusBarHeight)];
+    [self.registView.btnRegist addTarget:self action:@selector(registAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.registView.btnValidCode addTarget:self action:@selector(requestSendMessage) forControlEvents:UIControlEventTouchUpInside];
+    [self.registView.ruleBtn addTarget:self action:@selector(rulerAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.registView.ruleselectBtn addTarget:self action:@selector(rulerSelectAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.registView];
+    [self.view addSubview:self.loginView];
 }
 
-/*微信登录
-返回 中 如果 mobile 有值，则代表该用户 已经存在平台，直接转到首页即可
-如果没有mobile 值，则转到手机绑定页面
- */
-- (IBAction)getAuthWithUserInfoFromWechat
-{
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
-        if (error) {
-            ZB_Toast(@"登录失败");
-            NSLog(@"%@", error);
-        } else {
-            UMSocialUserInfoResponse *resp = result;
+-(void)changeType:(UIButton *)sender{
+    if ([sender isEqual:self.btnLogin]) {
+        if (!self.isLogin) {
+            self.btnLogin.selected = !self.btnLogin.selected;
+            self.btnRegister.selected = !self.btnRegister.selected;
+           
+            [UIView animateWithDuration:0.2 animations:^{
+               
+                self.lineView.xl_centerX = self.btnLogin.xl_centerX;
+                self.loginView.xl_x = 0;
+                self.registView.xl_x = Screen_Width;
 
-            // 第三方平台SDK源数据
-            NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
-            NSDictionary *dict = (NSDictionary *)resp.originalResponse;
-            [LLRequestClass requestRegisterWXByunionid:dict[@"unionid"] nickname:dict[@"nickname"] success:^(id jsonData) {
-                NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-                NSLog(@"%@", contentArray);
-                if(contentArray.count > 0)
-                {
-                    NSDictionary *contentDict = contentArray.firstObject;
-                    NSString *result = [contentDict objectForKey:@"result"];
-                    if([result isEqualToString:@"success"]){
-                        [LdGlobalObj sharedInstanse].user_id = contentDict[@"uid"];
-                        [LdGlobalObj sharedInstanse].user_mobile = contentDict[@"mobile"];
-                        [LdGlobalObj sharedInstanse].user_name = contentDict[@"pet"];
-                        [LdGlobalObj sharedInstanse].tech_id = contentDict[@"tech"];
-                        [LdGlobalObj sharedInstanse].islive = [contentDict[@"islive"] isEqualToString:@"是"] ? YES : NO ;
-                        [LdGlobalObj sharedInstanse].istecher = [contentDict[@"istecher"] isEqualToString:@"是"] ? YES : NO ;
-                        [LdGlobalObj sharedInstanse].user_acc = contentDict[@"acc"];
-                        [LdGlobalObj sharedInstanse].user_LastSign = contentDict[@"LastSign"];
-                        [LdGlobalObj sharedInstanse].user_SignDays = contentDict[@"SignDays"];
-                        
-                        self.pass = contentDict[@"pass"];
-                        
-                        //如果没有mobile值，则转到手机绑定页面
-                        if(strIsNullOrEmpty(contentDict[@"mobile"])){
-                            BindPhoneViewController *vc = [[BindPhoneViewController alloc] init];
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }else{
-                            [self saveAutoLoginMes];
-                            
-                            if(self.loginSuccessBlock)
-                            {
-                                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                                self.loginSuccessBlock();
-                            }
-                            else
-                            {
-                                TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
-                                [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
-                                appDelegate.window.rootViewController = homePageVC;
-                                [appDelegate.window makeKeyAndVisible];
-                            }
-                            
-                            [self NetworkPutMsgToken];
-                        }
-                    }else{
-                        ZB_Toast(@"微信授权登录失败");
-                    }
-                }
-            } failure:^(NSError *error) {
-                ZB_Toast(@"登录失败");
             }];
+            self.isLogin = !self.isLogin;
+            
         }
-    }];
-}
-
-//微信登录后，绑定手机号，type=0的情况
-- (void)saveAutoLoginMes{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:[LdGlobalObj sharedInstanse].user_mobile, @"userLoginname", self.pass, @"userPassword", nil];
-    [defaults setObject:userLoginDict forKey:@"userLoginDict"];
-    [defaults synchronize];
-    
-    self.pass = @"";
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (IBAction)backAction:(id)sender
-{
-    if([[LdGlobalObj sharedInstanse].user_id isEqualToString:@"0"])
-    {
-        [self visitorLoginAction:nil];
-    }
-    else
-    {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
-- (IBAction)passwordShow
-{
-    self.passwordTextField.secureTextEntry = !self.passwordTextField.secureTextEntry;
-    if(self.passwordTextField.secureTextEntry)
-    {
-        [self.showPasswordButton setImage:[UIImage imageNamed:@"eye_white_close"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.showPasswordButton setImage:[UIImage imageNamed:@"eye_white_open"] forState:UIControlStateNormal];
-    }
-}
-
-- (IBAction)visitorLoginAction:(id)sender
-{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSString *vid = [defaults objectForKey:@"VisitorID"];
-    if(!strIsNullOrEmpty(vid))
-    {
-        [LdGlobalObj sharedInstanse].user_id = vid;
-        if(self.loginSuccessBlock)
-        {
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        }
-        else
-        {
-            TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
-            [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
-            appDelegate.window.rootViewController = homePageVC;
-            [appDelegate.window makeKeyAndVisible];
+    }else{
+      if (self.isLogin) {
+                self.btnLogin.selected = !self.btnLogin.selected;
+                 self.btnRegister.selected = !self.btnRegister.selected;
+            
+          [UIView animateWithDuration:0.2 animations:^{
+                self.lineView.xl_centerX = self.btnRegister.xl_centerX;
+                        self.loginView.xl_x = Screen_Width;
+                        self.registView.xl_x = 0;
+            }];
+            self.isLogin = !self.isLogin;
         }
         
-        [self NetworkPutMsgToken];
-        return;
     }
-    
-    [LLRequestClass requestGetVisitorSuccess:^(id jsonData) {
-        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-        NSLog(@"%@", contentArray);
-        if(contentArray.count > 0)
-        {
-            NSDictionary *contentDict = contentArray.firstObject;
-            NSString *result = [contentDict objectForKey:@"result"];
-            if([result isEqualToString:@"success"])
-            {
-                [LdGlobalObj sharedInstanse].user_id = contentDict[@"vid"];
-                
-                [defaults setObject:contentDict[@"vid"] forKey:@"VisitorID"];
-                [defaults synchronize];
-                
-                if(self.loginSuccessBlock)
-                {
-                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                    self.loginSuccessBlock();
-                }
-                else
-                {
-                    TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
-                    [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
-                    appDelegate.window.rootViewController = homePageVC;
-                    [appDelegate.window makeKeyAndVisible];
-                }
-                
-                [self NetworkPutMsgToken];
-                return;
-            }
-            else
-            {
-                NSString *msg = [contentDict objectForKey:@"msg"];
-                if(!strIsNullOrEmpty(msg))
-                {
-                    ZB_Toast(msg);
-                    return;
-                }
-            }
-        }
-        
-        ZB_Toast(@"登录失败");
-    } failure:^(NSError *error) {
-        ZB_Toast(@"网络连接失败");
-    }];
 }
 
-- (IBAction)loginAction:(id)sender
-{
-    if(strIsNullOrEmpty(self.nameTextField.text)||strIsNullOrEmpty(self.passwordTextField.text))
+#pragma mark --UIuttonClick
+-(void)forgerPwdAction{
+    GetSMSViewController *vc = [[GetSMSViewController alloc] init];
+       vc.getSMSType = FindPassWordType;
+       [self.navigationController pushViewController:vc animated:YES];
+    
+}
+-(void)loginAction{
+    if(strIsNullOrEmpty(self.loginView.phoneTextField.text)||strIsNullOrEmpty(self.loginView.pwdTextField.text))
     {
         ZB_Toast(@"请输入账号密码");
         return;
     }
     
-    [LLRequestClass requestLoginByPhone:self.nameTextField.text Password:self.passwordTextField.text success:^(id jsonData) {
+    [LLRequestClass requestLoginByPhone:self.loginView.phoneTextField.text Password:self.loginView.pwdTextField.text success:^(id jsonData) {
         NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         NSLog(@"%@", contentArray);
         if(contentArray.count > 0)
@@ -276,7 +177,7 @@
                 [LdGlobalObj sharedInstanse].user_SignDays = contentDict[@"SignDays"];
                 
                 NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-                NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:self.nameTextField.text, @"userLoginname", self.passwordTextField.text, @"userPassword", nil];
+                NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:self.loginView.phoneTextField.text, @"userLoginname", self.loginView.pwdTextField.text, @"userPassword", nil];
                 [defaults setObject:userLoginDict forKey:@"userLoginDict"];
                 [defaults synchronize];
                 
@@ -285,8 +186,7 @@
                     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                     self.loginSuccessBlock();
                 }
-                else
-                {
+                else{
                     TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
                     [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
                     appDelegate.window.rootViewController = homePageVC;
@@ -311,23 +211,77 @@
     } failure:^(NSError *error) {
         ZB_Toast(@"登录失败");
     }];
+    
+}
+/*微信登录
+返回 中 如果 mobile 有值，则代表该用户 已经存在平台，直接转到首页即可
+如果没有mobile 值，则转到手机绑定页面
+ */
+-(void)weChatAuth{
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
+           if (error) {
+               ZB_Toast(@"登录失败");
+               NSLog(@"%@", error);
+           } else {
+               UMSocialUserInfoResponse *resp = result;
+
+               // 第三方平台SDK源数据
+               NSLog(@"Wechat originalResponse: %@", resp.originalResponse);
+               NSDictionary *dict = (NSDictionary *)resp.originalResponse;
+               [LLRequestClass requestRegisterWXByunionid:dict[@"unionid"] nickname:dict[@"nickname"] success:^(id jsonData) {
+                   NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+                   NSLog(@"%@", contentArray);
+                   if(contentArray.count > 0)
+                   {
+                       NSDictionary *contentDict = contentArray.firstObject;
+                       NSString *result = [contentDict objectForKey:@"result"];
+                       if([result isEqualToString:@"success"]){
+                           [LdGlobalObj sharedInstanse].user_id = contentDict[@"uid"];
+                           [LdGlobalObj sharedInstanse].user_mobile = contentDict[@"mobile"];
+                           [LdGlobalObj sharedInstanse].user_name = contentDict[@"pet"];
+                           [LdGlobalObj sharedInstanse].tech_id = contentDict[@"tech"];
+                           [LdGlobalObj sharedInstanse].islive = [contentDict[@"islive"] isEqualToString:@"是"] ? YES : NO ;
+                           [LdGlobalObj sharedInstanse].istecher = [contentDict[@"istecher"] isEqualToString:@"是"] ? YES : NO ;
+                           [LdGlobalObj sharedInstanse].user_acc = contentDict[@"acc"];
+                           [LdGlobalObj sharedInstanse].user_LastSign = contentDict[@"LastSign"];
+                           [LdGlobalObj sharedInstanse].user_SignDays = contentDict[@"SignDays"];
+                           
+                           self.pass = contentDict[@"pass"];
+                           
+                           //如果没有mobile值，则转到手机绑定页面
+                           if(strIsNullOrEmpty(contentDict[@"mobile"])){
+                               BindPhoneViewController *vc = [[BindPhoneViewController alloc] init];
+                               [self.navigationController pushViewController:vc animated:YES];
+                           }else{
+                               [self saveAutoLoginMes];
+                               
+                               if(self.loginSuccessBlock)
+                               {
+                                   [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                                   self.loginSuccessBlock();
+                               }
+                               else
+                               {
+                                   TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
+                                   [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
+                                   appDelegate.window.rootViewController = homePageVC;
+                                   [appDelegate.window makeKeyAndVisible];
+                               }
+                               
+                               [self NetworkPutMsgToken];
+                           }
+                       }else{
+                           ZB_Toast(@"微信授权登录失败");
+                       }
+                   }
+               } failure:^(NSError *error) {
+                   ZB_Toast(@"登录失败");
+               }];
+           }
+       }];
 }
 
-- (IBAction)registerAction:(id)sender
-{
-    RegisterViewController *vc = [[RegisterViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (IBAction)forgetPassword:(id)sender
-{
-    GetSMSViewController *vc = [[GetSMSViewController alloc] init];
-    vc.getSMSType = FindPassWordType;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)NetworkPutMsgToken
-{
+- (void)NetworkPutMsgToken{
     [LLRequestClass requestdoPutMsgTokenBytoken:[LdGlobalObj sharedInstanse].deviceToken Success:^(id jsonData) {
         NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         NSLog(@"%@", contentArray);
@@ -343,6 +297,229 @@
     } failure:^(NSError *error) {
         ZB_Toast(@"注册Token失败");
     }];
+}
+//微信登录后，绑定手机号，type=0的情况
+- (void)saveAutoLoginMes{
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:[LdGlobalObj sharedInstanse].user_mobile, @"userLoginname", self.pass, @"userPassword", nil];
+    [defaults setObject:userLoginDict forKey:@"userLoginDict"];
+    [defaults synchronize];
+    
+    self.pass = @"";
+}
+-(void)backButtonPressed{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)registAction{
+    if(strIsNullOrEmpty(self.registView.phoneTextField.text))
+       {
+           ZB_Toast(@"请输入您的手机号码");
+           return;
+       }
+       
+    if(![self.registView.btnValidCode.titleLabel.text isEqualToString:self.smsCodeString])
+       {
+           ZB_Toast(@"请输入正确的短信验证码");
+           return;
+       }
+       
+    if(strIsNullOrEmpty(self.registView.pwdTextField.text))
+       {
+           ZB_Toast(@"请输入密码");
+           return;
+       }
+       
+    if(![self.self.registView.pwdTextField.text isEqualToString:self.self.registView.pwdAgainTextField.text])
+       {
+           ZB_Toast(@"密码验证不一致");
+           return;
+       }
+       
+    if(![self judgePassWordLegal:self.registView.pwdTextField.text]){
+           ZB_Toast(@"密码格式非法");
+           return;
+       }
+       
+    if(!self.registView.ruleselectBtn.selected){
+           ZB_Toast(@"请阅读并同意用户注册协议");
+           return;
+       }
+       
+    [LLRequestClass requestRegisterByPhone:self.registView.phoneTextField.text Password:self.registView.pwdTextField.text success:^(id jsonData) {
+           NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+           NSLog(@"%@", contentArray);
+           if(contentArray.count > 0)
+           {
+               NSDictionary *contentDict = contentArray.firstObject;
+               NSString *result = [contentDict objectForKey:@"result"];
+               if([result isEqualToString:@"success"])
+               {
+                   ZB_Toast(@"注册成功");
+                   if(self.messageTimer)
+                   {
+                       [self.messageTimer invalidate];
+                   }
+                   
+                   [LdGlobalObj sharedInstanse].user_id = contentDict[@"uid"];
+                   [LdGlobalObj sharedInstanse].user_mobile = self.registView.phoneTextField.text;
+                   NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+                   NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:self.self.registView.phoneTextField.text, @"userLoginname", self.registView.pwdTextField.text, @"userPassword", nil];
+                   [defaults setObject:userLoginDict forKey:@"userLoginDict"];
+                   [defaults synchronize];
+                   if([LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock)
+                   {
+                       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                       [LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock();
+                   }
+                   else
+                   {
+                       TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
+                       [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
+                       appDelegate.window.rootViewController = homePageVC;
+                       [appDelegate.window makeKeyAndVisible];
+                   }
+                   
+                   [self NetworkPutMsgToken];
+                   
+                   return ;
+               }
+               else
+               {
+                   NSString *msg = [contentDict objectForKey:@"msg"];
+                   if([msg containsString:@"已经被注册"])
+                   {
+                       BBAlertView *alertView = [[BBAlertView alloc] initWithTitle:@"提示" message:@"该手机号已注册，直接去登录呗？" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"去登录"];
+                       LL_WEAK_OBJC(self);
+                       [alertView setConfirmBlock:^{
+                           [weakself changeType:self.btnLogin];
+                       }];
+                       [alertView setCancelBlock:^{
+                           
+                       }];
+                       [alertView show];
+                   }
+                   else
+                   {
+                       ZB_Toast(msg);
+                   }
+               }
+           }
+       } failure:^(NSError *error) {
+           ZB_Toast(@"网络失败");
+       }];
+    
+}
+-(void)validcodeAction{
+    if([self.registView.phoneTextField.text isEqualToString:@""]){
+            if(strIsNullOrEmpty(self.registView.phoneTextField.text)){
+                ZB_Toast(@"请输入您的手机号码");
+                return;
+            }
+        if(self.registView.phoneTextField.text.length != 11)
+            {
+                ZB_Toast(@"请输入合法的手机号码");
+                return;
+            }
+            
+            self.registView.btnValidCode.userInteractionEnabled = NO;
+            self.messageTimerIndex = 60;
+            self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(messageTimerRefreshAction) userInfo:nil repeats:YES];
+            [self.messageTimer fire];
+            [self requestSendMessage];
+        }
+}
+
+- (void)messageTimerRefreshAction{
+        self.messageTimerIndex--;
+        if(self.messageTimerIndex == 0)
+        {
+            [self.messageTimer invalidate];
+            [self.registView.btnValidCode setTitle:@"发送验证码" forState:UIControlStateNormal];
+            self.registView.btnValidCode.userInteractionEnabled = YES;
+        }
+        else
+        {
+            [self.registView.btnValidCode setTitle:[NSString stringWithFormat:@"%ldS", (long)self.messageTimerIndex] forState:UIControlStateNormal];
+        }
+    }
+
+- (void)requestSendMessage{
+    [LLRequestClass requestSMSByPhone:self.registView.phoneTextField.text type:@"0" success:^(id jsonData) {
+        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        NSLog(@"%@", contentArray);
+        if(contentArray.count > 0)
+        {
+            NSDictionary *contentDict = contentArray.firstObject;
+            NSString *result = [contentDict objectForKey:@"result"];
+            NSString *msg = contentDict[@"msg"];
+            if([result isEqualToString:@"success"])
+            {
+                NSString *code = contentDict[@"code"];
+                
+                self.smsCodeString = code;
+                BBAlertView *alertView = [[BBAlertView alloc] initWithTitle:@"提示" message:msg delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+                [alertView show];
+                
+                return;
+            }
+            else
+            {
+                ZB_Toast(msg);
+                return;
+            }
+        }
+        
+        ZB_Toast(@"发送短信失败");
+    } failure:^(NSError *error) {
+        ZB_Toast(@"发送短信失败");
+    }];
+}
+
+-(BOOL)judgePassWordLegal:(NSString *)str{
+    
+    BOOL result = false;
+    if ([str length] >= 6){
+        // 判断长度大于6位后再接着判断是否同时包含数字和字符
+        NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$";
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        result = [pred evaluateWithObject:str];
+    }
+    return result;
+
+}
+
+-(void)rulerSelectAction:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    
+}
+-(void)rulerAction{
+    UserKnowViewController *vc = [[UserKnowViewController alloc] init];
+       [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (UIButton *)btnLogin {
+    if (!_btnLogin) {
+        _btnLogin = [[UIButton alloc] init];
+        [_btnLogin setTitleColor:[UIColor colorWithHex:@"#999999"] forState:UIControlStateNormal];
+        [_btnLogin setTitleColor:[UIColor colorWithHex:@"#333333"] forState:UIControlStateSelected];
+        _btnLogin.selected = YES;
+        _btnLogin.titleLabel.font = [UIFont systemFontOfSize:17];
+        [_btnLogin setTitle:@"登录" forState:UIControlStateNormal];
+        [_btnLogin addTarget:self action:@selector(changeType:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btnLogin;
+}
+
+- (UIButton *)btnRegister {
+    if (!_btnRegister) {
+        _btnRegister = [[UIButton alloc] init];
+        [_btnRegister setTitleColor:[UIColor colorWithHex:@"#999999"] forState:UIControlStateNormal];
+        [_btnRegister setTitleColor:[UIColor colorWithHex:@"#333333"] forState:UIControlStateSelected];
+        _btnRegister.titleLabel.font = [UIFont systemFontOfSize:17];
+        [_btnRegister setTitle:@"注册" forState:UIControlStateNormal];
+        [_btnRegister addTarget:self action:@selector(changeType:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btnRegister;
 }
 
 @end

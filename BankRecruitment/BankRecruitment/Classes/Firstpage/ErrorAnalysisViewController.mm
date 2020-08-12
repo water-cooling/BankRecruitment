@@ -418,7 +418,7 @@
 {
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    [_backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+    [_backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
@@ -532,7 +532,7 @@
         }
         
         self.analysisTypeLabel.textColor = [UIColor whiteColor];
-        [self.backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+        [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
         [self.answerSheetBtn setImage:[UIImage imageNamed:@"shiti_icon_datika"] forState:UIControlStateNormal];
         [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
         [self.shareBtn setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
@@ -590,7 +590,7 @@
         }
         
         self.analysisTypeLabel.textColor = [UIColor whiteColor];
-        [self.backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+        [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
         [self.answerSheetBtn setImage:[UIImage imageNamed:@"shiti_icon_datika"] forState:UIControlStateNormal];
         [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
         [self.shareBtn setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];

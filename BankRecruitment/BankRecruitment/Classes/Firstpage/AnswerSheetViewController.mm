@@ -70,7 +70,7 @@
     self.answerTitleLabel.text = @"";
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    [_backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+    [_backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
@@ -203,7 +203,7 @@
         self.answerSheetScrollView.backgroundColor = [UIColor whiteColor];
         [self.timerRightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //        [self.moreBtn setImage:[UIImage imageNamed:@"day_shiti_icon_more"] forState:UIControlStateNormal];
-        [self.backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
+        [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
         self.answerTitleLabel.textColor = UIColorFromHex(0x444444);
         [self.submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
