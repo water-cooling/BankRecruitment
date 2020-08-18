@@ -32,12 +32,28 @@
     self.searchBar.barTintColor = [UIColor whiteColor];
     self.searchBar.placeholder = @"搜索题目";
     self.searchBar.delegate = self;
+    if (@available(iOS 13.0, *)) {
+        for (id cencelButton in [self.searchBar.subviews[0] subviews]){
+            if([cencelButton isKindOfClass:[UIButton class]]){
+                UIButton *btn = (UIButton *)cencelButton;
+                [btn setTitle:@"取消"  forState:UIControlStateNormal];
+            }
+            if([cencelButton isKindOfClass:[UITextField class]]){
+                UITextField *searchField = (UITextField *)cencelButton;;
+                searchField.textColor = kColorDarkText;
+                searchField.attributedPlaceholder=[[NSAttributedString alloc]initWithString:@"搜索题目" attributes:@{NSForegroundColorAttributeName:kColorDarkText}];
+            }
+        }
+        
+    }else{
     [self.searchBar setValue:@"取消" forKey: @"_cancelButtonText"];
     UITextField *searchField = [self.searchBar valueForKey:@"_searchField"];
-    // 输入文本颜色
-    searchField.textColor = kColorDarkText;
-    // 默认文本颜色
     [searchField setValue:kColorDarkText forKeyPath:@"_placeholderLabel.textColor"];
+        searchField.textColor = kColorDarkText;
+
+    }
+    // 输入文本颜色
+    // 默认文本颜色
     self.navigationItem.titleView = self.searchBar;
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -54,8 +70,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     self.navigationController.navigationBarHidden = NO;
 //    [self.searchBar becomeFirstResponder];
 }

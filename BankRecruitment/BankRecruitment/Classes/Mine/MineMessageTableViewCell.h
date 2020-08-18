@@ -12,6 +12,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *messageTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageDetailLabel;
 @property (nonatomic, strong) IBOutlet UILabel *messageTimeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *moreBtn;
 
 - (CGFloat)getMineMessageTableViewCellByDetailString:(NSString *)string;
 @end

@@ -57,17 +57,15 @@
       [RightView addSubview:eyesBtn];
     pwdTextField.rightView = RightView;
     pwdTextField.rightViewMode = UITextFieldViewModeWhileEditing;
-           pwdTextField.returnKeyType =  UIReturnKeySearch;
            pwdTextField.backgroundColor = [UIColor whiteColor];
            NSAttributedString *pwdattrString = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:
                @{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#AAAAAA"],
                NSFontAttributeName:[UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular]}];
            pwdTextField.attributedPlaceholder = pwdattrString;
            pwdTextField.leftViewMode = UITextFieldViewModeAlways;
-            phoneTextField.leftView = pwdView;
+            pwdTextField.leftView = pwdView;
            pwdTextField.borderStyle = UITextBorderStyleNone;
            pwdTextField.textColor = [UIColor colorWithHex:@"#333333"];
-           pwdTextField.keyboardType = UIKeyboardTypeNumberPad;
            self.pwdTextField= pwdTextField;
            [self addSubview:self.pwdTextField];
     UIView *lineViewTwo = [UIView new];

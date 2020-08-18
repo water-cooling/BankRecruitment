@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *questionTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *questionNumberLabel;
 @property (nonatomic, strong) IBOutlet UILabel *totelCountLabel;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (nonatomic, strong) UIView *BottomLine;
 
 @end

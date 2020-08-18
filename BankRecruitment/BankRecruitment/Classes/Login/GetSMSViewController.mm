@@ -86,10 +86,8 @@
     return YES;
 }
 
-- (void)backButtonPressed
-{
-    if(self.messageTimer)
-    {
+- (void)backButtonPressed{
+    if(self.messageTimer){
         [self.messageTimer invalidate];
     }
     
@@ -206,8 +204,7 @@
  Type:1 需要设置面
  此手机号码 不存在平台，需要设置密码
  */
-- (void)NetworkCheckWxRegisterPhone
-{
+- (void)NetworkCheckWxRegisterPhone{
     [LLRequestClass requestCheckWXBymobile:self.phoneTextField.text uid:[LdGlobalObj sharedInstanse].user_id success:^(id jsonData) {
         NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         NSLog(@"%@", contentArray);

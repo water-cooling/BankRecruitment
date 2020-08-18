@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,27 +15,30 @@
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tSU-fo-1cV">
                     <rect key="frame" x="25" y="121" width="100" height="29"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="WRK-fy-mHg"/>
                         <constraint firstAttribute="height" constant="28" id="aGG-4F-knA"/>
                     </constraints>
                     <segments>
-                        <segment title="夜晚"/>
                         <segment title="白天"/>
+                        <segment title="夜晚"/>
                     </segments>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="selectedSegmentTintColor" red="0.2274509804" green="0.52941176469999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <action selector="moreSegmentCtlAction:" destination="iN0-l3-epB" eventType="valueChanged" id="nEj-Af-mMT"/>
                     </connections>
                 </segmentedControl>
                 <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wa5-F9-L4c">
-                    <rect key="frame" x="57" y="86" width="35" height="30"/>
+                    <rect key="frame" x="57.5" y="86" width="35" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="8L4-hK-PdT"/>
                         <constraint firstAttribute="height" constant="30" id="RCs-I5-7Gm"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="Aa">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="fontBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="JpK-AM-z57"/>
@@ -51,7 +52,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="Aa">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="fontBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="OMv-Nj-Yw7"/>
@@ -65,7 +66,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="Aa">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
                         <action selector="fontBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="myf-oT-pM0"/>
@@ -85,11 +86,11 @@
                         <constraint firstAttribute="height" constant="21" id="Ft0-QI-khL"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlc-RW-3U2">
-                    <rect key="frame" x="0.0" y="51" width="150" height="30"/>
+                    <rect key="frame" x="0.0" y="51.5" width="150" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="JCm-0x-I8K"/>
                     </constraints>
@@ -97,7 +98,7 @@
                         <action selector="reportErrorBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="N98-l0-zAD"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shiti_icon_share" translatesAutoresizingMaskIntoConstraints="NO" id="Cqj-Bi-b0K">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="night_icon_share" translatesAutoresizingMaskIntoConstraints="NO" id="Cqj-Bi-b0K">
                     <rect key="frame" x="32" y="21" width="15" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="qaR-nE-6SQ"/>
@@ -111,11 +112,11 @@
                         <constraint firstAttribute="width" constant="96" id="SCy-XM-Pt2"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgc-qs-Fe3">
-                    <rect key="frame" x="0.0" y="13" width="150" height="30"/>
+                    <rect key="frame" x="0.0" y="13.5" width="150" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="bWg-U8-PpP"/>
                     </constraints>
@@ -124,7 +125,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.97647058819999999" green="0.28627450980000002" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Tlc-RW-3U2" firstAttribute="centerY" secondItem="ElZ-L3-BAB" secondAttribute="centerY" id="0vR-FG-Urc"/>
                 <constraint firstItem="eIV-Gt-xuF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="86" id="67K-A3-2i9"/>
@@ -157,7 +158,7 @@
         </view>
     </objects>
     <resources>
-        <image name="report_error" width="17" height="16"/>
-        <image name="shiti_icon_share" width="16" height="16"/>
+        <image name="night_icon_share" width="16" height="16"/>
+        <image name="report_error" width="16" height="16"/>
     </resources>
 </document>

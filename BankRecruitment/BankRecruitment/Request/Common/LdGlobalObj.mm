@@ -149,12 +149,16 @@ static LdGlobalObj* _glbObj;
     //
     // 以下地址切记不可修改为开发环境
     //http://120.26.192.48:8080/bshApp/AppAction?action=getBootScrollPics&uid=0
-    self.webAppIp       = @"http://yk.yinhangzhaopin.com/bshApp/AppAction";
     self.webAppPort     = [self getSettingForKey:_SET_WEB_PORT default:@"10007"];
-    self.fileServIp     = @"http://yk.yinhangzhaopin.com/";
     self.fileGetPort    = [self getSettingForKey:_SET_FILE_GET_IP default:@"10008"];
     self.fileSetPort    = [self getSettingForKey:_SET_FILE_SET_IP default:@"10009"];
-    self.htmlServIp     = @"http://yk.yinhangzhaopin.com/zlh5/";
+//    self.webAppIp       = @"http://yk.yinhangzhaopin.com/bshApp/AppAction";
+//    self.fileServIp     = @"http://yk.yinhangzhaopin.com/";
+//    self.htmlServIp     = @"http://yk.yinhangzhaopin.com/zlh5/";
+    //测试
+    self.webAppIp = @"http://yhyk.project.njagan.org/bshApp/AppAction";
+    self.fileServIp = @"http://yhyk.project.njagan.org/";
+    self.htmlServIp = @"http://yhyk.project.njagan.org/zlh5/";
 
     //
     // 路径初始化
@@ -262,8 +266,7 @@ static LdGlobalObj* _glbObj;
             //进入一个显示消息文字的页面
             UINavigationController *currentNav = (UINavigationController *)[LdGlobalObj sharedInstanse].homePageVC.selectedViewController;
             MessageWordDetailViewController *vc = [[MessageWordDetailViewController alloc] init];
-            vc.detailString = remoteMessageModel.msg;
-            vc.title = remoteMessageModel.name;
+            vc.model = remoteMessageModel;
             [currentNav pushViewController:vc animated:YES];
             
         }else{

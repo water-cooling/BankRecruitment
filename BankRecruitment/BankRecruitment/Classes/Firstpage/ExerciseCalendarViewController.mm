@@ -47,6 +47,7 @@
     BOOL ok = [calendar rangeOfUnit:NSCalendarUnitMonth startDate:&beginDate interval:&interval forDate:[NSDate date]];
     //分别修改为 NSDayCalendarUnit NSWeekCalendarUnit NSYearCalendarUnit
     if (ok) {
+        //获取这个月的第一天和最后一天
         endDate = [beginDate dateByAddingTimeInterval:interval-1];
         beginDate = [beginDate dateByAddingTimeInterval:-(interval-1)*6];
     }else {
@@ -77,8 +78,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)drawViews
-{
+- (void)drawViews{
     self.view.backgroundColor = [UIColor whiteColor];
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
@@ -88,8 +88,7 @@
     [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
 }
 
-- (void)drawCalendarAndTableView
-{
+- (void)drawCalendarAndTableView{
     NSMutableArray *dateList = [NSMutableArray arrayWithCapacity:9];
     NSDateFormatter* dateFmt = [[NSDateFormatter alloc] init];
     dateFmt.dateFormat = @"yyyy-MM-dd";
@@ -115,8 +114,9 @@
 //    }else{
         self.calendarView.weekdayHeaderTextColor = [UIColor colorWithHex:@"#8792ae"];
         self.calendarView.weekdayHeaderWeekendTextColor = [UIColor colorWithHex:@"#8792ae"];
-        self.calendarView.selectedIndicatorColor = kColorNavigationBar;
-        self.calendarView.todayIndicatorColor = [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1];
+        self.calendarView.selectedIndicatorColor = KColorBlueText;
+        self.calendarView.todayIndicatorColor = KColorBlueText;
+    self.calendarView.componentTextColor = [UIColor colorWithHex:@"#999999"];
         self.calendarView.backgroundColor = [UIColor whiteColor];
 //    }
     [self.calendarView makeUIElements];

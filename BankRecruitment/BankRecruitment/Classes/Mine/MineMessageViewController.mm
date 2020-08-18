@@ -141,9 +141,15 @@
 {
     MineMessageTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MineMessageTableViewCell, @"MineMessageTableViewCell");
     NSDictionary *dict = self.list[indexPath.row];
+    loc_cell.layer.cornerRadius = 4;
+    loc_cell.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor colorWithHex:@"#3C3C3C"]);
+    loc_cell.layer.shadowRadius = -M_PI_2;
+    loc_cell.layer.shadowOffset = CGSizeMake(2.5, 0);
     loc_cell.messageTitleLabel.text = dict[@"Name"];
     loc_cell.messageDetailLabel.text = dict[@"Msg"];
     loc_cell.messageTimeLabel.text = dict[@"BegTime"];
+    [loc_cell.moreBtn addTarget:self action:@selector(moreClick:) forControlEvents:UIControlEventTouchUpInside];
+    loc_cell.moreBtn.tag = indexPath.row;
     return loc_cell;
 }
 
@@ -159,6 +165,17 @@
     model.linkId = dict[@"LinkID"];
     model.notify_id = dict[@"ID"];
     [[LdGlobalObj sharedInstanse] processRemoteMessage:model];
+}
+-(void)moreClick:(UIButton *)sender{
+    NSDictionary *dict = self.list[sender.tag];
+       RemoteMessageModel *model = [RemoteMessageModel model];
+       model.msg = dict[@"Msg"];
+       model.msgUrl = dict[@"MsgURL"];
+       model.mType = dict[@"mType"];
+       model.name = dict[@"Name"];
+       model.linkId = dict[@"LinkID"];
+       model.notify_id = dict[@"ID"];
+       [[LdGlobalObj sharedInstanse] processRemoteMessage:model];
 }
 
 #pragma -mark Network

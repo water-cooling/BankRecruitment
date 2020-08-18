@@ -11,15 +11,17 @@
 - (void)MineFunctionBtnPressed:(NSInteger)index;
 @end
 @interface MineFunctionBtnTableViewCell : UITableViewCell<UIScrollViewDelegate>
-//滚动视图对象
-@property (nonatomic ,strong) IBOutlet UIScrollView *functionBtnScrollView;
-//视图中小圆点，对应视图的页码
-@property (retain, nonatomic) IBOutlet UIPageControl *functionBtnPageControl;
-//动态数组对象，存储图片
-@property (copy, nonatomic) NSArray *functionBtnDictLists;
 
 @property (nonatomic, assign) id<MineFunctionBtnFunc> delegate;
 
-- (void)setupFunctionsPage:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UIButton *messageBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headImgtop;
+
+@property (weak, nonatomic) IBOutlet UILabel *telephoneLab;
+@property (weak, nonatomic) IBOutlet UIImageView *headImg;
+@property (weak, nonatomic) IBOutlet UILabel *noReadCountLab;
+@property (weak, nonatomic) IBOutlet UIButton *settingBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageTop;
 
 @end

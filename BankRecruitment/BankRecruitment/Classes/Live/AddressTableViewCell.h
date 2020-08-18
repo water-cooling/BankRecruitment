@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface AddressTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *receiveNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *receivePhoneLab;
+@property (weak, nonatomic) IBOutlet UILabel *addressLab;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
 
 @end

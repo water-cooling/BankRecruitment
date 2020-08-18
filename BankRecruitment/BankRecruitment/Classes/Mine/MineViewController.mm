@@ -23,30 +23,30 @@
 #import "SpecialExercisesViewController.h"
 #import "IntelligentPaperViewController.h"
 #import "LianxiHisViewController.h"
-
+#import "SettingViewController.h"
+#import "AddressListViewController.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource, MineFunctionBtnFunc>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *moduleList;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *offsetTop;
+
 @end
 
 @implementation MineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.moduleList = @[@{@"title":@"智能组卷",@"path":@"nav_zhinengzujuan"},
-                        @{@"title":@"专项练习",@"path":@"nav_zhinenglianxi"},
-                        @{@"title":@"数据报告",@"path":@"nav_shuju"},
-                        @{@"title":@"错题本",@"path":@"nav_cuotiben"},
-                        @{@"title":@"练习历史",@"path":@"nav_lianxilishi"}];
+    self.offsetTop.constant = -StatusBarHeight;
     
-    [self drawViews];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
-    self.hidesBottomBarWhenPushed = NO;
+    self.navigationController.navigationBar.hidden = YES;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,12 +54,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)drawViews
-{
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
-    self.title = @"我的";
-}
+
 
 - (void)shareToPlatformType:(UMSocialPlatformType)platformType
 {
@@ -104,36 +99,32 @@
     [defaults synchronize];
 }
 
-- (void)MineFunctionBtnPressed:(NSInteger)index
-{
-    NSDictionary *dict = self.moduleList[index];
-    NSString *title = dict[@"title"];
-    if ([title isEqualToString:@"智能组卷"])
-    {
+- (void)MineFunctionBtnPressed:(NSInteger)index{
+    if (index == 0){
         IntelligentPaperViewController *vc = [[IntelligentPaperViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if ([title isEqualToString:@"专项练习"])
+    else if (index == 1)
     {
         SpecialExercisesViewController *vc = [[SpecialExercisesViewController alloc] init];
-        vc.intelligentType = title;
+        vc.intelligentType = @"专项练习";
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if ([title isEqualToString:@"数据报告"])
+    else if (index == 2)
     {
         DataReportViewController *vc = [[DataReportViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if ([title isEqualToString:@"错题本"])
+    else if (index == 3)
     {
         WrongQuestionsViewController *vc = [[WrongQuestionsViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if ([title isEqualToString:@"练习历史"])
+    else if (index == 4)
     {
         LianxiHisViewController *vc = [[LianxiHisViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
@@ -188,180 +179,69 @@
 }
 
 #pragma -mark UITableView delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10;
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 0.1;
-}
 
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, 10)];
-    footerView.backgroundColor = kColorBarGrayBackground;
-    return footerView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.section == 0)
-    {
-        if(indexPath.row == 0)
-        {
-            return 90;
-        }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+        if(indexPath.row == 0){
+            return 220+(IS_iPhoneX ? 24:0);
     }
-    return 44;
+    return 54;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 3;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if(section == 0)
-    {
-        return 2;
-    }
-    else if(section == 1)
-    {
-        return 5;
-    }
-    else
-    {
-        return 4;
-    }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+        return 8;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.section == 0)
-    {
-        if(indexPath.row == 0)
-        {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row == 0){
             MineFunctionBtnTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MineFunctionBtnTableViewCell, @"MineFunctionBtnTableViewCell");
-            
-            loc_cell.functionBtnDictLists = self.moduleList;
             loc_cell.delegate = self;
+        [loc_cell.settingBtn addTarget:self action:@selector(settingClick) forControlEvents:UIControlEventTouchUpInside];
+        [loc_cell.messageBtn addTarget:self action:@selector(messageClick) forControlEvents:UIControlEventTouchUpInside];
+
             loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [loc_cell setupFunctionsPage:nil];
+           
             return loc_cell;
-        }
-        else
-        {
+    }else {
+       
             AccountInfoTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, AccountInfoTableViewCell, @"AccountInfoTableViewCell");
-            if([LdGlobalObj sharedInstanse].user_id.floatValue > 0)
-            {
-                loc_cell.titleCommonLabel.text = @"账号信息";
+       if(indexPath.row == 1){
+            loc_cell.titleCommonLabel.text = @"直播课提醒";
+            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"zbtx-icon"];
+       }else if(indexPath.row == 2){
+                loc_cell.titleCommonLabel.text = @"我的试卷";
+                loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"wdsj-icon"];
+            }else if(indexPath.row == 3){
+                loc_cell.titleCommonLabel.text = @"我的收藏";
+                loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"sc-icon"];
+            }else if(indexPath.row == 4){
+                loc_cell.titleCommonLabel.text = @"我的笔记";
+                loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"bj-icon"];
+            }else if (indexPath.row == 5){
+                loc_cell.titleCommonLabel.text = @"APP分享";
+                loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"share-icon"];
+            }else if (indexPath.row == 6){
+                loc_cell.titleCommonLabel.text = @"收货地址";
+                           loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"shdz-icon"];
+            }else{
+                loc_cell.titleCommonLabel.text = @"在线客服";
+                loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"zhibo_btn_zixun"];
             }
-            else
-            {
-                loc_cell.titleCommonLabel.text = @"请登录/注册，以免您的信息丢失";
-            }
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"home_icon_my"];
-            return loc_cell;
-        }
+           return loc_cell;
     }
-    else if (indexPath.section == 1)
-    {
-        if(indexPath.row == 0)
-        {
-            AccountInfoTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, AccountInfoTableViewCell, @"AccountInfoTableViewCell");
-            loc_cell.titleCommonLabel.text = @"我的消息";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"p_icon_message"];
-            return loc_cell;
-        }
-        else if(indexPath.row == 1)
-        {
-            LiveWarnTableViewCell *cell = GET_TABLE_CELL_FROM_NIB(tableView, LiveWarnTableViewCell, @"LiveWarnTableViewCell");
-            cell.titleCommonSwitch.on = [LdGlobalObj sharedInstanse].isWarnExamFlag;
-            [cell.titleCommonSwitch addTarget:self action:@selector(titleCommonSwitchAction:) forControlEvents:UIControlEventValueChanged];
-            return cell;
-        }
-        else if(indexPath.row == 2)
-        {
-            AccountInfoTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, AccountInfoTableViewCell, @"AccountInfoTableViewCell");
-            loc_cell.titleCommonLabel.text = @"我的试卷";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"icon_lishijilu"];
-            return loc_cell;
-        }
-        else if(indexPath.row == 3)
-        {
-            AccountInfoTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, AccountInfoTableViewCell, @"AccountInfoTableViewCell");
-            loc_cell.titleCommonLabel.text = @"我的收藏";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"p_icon_collect"];
-            return loc_cell;
-        }
-        else if(indexPath.row == 4)
-        {
-            AccountInfoTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, AccountInfoTableViewCell, @"AccountInfoTableViewCell");
-            loc_cell.titleCommonLabel.text = @"我的笔记";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"icon_biji"];
-            return loc_cell;
-        }
-        else
-        {
-            return nil;
-        }
-    }
-    else
-    {
-        AccountInfoTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, AccountInfoTableViewCell, @"AccountInfoTableViewCell");
-        
-        if(indexPath.row == 0)
-        {
-            loc_cell.titleCommonLabel.text = @"在线客服";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"p_icon_kefu"];
-        }
-        else if (indexPath.row == 1)
-        {
-            loc_cell.titleCommonLabel.text = @"APP分享";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"p_icon_share"];
-        }
-        else if(indexPath.row == 2)
-        {
-            loc_cell.titleCommonLabel.text = @"缓存清理";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"clearCahche"];
-        }
-        else
-        {
-            loc_cell.titleCommonLabel.text = @"关于";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"p_icon_about"];
-        }
-        return loc_cell;
-    }
+        return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if(indexPath.section == 0)
-    {
-        if([LdGlobalObj sharedInstanse].user_id.floatValue > 0)
-        {
-            AccountInfoViewController *vc = [[AccountInfoViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        else
-        {
-            NSString *preUserID = [LdGlobalObj sharedInstanse].user_id;
-            [LdGlobalObj sharedInstanse].loginVC = [[LoginViewController alloc] init];
-            [LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock = ^(void){
-                //迁移权益
-                [self transitionVistorToNomalByPre:preUserID];
-            };
-            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[LdGlobalObj sharedInstanse].loginVC] animated:YES completion:nil];
-        }
-    }
-    else if (indexPath.section == 1)
-    {
-        if(indexPath.row == 0)
+   
+        if(indexPath.row == 1)
         {
             MineMessageViewController *vc = [[MineMessageViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
@@ -384,41 +264,34 @@
             NoteQuestionViewController *vc = [[NoteQuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }
-    }
-    else if(indexPath.section == 2)
-    {
-        if(indexPath.row == 0)
-        {
-            NSString *qq = @"3004628600";
-            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]]) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]];
-            }
-            else
-            {
-                ZB_Toast(@"尚未检测到相关客户端，咨询失败");
-            }
-        }
-        else if(indexPath.row == 1)
-        {
+        }else if(indexPath.row == 5){
             [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession), @(UMSocialPlatformType_WechatTimeLine), @(UMSocialPlatformType_QQ), @(UMSocialPlatformType_Qzone)]];
             [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
                 // 根据获取的platformType确定所选平台进行下一步操作
                 [self shareToPlatformType:platformType];
             }];
-        }
-        else if(indexPath.row == 2)
-        {
-            [SVProgressHUD showWithStatus:@"正在清理"];
-            [self performSelector:@selector(stopClearCache) withObject:nil afterDelay:1];
-        }
-        else if(indexPath.row == 3)
-        {
-            AboutViewController *vc = [[AboutViewController alloc] init];
+        }else if(indexPath.row == 6){
+            AddressListViewController *vc = [[AddressListViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
+        }else if(indexPath.row == 7){
+           NSString *qq = @"3004628600";
+           if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]]) {
+               [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]];
+           }
         }
-    }
 }
 
+-(void)settingClick{
+    SettingViewController * settingVC = [SettingViewController new];
+    settingVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingVC animated:YES];
+}
+
+-(void)messageClick{
+    MineMessageViewController *vc = [[MineMessageViewController alloc] init];
+               vc.hidesBottomBarWhenPushed = YES;
+               [self.navigationController pushViewController:vc animated:YES];
+    
+}
 @end

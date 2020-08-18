@@ -13,7 +13,7 @@
 @property (nonatomic, strong) IBOutlet UITextField* addressTextFeild;
 @property (nonatomic, strong) IBOutlet UITextField* nameTextFeild;
 @property (nonatomic, strong) IBOutlet UITextField* phoneTextFeild;
-@property (nonatomic, strong) IBOutlet UIButton *saveBtn;
+@property (nonatomic, strong) UIButton *saveBtn;
 @end
 
 @implementation CreateAddressViewController
@@ -22,18 +22,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"编辑地址";
-    
     [self drawViews];
     
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    self.addressTextFeild.text = self.addressModel.Addr;
-    self.nameTextFeild.text = self.addressModel.Name;
-    self.phoneTextFeild.text = self.addressModel.Tel;
+    if (self.addressModel) {
+        self.addressTextFeild.text = self.addressModel.Addr;
+        self.nameTextFeild.text = self.addressModel.Name;
+        self.phoneTextFeild.text = self.addressModel.Tel;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,34 +40,28 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)drawViews
-{
+- (void)drawViews{
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.view.backgroundColor = kColorBarGrayBackground;
-    
-    UILabel *lineView = [[UILabel alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight+43+0.5, Screen_Width, 0.5)];
-    lineView.backgroundColor = kColorBarGrayBackground;
-    [self.view addSubview:lineView];
-    
-    UILabel *lineView1 = [[UILabel alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight+43+44+0.5, Screen_Width, 0.5)];
-    lineView1.backgroundColor = kColorBarGrayBackground;
-    [self.view addSubview:lineView1];
-    
-    self.saveBtn.layer.cornerRadius = 4;
-    self.saveBtn.layer.masksToBounds = YES;
+    [self.view addSubview:self.saveBtn];
+    [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-22.5);
+               make.width.mas_equalTo(Screen_Width-64);
+               make.height.mas_equalTo(40);
+    }];
+    [self.saveBtn addTarget:self action:@selector(addAddressAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)backButtonPressed
-{
+- (void)backButtonPressed{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)addAddressAction:(id)sender
+- (void)addAddressAction
 {
     if(strIsNullOrEmpty(self.addressTextFeild.text) || strIsNullOrEmpty(self.nameTextFeild.text) || strIsNullOrEmpty(self.phoneTextFeild.text))
     {
@@ -99,6 +92,18 @@
         NSLog(@"%@",error);
         ZB_Toast(@"编辑地址失败");
     }];
+}
+
+- (UIButton *)saveBtn {
+    if (!_saveBtn) {
+        _saveBtn = [[UIButton alloc] init];
+        [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _saveBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        _saveBtn.layer.cornerRadius = 20;
+        _saveBtn.backgroundColor = KColorBlueText;
+        [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+    }
+    return _saveBtn;
 }
 
 @end

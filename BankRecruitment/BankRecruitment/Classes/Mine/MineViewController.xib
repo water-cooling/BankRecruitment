@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MineViewController">
             <connections>
+                <outlet property="offsetTop" destination="iie-jO-ROK" id="V7K-Dd-Et3"/>
                 <outlet property="tableView" destination="Qwy-LF-frU" id="pVE-VE-d0E"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,13 +33,11 @@
             <constraints>
                 <constraint firstItem="Qwy-LF-frU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Za-41-Fhi"/>
                 <constraint firstAttribute="trailing" secondItem="Qwy-LF-frU" secondAttribute="trailing" id="4ws-QO-Dhu"/>
-                <constraint firstItem="Qwy-LF-frU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" id="6GF-gm-yux"/>
-                <constraint firstItem="Qwy-LF-frU" firstAttribute="top" secondItem="isd-DX-rrM" secondAttribute="top" priority="800" constant="-20" id="Tkf-wv-rYV"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Qwy-LF-frU" secondAttribute="bottom" id="aNJ-BP-58x"/>
                 <constraint firstItem="Qwy-LF-frU" firstAttribute="bottom" secondItem="isd-DX-rrM" secondAttribute="bottom" priority="800" id="cIY-Pd-lDJ"/>
+                <constraint firstItem="Qwy-LF-frU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iie-jO-ROK"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="isd-DX-rrM"/>
-            <point key="canvasLocation" x="-169.5" y="27.5"/>
+            <point key="canvasLocation" x="-52" y="-40.929535232383813"/>
         </view>
     </objects>
 </document>

@@ -13,7 +13,7 @@
 #import "VideoTypeModel.h"
 #import "VideoCatalogModel.h"
 #import "BBAlertView.h"
-#import "QuestionReportTableViewCell.h"
+#import "VideoTreeTableViewCell.h"
 #import "VideoModel.h"
 #import "VideoDetailViewController.h"
 
@@ -51,8 +51,7 @@
 
 - (void)drawViews
 {
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
@@ -128,9 +127,7 @@
         float price = self.remoteMessageVideoModel.Price.floatValue;
         if([self.remoteMessageVideoModel.IsGet isEqualToString:@"是"] || (price == 0))
         {
-            UIButton *btn = [[UIButton alloc] init];
-            btn.tag = selectIndex*10000;
-            [self outLineCellAction:btn];
+            [self outLineCellAction:selectIndex];
             
             if(![self.remoteMessageVideoModel.IsGet isEqualToString:@"是"])
             {
@@ -146,9 +143,7 @@
                     ZB_Toast(@"购买成功");
                     [self refreshCurrentVideoList];
                     
-                    UIButton *btn = [[UIButton alloc] init];
-                    btn.tag = selectIndex*10000;
-                    [self outLineCellAction:btn];
+                    [self outLineCellAction:selectIndex];
                 };
             }
             else
@@ -161,9 +156,7 @@
                         ZB_Toast(@"购买成功");
                         [weakself refreshCurrentVideoList];
                         
-                        UIButton *btn = [[UIButton alloc] init];
-                        btn.tag = selectIndex*10000;
-                        [self outLineCellAction:btn];
+                        [self outLineCellAction:selectIndex];
                     };
                 }];
                 [alertView show];
@@ -194,9 +187,8 @@
     return index;
 }
 
-- (void)outLineCellAction:(UIButton *)button
-{
-    VideoCatalogModel *model = self.videoMainList[button.tag/10000];
+- (void)outLineCellAction:(NSInteger )index{
+    VideoCatalogModel *model = self.videoMainList[index];
     NSArray *subArray = [self.mainIDAndSubValueDict objectForKey:model.cID];
     if(!subArray){
         [self NetworkGetSubVideoListsBy:model];
@@ -275,8 +267,7 @@
     return number;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     VideoCatalogModel *mainModel = self.videoMainList[indexPath.section];
     NSArray *subArray = [self.mainIDAndSubValueDict objectForKey:mainModel.cID];
     VideoModel *subModel = nil;
@@ -284,50 +275,45 @@
         subModel = subArray[indexPath.row-1];
     }
     
-    QuestionReportTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, QuestionReportTableViewCell, @"QuestionReportTableViewCell");
+    VideoTreeTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, VideoTreeTableViewCell, @"VideoTreeTableViewCell");
     [loc_cell.actionBtn setImage:nil forState:UIControlStateNormal];
     if(indexPath.row == 0){
-        loc_cell.questionTitleLabel.text = mainModel.Name;
-        loc_cell.actionBtn.tag = indexPath.section*10000;
-        [loc_cell.actionBtn addTarget:self action:@selector(outLineCellAction:) forControlEvents:UIControlEventTouchUpInside];
+        loc_cell.titleLab.text = mainModel.Name;
+        loc_cell.leftConstraint.constant = 6.8;
+        loc_cell.cricleHeight.constant = 6;
+        if (mainModel.isSpread) {
+            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"arrowdown"] forState: 0];
+        }else{
+            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"arrowtop"] forState: 0];
+        }
     }else{
-        loc_cell.questionTitleLabel.text = subModel.Name;
+        loc_cell.titleLab.text = subModel.Name;
+        loc_cell.leftConstraint.constant = 33;
+        loc_cell.cricleHeight.constant = 0;
+        [loc_cell.actionBtn setImage:[UIImage imageNamed:@"播放"] forState:0];
     }
-    loc_cell.questionExamButton.hidden = YES;
+    loc_cell.actionBtn.tag = indexPath.section*10000+indexPath.row;
+    [loc_cell.actionBtn addTarget:self action:@selector(actionClick:) forControlEvents:UIControlEventTouchUpInside];
     loc_cell.upLineView.hidden = NO;
     loc_cell.downLineView.hidden = NO;
-    loc_cell.BottomLine.hidden = YES;
     if(indexPath.row == 0)
     {
         loc_cell.upLineView.hidden = YES;
     }
     if(indexPath.row == ([tableView numberOfRowsInSection:indexPath.section]-1))
     {
-        loc_cell.BottomLine.hidden = NO;
-        loc_cell.downLineView.hidden = YES;
+        loc_cell.upLineView.hidden =NO;
     }
-    
-    if(indexPath.row == 0)
-    {
-        if(mainModel.isSpread)
-        {
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_minus"] forState:UIControlStateNormal];
-        }
-        else
-        {
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_add"] forState:UIControlStateNormal];
-        }
-    }
-    else
-    {
-        [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_circle_blue"] forState:UIControlStateNormal];
-    }
-    
     return loc_cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)actionClick:(UIButton *)sender{
+    NSIndexPath * index = [NSIndexPath indexPathForRow:sender.tag%10000 inSection:sender.tag/10000];
+    [self tableView:self.tableView didSelectRowAtIndexPath:index];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     VideoCatalogModel *mainModel = self.videoMainList[indexPath.section];
     NSArray *subArray = [self.mainIDAndSubValueDict objectForKey:mainModel.cID];
@@ -340,9 +326,7 @@
         float price = mainModel.Price.floatValue;
         if([mainModel.IsGet isEqualToString:@"是"] || (price == 0))
         {
-            UIButton *btn = [[UIButton alloc] init];
-            btn.tag = indexPath.section*10000;
-            [self outLineCellAction:btn];
+            [self outLineCellAction:indexPath.section];
             
             if(![mainModel.IsGet isEqualToString:@"是"])
             {
@@ -357,10 +341,8 @@
                 [LdGlobalObj sharedInstanse].buyObjectSuccessBlock = ^(){
                     ZB_Toast(@"购买成功");
                     [self refreshCurrentVideoList];
-                    
-                    UIButton *btn = [[UIButton alloc] init];
-                    btn.tag = indexPath.section*10000;
-                    [self outLineCellAction:btn];
+               
+                    [self outLineCellAction:indexPath.section];
                 };
             }
             else
@@ -372,10 +354,8 @@
                     [LdGlobalObj sharedInstanse].buyObjectSuccessBlock = ^(){
                         ZB_Toast(@"购买成功");
                         [weakself refreshCurrentVideoList];
-                        
-                        UIButton *btn = [[UIButton alloc] init];
-                        btn.tag = indexPath.section*10000;
-                        [self outLineCellAction:btn];
+                    
+                        [self outLineCellAction:indexPath.section];
                     };
                 }];
                 [alertView show];

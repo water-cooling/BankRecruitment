@@ -94,7 +94,7 @@
 //    _moreBtn.centerY = rightBarView.height/2;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.timerRightButton];
     
-    self.submitButton.layer.cornerRadius = 4;
+    self.submitButton.layer.cornerRadius = 20;
     self.submitButton.layer.masksToBounds = YES;
     self.answerSheetScrollView.backgroundColor = kColorBarGrayBackground;
     
@@ -104,34 +104,17 @@
         //创建一个视图
         UIButton *functionBtn = [[UIButton alloc] initWithFrame:CGRectZero];
         NSString *result = self.realResultDict[[NSNumber numberWithInteger:index]];
-        if(result)
-        {
-            if([LdGlobalObj sharedInstanse].isNightExamFlag)
-            {
-                [functionBtn setBackgroundImage:[UIImage imageNamed:@"night_datika_circle_selected"] forState:UIControlStateNormal];
-                [functionBtn setTitleColor:UIColorFromHex(0x667aa1) forState:UIControlStateNormal];
-            }
-            else
-            {
-                [functionBtn setBackgroundImage:[UIImage imageNamed:@"datika_circle_selected"] forState:UIControlStateNormal];
+        if(result){
                 [functionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            }
-        }
-        else
-        {
-            if([LdGlobalObj sharedInstanse].isNightExamFlag)
-            {
-                [functionBtn setBackgroundImage:[UIImage imageNamed:@"night_datika_circle_normal"] forState:UIControlStateNormal];
-                [functionBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-            }
-            else
-            {
-                [functionBtn setBackgroundImage:[UIImage imageNamed:@"datika_circle_normal"] forState:UIControlStateNormal];
-                [functionBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-            }
+                functionBtn.backgroundColor =KColorBlueText;
+
+        }else{
+                [functionBtn setTitleColor:kColorBlackText forState:UIControlStateNormal];
+                functionBtn.backgroundColor =[UIColor colorWithHex:@"#EFEFEF"];
         }
         functionBtn.tag = index;
-        
+        functionBtn.layer.cornerRadius = 20;
+        functionBtn.layer.masksToBounds = YES;
         functionBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         [functionBtn setTitle:[NSString stringWithFormat:@"%d", index+1] forState:UIControlStateNormal];
         [functionBtn addTarget:self action:@selector(functionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -161,7 +144,6 @@
                 [functionBtn addSubview:tagImageView];
             }
         }
-        
         //把视图添加到当前的滚动视图中
         [self.answerSheetScrollView addSubview:functionBtn];
         lastButton = functionBtn;
@@ -181,7 +163,7 @@
 {
     if([LdGlobalObj sharedInstanse].isNightExamFlag)
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromHex(0x7a8596) ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         self.navigationController.navigationBar.barTintColor = UIColorFromHex(0x2b3f5d);
         
         self.view.backgroundColor = UIColorFromHex(0x2b3f5d);
@@ -190,12 +172,10 @@
         [self.timerRightButton setTitleColor:UIColorFromHex(0x7a8596) forState:UIControlStateNormal];
 //        [self.moreBtn setImage:[UIImage imageNamed:@"night_icon_more"] forState:UIControlStateNormal];
         [self.backButton setImage:[UIImage imageNamed:@"night_btn_top_back"] forState:UIControlStateNormal];
-        self.answerTitleLabel.textColor = UIColorFromHex(0x666666);
-        [self.submitButton setTitleColor:UIColorFromHex(0x370a00) forState:UIControlStateNormal];
     }
     else
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
         
         self.view.backgroundColor = kColorBarGrayBackground;
@@ -204,8 +184,6 @@
         [self.timerRightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //        [self.moreBtn setImage:[UIImage imageNamed:@"day_shiti_icon_more"] forState:UIControlStateNormal];
         [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
-        self.answerTitleLabel.textColor = UIColorFromHex(0x444444);
-        [self.submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     
     for(UIView *subView in self.answerSheetScrollView.subviews)

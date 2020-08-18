@@ -11,4 +11,5 @@
 @interface MockExamTitleTableViewCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel* examTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* examNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @end

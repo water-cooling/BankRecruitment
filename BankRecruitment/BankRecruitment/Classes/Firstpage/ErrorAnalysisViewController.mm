@@ -20,7 +20,7 @@
 #import "NoteModel.h"
 #import "NoteViewController.h"
 #import "BBAlertView.h"
-#import "ExamTitleTableViewCell.h"
+#import "NewExamTitleTableViewCell.h"
 #import "ExamStemTableViewCell.h"
 #import "ReportErrorViewController.h"
 #import "BigImageShowViewController.h"
@@ -494,8 +494,7 @@
     
     if([LdGlobalObj sharedInstanse].isNightExamFlag)
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromHex(0x7a8596) ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-        self.navigationController.navigationBar.barTintColor = UIColorFromHex(0x2b3f5d);
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         
         self.functionBackView.backgroundColor = UIColorFromHex(0x213451);
         for(UIView *subView in self.examScrollView.subviews)
@@ -519,8 +518,7 @@
     }
     else
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-        self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         
         self.functionBackView.backgroundColor = UIColorFromHex(0x1e9aed);
         for(UIView *subView in self.examScrollView.subviews)
@@ -576,9 +574,8 @@
     }
     else
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-        self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
-        
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
+
         self.view.backgroundColor = [UIColor whiteColor];
         self.functionBackView.backgroundColor = UIColorFromHex(0x1e9aed);
         for(UIView *subView in self.examScrollView.subviews)
@@ -1253,7 +1250,7 @@
             return loc_cell;
         }
         
-        ExamTitleTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, ExamTitleTableViewCell, @"ExamTitleTableViewCell");
+        NewExamTitleTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, NewExamTitleTableViewCell, @"NewExamTitleTableViewCell");
         NSMutableAttributedString *tempstring = [[NSMutableAttributedString alloc] init];
         [tempstring setAttributedString:[attributedDict objectForKey:@"globalTitleAttributeString"]];
         [tempstring addAttribute:NSPaperSizeDocumentAttribute value:[NSValue valueWithCGSize:CGSizeMake(Screen_Width-15-33, self.titleHeight)] range:NSMakeRange(0, [tempstring length])];
@@ -1264,6 +1261,7 @@
         loc_cell.examTopTitleLabel.text = [NSString stringWithFormat:@"%@(%@)", examModel.content, examModel.QPoint];
         loc_cell.examIndexLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:[LdGlobalObj sharedInstanse].examFontSize];
         loc_cell.examTopTitleLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:[LdGlobalObj sharedInstanse].examFontSize];
+        loc_cell.numLab.text = [NSString stringWithFormat:@"%ld",self.selectExamIndex+1];
         loc_cell.examIndexLabel.text = [NSString stringWithFormat:@"%d/%d", (int)tableView.tag+1, (int)self.practiceList.count];
         
         if([LdGlobalObj sharedInstanse].isNightExamFlag)
@@ -1272,25 +1270,12 @@
             loc_cell.examIndexLabel.textColor = UIColorFromHex(0x666666);
             loc_cell.examTopTitleLabel.textColor = UIColorFromHex(0x666666);
             loc_cell.backgroundColor = [UIColor clearColor];
-            if ([examModel.QType isEqualToString:@"多选题"])
-            {
-                loc_cell.examTypeImageView.image = [UIImage imageNamed:@"night_shiti_tips_duoxuan"];
-            }
-            else
-            {
-                loc_cell.examTypeImageView.image = [UIImage imageNamed:@"night_shiti_tips_danxuan"];
-            }
+             loc_cell.typeLab.text  = examModel.QType;
+           
         }
         else
         {
-            if ([examModel.QType isEqualToString:@"多选题"])
-            {
-                loc_cell.examTypeImageView.image = [UIImage imageNamed:@"shiti_tips_duoxuan"];
-            }
-            else
-            {
-                loc_cell.examTypeImageView.image = [UIImage imageNamed:@"shiti_tips_danxuan"];
-            }
+          loc_cell.typeLab.text  = examModel.QType;
             loc_cell.examTitleLabel.textColor = kColorDarkText;
             loc_cell.examIndexLabel.textColor = kColorDarkText;
             loc_cell.examTopTitleLabel.textColor = kColorDarkText;

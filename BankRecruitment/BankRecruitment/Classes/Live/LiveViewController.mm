@@ -15,16 +15,20 @@
 #import "LiveModel.h"
 #import "MyCourseTableViewCell.h"
 #import "TimetablesViewController.h"
-
+#import "VideoTypeModel.h"
+#import "VideoSelectTableViewCell.h"
+#import "VideoViewController.h"
 @interface LiveViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) UIView *mainBottomView;
 @property (nonatomic, assign) NSInteger selectMainIndex;
-@property (nonatomic, copy) NSArray *mainList;
+@property (nonatomic, strong)  UIButton*liveBtn;
+@property (nonatomic, strong)  UIButton*videoBtn;
+@property (nonatomic, strong)  UIView*lineView;
 @property (nonatomic, strong) NSMutableArray *liveList;
-@property (nonatomic, strong) NSMutableArray *myClassesList;
+@property (nonatomic, strong) NSMutableArray *typeList;
 
 @end
 
@@ -32,21 +36,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.selectMainIndex = 0;
+    self.selectMainIndex = 100;
     self.liveList = [NSMutableArray arrayWithCapacity:9];
-    self.myClassesList = [NSMutableArray arrayWithCapacity:9];
-    [self drawViews];
+    self.typeList = [NSMutableArray arrayWithCapacity:9];
+    [self initUI];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
-    self.navigationItem.title = @"直播";
-    
+    self.navigationController.navigationBar.hidden = YES;
     [self NetworkGetAllLiveList];
-    [self NetworkGetMineLiveList];
+    [self NetworkGetVideoTypes];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,11 +58,48 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)drawViews
-{
-    float modelheight = 44;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight+modelheight, Screen_Width, Screen_Height-TabbarHeight-StatusBarAndNavigationBarHeight-modelheight) style:UITableViewStyleGrouped];
-    self.tableView.backgroundColor = kColorBarGrayBackground;
+-(void)initUI{
+UIButton *myCourseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [myCourseButton setTitle:@"我的课程" forState:UIControlStateNormal];
+    [myCourseButton setTitleColor:kColorBlackText forState:0];
+    myCourseButton.titleLabel.font =[UIFont systemFontOfSize:12];
+   [myCourseButton addTarget:self action:@selector(courseClick) forControlEvents:UIControlEventTouchUpInside];
+[self.view addSubview:myCourseButton];
+[myCourseButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.right.equalTo(self.view).offset(-12);
+    make.top.equalTo(self.view).offset(StatusBarHeight+15);
+}];
+ 
+[self.view addSubview:self.videoBtn];
+[self.videoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.right.equalTo(self.view.mas_centerX).offset(-47);
+    make.top.equalTo(self.view).offset(StatusBarHeight+15);
+}];
+[self.view addSubview:self.liveBtn];
+[self.liveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+      make.left.equalTo(self.view.mas_centerX).offset(47);
+      make.top.equalTo(self.view).offset(StatusBarHeight+15);
+  }];
+self.lineView = [[UIView alloc]init];
+self.lineView.backgroundColor = KColorBlueText;
+[self.view addSubview:self.lineView];
+[self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.centerX.equalTo(self.videoBtn);
+    make.top.equalTo(self.videoBtn.mas_bottom).offset(2);
+    make.size.mas_equalTo(CGSizeMake(12, 2));
+}];
+    
+    UIView *speatorView = [[UIView alloc]init];
+    speatorView.backgroundColor = kColorBarGrayBackground;
+    [self.view addSubview:speatorView];
+    [speatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.videoBtn);
+        make.top.equalTo(self.view).offset(StatusBarAndNavigationBarHeight);
+        make.size.mas_equalTo(CGSizeMake(Screen_Width, 1));
+    }];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Height-TabbarHeight-StatusBarAndNavigationBarHeight) style:UITableViewStylePlain];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -72,78 +113,24 @@
     }else{
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
-    
-    self.mainList = @[@"直播中心", @"我的课程"];
-    float kongxi = 0;
-    float modelWidth = Screen_Width/self.mainList.count;
-    self.mainView = [[UIView alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, modelheight)];
-    self.mainView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.mainView];
-    for(int index=0; index<self.mainList.count; index++)
-    {
-        UIView *modelView = [[UIView alloc] initWithFrame:CGRectMake(modelWidth*index + kongxi*(index+1), 0, modelWidth, modelheight)];
-        modelView.userInteractionEnabled = YES;
-        [self.mainView addSubview:modelView];
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(3, 10, modelWidth-6, 24)];
-        label.tag = index;
-        label.font = [UIFont systemFontOfSize:15];
-        label.textColor = kColorDarkText;
-        label.textAlignment = NSTextAlignmentCenter;
-        label.adjustsFontSizeToFitWidth = YES;
-        label.numberOfLines = 2;
-        label.text = self.mainList[index];
-        [modelView addSubview:label];
-        
-        UIButton *button = [[UIButton alloc] initWithFrame:modelView.bounds];
-        button.backgroundColor = [UIColor clearColor];
-        button.tag = index;
-        [button addTarget:self action:@selector(mainButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [modelView addSubview:button];
-    }
-    
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1, 20)];
-    lineView.backgroundColor = kColorLineSepBackground;
-    lineView.center = self.mainView.center;
-    [self.view addSubview:lineView];
-    
-    self.mainBottomView = [[UIView alloc] initWithFrame:CGRectMake(kongxi, modelheight-4, 100, 4)];
-    self.mainBottomView.backgroundColor = kColorNavigationBar;
-    self.mainBottomView.centerX = Screen_Width/4;
-    [self.mainView addSubview:self.mainBottomView];
-    
-    UIView *lineBottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, 0.5)];
-    lineBottomView.backgroundColor = kColorLineSepBackground;
-    lineBottomView.top = self.mainView.bottom-0.5;
-    [self.view addSubview:lineBottomView];
 }
 
-- (void)mainButtonAction:(UIButton *)btn
-{
-    NSInteger index = btn.tag;
-    self.selectMainIndex = index;
-    for(UIView *subView in self.mainView.subviews)
-    {
-        for(UIView *subsubView in subView.subviews)
-        {
-            if((subsubView.tag == index)&&([subsubView isKindOfClass:[UILabel class]]))
-            {
-                UILabel *tempView = (UILabel *)subsubView;
-                tempView.textColor = kColorNavigationBar;
-                
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.mainBottomView.centerX = subView.centerX;
-                }];
-            }
-            else if([subsubView isKindOfClass:[UILabel class]])
-            {
-                UILabel *tempView = (UILabel *)subsubView;
-                tempView.textColor = kColorDarkText;
-            }
-        }
-        
-    }
+-(void)courseClick{
     
+}
+
+- (void)mainButtonAction:(UIButton *)btn{
+    NSInteger index = btn.tag;
+    if (btn.tag == self.selectMainIndex) {
+        return;
+    }
+    UIButton * lastBtn = [self.view viewWithTag:self.selectMainIndex];
+    lastBtn.selected = NO;
+    btn.selected = YES;
+    self.selectMainIndex = index;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.lineView.xl_centerX = btn.xl_centerX;
+    }];
     [self.tableView reloadData];
 }
 
@@ -172,122 +159,52 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(self.selectMainIndex == 0)
-    {
-        return 118;
-    }
-    else
-    {
-        if(indexPath.section == 0)
-        {
-            return 44;
-        }
-        else
-        {
-            return 80;
-        }
-    }
+    
+        return 120;
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(self.selectMainIndex == 0)
+    if(self.selectMainIndex == 101)
     {
         return self.liveList.count;
     }
     else
     {
-        return 1+self.myClassesList.count;
+        return self.typeList.count;
     }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if(self.selectMainIndex == 0)
-    {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
         return 1;
-    }
-    else
-    {
-        if(section == 0)
-        {
-            return 1;
-        }
-        else
-        {
-            return 1;
-        }
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(self.selectMainIndex == 0)
+    if(self.selectMainIndex == 101)
     {
         LiveTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, LiveTableViewCell, @"LiveTableViewCell");
         LiveModel *model = self.liveList[indexPath.section];
         loc_cell.liveTitleLabel.text = model.Name;
-        float price = model.Price.floatValue;
-        if([model.IsGet isEqualToString:@"是"])
-        {
-            loc_cell.livePriceLabel.text = @"";
-            loc_cell.priceConstraint.constant = 0;
-        }
-        else if((price != 0)&&([model.IsGet isEqualToString:@"否"]))
-        {
-            loc_cell.livePriceLabel.text = [NSString stringWithFormat:@"￥%.2f", price];
-            loc_cell.priceConstraint.constant = 90;
-        }
-        else
-        {
-            loc_cell.livePriceLabel.text = @"";
-            loc_cell.priceConstraint.constant = 0;
-        }
+        [loc_cell.enterBtn addTarget:self action:@selector(enterClcik:) forControlEvents:UIControlEventTouchUpInside];
+        loc_cell.enterBtn.tag = indexPath.section;
         
-        if([model.IsGet isEqualToString:@"是"]&&(price != 0))
-        {
-            loc_cell.livePriceLabel.text = @"";
-            loc_cell.priceConstraint.constant = 0;
-        }
-        
-        loc_cell.liveBuyNumberLabel.text = [NSString stringWithFormat:@"参与人数 %@",model.PurchCount];
-        loc_cell.liveClassPlanLabel.text = [NSString stringWithFormat:@"课程安排：%@至%@(%@课时)",model.BegDate, model.EndDate, model.LCount];
-        int endNumber = dateNumberFromDateToToday(model.EndDate);
-        if(endNumber>0)
-        {
-            loc_cell.liveLimitTimeLabel.text = [NSString stringWithFormat:@"距停售时间还有%d天",endNumber];
-        }
-        else
-        {
-            loc_cell.liveLimitTimeLabel.text = @"已停售";
-        }
+        loc_cell.liveBuyNumberLabel.text = [NSString stringWithFormat:@"%@已购",model.PurchCount];
+        loc_cell.liveClassPlanLabel.text = [NSString stringWithFormat:@"%@至%@",model.BegDate, model.EndDate];
+        loc_cell.classTImeLab.text = [NSString stringWithFormat:@"%@课时",model.LCount];
         return loc_cell;
     }
-    else
-    {
-        if(indexPath.section == 0)
-        {
-            MyLiveCommonTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MyLiveCommonTableViewCell, @"MyLiveCommonTableViewCell");
-//            if(indexPath.row == 0)
-//            {
-//                loc_cell.liveTitleImageView.image = [UIImage imageNamed:@"zhibo_icon_collect"];
-//                loc_cell.liveTitleLabel.text = @"我的收藏";
-//            }
-//            else
-//            {
-                loc_cell.liveTitleImageView.image = [UIImage imageNamed:@"zhibo_icon_calendar"];
-                loc_cell.liveTitleLabel.text = @"课程日历";
-//            }
-            return loc_cell;
-        }
-        else
-        {
-            MyCourseTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MyCourseTableViewCell, @"MyCourseTableViewCell");
-            LiveModel *model = self.myClassesList[indexPath.section-1];
-            loc_cell.liveTitleLabel.text = model.Name;
-            loc_cell.liveClassPlanLabel.text = [NSString stringWithFormat:@"课程安排：%@至%@(%@课时)",model.BegDate, model.EndDate, model.LCount];
-            return loc_cell;
-        }
+    else{
+      VideoSelectTableViewCell *cell = GET_TABLE_CELL_FROM_NIB(tableView, VideoSelectTableViewCell, @"VideoSelectTableViewCell");
+      VideoTypeModel *model = self.typeList[indexPath.row];
+      cell.videoTypeLabel.text = model.VType;
+      [cell.videoTypeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [LdGlobalObj sharedInstanse].fileServIp, model.picture]] placeholderImage:kDefaultHorizontalRectangleImage completed:nil];
+      cell.countLabel.text = [NSString stringWithFormat:@"视频:%@", model.video_num];
+      cell.chapterLabel.text = [NSString stringWithFormat:@"章节:%@", model.type_num];
+      return cell;
+          
     }
 }
 
@@ -295,7 +212,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    if(self.selectMainIndex == 0)
+    if(self.selectMainIndex == 101)
     {
         LiveModel *liveModel = self.liveList[indexPath.section];
         CourseDetailViewController *vc = [[CourseDetailViewController alloc] init];
@@ -303,24 +220,21 @@
         vc.liveModel = liveModel;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else
-    {
-        if(indexPath.section == 0)
-        {
-            CourseCalendarViewController *vc = [[CourseCalendarViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        else
-        {
-            LiveModel *model = self.myClassesList[indexPath.section-1];
-            TimetablesViewController *vc = [[TimetablesViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            vc.LID = model.LID;
-            vc.title = model.Name;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+    else    {
+        VideoViewController *vc = [[VideoViewController alloc] init];
+          vc.typeModel =self.typeList[indexPath.row];
+          [self.navigationController pushViewController:vc animated:YES];
+          vc.hidesBottomBarWhenPushed = YES;
     }
+    
+}
+
+-(void)enterClcik:(UIButton *)sender{
+    LiveModel *liveModel = self.liveList[sender.tag];
+          CourseDetailViewController *vc = [[CourseDetailViewController alloc] init];
+          vc.hidesBottomBarWhenPushed = YES;
+          vc.liveModel = liveModel;
+          [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -352,32 +266,60 @@
         //ZB_Toast(@"失败");
     }];
 }
-
-- (void)NetworkGetMineLiveList
-{
-    [LLRequestClass requestGetUserBuyedLiveListBySuccess:^(id jsonData) {
+- (void)NetworkGetVideoTypes{
+    self.typeList = [NSMutableArray arrayWithCapacity:9];
+    [LLRequestClass requestGetVideoTypeBySuccess:^(id jsonData) {
         NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         NSLog(@"%@", contentArray);
         if(contentArray.count > 0)
         {
-            [self.myClassesList removeAllObjects];
             NSDictionary *contentDict = contentArray.firstObject;
             NSString *result = [contentDict objectForKey:@"result"];
             if([result isEqualToString:@"success"])
             {
                 for(NSDictionary *dict in contentArray)
                 {
-                    LiveModel *model = [LiveModel model];
+                    VideoTypeModel *model = [VideoTypeModel model];
                     [model setDataWithDic:dict];
-                    [self.myClassesList addObject:model];
+                    [self.typeList addObject:model];
                 }
+                
             }
+            
         }
-        
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-        //ZB_Toast(@"失败");
+        
     }];
 }
+
+    
+- (UIButton *)liveBtn {
+        if (!_liveBtn) {
+            _liveBtn = [[UIButton alloc] init];
+            [_liveBtn setTitleColor:kColorBlackText forState:UIControlStateNormal];
+            [_liveBtn setTitleColor:KColorBlueText forState:UIControlStateSelected];
+            _liveBtn.tag = 101;
+            _liveBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+            [_liveBtn setTitle:@"直播" forState:UIControlStateNormal];
+            [_liveBtn addTarget:self action:@selector(mainButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        return _liveBtn;
+    }
+
+- (UIButton *)videoBtn {
+        if (!_videoBtn) {
+            _videoBtn = [[UIButton alloc] init];
+           [_videoBtn setTitleColor:kColorBlackText forState:UIControlStateNormal];
+            _videoBtn.tag = 100;
+            [_videoBtn setTitleColor:KColorBlueText forState:UIControlStateSelected];
+            _videoBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+            [_videoBtn setTitle:@"视频" forState:UIControlStateNormal];
+            _videoBtn.selected = YES;
+            [_videoBtn addTarget:self action:@selector(mainButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        return _videoBtn;
+    }
+
 
 @end

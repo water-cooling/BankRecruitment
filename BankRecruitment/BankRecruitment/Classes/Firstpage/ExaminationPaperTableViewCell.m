@@ -14,11 +14,10 @@
     [super awakeFromNib];
     // Initialization code
     
-    self.ExaminationPaperTitleLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:17];
-    self.ExaminationPaperPriceLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:18];
-    self.ExaminationPaperClassPlanLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:14];
-    self.ExaminationPaperBuyNumberLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:11];
-    self.ExaminationPaperLimitTimeLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:11];
+    self.ExaminationPaperTitleLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:15];
+    self.ExaminationPaperClassPlanLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:12];
+    self.ExaminationPaperBuyNumberLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:12];
+    self.ExaminationPaperLimitTimeLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:12];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

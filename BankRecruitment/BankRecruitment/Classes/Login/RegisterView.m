@@ -47,6 +47,10 @@
               [smsView addSubview:smsIcon];
     UITextField *smsTextField = [[UITextField alloc] init];
            smsTextField.delegate = self;
+    UIView *smsRightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 75, 26)];
+    [smsRightView addSubview:self.btnValidCode];
+    smsTextField.rightView = smsRightView;
+    smsTextField.rightViewMode = UITextFieldViewModeAlways;
                smsTextField.backgroundColor = [UIColor whiteColor];
                NSAttributedString *smsAttrString = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:
                    @{NSForegroundColorAttributeName:[UIColor colorWithHex:@"#AAAAAA"],
@@ -88,7 +92,6 @@
                 pwdTextField.leftView = pwdView;
                pwdTextField.borderStyle = UITextBorderStyleNone;
                pwdTextField.textColor = [UIColor colorWithHex:@"#333333"];
-               pwdTextField.keyboardType = UIKeyboardTypeNumberPad;
                self.pwdTextField= pwdTextField;
                [self addSubview:self.pwdTextField];
         UIView *lineViewThree = [UIView new];
@@ -119,7 +122,6 @@
                    pwdAgainTextField.leftView = pwdAgainView;
                   pwdAgainTextField.borderStyle = UITextBorderStyleNone;
                   pwdAgainTextField.textColor = [UIColor colorWithHex:@"#333333"];
-                  pwdAgainTextField.keyboardType = UIKeyboardTypeNumberPad;
                   self.pwdAgainTextField= pwdAgainTextField;
                   [self addSubview:self.pwdAgainTextField];
            UIView *lineViewFour = [UIView new];
@@ -226,6 +228,7 @@
         if (self.phoneTextField.text.length > 0 && self.pwdTextField.text.length > 0 &&self.smsTextField.text.length > 0 && self.pwdAgainTextField.text.length > 0) {
             self.btnRegist.enabled = YES;
             self.btnRegist.backgroundColor = [UIColor colorWithHex:@"#558CF4"];
+            
         } else {
             self.btnRegist.enabled = NO;
             self.btnRegist.backgroundColor = [UIColor colorWithHex:@"#DCDCDC"];
@@ -285,10 +288,10 @@
         _btnValidCode.titleLabel.font = [UIFont systemFontOfSize:12];
         [_btnValidCode setTitleColor:kColorBlackText forState:0];
         [_btnValidCode setTitle:@"发送验证码" forState:UIControlStateNormal];
-        _btnValidCode.enabled = NO;
+        _btnValidCode.layer.borderWidth = 1;
+        _btnValidCode.layer.borderColor = kColorBlackText.CGColor;
         _btnValidCode.layer.cornerRadius = 2;
         [_btnValidCode setBackgroundColor:[UIColor whiteColor]];
-        [_btnValidCode setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _btnValidCode;
 }

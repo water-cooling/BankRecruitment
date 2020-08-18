@@ -87,50 +87,34 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == 0)
-    {
-        return 50;
-    }
-    else
-    {
-        return 30;
-    }
+   return 120;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.mockList.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+return self.mockList.count ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MockModel *model = self.mockList[indexPath.section];
     
-    if(indexPath.row == 0)
-    {
         MockExamTitleTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MockExamTitleTableViewCell, @"MockExamTitleTableViewCell");
         loc_cell.examTitleLabel.text = model.Name;
-        loc_cell.examNumberLabel.text = [NSString stringWithFormat:@"%@人报名", model.iCount];
-        return loc_cell;
-    }
-    else
-    {
-        MockExamTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MockExamTableViewCell, @"MockExamTableViewCell");
-        loc_cell.timeTitleLabel.text = @"活动时间";
+        loc_cell.examNumberLabel.text = [NSString stringWithFormat:@"%@", model.iCount];
         NSDateFormatter* dateFmt = [[NSDateFormatter alloc] init];
         dateFmt.dateFormat = @"yyyy-MM-dd";
         NSDateFormatter* dateFmt1 = [[NSDateFormatter alloc] init];
         dateFmt1.dateFormat = @"yyyy.MM.dd";
         NSDate *BegDate = [dateFmt dateFromString:model.BegDate];
         NSDate *EndDate = [dateFmt dateFromString:model.EndDate];
-        loc_cell.timeLabel.text = [NSString stringWithFormat:@"%@-%@", [dateFmt1 stringFromDate:BegDate], [dateFmt1 stringFromDate:EndDate]];
+        loc_cell.timeLab.text = [NSString stringWithFormat:@"%@-%@", [dateFmt1 stringFromDate:BegDate], [dateFmt1 stringFromDate:EndDate]];
         return loc_cell;
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

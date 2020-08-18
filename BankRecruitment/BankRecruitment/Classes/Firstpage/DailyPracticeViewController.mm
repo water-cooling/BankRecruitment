@@ -14,7 +14,7 @@
 #import "AnalysisMoreView.h"
 #import "ExamDetailModel.h"
 #import "ExamDetailOptionModel.h"
-#import "ExamTitleTableViewCell.h"
+#import "NewExamTitleTableViewCell.h"
 #import "ExamStemTableViewCell.h"
 #import "BBAlertView.h"
 #import "ReportErrorViewController.h"
@@ -27,16 +27,16 @@
 @interface DailyPracticeViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UIScrollView *examScrollView;
-@property (retain, nonatomic) IBOutlet UIPageControl *examPageControl;
-@property (nonatomic, strong) IBOutlet UILabel *bottomTitleLabel;
-@property (nonatomic, strong) IBOutlet UIButton *PreBtn;
-@property (nonatomic, strong) IBOutlet UIButton *NextBtn;
+
+//画布按钮
 @property (nonatomic, strong) IBOutlet UIButton *draftBtn;
+//答案弹框
 @property (nonatomic, strong) IBOutlet UIButton *answerSheetBtn;
+//收藏
 @property (nonatomic, strong) IBOutlet UIButton *collectBtn;
-@property (nonatomic, strong) IBOutlet UIButton *shareBtn;
 @property (nonatomic, strong) IBOutlet UIButton *TimerBtn;
-@property (nonatomic, strong) IBOutlet UIButton *moreBtn;
+@property (nonatomic, strong)  UIButton *moreBtn;
+//标记按钮
 @property (nonatomic, strong) IBOutlet UIButton *tagBtn;
 @property (nonatomic, strong) IBOutlet UIView *bottomContentView;
 @property (nonatomic, strong) UIButton *forwordDraftButton;
@@ -126,7 +126,6 @@
     if((self.selectExamIndex > 0)&&(!self.isloadOperation))
     {
         self.isloadOperation = YES;
-        self.examPageControl.currentPage = self.selectExamIndex;
         [self.examScrollView scrollRectToVisible:CGRectMake(self.selectExamIndex*Screen_Width, 0, Screen_Width, 10)  animated:YES];
         [self refreshScrollViewByIndex:self.selectExamIndex];
     }
@@ -556,11 +555,14 @@
             vc.practiceList = [NSMutableArray arrayWithArray:self.practiceList];
             vc.userResultDict = [NSMutableDictionary dictionaryWithDictionary:self.userResultDict];
             vc.isMockExamType = self.isMockExamType;
+            [[NSUserDefaults standardUserDefaults]setObject:@(YES) forKey:@"today"];
             [weakself.navigationController pushViewController:vc animated:NO];
             
             [weakself performSelector:@selector(laterSubmitAction:) withObject:vc afterDelay:0.3];
         }];
         [alertView setCancelBlock:^{
+        [[NSUserDefaults standardUserDefaults]setObject:@(YES) forKey:@"today"];
+
             [weakself.navigationController popViewControllerAnimated:YES];
         }];
         [alertView show];
@@ -585,6 +587,7 @@
                 operationModel.isSelected = [NSString stringWithFormat:@"%d", (int)self.selectExamIndex];
                 [[DataBaseManager sharedManager] addUserOperate:operationModel];
             }
+            [[NSUserDefaults standardUserDefaults]setObject:@(YES) forKey:@"today"];
             
             [weakself.navigationController popViewControllerAnimated:YES];
         }];
@@ -657,10 +660,6 @@
     self.examScrollView.showsHorizontalScrollIndicator = NO;
     self.examScrollView.showsVerticalScrollIndicator = NO;
     
-    self.examPageControl.numberOfPages = [self.practiceList count];
-    self.examPageControl.currentPage = 0;
-    self.examPageControl.hidden = YES;
-    
     NSInteger tableViewCount = 0;
     if(IOS9_OR_LATER)
     {
@@ -706,15 +705,18 @@
               context:NULL];
     [[LdGlobalObj sharedInstanse] startExamTimer];
     
-    
+    self.moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.moreBtn.frame = CGRectMake(0.0f, 0.0f, 19.0f, 4.0f);
+    [self.moreBtn addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.moreBtn setImage:[UIImage imageNamed:@"night_icon_more"] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
+    self.TimerBtn.layer.cornerRadius = 4;
     if([LdGlobalObj sharedInstanse].isNightExamFlag)
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromHex(0x7a8596) ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-        self.navigationController.navigationBar.barTintColor = UIColorFromHex(0x2b3f5d);
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         [_dailyButton setImage:[UIImage imageNamed:@"night_btn_history"] forState:UIControlStateNormal];
         
         self.examScrollView.backgroundColor = [UIColor blackColor];
-        self.functionBackView.backgroundColor = UIColorFromHex(0x213451);
         for(UIView *subView in self.examScrollView.subviews)
         {
             if([subView isKindOfClass:[UITableView class]])
@@ -723,25 +725,14 @@
             }
         }
         [self.backButton setImage:[UIImage imageNamed:@"night_btn_top_back"] forState:UIControlStateNormal];
-        [self.draftBtn setImage:[UIImage imageNamed:@"night_icon_caogao"] forState:UIControlStateNormal];
-        [self.answerSheetBtn setImage:[UIImage imageNamed:@"night_icon_datika"] forState:UIControlStateNormal];
-        [self.collectBtn setImage:[UIImage imageNamed:@"night_icon_collect"] forState:UIControlStateNormal];
-        [self.shareBtn setImage:[UIImage imageNamed:@"night_icon_share"] forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"night_icon_more"] forState:UIControlStateNormal];
-        [self.TimerBtn setTitleColor:UIColorFromHex(0x7a8596) forState:UIControlStateNormal];
-        self.bottomContentView.backgroundColor = UIColorFromHex(0x29323a);
-        [self.PreBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-        [self.NextBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-        self.bottomTitleLabel.textColor = UIColorFromHex(0x666666);
+        [self.TimerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-        self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         [_dailyButton setImage:[UIImage imageNamed:@"day_btn_history"] forState:UIControlStateNormal];
         
         self.examScrollView.backgroundColor = [UIColor whiteColor];
-        self.functionBackView.backgroundColor = UIColorFromHex(0x1e9aed);
         for(UIView *subView in self.examScrollView.subviews)
         {
             if([subView isKindOfClass:[UITableView class]])
@@ -751,32 +742,22 @@
         }
         
         [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
-        [self.draftBtn setImage:[UIImage imageNamed:@"shiti_icon_caogao"] forState:UIControlStateNormal];
-        [self.answerSheetBtn setImage:[UIImage imageNamed:@"shiti_icon_datika"] forState:UIControlStateNormal];
-        [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
-        [self.shareBtn setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"day_shiti_icon_more"] forState:UIControlStateNormal];
         [self.TimerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.bottomContentView.backgroundColor = [UIColor whiteColor];
-        [self.PreBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-        [self.NextBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-        self.bottomTitleLabel.textColor = kColorDarkText;
+        
     }
     
-    self.bottomTitleLabel.text = [NSString stringWithFormat:@"1/%d", (int)self.practiceList.count];
 }
 
 - (void)refreshViewByDayNightType
 {
     if([LdGlobalObj sharedInstanse].isNightExamFlag)
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromHex(0x7a8596) ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-        self.navigationController.navigationBar.barTintColor = UIColorFromHex(0x2b3f5d);
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         [_dailyButton setImage:[UIImage imageNamed:@"night_btn_history"] forState:UIControlStateNormal];
         
         self.view.backgroundColor = UIColorFromHex(0x20282f);
         self.examScrollView.backgroundColor = [UIColor blackColor];
-        self.functionBackView.backgroundColor = UIColorFromHex(0x213451);
         for(UIView *subView in self.examScrollView.subviews)
         {
             if([subView isKindOfClass:[UITableView class]])
@@ -785,26 +766,15 @@
             }
         }
         [self.backButton setImage:[UIImage imageNamed:@"night_btn_top_back"] forState:UIControlStateNormal];
-        [self.draftBtn setImage:[UIImage imageNamed:@"night_icon_caogao"] forState:UIControlStateNormal];
-        [self.answerSheetBtn setImage:[UIImage imageNamed:@"night_icon_datika"] forState:UIControlStateNormal];
-        [self.collectBtn setImage:[UIImage imageNamed:@"night_icon_collect"] forState:UIControlStateNormal];
-        [self.shareBtn setImage:[UIImage imageNamed:@"night_icon_share"] forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"night_icon_more"] forState:UIControlStateNormal];
-        [self.TimerBtn setTitleColor:UIColorFromHex(0x7a8596) forState:UIControlStateNormal];
-        self.bottomContentView.backgroundColor = UIColorFromHex(0x29323a);
-        [self.PreBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-        [self.NextBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-        self.bottomTitleLabel.textColor = UIColorFromHex(0x666666);
+        [self.TimerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-        self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         [_dailyButton setImage:[UIImage imageNamed:@"day_btn_history"] forState:UIControlStateNormal];
         
         self.view.backgroundColor = [UIColor whiteColor];
         self.examScrollView.backgroundColor = [UIColor whiteColor];
-        self.functionBackView.backgroundColor = UIColorFromHex(0x1e9aed);
         for(UIView *subView in self.examScrollView.subviews)
         {
             if([subView isKindOfClass:[UITableView class]])
@@ -814,16 +784,7 @@
         }
         
         [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
-        [self.draftBtn setImage:[UIImage imageNamed:@"shiti_icon_caogao"] forState:UIControlStateNormal];
-        [self.answerSheetBtn setImage:[UIImage imageNamed:@"shiti_icon_datika"] forState:UIControlStateNormal];
-        [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
-        [self.shareBtn setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"day_shiti_icon_more"] forState:UIControlStateNormal];
         [self.TimerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.bottomContentView.backgroundColor = [UIColor whiteColor];
-        [self.PreBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-        [self.NextBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-        self.bottomTitleLabel.textColor = kColorDarkText;
     }
     
     if(self.practiceList.count > 0)
@@ -874,7 +835,6 @@
         //切换改变页码，小圆点
         if(scrollView == self.examScrollView)
         {
-            self.examPageControl.currentPage = currentPage;
             [self refreshScrollViewByIndex:currentPage];
         }
     }
@@ -891,21 +851,10 @@
     }
 }
 
-- (void)refreshScrollViewByIndex:(NSInteger)index
-{
-    if(IOS9_OR_LATER)
-    {
+- (void)refreshScrollViewByIndex:(NSInteger)index{
+    if(IOS9_OR_LATER){
         self.selectExamIndex = index;
         [self yibuLoadAttributeStringBy:index];
-//        if(index-1 > 0)
-//        {
-//            [self yibuLoadAttributeStringBy:index-1];
-//        }
-//        
-//        if(index+1 < self.practiceList.count)
-//        {
-//            [self yibuLoadAttributeStringBy:index+1];
-//        }
         
     }
     else
@@ -913,19 +862,12 @@
         self.selectExamIndex = index;
     }
     
-    if(index == self.practiceList.count-1){
-        [self.NextBtn setTitle:@"提交答案" forState:UIControlStateNormal];
-    }else{
-        [self.NextBtn setTitle:@"下一题" forState:UIControlStateNormal];
-    }
-   
-    self.bottomTitleLabel.text = [NSString stringWithFormat:@"%d/%d", (int)index+1, (int)self.practiceList.count];
+    
     //判断是否收藏
     [self showIsCollectView];
     
     [self showIsTagView];
 }
-
 //异步加载
 - (void)yibuLoadAttributeStringBy:(NSInteger) currentIndex
 {
@@ -1030,7 +972,6 @@
 {
     NSNumber *number = notification.object;
     
-    self.examPageControl.currentPage = number.integerValue;
     [self.examScrollView scrollRectToVisible:CGRectMake(number.integerValue*Screen_Width, 0, Screen_Width, 10)  animated:YES];
     [self refreshScrollViewByIndex:number.integerValue];
 }
@@ -1050,7 +991,6 @@
 {
     if(self.selectExamIndex < self.practiceList.count-1)
     {
-        self.examPageControl.currentPage = self.selectExamIndex+1;
         [self.examScrollView scrollRectToVisible:CGRectMake((self.selectExamIndex+1)*Screen_Width, 0, Screen_Width, 10)  animated:YES];
         [self refreshScrollViewByIndex:self.selectExamIndex+1];
     }
@@ -1070,13 +1010,12 @@
 {
     if(self.selectExamIndex > 0)
     {
-        self.examPageControl.currentPage = self.selectExamIndex-1;
         [self.examScrollView scrollRectToVisible:CGRectMake((self.selectExamIndex-1)*Screen_Width, 0, Screen_Width, 10)  animated:YES];
         [self refreshScrollViewByIndex:self.selectExamIndex-1];
     }
 }
 
-- (IBAction)AnswerSheetAction:(id)sender
+- (IBAction)AnswerSheetAction:(UIButton *)sender
 {
     AnswerSheetViewController *vc = [[AnswerSheetViewController alloc] init];
     vc.DailyPracticeTitle = self.title;
@@ -1087,7 +1026,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (IBAction)collectAction:(id)sender
+- (IBAction)collectAction:(UIButton *)sender
 {
     BOOL isCollect = NO;
     ExamDetailModel *examModel = self.practiceList[self.selectExamIndex];
@@ -1110,8 +1049,7 @@
         }
     }
     
-    if(isCollect)
-    {
+    if(isCollect){
         [self NetworkSubmitDeleteFavorite];
     }
     else
@@ -1131,22 +1069,14 @@
     }
     
     ExamDetailModel *examModel = self.practiceList[self.selectExamIndex];
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
-        [self.collectBtn setImage:[UIImage imageNamed:@"night_icon_collect"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
-    }
-    
+   
     for(NSDictionary *dict in self.favoriteExamList)
     {
         NSString *LinkID = dict[@"LinkID"];
         NSString *FType = dict[@"FType"];
         if([LinkID isEqualToString:examModel.ID]&&[FType isEqualToString:examType])
         {
-            [self.collectBtn setImage:[UIImage imageNamed:@"zhibo_detail_icon_collect_press"] forState:UIControlStateNormal];
+            self.collectBtn.selected = YES;
             break;
         }
     }
@@ -1210,7 +1140,7 @@
     }];
 }
 
-- (IBAction)shareAction:(id)sender
+- (void)shareAction:(id)sender
 {
     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession), @(UMSocialPlatformType_WechatTimeLine), @(UMSocialPlatformType_QQ), @(UMSocialPlatformType_Qzone)]];
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
@@ -1263,13 +1193,12 @@
 
 - (void)showIsTagView
 {
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
-        [self.tagBtn setImage:[UIImage imageNamed:@"night_exam_tag"] forState:UIControlStateNormal];
+    if([LdGlobalObj sharedInstanse].isNightExamFlag){
+        self.tagBtn.selected = YES;
     }
     else
     {
-        [self.tagBtn setImage:[UIImage imageNamed:@"exam_tag"] forState:UIControlStateNormal];
+        self.tagBtn.selected = NO;
     }
     
     NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithDictionary:self.userResultDict[[NSNumber numberWithInteger:self.selectExamIndex]]];
@@ -1280,19 +1209,18 @@
         {
             if([LdGlobalObj sharedInstanse].isNightExamFlag)
             {
-                [self.tagBtn setImage:[UIImage imageNamed:@"night_exam_Taged"] forState:UIControlStateNormal];
+                self.tagBtn.selected = YES;
             }
             else
             {
-                [self.tagBtn setImage:[UIImage imageNamed:@"exam_Taged"] forState:UIControlStateNormal];
+                self.tagBtn.selected = NO;
             }
             
         }
     }
 }
 
-- (void)ReportErrorAction
-{
+- (void)ReportErrorAction{
     ExamDetailModel *examModel = self.practiceList[self.selectExamIndex];
     ReportErrorViewController *vc = [[ReportErrorViewController alloc] init];
     vc.examModel = examModel;
@@ -1300,7 +1228,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (IBAction)moreAction:(id)sender
+- (void)moreAction
 {
     if(self.moreView)
     {
@@ -1311,8 +1239,6 @@
     self.moreView = nil;
     self.moreView = [[[NSBundle mainBundle] loadNibNamed:@"AnalysisMoreView" owner:nil options:nil] firstObject];
     self.moreView.frame = CGRectMake(Screen_Width-150, StatusBarAndNavigationBarHeight+40, 150, 158);
-    self.moreView.backgroundColor = kColorNavigationBar;
-    self.moreView.moreSegmentCtl.tintColor = [UIColor whiteColor];
     self.moreView.moreSegmentCtl.selectedSegmentIndex = [LdGlobalObj sharedInstanse].isNightExamFlag ? 0 : 1;
     [self.view addSubview:self.moreView];
     self.moreView.layer.borderColor = UIColorFromHex(0x1e9aed).CGColor;
@@ -1538,12 +1464,13 @@
 }
 
 #pragma -mark DraftBook
-- (IBAction)DraftBookAction:(id)sender
+- (IBAction)DraftBookAction:(UIButton *)sender
 {
     if(self.drawView)
     {
         return;
     }
+    sender.selected = !sender.selected;
     self.drawView = [[WDDrawView alloc] initWithFrame:CGRectMake(0, Screen_Height, Screen_Width, Screen_Height)];
     self.drawView.backgroundColor = kColorBarGrayBackground;
     self.drawView.alpha = 0.8;
@@ -1618,6 +1545,7 @@
     [UIView animateWithDuration:0.8 animations:^{
         self.drawView.frame = CGRectMake(0, Screen_Height, Screen_Width, Screen_Height);
     } completion:^(BOOL finished) {
+        self.draftBtn.selected = NO;
         [self.drawView removeObserver:self forKeyPath:@"pathCountNumber"];
         [self.drawView removeFromSuperview];
         self.drawView = nil;
@@ -1630,15 +1558,10 @@
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
-        UIButton *dailyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        dailyButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-        [dailyButton setImage:[UIImage imageNamed:@"icn_message"] forState:UIControlStateNormal];
-        [dailyButton addTarget:self action:@selector(dailyButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        [dailyButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:dailyButton];
+       
     }];
 }
-
+//
 - (void)forwordDraftButtonPressed
 {
     [self.drawView resume];
@@ -1779,6 +1702,7 @@
         if(!strIsNullOrEmpty(examModel.material)&&indexPath.row == 0)
         {
             ExamStemTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, ExamStemTableViewCell, @"ExamStemTableViewCell");
+            
             loc_cell.examStemLabel.attributedText = [attributedDict objectForKey:@"globalMaterialAttributeString"];
             if([LdGlobalObj sharedInstanse].isNightExamFlag)
             {
@@ -1793,18 +1717,17 @@
             return loc_cell;
         }
         
-        ExamTitleTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, ExamTitleTableViewCell, @"ExamTitleTableViewCell");
+        NewExamTitleTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, NewExamTitleTableViewCell, @"NewExamTitleTableViewCell");
 //            loc_cell.examTitleLabel.attributedText = [attributedDict objectForKey:@"globalTitleAttributeString"];
         NSMutableAttributedString *tempstring = [[NSMutableAttributedString alloc] init];
         [tempstring setAttributedString:[attributedDict objectForKey:@"globalTitleAttributeString"]];
         [tempstring addAttribute:NSPaperSizeDocumentAttribute value:[NSValue valueWithCGSize:CGSizeMake(Screen_Width-15-33, self.titleHeight)] range:NSMakeRange(0, [tempstring length])];
         loc_cell.examTitleLabel.attributedText = tempstring;
-        
-        
-        loc_cell.examTopTitleLabel.text = [NSString stringWithFormat:@"%@(%@)", examModel.content, examModel.QPoint];
-        loc_cell.examTopTitleLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:[LdGlobalObj sharedInstanse].examFontSize];
+        loc_cell.numLab.text = [NSString stringWithFormat:@"%ld",self.selectExamIndex+1];
+           loc_cell.examIndexLabel.text = [NSString stringWithFormat:@"%d/%d", (int)tableView.tag+1, (int)self.practiceList.count];
+        loc_cell.totalLab.text =  [NSString stringWithFormat:@"/%ld",self.practiceList.count];
         loc_cell.examIndexLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:[LdGlobalObj sharedInstanse].examFontSize];
-        loc_cell.examIndexLabel.text = [NSString stringWithFormat:@"%d/%d", (int)tableView.tag+1, (int)self.practiceList.count];
+     
         
         if([LdGlobalObj sharedInstanse].isNightExamFlag)
         {
@@ -1812,25 +1735,12 @@
             loc_cell.examIndexLabel.textColor = UIColorFromHex(0x666666);
             loc_cell.examTopTitleLabel.textColor = UIColorFromHex(0x666666);
             loc_cell.backgroundColor = [UIColor clearColor];
-            if ([examModel.QType isEqualToString:@"多选题"])
-            {
-                loc_cell.examTypeImageView.image = [UIImage imageNamed:@"night_shiti_tips_duoxuan"];
-            }
-            else
-            {
-                loc_cell.examTypeImageView.image = [UIImage imageNamed:@"night_shiti_tips_danxuan"];
-            }
+            loc_cell.typeLab.text = examModel.QType;
+
         }
         else
         {
-            if ([examModel.QType isEqualToString:@"多选题"])
-            {
-                loc_cell.examTypeImageView.image = [UIImage imageNamed:@"shiti_tips_duoxuan"];
-            }
-            else
-            {
-                loc_cell.examTypeImageView.image = [UIImage imageNamed:@"shiti_tips_danxuan"];
-            }
+            loc_cell.typeLab.text = examModel.QType;
             loc_cell.examTitleLabel.textColor = kColorDarkText;
             loc_cell.examIndexLabel.textColor = kColorDarkText;
             loc_cell.examTopTitleLabel.textColor = kColorDarkText;
@@ -2329,6 +2239,7 @@
             NSString *result = [contentDict objectForKey:@"result"];
             if([result isEqualToString:@"success"])
             {
+                self.collectBtn.selected = YES;
                 [SNToast toast:@"收藏成功"];
                 self.favoriteExamList = [NSMutableArray arrayWithArray:contentArray];
                 [self showIsCollectView];
@@ -2367,6 +2278,8 @@
             }
             else if([result isEqualToString:@"noresult"])
             {
+                self.collectBtn.selected = NO;
+
                 [SNToast toast:@"取消收藏成功"];
                 [self.favoriteExamList removeAllObjects];
                 [self showIsCollectView];

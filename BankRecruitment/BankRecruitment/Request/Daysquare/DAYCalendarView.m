@@ -242,7 +242,6 @@
                                                                          constant:0]];
     
     self.componentViews = [NSMutableArray array];
-//    [self makeUIElements];
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate {
@@ -384,17 +383,27 @@
     else {
         [view setSelected:NO];
     }
-    view.textColor = self.componentTextColor;
+    NSDate *todayDate = [NSDate dateWithTimeIntervalSinceNow:0];
+
+    NSDateComponents *today = [DAYUtils dateComponentsFromDate:todayDate];
+           view.textColor = self.componentTextColor;
     view.highlightTextColor = self.highlightedComponentTextColor;
     view.selectedDotColor = self.selectedIndicatorColor;
     view.textLabel.alpha = self->_visibleMonth == month ? 1.0 : 0.5;
     if (self->_visibleMonth == month && self.boldPrimaryComponentText) {
-        view.textLabel.font = [UIFont systemFontOfSize:14];
+        view.textLabel.font = [UIFont systemFontOfSize:12];
     }
     else {
-        view.textLabel.font = [UIFont systemFontOfSize:14];
+        view.textLabel.font = [UIFont systemFontOfSize:12];
     }
-    view.textLabel.text = [NSString stringWithFormat:@"%d", (int) day];
+    if (today.year == year && today.month == month && today.day  == day){
+        view.textLabel.text =@"今";
+        view.textLabel.textColor = [UIColor whiteColor];
+
+    }else{
+        view.textLabel.text = [NSString stringWithFormat:@"%d", (int) day];
+
+    }
 }
 
 - (void)configureContentView {
@@ -448,6 +457,8 @@
 }
 
 - (void)addConstraintToCenterIndicatorView:(UIView *)view toView:(UIView *)toView {
+    DAYIndicatorView * todayview =  (DAYIndicatorView *)view;
+   
     [[self.contentWrapperView.constraints copy] enumerateObjectsUsingBlock:^(__kindof NSLayoutConstraint * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.firstItem == view) {
             [self.contentWrapperView removeConstraint:obj];

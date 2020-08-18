@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageWordDetailViewController">
             <connections>
+                <outlet property="appTitleLab" destination="ADU-tT-hjl" id="cyu-V2-HNq"/>
                 <outlet property="textView" destination="thc-HU-9vO" id="oHn-GF-z9f"/>
+                <outlet property="timeLab" destination="5I0-PU-pKg" id="hHR-QZ-9G9"/>
+                <outlet property="titleLab" destination="yVa-7H-FbM" id="d1d-hU-Qcd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,22 +23,47 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thc-HU-9vO">
-                    <rect key="frame" x="16" y="20" width="343" height="610"/>
+                    <rect key="frame" x="16" y="106.5" width="343" height="523.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVa-7H-FbM">
+                    <rect key="frame" x="12" y="16" width="351" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行易考" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADU-tT-hjl">
+                    <rect key="frame" x="12" y="50" width="49.5" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5I0-PU-pKg">
+                    <rect key="frame" x="332" y="50" width="31" height="14.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="thc-HU-9vO" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="IzO-gz-PGR"/>
+                <constraint firstItem="yVa-7H-FbM" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="12" id="4Ek-Lc-2gr"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="5I0-PU-pKg" secondAttribute="trailing" constant="12" id="4Ta-AI-kXr"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="yVa-7H-FbM" secondAttribute="trailing" constant="12" id="G7P-Hh-Ye8"/>
+                <constraint firstItem="ADU-tT-hjl" firstAttribute="top" secondItem="yVa-7H-FbM" secondAttribute="bottom" constant="14.6" id="IkW-Vi-A4R"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="thc-HU-9vO" secondAttribute="bottom" constant="37" id="LEJ-YK-xD3"/>
+                <constraint firstItem="ADU-tT-hjl" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="12" id="WT2-Ie-jz8"/>
+                <constraint firstItem="thc-HU-9vO" firstAttribute="top" secondItem="ADU-tT-hjl" secondAttribute="bottom" constant="42" id="Ymp-Zb-qY2"/>
+                <constraint firstItem="yVa-7H-FbM" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="16" id="Ywl-8Y-D5j"/>
+                <constraint firstItem="5I0-PU-pKg" firstAttribute="centerY" secondItem="ADU-tT-hjl" secondAttribute="centerY" id="s6W-wm-OjE"/>
                 <constraint firstItem="thc-HU-9vO" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="viP-45-8x7"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="thc-HU-9vO" secondAttribute="trailing" constant="16" id="zo6-T4-blU"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-44.5" y="20.5"/>
+            <point key="canvasLocation" x="-45.600000000000001" y="20.239880059970016"/>
         </view>
     </objects>
 </document>

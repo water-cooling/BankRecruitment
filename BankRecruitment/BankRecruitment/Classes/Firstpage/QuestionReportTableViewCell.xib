@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6D0-sL-02C">
-                        <rect key="frame" x="27" y="0.0" width="1" height="31"/>
+                        <rect key="frame" x="34" y="3" width="1" height="31"/>
                         <color key="backgroundColor" red="0.30196078430000001" green="0.70588235290000001" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="31" id="WII-oV-TUC"/>
@@ -28,7 +25,7 @@
                         </constraints>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obj-kP-7JH">
-                        <rect key="frame" x="27" y="31" width="1" height="31"/>
+                        <rect key="frame" x="34" y="28" width="1" height="31"/>
                         <color key="backgroundColor" red="0.30196078430000001" green="0.70588235290000001" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="Lyd-JS-if2"/>
@@ -36,7 +33,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGy-cs-o5H">
-                        <rect key="frame" x="3" y="6" width="50" height="50"/>
+                        <rect key="frame" x="10" y="6" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="AeW-wX-Jj8"/>
                             <constraint firstAttribute="width" constant="50" id="szr-G4-UOt"/>
@@ -44,7 +41,7 @@
                         <state key="normal" image="content_icon_add"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="语言理解与表达语言理解与表达语言理解与表达" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjL-Ai-yz5">
-                        <rect key="frame" x="48" y="14" width="186" height="33.5"/>
+                        <rect key="frame" x="55" y="14.5" width="172" height="33.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="33.5" id="mAV-E5-LvZ"/>
                         </constraints>
@@ -53,7 +50,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWG-ZI-8bt">
-                        <rect key="frame" x="231" y="-1" width="87" height="63"/>
+                        <rect key="frame" x="224" y="-0.5" width="87" height="63"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="63" id="iEt-Ru-zBO"/>
                             <constraint firstAttribute="width" constant="87" id="xIN-1h-cjG"/>
@@ -90,6 +87,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="content_icon_add" width="25" height="25"/>
+        <image name="content_icon_add" width="24.5" height="24.5"/>
     </resources>
 </document>

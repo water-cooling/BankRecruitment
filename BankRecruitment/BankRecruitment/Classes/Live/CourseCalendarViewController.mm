@@ -32,14 +32,14 @@
     self.totalTimeEventList = [NSMutableArray arrayWithCapacity:9];
     self.selectedDayEventList = [NSMutableArray arrayWithCapacity:9];
     [self drawViews];
+    [self drawCalendarAndTableView];
     [self NetworkGetLiveScheduleList];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -71,16 +71,13 @@
     }
 }
 
-- (void)drawCalendarAndTableView
-{
+- (void)drawCalendarAndTableView{
     NSMutableArray *dateList = [NSMutableArray arrayWithCapacity:9];
     NSDateFormatter* dateFmt = [[NSDateFormatter alloc] init];
     dateFmt.dateFormat = @"yyyy-MM-dd HH:mm";
-    for(LiveUserClassScheduleModel *model in self.totalTimeEventList)
-    {
+    for(LiveUserClassScheduleModel *model in self.totalTimeEventList){
         NSDate *BegDate = [dateFmt dateFromString:model.BegDate];
-        if(BegDate)
-        {
+        if(BegDate){
             [dateList addObject:BegDate];
         }
     }

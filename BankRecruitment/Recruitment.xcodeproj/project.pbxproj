@@ -156,8 +156,6 @@
 		607BD4A81ECED01B00207C70 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607BD4A61ECED01B00207C70 /* AboutViewController.xib */; };
 		607BD4AC1ECED5E500207C70 /* AccountInfoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 607BD4AA1ECED5E500207C70 /* AccountInfoViewController.mm */; };
 		607BD4AD1ECED5E500207C70 /* AccountInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607BD4AB1ECED5E500207C70 /* AccountInfoViewController.xib */; };
-		607BD4B11ECED6BC00207C70 /* QuitLoginTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 607BD4AF1ECED6BC00207C70 /* QuitLoginTableViewCell.m */; };
-		607BD4B21ECED6BC00207C70 /* QuitLoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607BD4B01ECED6BC00207C70 /* QuitLoginTableViewCell.xib */; };
 		607FFB1E1EAF317600CDD25A /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 607FFB1D1EAF317600CDD25A /* libxml2.tbd */; };
 		607FFB201EAF319B00CDD25A /* libbz2.1.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 607FFB1F1EAF319B00CDD25A /* libbz2.1.0.tbd */; };
 		607FFB281EB0C01100CDD25A /* icon_72*72.png in Resources */ = {isa = PBXBuildFile; fileRef = 607FFB211EB0C01100CDD25A /* icon_72*72.png */; };
@@ -292,8 +290,6 @@
 		60D78F7C1F03B20500D122B2 /* WSPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D78F7A1F03B20500D122B2 /* WSPageView.m */; };
 		60D78F7F1F03B2BF00D122B2 /* FirstPageAdScrollTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D78F7E1F03B2BF00D122B2 /* FirstPageAdScrollTableViewCell.m */; };
 		60D78F811F03B50000D122B2 /* FirstPageAdScrollTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60D78F801F03B50000D122B2 /* FirstPageAdScrollTableViewCell.xib */; };
-		60D78F851F04F9F100D122B2 /* EverydaySignViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60D78F831F04F9F100D122B2 /* EverydaySignViewController.mm */; };
-		60D78F861F04F9F100D122B2 /* EverydaySignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60D78F841F04F9F100D122B2 /* EverydaySignViewController.xib */; };
 		60D78F8A1F05F75500D122B2 /* SignCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D78F881F05F75500D122B2 /* SignCalendarViewController.m */; };
 		60D78F8B1F05F75500D122B2 /* SignCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60D78F891F05F75500D122B2 /* SignCalendarViewController.xib */; };
 		60DE043A1EA73B9600CF1FD0 /* ExamDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 60DE04391EA73B9600CF1FD0 /* ExamDetailModel.m */; };
@@ -497,6 +493,15 @@
 		BEB2A28124E296EA00B3C098 /* InviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB2A27F24E296EA00B3C098 /* InviteTableViewCell.xib */; };
 		BEB2A28824E3BF6000B3C098 /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEB2A28724E3BF6000B3C098 /* LoginViewController.mm */; };
 		BEB2A28C24E3D73800B3C098 /* UIView+XLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB2A28924E3D73600B3C098 /* UIView+XLExtension.m */; };
+		BEC1F47A24E5885100EADCC3 /* SignViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEC1F47824E5885100EADCC3 /* SignViewController.mm */; };
+		BEC1F47B24E5885100EADCC3 /* SignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC1F47924E5885100EADCC3 /* SignViewController.xib */; };
+		BEC1F48224E96A8900EADCC3 /* VideoTreeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC1F48024E96A8800EADCC3 /* VideoTreeTableViewCell.m */; };
+		BEC1F48324E96A8900EADCC3 /* VideoTreeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC1F48124E96A8800EADCC3 /* VideoTreeTableViewCell.xib */; };
+		BEC1F48624E985AE00EADCC3 /* LYLUnicode.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC1F48524E985AD00EADCC3 /* LYLUnicode.m */; };
+		BEC1F48A24E98F1000EADCC3 /* NewExamTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC1F48824E98F0F00EADCC3 /* NewExamTitleTableViewCell.m */; };
+		BEC1F48B24E98F1000EADCC3 /* NewExamTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC1F48924E98F1000EADCC3 /* NewExamTitleTableViewCell.xib */; };
+		BEC77B8324E4E0BB0022A404 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B8224E4E0BB0022A404 /* SettingViewController.m */; };
+		BED1F39E24E571C600EE4E4A /* AddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED1F39D24E571C600EE4E4A /* AddressListViewController.m */; };
 		D2D70D8A217AD2F60050AE8B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D70D89217AD2F60050AE8B /* UserNotifications.framework */; };
 /* End PBXBuildFile section */
 
@@ -739,9 +744,6 @@
 		607BD4A91ECED5E500207C70 /* AccountInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountInfoViewController.h; sourceTree = "<group>"; };
 		607BD4AA1ECED5E500207C70 /* AccountInfoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AccountInfoViewController.mm; sourceTree = "<group>"; };
 		607BD4AB1ECED5E500207C70 /* AccountInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountInfoViewController.xib; sourceTree = "<group>"; };
-		607BD4AE1ECED6BC00207C70 /* QuitLoginTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuitLoginTableViewCell.h; sourceTree = "<group>"; };
-		607BD4AF1ECED6BC00207C70 /* QuitLoginTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuitLoginTableViewCell.m; sourceTree = "<group>"; };
-		607BD4B01ECED6BC00207C70 /* QuitLoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuitLoginTableViewCell.xib; sourceTree = "<group>"; };
 		607FFB1D1EAF317600CDD25A /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		607FFB1F1EAF319B00CDD25A /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		607FFB211EB0C01100CDD25A /* icon_72*72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_72*72.png"; sourceTree = "<group>"; };
@@ -948,9 +950,6 @@
 		60D78F7D1F03B2BF00D122B2 /* FirstPageAdScrollTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPageAdScrollTableViewCell.h; sourceTree = "<group>"; };
 		60D78F7E1F03B2BF00D122B2 /* FirstPageAdScrollTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPageAdScrollTableViewCell.m; sourceTree = "<group>"; };
 		60D78F801F03B50000D122B2 /* FirstPageAdScrollTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstPageAdScrollTableViewCell.xib; sourceTree = "<group>"; };
-		60D78F821F04F9F100D122B2 /* EverydaySignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EverydaySignViewController.h; sourceTree = "<group>"; };
-		60D78F831F04F9F100D122B2 /* EverydaySignViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EverydaySignViewController.mm; sourceTree = "<group>"; };
-		60D78F841F04F9F100D122B2 /* EverydaySignViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EverydaySignViewController.xib; sourceTree = "<group>"; };
 		60D78F871F05F75500D122B2 /* SignCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignCalendarViewController.h; sourceTree = "<group>"; };
 		60D78F881F05F75500D122B2 /* SignCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignCalendarViewController.m; sourceTree = "<group>"; };
 		60D78F891F05F75500D122B2 /* SignCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignCalendarViewController.xib; sourceTree = "<group>"; };
@@ -1341,6 +1340,21 @@
 		BEB2A28724E3BF6000B3C098 /* LoginViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginViewController.mm; sourceTree = "<group>"; };
 		BEB2A28924E3D73600B3C098 /* UIView+XLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XLExtension.m"; sourceTree = "<group>"; };
 		BEB2A28A24E3D73700B3C098 /* UIView+XLExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XLExtension.h"; sourceTree = "<group>"; };
+		BEC1F47724E5885100EADCC3 /* SignViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignViewController.h; sourceTree = "<group>"; };
+		BEC1F47824E5885100EADCC3 /* SignViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SignViewController.mm; sourceTree = "<group>"; };
+		BEC1F47924E5885100EADCC3 /* SignViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignViewController.xib; sourceTree = "<group>"; };
+		BEC1F47F24E96A8800EADCC3 /* VideoTreeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoTreeTableViewCell.h; sourceTree = "<group>"; };
+		BEC1F48024E96A8800EADCC3 /* VideoTreeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoTreeTableViewCell.m; sourceTree = "<group>"; };
+		BEC1F48124E96A8800EADCC3 /* VideoTreeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTreeTableViewCell.xib; sourceTree = "<group>"; };
+		BEC1F48424E985AD00EADCC3 /* LYLUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYLUnicode.h; sourceTree = "<group>"; };
+		BEC1F48524E985AD00EADCC3 /* LYLUnicode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYLUnicode.m; sourceTree = "<group>"; };
+		BEC1F48724E98F0F00EADCC3 /* NewExamTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewExamTitleTableViewCell.h; sourceTree = "<group>"; };
+		BEC1F48824E98F0F00EADCC3 /* NewExamTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewExamTitleTableViewCell.m; sourceTree = "<group>"; };
+		BEC1F48924E98F1000EADCC3 /* NewExamTitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewExamTitleTableViewCell.xib; sourceTree = "<group>"; };
+		BEC77B8124E4E0BB0022A404 /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		BEC77B8224E4E0BB0022A404 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		BED1F39C24E571C600EE4E4A /* AddressListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressListViewController.h; sourceTree = "<group>"; };
+		BED1F39D24E571C600EE4E4A /* AddressListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressListViewController.m; sourceTree = "<group>"; };
 		D2D70D89217AD2F60050AE8B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -1526,6 +1540,10 @@
 				60494C9220BFEA8300BC5EE4 /* MessageWordDetailViewController.h */,
 				60494C9320BFEA8300BC5EE4 /* MessageWordDetailViewController.m */,
 				60494C9420BFEA8300BC5EE4 /* MessageWordDetailViewController.xib */,
+				BEC77B8124E4E0BB0022A404 /* SettingViewController.h */,
+				BEC77B8224E4E0BB0022A404 /* SettingViewController.m */,
+				BED1F39C24E571C600EE4E4A /* AddressListViewController.h */,
+				BED1F39D24E571C600EE4E4A /* AddressListViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1544,9 +1562,6 @@
 				601232CA1E9277F300868FC3 /* AboutTableViewCell.h */,
 				601232CB1E9277F300868FC3 /* AboutTableViewCell.m */,
 				601232CC1E9277F300868FC3 /* AboutTableViewCell.xib */,
-				607BD4AE1ECED6BC00207C70 /* QuitLoginTableViewCell.h */,
-				607BD4AF1ECED6BC00207C70 /* QuitLoginTableViewCell.m */,
-				607BD4B01ECED6BC00207C70 /* QuitLoginTableViewCell.xib */,
 				60C5058E1EE43A4700B145A2 /* ExaminationPaperWithoutTableViewCell.h */,
 				60C5058F1EE43A4700B145A2 /* ExaminationPaperWithoutTableViewCell.m */,
 				60C505901EE43A4700B145A2 /* ExaminationPaperWithoutTableViewCell.xib */,
@@ -1939,6 +1954,9 @@
 				60D7762D1F4EA68200AE92DE /* VideoViewController.h */,
 				60D7762E1F4EA68200AE92DE /* VideoViewController.mm */,
 				60D7762F1F4EA68200AE92DE /* VideoViewController.xib */,
+				BEC1F47F24E96A8800EADCC3 /* VideoTreeTableViewCell.h */,
+				BEC1F48024E96A8800EADCC3 /* VideoTreeTableViewCell.m */,
+				BEC1F48124E96A8800EADCC3 /* VideoTreeTableViewCell.xib */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -2206,6 +2224,8 @@
 		60F90C591E88F77A00151728 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				BEC1F48424E985AD00EADCC3 /* LYLUnicode.h */,
+				BEC1F48524E985AD00EADCC3 /* LYLUnicode.m */,
 				60F90C5A1E88F77A00151728 /* ARCMacro.h */,
 				60F90C5B1E88F77A00151728 /* BusinessConstant.h */,
 				60F90C5C1E88F77A00151728 /* Const.h */,
@@ -2574,110 +2594,113 @@
 		60F90E4F1E8A020300151728 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2721BF8224E19C4800BE8381 /* HomeVideoListTableViewCell.h */,
-				2721BF8424E19C4900BE8381 /* HomeVideoListTableViewCell.m */,
-				60A895E320BD473800566494 /* InformationTableViewCell.h */,
-				60A895E420BD473800566494 /* InformationTableViewCell.m */,
-				60A895E520BD473800566494 /* InformationTableViewCell.xib */,
-				60F14A2B1F7293F500D1ADD4 /* MockReportScoreTableViewCell.h */,
-				60F14A2C1F7293F500D1ADD4 /* MockReportScoreTableViewCell.m */,
-				60F14A2D1F7293F500D1ADD4 /* MockReportScoreTableViewCell.xib */,
+				6000BBB01E96662A00F38DC3 /* AnalysisMoreView.h */,
+				6000BBB11E96662A00F38DC3 /* AnalysisMoreView.m */,
+				6000BBB31E96663F00F38DC3 /* AnalysisMoreView.xib */,
+				6000BBAB1E965AE600F38DC3 /* AnalysisTableViewCell.h */,
+				6000BBAC1E965AE600F38DC3 /* AnalysisTableViewCell.m */,
+				6000BBAD1E965AE600F38DC3 /* AnalysisTableViewCell.xib */,
+				6080D0221ECC384600C0B806 /* BuyExaminationPaperInfoTableViewCell.h */,
+				6080D0231ECC384600C0B806 /* BuyExaminationPaperInfoTableViewCell.m */,
+				6080D0241ECC384600C0B806 /* BuyExaminationPaperInfoTableViewCell.xib */,
+				6000BBA61E96558900F38DC3 /* ErrorAnalysisOptionTableViewCell.h */,
+				6000BBA71E96558900F38DC3 /* ErrorAnalysisOptionTableViewCell.m */,
+				6000BBA81E96558900F38DC3 /* ErrorAnalysisOptionTableViewCell.xib */,
+				60E9FC001EFE394E00F137F8 /* EveryDayExamTableViewCell.h */,
+				60E9FC011EFE394E00F137F8 /* EveryDayExamTableViewCell.m */,
+				60E9FC021EFE394E00F137F8 /* EveryDayExamTableViewCell.xib */,
+				605C15731F064FD90060C397 /* EveryDayTableViewCell.h */,
+				605C15741F064FD90060C397 /* EveryDayTableViewCell.m */,
+				605C15751F064FD90060C397 /* EveryDayTableViewCell.xib */,
+				6074A2441ECBF40200981AC5 /* ExaminationPaperTableViewCell.h */,
+				6074A2451ECBF40200981AC5 /* ExaminationPaperTableViewCell.m */,
+				6074A2461ECBF40200981AC5 /* ExaminationPaperTableViewCell.xib */,
+				60D5422B1E8E34AE0004AA31 /* ExamOptionTableViewCell.h */,
+				60D5422C1E8E34AE0004AA31 /* ExamOptionTableViewCell.m */,
+				60D5422D1E8E34AF0004AA31 /* ExamOptionTableViewCell.xib */,
+				6098475A1EE8FF28006D944F /* ExamStemTableViewCell.h */,
+				6098475B1EE8FF28006D944F /* ExamStemTableViewCell.m */,
+				6098475C1EE8FF28006D944F /* ExamStemTableViewCell.xib */,
+				609847551EE8FF13006D944F /* ExamTitleTableViewCell.h */,
+				609847561EE8FF13006D944F /* ExamTitleTableViewCell.m */,
+				609847571EE8FF13006D944F /* ExamTitleTableViewCell.xib */,
+				6000BB9C1E95EF5D00F38DC3 /* ExerciseHositoryTableViewCell.h */,
+				6000BB9D1E95EF5D00F38DC3 /* ExerciseHositoryTableViewCell.m */,
+				6000BB9E1E95EF5D00F38DC3 /* ExerciseHositoryTableViewCell.xib */,
 				60D78F7D1F03B2BF00D122B2 /* FirstPageAdScrollTableViewCell.h */,
 				60D78F7E1F03B2BF00D122B2 /* FirstPageAdScrollTableViewCell.m */,
 				60D78F801F03B50000D122B2 /* FirstPageAdScrollTableViewCell.xib */,
-				6000BB8B1E95CEC700F38DC3 /* ReportAnswerSheetTableViewCell.h */,
-				6000BB8C1E95CEC700F38DC3 /* ReportAnswerSheetTableViewCell.m */,
-				6000BB8D1E95CEC700F38DC3 /* ReportAnswerSheetTableViewCell.xib */,
 				60F90E401E89156500151728 /* FirstPageHeadTableViewCell.h */,
 				60F90E411E89156500151728 /* FirstPageHeadTableViewCell.mm */,
 				60F90E421E89156500151728 /* FirstPageHeadTableViewCell.xib */,
 				60F90E431E89156500151728 /* FirstpageModulesTableViewCell.h */,
 				60F90E441E89156500151728 /* FirstpageModulesTableViewCell.m */,
 				60F90E451E89156500151728 /* FirstpageModulesTableViewCell.xib */,
-				60F90E511E8A0D8A00151728 /* TestTableViewCell.h */,
-				60F90E521E8A0D8A00151728 /* TestTableViewCell.m */,
-				60F90E531E8A0D8A00151728 /* TestTableViewCell.xib */,
-				60D541F51E8D25FB0004AA31 /* QuestionTableViewCell.h */,
-				60D541F61E8D25FB0004AA31 /* QuestionTableViewCell.m */,
-				60D541F71E8D25FB0004AA31 /* QuestionTableViewCell.xib */,
-				6000BB901E95CF5400F38DC3 /* QuestionReportTableViewCell.h */,
-				6000BB911E95CF5400F38DC3 /* QuestionReportTableViewCell.m */,
-				6000BB921E95CF5400F38DC3 /* QuestionReportTableViewCell.xib */,
-				60D542041E8DE3130004AA31 /* OldExamsTableViewCell.h */,
-				60D542051E8DE3130004AA31 /* OldExamsTableViewCell.m */,
-				60D542061E8DE3130004AA31 /* OldExamsTableViewCell.xib */,
-				60D5420E1E8DE98A0004AA31 /* OldExamsSubTableViewCell.h */,
-				60D5420F1E8DE98A0004AA31 /* OldExamsSubTableViewCell.m */,
-				60D542101E8DE98A0004AA31 /* OldExamsSubTableViewCell.xib */,
-				609847551EE8FF13006D944F /* ExamTitleTableViewCell.h */,
-				609847561EE8FF13006D944F /* ExamTitleTableViewCell.m */,
-				609847571EE8FF13006D944F /* ExamTitleTableViewCell.xib */,
-				6098475A1EE8FF28006D944F /* ExamStemTableViewCell.h */,
-				6098475B1EE8FF28006D944F /* ExamStemTableViewCell.m */,
-				6098475C1EE8FF28006D944F /* ExamStemTableViewCell.xib */,
-				60D5422B1E8E34AE0004AA31 /* ExamOptionTableViewCell.h */,
-				60D5422C1E8E34AE0004AA31 /* ExamOptionTableViewCell.m */,
-				60D5422D1E8E34AF0004AA31 /* ExamOptionTableViewCell.xib */,
-				6000BBA61E96558900F38DC3 /* ErrorAnalysisOptionTableViewCell.h */,
-				6000BBA71E96558900F38DC3 /* ErrorAnalysisOptionTableViewCell.m */,
-				6000BBA81E96558900F38DC3 /* ErrorAnalysisOptionTableViewCell.xib */,
-				6000BBAB1E965AE600F38DC3 /* AnalysisTableViewCell.h */,
-				6000BBAC1E965AE600F38DC3 /* AnalysisTableViewCell.m */,
-				6000BBAD1E965AE600F38DC3 /* AnalysisTableViewCell.xib */,
-				6027AE371EAB09AC0019BC02 /* NoteTableViewCell.h */,
-				6027AE381EAB09AC0019BC02 /* NoteTableViewCell.m */,
-				6027AE391EAB09AC0019BC02 /* NoteTableViewCell.xib */,
-				60D542601E8F8FA20004AA31 /* MockExamTitleTableViewCell.h */,
-				60D542611E8F8FA20004AA31 /* MockExamTitleTableViewCell.m */,
-				60D542621E8F8FA20004AA31 /* MockExamTitleTableViewCell.xib */,
-				60D542651E8F90C70004AA31 /* MockExamTableViewCell.h */,
-				60D542661E8F90C70004AA31 /* MockExamTableViewCell.m */,
-				60D542671E8F90C70004AA31 /* MockExamTableViewCell.xib */,
-				60D5426A1E8F90E40004AA31 /* MockExamLearnTableViewCell.h */,
-				60D5426B1E8F90E40004AA31 /* MockExamLearnTableViewCell.m */,
-				60D5426C1E8F90E40004AA31 /* MockExamLearnTableViewCell.xib */,
-				6000BB9C1E95EF5D00F38DC3 /* ExerciseHositoryTableViewCell.h */,
-				6000BB9D1E95EF5D00F38DC3 /* ExerciseHositoryTableViewCell.m */,
-				6000BB9E1E95EF5D00F38DC3 /* ExerciseHositoryTableViewCell.xib */,
-				6000BBB01E96662A00F38DC3 /* AnalysisMoreView.h */,
-				6000BBB11E96662A00F38DC3 /* AnalysisMoreView.m */,
-				6000BBB31E96663F00F38DC3 /* AnalysisMoreView.xib */,
-				60242EB71EC4609D00EA32B0 /* SimpleMoreView.h */,
-				60242EB81EC4609D00EA32B0 /* SimpleMoreView.m */,
-				60242EBA1EC460AB00EA32B0 /* SimpleMoreView.xib */,
-				60C10FFD1ECAE34500D9F7B3 /* IntelligenceTypeTableViewCell.h */,
-				60C10FFE1ECAE34500D9F7B3 /* IntelligenceTypeTableViewCell.m */,
-				60C10FFF1ECAE34500D9F7B3 /* IntelligenceTypeTableViewCell.xib */,
+				2721BF8224E19C4800BE8381 /* HomeVideoListTableViewCell.h */,
+				2721BF8424E19C4900BE8381 /* HomeVideoListTableViewCell.m */,
+				60A895E320BD473800566494 /* InformationTableViewCell.h */,
+				60A895E420BD473800566494 /* InformationTableViewCell.m */,
+				60A895E520BD473800566494 /* InformationTableViewCell.xib */,
 				60C110021ECAE5D500D9F7B3 /* IntelligenceTypeHeaderView.h */,
 				60C110031ECAE5D500D9F7B3 /* IntelligenceTypeHeaderView.m */,
 				60C110051ECAE60D00D9F7B3 /* IntelligenceTypeHeaderView.xib */,
-				6074A2441ECBF40200981AC5 /* ExaminationPaperTableViewCell.h */,
-				6074A2451ECBF40200981AC5 /* ExaminationPaperTableViewCell.m */,
-				6074A2461ECBF40200981AC5 /* ExaminationPaperTableViewCell.xib */,
-				6080D0221ECC384600C0B806 /* BuyExaminationPaperInfoTableViewCell.h */,
-				6080D0231ECC384600C0B806 /* BuyExaminationPaperInfoTableViewCell.m */,
-				6080D0241ECC384600C0B806 /* BuyExaminationPaperInfoTableViewCell.xib */,
-				600763DE1ED5631300BCCBB0 /* SearchTitleTableViewCell.h */,
-				600763DF1ED5631300BCCBB0 /* SearchTitleTableViewCell.m */,
-				600763E01ED5631300BCCBB0 /* SearchTitleTableViewCell.xib */,
-				60E9FC001EFE394E00F137F8 /* EveryDayExamTableViewCell.h */,
-				60E9FC011EFE394E00F137F8 /* EveryDayExamTableViewCell.m */,
-				60E9FC021EFE394E00F137F8 /* EveryDayExamTableViewCell.xib */,
-				60E9FC0A1EFE4B0D00F137F8 /* ZhaopinTableViewCell.h */,
-				60E9FC0B1EFE4B0D00F137F8 /* ZhaopinTableViewCell.m */,
-				60E9FC0C1EFE4B0D00F137F8 /* ZhaopinTableViewCell.xib */,
-				605C15731F064FD90060C397 /* EveryDayTableViewCell.h */,
-				605C15741F064FD90060C397 /* EveryDayTableViewCell.m */,
-				605C15751F064FD90060C397 /* EveryDayTableViewCell.xib */,
-				60209BA91F73EA3E00E49A2B /* MockReportHeaderView.h */,
-				60209BAA1F73EA3E00E49A2B /* MockReportHeaderView.m */,
-				60209BAC1F73EA4A00E49A2B /* MockReportHeaderView.xib */,
-				2721BF8924E19FCC00BE8381 /* VideoSelectCollectionViewCell.h */,
-				2721BF8A24E19FCC00BE8381 /* VideoSelectCollectionViewCell.m */,
-				2721BF8B24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib */,
+				60C10FFD1ECAE34500D9F7B3 /* IntelligenceTypeTableViewCell.h */,
+				60C10FFE1ECAE34500D9F7B3 /* IntelligenceTypeTableViewCell.m */,
+				60C10FFF1ECAE34500D9F7B3 /* IntelligenceTypeTableViewCell.xib */,
 				BEB2A27D24E296EA00B3C098 /* InviteTableViewCell.h */,
 				BEB2A27E24E296EA00B3C098 /* InviteTableViewCell.m */,
 				BEB2A27F24E296EA00B3C098 /* InviteTableViewCell.xib */,
+				60D5426A1E8F90E40004AA31 /* MockExamLearnTableViewCell.h */,
+				60D5426B1E8F90E40004AA31 /* MockExamLearnTableViewCell.m */,
+				60D5426C1E8F90E40004AA31 /* MockExamLearnTableViewCell.xib */,
+				60D542651E8F90C70004AA31 /* MockExamTableViewCell.h */,
+				60D542661E8F90C70004AA31 /* MockExamTableViewCell.m */,
+				60D542671E8F90C70004AA31 /* MockExamTableViewCell.xib */,
+				60D542601E8F8FA20004AA31 /* MockExamTitleTableViewCell.h */,
+				60D542611E8F8FA20004AA31 /* MockExamTitleTableViewCell.m */,
+				60D542621E8F8FA20004AA31 /* MockExamTitleTableViewCell.xib */,
+				60209BA91F73EA3E00E49A2B /* MockReportHeaderView.h */,
+				60209BAA1F73EA3E00E49A2B /* MockReportHeaderView.m */,
+				60209BAC1F73EA4A00E49A2B /* MockReportHeaderView.xib */,
+				60F14A2B1F7293F500D1ADD4 /* MockReportScoreTableViewCell.h */,
+				60F14A2C1F7293F500D1ADD4 /* MockReportScoreTableViewCell.m */,
+				60F14A2D1F7293F500D1ADD4 /* MockReportScoreTableViewCell.xib */,
+				BEC1F48724E98F0F00EADCC3 /* NewExamTitleTableViewCell.h */,
+				BEC1F48824E98F0F00EADCC3 /* NewExamTitleTableViewCell.m */,
+				BEC1F48924E98F1000EADCC3 /* NewExamTitleTableViewCell.xib */,
+				6027AE371EAB09AC0019BC02 /* NoteTableViewCell.h */,
+				6027AE381EAB09AC0019BC02 /* NoteTableViewCell.m */,
+				6027AE391EAB09AC0019BC02 /* NoteTableViewCell.xib */,
+				60D5420E1E8DE98A0004AA31 /* OldExamsSubTableViewCell.h */,
+				60D5420F1E8DE98A0004AA31 /* OldExamsSubTableViewCell.m */,
+				60D542101E8DE98A0004AA31 /* OldExamsSubTableViewCell.xib */,
+				60D542041E8DE3130004AA31 /* OldExamsTableViewCell.h */,
+				60D542051E8DE3130004AA31 /* OldExamsTableViewCell.m */,
+				60D542061E8DE3130004AA31 /* OldExamsTableViewCell.xib */,
+				6000BB901E95CF5400F38DC3 /* QuestionReportTableViewCell.h */,
+				6000BB911E95CF5400F38DC3 /* QuestionReportTableViewCell.m */,
+				6000BB921E95CF5400F38DC3 /* QuestionReportTableViewCell.xib */,
+				60D541F51E8D25FB0004AA31 /* QuestionTableViewCell.h */,
+				60D541F61E8D25FB0004AA31 /* QuestionTableViewCell.m */,
+				60D541F71E8D25FB0004AA31 /* QuestionTableViewCell.xib */,
+				6000BB8B1E95CEC700F38DC3 /* ReportAnswerSheetTableViewCell.h */,
+				6000BB8C1E95CEC700F38DC3 /* ReportAnswerSheetTableViewCell.m */,
+				6000BB8D1E95CEC700F38DC3 /* ReportAnswerSheetTableViewCell.xib */,
+				600763DE1ED5631300BCCBB0 /* SearchTitleTableViewCell.h */,
+				600763DF1ED5631300BCCBB0 /* SearchTitleTableViewCell.m */,
+				600763E01ED5631300BCCBB0 /* SearchTitleTableViewCell.xib */,
+				60242EB71EC4609D00EA32B0 /* SimpleMoreView.h */,
+				60242EB81EC4609D00EA32B0 /* SimpleMoreView.m */,
+				60242EBA1EC460AB00EA32B0 /* SimpleMoreView.xib */,
+				60F90E511E8A0D8A00151728 /* TestTableViewCell.h */,
+				60F90E521E8A0D8A00151728 /* TestTableViewCell.m */,
+				60F90E531E8A0D8A00151728 /* TestTableViewCell.xib */,
+				2721BF8924E19FCC00BE8381 /* VideoSelectCollectionViewCell.h */,
+				2721BF8A24E19FCC00BE8381 /* VideoSelectCollectionViewCell.m */,
+				2721BF8B24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib */,
+				60E9FC0A1EFE4B0D00F137F8 /* ZhaopinTableViewCell.h */,
+				60E9FC0B1EFE4B0D00F137F8 /* ZhaopinTableViewCell.m */,
+				60E9FC0C1EFE4B0D00F137F8 /* ZhaopinTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2685,97 +2708,97 @@
 		60F90E501E8A020E00151728 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				60F90E1A1E88FA8600151728 /* FirstpageViewController.h */,
-				60F90E1B1E88FA8600151728 /* FirstpageViewController.mm */,
-				60F90E1C1E88FA8600151728 /* FirstpageViewController.xib */,
-				60A895E820BD4BAF00566494 /* InformationViewController.h */,
-				60A895E920BD4BAF00566494 /* InformationViewController.mm */,
-				60A895EA20BD4BAF00566494 /* InformationViewController.xib */,
-				604AC00120CBA2A8006AB73C /* InformationDetailViewController.h */,
-				604AC00220CBA2A8006AB73C /* InformationDetailViewController.m */,
-				604AC00320CBA2A8006AB73C /* InformationDetailViewController.xib */,
-				60D541DE1E8CE74C0004AA31 /* WrongQuestionsViewController.h */,
-				60D541DF1E8CE74C0004AA31 /* WrongQuestionsViewController.mm */,
-				60D541E01E8CE74C0004AA31 /* WrongQuestionsViewController.xib */,
-				60CB57251EF55E6700EE611C /* WrongTreeViewController.h */,
-				60CB57261EF55E6700EE611C /* WrongTreeViewController.mm */,
-				607533BE1F1DB87800888236 /* WrongTreeViewController.xib */,
-				60D5426F1E8F94E90004AA31 /* WrongQuestionsSheetViewController.h */,
-				60D542701E8F94E90004AA31 /* WrongQuestionsSheetViewController.mm */,
-				60D542711E8F94E90004AA31 /* WrongQuestionsSheetViewController.xib */,
-				605B42131E9377E9007B7BFF /* CollectionQuestionViewController.h */,
-				605B42141E9377E9007B7BFF /* CollectionQuestionViewController.mm */,
-				605B42151E9377E9007B7BFF /* CollectionQuestionViewController.xib */,
-				605B42181E937820007B7BFF /* NoteQuestionViewController.h */,
-				605B42191E937820007B7BFF /* NoteQuestionViewController.mm */,
-				605B421A1E937820007B7BFF /* NoteQuestionViewController.xib */,
-				60D5421B1E8DF63C0004AA31 /* DailyPracticeViewController.h */,
-				60D5421C1E8DF63C0004AA31 /* DailyPracticeViewController.mm */,
-				60D5421D1E8DF63C0004AA31 /* DailyPracticeViewController.xib */,
 				60D542301E8E79580004AA31 /* AnswerSheetViewController.h */,
 				60D542311E8E79580004AA31 /* AnswerSheetViewController.mm */,
 				60D542321E8E79580004AA31 /* AnswerSheetViewController.xib */,
-				6000BB861E94F03500F38DC3 /* ExerciseReportViewController.h */,
-				6000BB871E94F03500F38DC3 /* ExerciseReportViewController.mm */,
-				6000BB881E94F03500F38DC3 /* ExerciseReportViewController.xib */,
-				6000BBA11E961DB400F38DC3 /* ErrorAnalysisViewController.h */,
-				6000BBA21E961DB400F38DC3 /* ErrorAnalysisViewController.mm */,
-				6000BBA31E961DB400F38DC3 /* ErrorAnalysisViewController.xib */,
-				6027AE321EAA53F20019BC02 /* ErrorAnswerSheetViewController.h */,
-				6027AE331EAA53F20019BC02 /* ErrorAnswerSheetViewController.m */,
-				6027AE341EAA53F20019BC02 /* ErrorAnswerSheetViewController.xib */,
-				6000BB971E95EA8300F38DC3 /* ExerciseHositoryViewController.h */,
-				6000BB981E95EA8300F38DC3 /* ExerciseHositoryViewController.mm */,
-				6000BB991E95EA8300F38DC3 /* ExerciseHositoryViewController.xib */,
-				6027AE3F1EAB1EC60019BC02 /* NoteViewController.h */,
-				6027AE401EAB1EC60019BC02 /* NoteViewController.mm */,
-				6027AE411EAB1EC60019BC02 /* NoteViewController.xib */,
-				602E33D31EFCEBA900417BC9 /* ReportErrorViewController.h */,
-				602E33D41EFCEBA900417BC9 /* ReportErrorViewController.mm */,
-				602E33D51EFCEBA900417BC9 /* ReportErrorViewController.xib */,
-				60C10FF81ECADFCC00D9F7B3 /* SpecialExercisesViewController.h */,
-				60C10FF91ECADFCC00D9F7B3 /* SpecialExercisesViewController.mm */,
-				60C10FFA1ECADFCC00D9F7B3 /* SpecialExercisesViewController.xib */,
-				60E9FC141EFE8A9800F137F8 /* IntelligentPaperViewController.h */,
-				60E9FC151EFE8A9800F137F8 /* IntelligentPaperViewController.mm */,
-				60E9FC161EFE8A9800F137F8 /* IntelligentPaperViewController.xib */,
-				6074A2491ECBF4FE00981AC5 /* ExaminationPaperViewController.h */,
-				6074A24A1ECBF4FE00981AC5 /* ExaminationPaperViewController.mm */,
-				6074A24B1ECBF4FE00981AC5 /* ExaminationPaperViewController.xib */,
-				601FB6051EF008DB00F35D07 /* ExamDetailViewController.h */,
-				601FB6061EF008DB00F35D07 /* ExamDetailViewController.m */,
-				601FB6071EF008DB00F35D07 /* ExamDetailViewController.xib */,
-				60F053FB1EFA704C00E8B8AB /* ExerciseCalendarViewController.h */,
-				60F053FC1EFA704C00E8B8AB /* ExerciseCalendarViewController.mm */,
+				605C157F1F075A9B0060C397 /* BigImageShowViewController.h */,
+				605C15801F075A9B0060C397 /* BigImageShowViewController.m */,
+				605C15811F075A9B0060C397 /* BigImageShowViewController.xib */,
+				605B42131E9377E9007B7BFF /* CollectionQuestionViewController.h */,
+				605B42141E9377E9007B7BFF /* CollectionQuestionViewController.mm */,
+				605B42151E9377E9007B7BFF /* CollectionQuestionViewController.xib */,
+				60D5421B1E8DF63C0004AA31 /* DailyPracticeViewController.h */,
+				60D5421C1E8DF63C0004AA31 /* DailyPracticeViewController.mm */,
+				60D5421D1E8DF63C0004AA31 /* DailyPracticeViewController.xib */,
 				60D644A71ED2C005003983CD /* DataReportViewController.h */,
 				60D644A81ED2C005003983CD /* DataReportViewController.mm */,
 				60D644A91ED2C005003983CD /* DataReportViewController.xib */,
 				60D644B11ED2CD18003983CD /* DateReportDetailViewController.h */,
 				60D644B21ED2CD18003983CD /* DateReportDetailViewController.m */,
 				60D644B31ED2CD18003983CD /* DateReportDetailViewController.xib */,
-				600763D21ED52CF400BCCBB0 /* SearchTitleViewController.h */,
-				600763D31ED52CF400BCCBB0 /* SearchTitleViewController.mm */,
-				600763D41ED52CF400BCCBB0 /* SearchTitleViewController.xib */,
+				6000BBA11E961DB400F38DC3 /* ErrorAnalysisViewController.h */,
+				6000BBA21E961DB400F38DC3 /* ErrorAnalysisViewController.mm */,
+				6000BBA31E961DB400F38DC3 /* ErrorAnalysisViewController.xib */,
+				6027AE321EAA53F20019BC02 /* ErrorAnswerSheetViewController.h */,
+				6027AE331EAA53F20019BC02 /* ErrorAnswerSheetViewController.m */,
+				6027AE341EAA53F20019BC02 /* ErrorAnswerSheetViewController.xib */,
+				601FB6051EF008DB00F35D07 /* ExamDetailViewController.h */,
+				601FB6061EF008DB00F35D07 /* ExamDetailViewController.m */,
+				601FB6071EF008DB00F35D07 /* ExamDetailViewController.xib */,
+				6074A2491ECBF4FE00981AC5 /* ExaminationPaperViewController.h */,
+				6074A24A1ECBF4FE00981AC5 /* ExaminationPaperViewController.mm */,
+				6074A24B1ECBF4FE00981AC5 /* ExaminationPaperViewController.xib */,
+				60F053FB1EFA704C00E8B8AB /* ExerciseCalendarViewController.h */,
+				60F053FC1EFA704C00E8B8AB /* ExerciseCalendarViewController.mm */,
+				6000BB971E95EA8300F38DC3 /* ExerciseHositoryViewController.h */,
+				6000BB981E95EA8300F38DC3 /* ExerciseHositoryViewController.mm */,
+				6000BB991E95EA8300F38DC3 /* ExerciseHositoryViewController.xib */,
+				6000BB861E94F03500F38DC3 /* ExerciseReportViewController.h */,
+				6000BB871E94F03500F38DC3 /* ExerciseReportViewController.mm */,
+				6000BB881E94F03500F38DC3 /* ExerciseReportViewController.xib */,
+				60F90E1A1E88FA8600151728 /* FirstpageViewController.h */,
+				60F90E1B1E88FA8600151728 /* FirstpageViewController.mm */,
+				60F90E1C1E88FA8600151728 /* FirstpageViewController.xib */,
+				604AC00120CBA2A8006AB73C /* InformationDetailViewController.h */,
+				604AC00220CBA2A8006AB73C /* InformationDetailViewController.m */,
+				604AC00320CBA2A8006AB73C /* InformationDetailViewController.xib */,
+				60A895E820BD4BAF00566494 /* InformationViewController.h */,
+				60A895E920BD4BAF00566494 /* InformationViewController.mm */,
+				60A895EA20BD4BAF00566494 /* InformationViewController.xib */,
+				60E9FC141EFE8A9800F137F8 /* IntelligentPaperViewController.h */,
+				60E9FC151EFE8A9800F137F8 /* IntelligentPaperViewController.mm */,
+				60E9FC161EFE8A9800F137F8 /* IntelligentPaperViewController.xib */,
 				60D5425B1E8F8ECA0004AA31 /* MockExamContestViewController.h */,
 				60D5425C1E8F8ECA0004AA31 /* MockExamContestViewController.mm */,
 				60D5425D1E8F8ECA0004AA31 /* MockExamContestViewController.xib */,
 				60C505841EE2B3CE00B145A2 /* MockExamDetailViewController.h */,
 				60C505851EE2B3CE00B145A2 /* MockExamDetailViewController.mm */,
 				60C505861EE2B3CE00B145A2 /* MockExamDetailViewController.xib */,
-				60E9FC051EFE427F00F137F8 /* ZhaopinViewController.h */,
-				60E9FC061EFE427F00F137F8 /* ZhaopinViewController.mm */,
-				60E9FC071EFE427F00F137F8 /* ZhaopinViewController.xib */,
-				60D78F821F04F9F100D122B2 /* EverydaySignViewController.h */,
-				60D78F831F04F9F100D122B2 /* EverydaySignViewController.mm */,
-				60D78F841F04F9F100D122B2 /* EverydaySignViewController.xib */,
+				60AE102E1F726FCD0027E334 /* MockReportViewController.h */,
+				60AE102F1F726FCD0027E334 /* MockReportViewController.mm */,
+				605B42181E937820007B7BFF /* NoteQuestionViewController.h */,
+				605B42191E937820007B7BFF /* NoteQuestionViewController.mm */,
+				605B421A1E937820007B7BFF /* NoteQuestionViewController.xib */,
+				6027AE3F1EAB1EC60019BC02 /* NoteViewController.h */,
+				6027AE401EAB1EC60019BC02 /* NoteViewController.mm */,
+				6027AE411EAB1EC60019BC02 /* NoteViewController.xib */,
+				602E33D31EFCEBA900417BC9 /* ReportErrorViewController.h */,
+				602E33D41EFCEBA900417BC9 /* ReportErrorViewController.mm */,
+				602E33D51EFCEBA900417BC9 /* ReportErrorViewController.xib */,
+				600763D21ED52CF400BCCBB0 /* SearchTitleViewController.h */,
+				600763D31ED52CF400BCCBB0 /* SearchTitleViewController.mm */,
+				600763D41ED52CF400BCCBB0 /* SearchTitleViewController.xib */,
 				60D78F871F05F75500D122B2 /* SignCalendarViewController.h */,
 				60D78F881F05F75500D122B2 /* SignCalendarViewController.m */,
 				60D78F891F05F75500D122B2 /* SignCalendarViewController.xib */,
-				605C157F1F075A9B0060C397 /* BigImageShowViewController.h */,
-				605C15801F075A9B0060C397 /* BigImageShowViewController.m */,
-				605C15811F075A9B0060C397 /* BigImageShowViewController.xib */,
-				60AE102E1F726FCD0027E334 /* MockReportViewController.h */,
-				60AE102F1F726FCD0027E334 /* MockReportViewController.mm */,
+				BEC1F47724E5885100EADCC3 /* SignViewController.h */,
+				BEC1F47824E5885100EADCC3 /* SignViewController.mm */,
+				BEC1F47924E5885100EADCC3 /* SignViewController.xib */,
+				60C10FF81ECADFCC00D9F7B3 /* SpecialExercisesViewController.h */,
+				60C10FF91ECADFCC00D9F7B3 /* SpecialExercisesViewController.mm */,
+				60C10FFA1ECADFCC00D9F7B3 /* SpecialExercisesViewController.xib */,
+				60D5426F1E8F94E90004AA31 /* WrongQuestionsSheetViewController.h */,
+				60D542701E8F94E90004AA31 /* WrongQuestionsSheetViewController.mm */,
+				60D542711E8F94E90004AA31 /* WrongQuestionsSheetViewController.xib */,
+				60D541DE1E8CE74C0004AA31 /* WrongQuestionsViewController.h */,
+				60D541DF1E8CE74C0004AA31 /* WrongQuestionsViewController.mm */,
+				60D541E01E8CE74C0004AA31 /* WrongQuestionsViewController.xib */,
+				60CB57251EF55E6700EE611C /* WrongTreeViewController.h */,
+				60CB57261EF55E6700EE611C /* WrongTreeViewController.mm */,
+				607533BE1F1DB87800888236 /* WrongTreeViewController.xib */,
+				60E9FC051EFE427F00F137F8 /* ZhaopinViewController.h */,
+				60E9FC061EFE427F00F137F8 /* ZhaopinViewController.mm */,
+				60E9FC071EFE427F00F137F8 /* ZhaopinViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -2853,7 +2876,7 @@
 					60F90BBA1E88F66000151728 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = Z2F894585Y;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -2905,7 +2928,6 @@
 				60A2404E1EE4FE1C00C15F5B /* MineMessageTableViewCell.xib in Resources */,
 				60D542121E8DE98A0004AA31 /* OldExamsSubTableViewCell.xib in Resources */,
 				6027AE3B1EAB09AC0019BC02 /* NoteTableViewCell.xib in Resources */,
-				60D78F861F04F9F100D122B2 /* EverydaySignViewController.xib in Resources */,
 				60D5421F1E8DF63C0004AA31 /* DailyPracticeViewController.xib in Resources */,
 				60D644AB1ED2C005003983CD /* DataReportViewController.xib in Resources */,
 				60D776371F4EA68200AE92DE /* VideoSelectViewController.xib in Resources */,
@@ -2961,7 +2983,6 @@
 				60F90DBD1E88F77B00151728 /* weather_thundershower@2x.png in Resources */,
 				60E9FC0E1EFE4B0D00F137F8 /* ZhaopinTableViewCell.xib in Resources */,
 				60F90E551E8A0D8A00151728 /* TestTableViewCell.xib in Resources */,
-				607BD4B21ECED6BC00207C70 /* QuitLoginTableViewCell.xib in Resources */,
 				607FFB291EB0C01100CDD25A /* icon_76*76.png in Resources */,
 				60D541E21E8CE74C0004AA31 /* WrongQuestionsViewController.xib in Resources */,
 				601EF6EB1F01F45800374C9F /* shareIcon.png in Resources */,
@@ -2972,11 +2993,13 @@
 				60C505921EE43A4700B145A2 /* ExaminationPaperWithoutTableViewCell.xib in Resources */,
 				60C10FFC1ECADFCC00D9F7B3 /* SpecialExercisesViewController.xib in Resources */,
 				6027AE431EAB1EC60019BC02 /* NoteViewController.xib in Resources */,
+				BEC1F48B24E98F1000EADCC3 /* NewExamTitleTableViewCell.xib in Resources */,
 				60209BAD1F73EA4A00E49A2B /* MockReportHeaderView.xib in Resources */,
 				60F90DF01E88F77B00151728 /* SVProgressHUD.bundle in Resources */,
 				60D542641E8F8FA20004AA31 /* MockExamTitleTableViewCell.xib in Resources */,
 				60F90DC21E88F77B00151728 /* LICENSE in Resources */,
 				60F90E281E88FAA200151728 /* MineViewController.xib in Resources */,
+				BEC1F48324E96A8900EADCC3 /* VideoTreeTableViewCell.xib in Resources */,
 				6000BB8F1E95CEC700F38DC3 /* ReportAnswerSheetTableViewCell.xib in Resources */,
 				600763E21ED5631300BCCBB0 /* SearchTitleTableViewCell.xib in Resources */,
 				60D776401F4EA68200AE92DE /* VideoViewController.xib in Resources */,
@@ -3016,6 +3039,7 @@
 				607533BF1F1DB87800888236 /* WrongTreeViewController.xib in Resources */,
 				601FB1971F666A4500423FEF /* DBYSDKResource.bundle in Resources */,
 				60D7763B1F4EA68200AE92DE /* VideoSubViewController.xib in Resources */,
+				BEC1F47B24E5885100EADCC3 /* SignViewController.xib in Resources */,
 				601232C41E9277C400868FC3 /* AccountInfoTableViewCell.xib in Resources */,
 				607FFB2C1EB0C01100CDD25A /* icon_256*256.png in Resources */,
 				60F90DC51E88F77B00151728 /* progressHUDLoading.png in Resources */,
@@ -3134,7 +3158,6 @@
 				60D5F9901E8B42810004AA31 /* DAYUtils.m in Sources */,
 				60F90DE51E88F77B00151728 /* SDWebImagePrefetcher.m in Sources */,
 				BE88B90624E1688E003F3B06 /* MASConstraintMaker.m in Sources */,
-				607BD4B11ECED6BC00207C70 /* QuitLoginTableViewCell.m in Sources */,
 				604AC00420CBA2A8006AB73C /* InformationDetailViewController.m in Sources */,
 				60F90D8E1E88F77B00151728 /* AFHTTPSessionManager.m in Sources */,
 				601FB18D1F666A4500423FEF /* DBYPlaybackBottomView.m in Sources */,
@@ -3158,6 +3181,7 @@
 				60E9FC171EFE8A9800F137F8 /* IntelligentPaperViewController.mm in Sources */,
 				601FB1831F666A4500423FEF /* DBY1V1LiveTestViewController.m in Sources */,
 				60D776311F4EA68200AE92DE /* VideoDetailViewController.mm in Sources */,
+				BEC1F47A24E5885100EADCC3 /* SignViewController.mm in Sources */,
 				60F90DA81E88F77B00151728 /* FMDatabaseAdditions.m in Sources */,
 				60F90DB11E88F77B00151728 /* DisplayCityManager.m in Sources */,
 				601557C01EBB4C2900961F4F /* LiveTecherModel.m in Sources */,
@@ -3207,6 +3231,7 @@
 				60F90DF51E88F77B00151728 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				606DC5E51EFBEA3400467686 /* DataBaseManager.m in Sources */,
 				60D776381F4EA68200AE92DE /* VideoSubTableViewCell.m in Sources */,
+				BED1F39E24E571C600EE4E4A /* AddressListViewController.m in Sources */,
 				601FB1951F666A4500423FEF /* DBY1v1OnlinePlaybackViewController.m in Sources */,
 				60F90DAC1E88F77B00151728 /* GTMBase64.m in Sources */,
 				60F90E461E89156500151728 /* FirstPageHeadTableViewCell.mm in Sources */,
@@ -3221,14 +3246,17 @@
 				60F90DDD1E88F77B00151728 /* MKAnnotationView+WebCache.m in Sources */,
 				60F90E271E88FAA200151728 /* MineViewController.mm in Sources */,
 				60F90D9A1E88F77B00151728 /* UIImageView+AFNetworking.m in Sources */,
+				BEC1F48624E985AE00EADCC3 /* LYLUnicode.m in Sources */,
 				60F90DCB1E88F77B00151728 /* MJRefreshGifFooter.m in Sources */,
 				60D78F7F1F03B2BF00D122B2 /* FirstPageAdScrollTableViewCell.m in Sources */,
 				6000BBA41E961DB400F38DC3 /* ErrorAnalysisViewController.mm in Sources */,
 				60F90D9F1E88F77B00151728 /* InternationalControl.m in Sources */,
 				60242EB91EC4609D00EA32B0 /* SimpleMoreView.m in Sources */,
+				BEC1F48A24E98F1000EADCC3 /* NewExamTitleTableViewCell.m in Sources */,
 				601FB18A1F666A4500423FEF /* DBYChatInputView.m in Sources */,
 				60F90D941E88F77B00151728 /* README.md in Sources */,
 				60A895E620BD473800566494 /* InformationTableViewCell.m in Sources */,
+				BEC1F48224E96A8900EADCC3 /* VideoTreeTableViewCell.m in Sources */,
 				60F90DE81E88F77B00151728 /* UIImage+MultiFormat.m in Sources */,
 				60E9FC031EFE394E00F137F8 /* EveryDayExamTableViewCell.m in Sources */,
 				60D7763C1F4EA68200AE92DE /* VideoTableViewCell.m in Sources */,
@@ -3308,6 +3336,7 @@
 				601FB1901F666A4500423FEF /* DBYUIUtils.m in Sources */,
 				60D5F9A81E8B8F6D0004AA31 /* CalendarTableViewCell.m in Sources */,
 				60F90DE01E88F77B00151728 /* SDWebImageCompat.m in Sources */,
+				BEC77B8324E4E0BB0022A404 /* SettingViewController.m in Sources */,
 				6080D0251ECC384600C0B806 /* BuyExaminationPaperInfoTableViewCell.m in Sources */,
 				60242EB61EC4434F00EA32B0 /* LiveUserClassScheduleModel.m in Sources */,
 				60341ED31EA62DBC008E565B /* ExaminationTitleModel.m in Sources */,
@@ -3329,7 +3358,6 @@
 				60F90DC41E88F77B00151728 /* MBProgressHUD.m in Sources */,
 				6098475D1EE8FF28006D944F /* ExamStemTableViewCell.m in Sources */,
 				60D644AE1ED2C551003983CD /* PurchedModel.m in Sources */,
-				60D78F851F04F9F100D122B2 /* EverydaySignViewController.mm in Sources */,
 				601FB1941F666A4500423FEF /* UINavigationController+Rotation.m in Sources */,
 				60F90D661E88F77B00151728 /* NSArray+SNFoundation.m in Sources */,
 				60F90D6F1E88F77B00151728 /* NSString+SNFoundation.m in Sources */,
@@ -3459,7 +3487,7 @@
 				CODE_SIGN_ENTITLEMENTS = Recruitment.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = Z2F894585Y;
 				ENABLE_BITCODE = NO;
 				EXECUTABLE_PREFIX = "";
@@ -3492,7 +3520,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.DongwuEducation.longlian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Recruitment_developProvisioningProfile;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -3504,9 +3532,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CODE_SIGN_ENTITLEMENTS = Recruitment.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = Z2F894585Y;
 				ENABLE_BITCODE = NO;
 				EXECUTABLE_PREFIX = "";
@@ -3539,7 +3567,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.DongwuEducation.longlian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = DongwuAppstoreDistribution;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

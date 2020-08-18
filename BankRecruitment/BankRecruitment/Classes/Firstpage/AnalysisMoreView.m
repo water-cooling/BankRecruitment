@@ -12,8 +12,7 @@
 
 - (IBAction)moreSegmentCtlAction:(id)sender
 {
-    if(self.moreSegmentCtlChangeBlock)
-    {
+    if(self.moreSegmentCtlChangeBlock){
         self.moreSegmentCtlChangeBlock((self.moreSegmentCtl.selectedSegmentIndex == 0) ? YES : NO);
     }
 }
@@ -40,6 +39,19 @@
     {
         self.moreReportErrorBtnBlock();
     }
+}
+
+-(instancetype)initWithCoder:(NSCoder *)coder{
+    if (self = [super initWithCoder:coder]) {
+        [self initUI];
+    }
+    return self;
+}
+
+-(void)initUI{
+[self.moreSegmentCtl setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
+[self.moreSegmentCtl setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
+
 }
 
 @end

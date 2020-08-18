@@ -11,9 +11,9 @@
 @interface ExaminationPaperTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel *ExaminationPaperTitleLabel;
-@property (nonatomic, strong) IBOutlet UILabel *ExaminationPaperPriceLabel;
 @property (nonatomic, strong) IBOutlet UILabel *ExaminationPaperClassPlanLabel;
 @property (nonatomic, strong) IBOutlet UILabel *ExaminationPaperBuyNumberLabel;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (nonatomic, strong) IBOutlet UILabel *ExaminationPaperLimitTimeLabel;
 
 @end

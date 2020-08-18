@@ -9,16 +9,20 @@
 #import "MessageWordDetailViewController.h"
 
 @interface MessageWordDetailViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *appTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (nonatomic, strong) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @end
 
 @implementation MessageWordDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"我的消息详情";
     // Do any additional setup after loading the view from its nib.
-    
-    self.textView.text = self.detailString;
+    self.appTitleLab.text = self.model.name;
+    self.textView.text = self.model.msg;
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);

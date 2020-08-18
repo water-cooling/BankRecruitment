@@ -43,8 +43,7 @@
 {
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     
     self.title = self.purchedModel.Abstract;
     

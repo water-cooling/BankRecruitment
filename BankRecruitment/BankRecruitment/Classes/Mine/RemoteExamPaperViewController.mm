@@ -35,8 +35,7 @@
     [super viewWillAppear:animated];
     
     self.title = @"推送试卷";
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     self.examList = [NSMutableArray arrayWithCapacity:9];
     [self.examList addObject:self.paperModel];
     [self.tableView reloadData];
@@ -100,16 +99,8 @@
         ExaminationPaperTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, ExaminationPaperTableViewCell, @"ExaminationPaperTableViewCell");
         loc_cell.ExaminationPaperTitleLabel.text = model.Name;
         float price = model.Price.floatValue;
-        if((price == 0)||([model.IsGet isEqualToString:@"是"]))
-        {
-            loc_cell.ExaminationPaperPriceLabel.text = @"";
-        }
-        else
-        {
-            loc_cell.ExaminationPaperPriceLabel.text = [NSString stringWithFormat:@"￥%.2f",price];
-        }
         
-        loc_cell.ExaminationPaperBuyNumberLabel.text = [NSString stringWithFormat:@"参与人数 %@",model.iCount];
+        loc_cell.ExaminationPaperBuyNumberLabel.text = [NSString stringWithFormat:@"%@",model.iCount];
         
         NSDateFormatter* dateFmt = [[NSDateFormatter alloc] init];
         dateFmt.dateFormat = @"yyyy-MM-dd";
@@ -121,7 +112,12 @@
         int endNumber = dateNumberFromDateToToday(model.EndDate);
         if(endNumber>0)
         {
-            loc_cell.ExaminationPaperLimitTimeLabel.text = [NSString stringWithFormat:@"可参与练习时间还有%d天",endNumber];
+            NSString * tempStr = [NSString stringWithFormat:@"可参与练习时间还有%d天",endNumber];
+            NSMutableAttributedString *strAtt = [[NSMutableAttributedString alloc] initWithString:tempStr];
+            NSRange markRange = [tempStr rangeOfString:[NSString stringWithFormat:@"%d",endNumber]];
+            [strAtt addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:markRange];
+            loc_cell.ExaminationPaperLimitTimeLabel.attributedText = strAtt;
+            
         }
         else
         {

@@ -69,8 +69,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:26/255.0 green:25/255.0 blue:31/255.0 alpha:1]];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
+
     self.navigationController.navigationBar.backIndicatorImage = [DBYUIUtils bundleImageWithImageName:@"Back Arrow"];
     self.navigationController.navigationBar.backIndicatorTransitionMaskImage = [DBYUIUtils bundleImageWithImageName:@"Back Arrow"];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];

@@ -130,9 +130,7 @@
     }
     else
     {
-        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-        self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
-        
+        [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];        
         self.view.backgroundColor = kColorBarGrayBackground;
         _whiteScrollBackView.backgroundColor = [UIColor whiteColor];
         self.answerSheetScrollView.backgroundColor = [UIColor whiteColor];

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,20 +20,121 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZGn-IQ-mSl">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="232.5" width="375" height="434.5"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="WzS-hJ-Qr4"/>
                         <outlet property="delegate" destination="-1" id="q1Q-Wy-NO8"/>
                     </connections>
                 </tableView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="题库bg" translatesAutoresizingMaskIntoConstraints="NO" id="aEy-1H-5lY">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="160" id="qTM-hj-KST"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="题库" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaw-TV-BiB">
+                    <rect key="frame" x="171" y="34" width="33" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7R-Sq-Hgo">
+                    <rect key="frame" x="12" y="78.5" width="351" height="98"/>
+                    <subviews>
+                        <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcd-w9-SPD">
+                            <rect key="frame" x="88" y="24.5" width="87.5" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="49" id="9hF-dw-oIC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <inset key="titleEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="-35"/>
+                            <inset key="imageEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="14"/>
+                            <state key="normal" title="智能组卷" image="组卷">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="topBtnClick:" destination="-1" eventType="touchUpInside" id="pjN-lW-Gun"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjF-yF-VRm">
+                            <rect key="frame" x="0.0" y="24.5" width="88" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <inset key="titleEdgeInsets" minX="-36" minY="0.0" maxX="0.0" maxY="-35"/>
+                            <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
+                            <state key="normal" title="独家密卷" image="djmj">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="topBtnClick:" destination="-1" eventType="touchUpInside" id="kso-GU-CBL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjN-33-Dbh">
+                            <rect key="frame" x="175.5" y="24.5" width="88" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <inset key="titleEdgeInsets" minX="-34" minY="0.0" maxX="0.0" maxY="-35"/>
+                            <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
+                            <state key="normal" title="错题本" image="错题">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="topBtnClick:" destination="-1" eventType="touchUpInside" id="xFr-Pu-G8h"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efv-p0-x43">
+                            <rect key="frame" x="263.5" y="24.5" width="87.5" height="49"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <inset key="titleEdgeInsets" minX="-33" minY="0.0" maxX="0.0" maxY="-35"/>
+                            <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
+                            <state key="normal" title="练习历史" image="历史回顾">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="topBtnClick:" destination="-1" eventType="touchUpInside" id="8h5-1h-Csj"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="efv-p0-x43" firstAttribute="width" secondItem="fjF-yF-VRm" secondAttribute="width" id="0RK-wz-q10"/>
+                        <constraint firstItem="fjF-yF-VRm" firstAttribute="leading" secondItem="B7R-Sq-Hgo" secondAttribute="leading" id="1lq-L4-KiY"/>
+                        <constraint firstItem="RjN-33-Dbh" firstAttribute="leading" secondItem="dcd-w9-SPD" secondAttribute="trailing" id="24t-MT-cVx"/>
+                        <constraint firstAttribute="trailing" secondItem="efv-p0-x43" secondAttribute="trailing" id="2bv-Nb-uM0"/>
+                        <constraint firstItem="RjN-33-Dbh" firstAttribute="centerY" secondItem="fjF-yF-VRm" secondAttribute="centerY" id="3qC-SN-aj9"/>
+                        <constraint firstItem="dcd-w9-SPD" firstAttribute="leading" secondItem="fjF-yF-VRm" secondAttribute="trailing" id="55f-hD-rvY"/>
+                        <constraint firstItem="RjN-33-Dbh" firstAttribute="width" secondItem="fjF-yF-VRm" secondAttribute="width" id="5PK-hy-Y0e"/>
+                        <constraint firstItem="dcd-w9-SPD" firstAttribute="width" secondItem="fjF-yF-VRm" secondAttribute="width" id="Ayx-Qy-vIA"/>
+                        <constraint firstItem="dcd-w9-SPD" firstAttribute="centerY" secondItem="fjF-yF-VRm" secondAttribute="centerY" id="Ogc-Uf-qBQ"/>
+                        <constraint firstItem="dcd-w9-SPD" firstAttribute="height" secondItem="fjF-yF-VRm" secondAttribute="height" id="Yng-K0-iuo"/>
+                        <constraint firstItem="RjN-33-Dbh" firstAttribute="height" secondItem="fjF-yF-VRm" secondAttribute="height" id="Z58-9K-y43"/>
+                        <constraint firstItem="efv-p0-x43" firstAttribute="centerY" secondItem="fjF-yF-VRm" secondAttribute="centerY" id="aRK-bw-POE"/>
+                        <constraint firstAttribute="height" constant="98" id="f5R-Ro-GXe"/>
+                        <constraint firstItem="fjF-yF-VRm" firstAttribute="centerY" secondItem="B7R-Sq-Hgo" secondAttribute="centerY" id="nTe-Q3-tta"/>
+                        <constraint firstItem="efv-p0-x43" firstAttribute="height" secondItem="fjF-yF-VRm" secondAttribute="height" id="uRL-D3-tUm"/>
+                        <constraint firstItem="efv-p0-x43" firstAttribute="leading" secondItem="RjN-33-Dbh" secondAttribute="trailing" id="yXu-07-852"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="章节练习" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sJJ-RP-tAD">
+                    <rect key="frame" x="11" y="202.5" width="66" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ZGn-IQ-mSl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0A1-mI-h7d"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZGn-IQ-mSl" secondAttribute="bottom" id="4zc-cc-nwx"/>
-                <constraint firstItem="ZGn-IQ-mSl" firstAttribute="top" secondItem="mg8-co-erD" secondAttribute="top" priority="800" constant="-20" id="YaZ-Hz-YDK"/>
+                <constraint firstItem="oaw-TV-BiB" firstAttribute="top" secondItem="mg8-co-erD" secondAttribute="top" constant="34" id="6fW-4d-LDt"/>
+                <constraint firstItem="aEy-1H-5lY" firstAttribute="top" secondItem="mg8-co-erD" secondAttribute="top" id="CGl-fv-CUY"/>
+                <constraint firstItem="sJJ-RP-tAD" firstAttribute="top" secondItem="B7R-Sq-Hgo" secondAttribute="bottom" constant="26" id="G2Y-6A-w0h"/>
+                <constraint firstItem="sJJ-RP-tAD" firstAttribute="leading" secondItem="mg8-co-erD" secondAttribute="leading" constant="11" id="SjQ-Ik-UVF"/>
+                <constraint firstItem="B7R-Sq-Hgo" firstAttribute="top" secondItem="oaw-TV-BiB" secondAttribute="bottom" constant="25" id="boR-53-Qf3"/>
+                <constraint firstItem="oaw-TV-BiB" firstAttribute="centerX" secondItem="aEy-1H-5lY" secondAttribute="centerX" id="hzE-vU-dAG"/>
+                <constraint firstItem="mg8-co-erD" firstAttribute="trailing" secondItem="aEy-1H-5lY" secondAttribute="trailing" id="jWH-mT-mR6"/>
                 <constraint firstAttribute="trailing" secondItem="ZGn-IQ-mSl" secondAttribute="trailing" id="mCZ-cl-n8j"/>
+                <constraint firstItem="aEy-1H-5lY" firstAttribute="leading" secondItem="mg8-co-erD" secondAttribute="leading" id="npb-7f-nN3"/>
+                <constraint firstItem="mg8-co-erD" firstAttribute="trailing" secondItem="B7R-Sq-Hgo" secondAttribute="trailing" constant="12" id="p3K-W6-vI5"/>
+                <constraint firstItem="B7R-Sq-Hgo" firstAttribute="leading" secondItem="mg8-co-erD" secondAttribute="leading" constant="12" id="pX5-x3-3ah"/>
+                <constraint firstItem="ZGn-IQ-mSl" firstAttribute="top" secondItem="sJJ-RP-tAD" secondAttribute="bottom" constant="10" id="r6P-xn-Ega"/>
                 <constraint firstItem="ZGn-IQ-mSl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vzj-3k-X4r"/>
                 <constraint firstItem="ZGn-IQ-mSl" firstAttribute="bottom" secondItem="mg8-co-erD" secondAttribute="bottom" priority="800" id="y7d-cI-U8R"/>
             </constraints>
@@ -43,4 +142,11 @@
             <point key="canvasLocation" x="-181.5" y="38.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="djmj" width="29" height="29"/>
+        <image name="历史回顾" width="28" height="28"/>
+        <image name="组卷" width="28" height="28"/>
+        <image name="错题" width="28" height="28"/>
+        <image name="题库bg" width="375" height="160"/>
+    </resources>
 </document>

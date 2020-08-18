@@ -36,7 +36,6 @@
 #import "NewsViewController.h"
 #import "FirstPageAdScrollTableViewCell.h"
 #import "HomeVideoListTableViewCell.h"
-#import "EverydaySignViewController.h"
 #import "LianxiHisViewController.h"
 #import "BBAlertView.h"
 #import "InformationViewController.h"
@@ -44,6 +43,7 @@
 #import "InviteTableViewCell.h"
 #import "VideoTypeModel.h"
 #import "VideoViewController.h"
+#import "SignViewController.h"
 #define kHeadScrollHeight 150
 
 @interface FirstpageViewController ()<UITableViewDelegate, UITableViewDataSource, FirstTableCellHeadFunctionBtnFunc, FirstpageModulesFunctionBtnFunc, UISearchBarDelegate, UIWebViewDelegate, WSPageViewDataSource, WSPageViewDelegate>
@@ -54,6 +54,8 @@
 @property (nonatomic, assign) NSInteger tempOutLineCellNumber;
 @property (nonatomic, strong) dispatch_group_t group;
 @property (nonatomic, strong)  dispatch_queue_t queue;
+@property (nonatomic, strong) UIButton *signBtn;
+
 @end
 
 @implementation FirstpageViewController
@@ -71,6 +73,13 @@
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
     [self setupTableViewRefresh];
+    [self.view addSubview:self.signBtn];
+    [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.view);
+        make.right.equalTo(self.view.mas_right).offset(-5);
+        make.width.mas_equalTo(43);
+        make.height.mas_equalTo(43);
+    }];
     [self getNetWork];
 }
 
@@ -78,6 +87,10 @@
     dispatch_group_async(self.group, self.queue, ^{
                 [self NetworkGetFavoriteType];
     });
+    dispatch_group_async(self.group, self.queue, ^{
+            [self NetworkGetFirstExaminPaper];
+       });
+    
     dispatch_group_async(self.group, self.queue, ^{
                  [self NetworkGetAllAdByIndex:9999];
     });
@@ -298,7 +311,6 @@
  独家密卷： djmj
  模考大赛：mkds
 
- 
  首页中部的按钮动态配置功能，可以通过后台设置8个按钮，包括：招聘信息【链接银行招聘网】、最新校招【资讯】、每日一练、历年真题、独家密卷、模块大赛、图书资料【东吴教育有赞商城】、报考指南【资讯】
  */
 - (void)FirstTableCellHeadFunctionBtnPressed:(NSInteger)index
@@ -315,7 +327,7 @@
     }
     
     if ([url isEqualToString:@"mryl"])
-    {
+    {//每日一练
         ExaminationPaperViewController *vc = [[ExaminationPaperViewController alloc] init];
         vc.examinationPaperType = ExaminationPaperDailyPracticeType;
         vc.hidesBottomBarWhenPushed = YES;
@@ -330,19 +342,23 @@
     }
     else if ([url isEqualToString:@"djmj"])
     {
+        //每日一练
+        //ExaminationPaperOldExamType,            //历年真题
+        //ExaminationPaperExclusivePaperType      //独家密卷
         ExaminationPaperViewController *vc = [[ExaminationPaperViewController alloc] init];
         vc.examinationPaperType = ExaminationPaperExclusivePaperType;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if ([url isEqualToString:@"mkds"])
-    {
+    {//模考大赛
         MockExamContestViewController *vc = [[MockExamContestViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    //报考指南
     else if ([url isEqualToString:@"bkzn"]||[url isEqualToString:@"zxxz"])
-    {
+    {//最新校招
         InformationViewController *vc = [[InformationViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         vc.title = model.title;
@@ -584,6 +600,63 @@
     
    
 }
+-(void)signClick{
+    SignViewController * signVC = [[SignViewController alloc]initWithNibName:@"SignViewController" bundle:nil];
+    signVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:signVC animated:YES];
+}
+
+/**
+ 获取首页的大试卷，添加到已购买的数据库
+ */
+- (void)NetworkGetFirstExaminPaper
+{
+    [LLRequestClass requestdoGetExaminByTypeInfo:@"首页" Success:^(id jsonData) {
+        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        NSLog(@"%@", contentArray);
+        if(contentArray.count > 0)
+        {
+            NSDictionary *contentDict = contentArray.firstObject;
+            NSString *result = [contentDict objectForKey:@"result"];
+            if([result isEqualToString:@"success"])
+            {
+                NSString *IsGet = contentDict[@"IsGet"];
+                [LdGlobalObj sharedInstanse].firstExaminPaperEID = contentDict[@"ID"];
+//                if(![IsGet isEqualToString:@"是"])
+//                {
+                    [self NetworkSendZeroPaySuccessByLinkID:contentDict[@"ID"] PaperName:contentDict[@"Name"]];
+//                }
+                return;
+            }
+        }
+    } failure:^(NSError *error) {
+        [self endTableRefreshing];
+        //ZB_Toast(@"失败");
+    }];
+}
+
+/**
+ 提交支付信息  做题、提纲的一张大试卷，添加到已购买的数据库
+ */
+- (void)NetworkSendZeroPaySuccessByLinkID:(NSString *)LinkID PaperName:(NSString *)PaperName
+{
+    [LLRequestClass requestSendZeroPaySuccessByLinkID:LinkID PType:@"试卷" Abstract:PaperName Success:^(id jsonData) {
+        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        NSLog(@"%@", contentArray);
+        if(contentArray.count > 0)
+        {
+            NSDictionary *contentDict = contentArray.firstObject;
+            NSString *result = [contentDict objectForKey:@"result"];
+            if([result isEqualToString:@"success"])
+            {}
+        }
+//        ZB_Toast(@"首页试卷没有自动购买成功");
+    } failure:^(NSError *error) {
+        ZB_Toast(@"失败");
+    }];
+}
+
+
 - (void)NetworkGetFavoriteType
 {
     [LLRequestClass requestGetTypeByIType:@"收藏类别" success:^(id jsonData) {
@@ -696,5 +769,12 @@
     }];
 }
 
-
+- (UIButton *)signBtn {
+    if (!_signBtn) {
+        _signBtn = [[UIButton alloc] init];
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@"签到"] forState:0];
+        [_signBtn addTarget:self action:@selector(signClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _signBtn;
+}
 @end

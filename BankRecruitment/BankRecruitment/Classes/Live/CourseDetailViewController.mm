@@ -18,15 +18,19 @@
 @interface CourseDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) IBOutlet UILabel *courseTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *coursePlanTimeLabel;
-@property (nonatomic, strong) IBOutlet UIButton *collectionBtn;
+//课程安排
 @property (nonatomic, strong) IBOutlet UIButton *courseIntroduceBtn;
+//课程计划
 @property (nonatomic, strong) IBOutlet UIButton *coursePlanBtn;
+//老师安排
 @property (nonatomic, strong) IBOutlet UIButton *teacherIntroduceBtn;
 @property (nonatomic, strong) IBOutlet UIButton *BuyBtn;
 @property (nonatomic, strong) IBOutlet UILabel *livePriceLabel;
 @property (nonatomic, strong) IBOutlet UILabel *liveBuyNumberLabel;
 @property (nonatomic, strong) IBOutlet UILabel *liveLimitTimeLabel;
 @property (nonatomic, strong) IBOutlet UIView *BuyBackView;
+@property (weak, nonatomic) IBOutlet UIView *speatorView;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) NSInteger selectMainIndex;
@@ -93,45 +97,27 @@
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
+    UIView *rightItems = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 57, 18)];
+    
+    UIButton *contactButton = [UIButton buttonWithType:UIButtonTypeCustom];
+       contactButton.frame = CGRectMake(0.0f, 0.0f, 17.0f, 18.0f);
+       [contactButton setImage:[UIImage imageNamed:@"zf"] forState:UIControlStateNormal];
+       [contactButton addTarget:self action:@selector(zixunAction) forControlEvents:UIControlEventTouchUpInside];
+       [contactButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
+    [rightItems addSubview:contactButton];
+    
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    shareButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
+    shareButton.frame = CGRectMake(41.0f, 0.0f, 17.0f, 18.0f);
     [shareButton setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    
-    UIView *uplineView = [[UIView alloc] initWithFrame:CGRectMake(0, 161-18+(IS_iPhoneX?24:0), Screen_Width, 0.5)];
-    uplineView.backgroundColor = kColorLineSepBackground;
-    [self.view addSubview:uplineView];
-    
-    UIView *downlineView = [[UIView alloc] initWithFrame:CGRectMake(0, (161+27)+18+(IS_iPhoneX?24:0), Screen_Width, 0.5)];
-    downlineView.backgroundColor = kColorLineSepBackground;
-    [self.view addSubview:downlineView];
-    
-    self.BuyBtn.layer.cornerRadius = 3;
+    [rightItems addSubview:shareButton];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightItems];
+    self.BuyBtn.layer.cornerRadius = 15;
     self.BuyBtn.layer.masksToBounds = YES;
-    
-    self.courseIntroduceBtn.titleLabel.backgroundColor = [UIColor clearColor];
-    self.courseIntroduceBtn.layer.cornerRadius = 13.5;
-    self.courseIntroduceBtn.layer.masksToBounds = YES;
-    
-    self.coursePlanBtn.titleLabel.backgroundColor = [UIColor clearColor];
-    self.coursePlanBtn.layer.cornerRadius = 13.5;
-    self.coursePlanBtn.layer.masksToBounds = YES;
-    
-    self.teacherIntroduceBtn.titleLabel.backgroundColor = [UIColor clearColor];
-    self.teacherIntroduceBtn.layer.cornerRadius = 13.5;
-    self.teacherIntroduceBtn.layer.masksToBounds = YES;
-    
-    self.courseIntroduceBtn.backgroundColor = kColorNavigationBar;
-    [self.courseIntroduceBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.coursePlanBtn.backgroundColor = [UIColor whiteColor];
-    [self.coursePlanBtn setTitleColor:kColorDarkText forState:UIControlStateNormal];
-    self.teacherIntroduceBtn.backgroundColor = [UIColor whiteColor];
-    [self.teacherIntroduceBtn setTitleColor:kColorDarkText forState:UIControlStateNormal];
-    
     self.courseTitleLabel.text = self.liveModel.Name;
-    self.coursePlanTimeLabel.text = [NSString stringWithFormat:@"课程安排：%@至%@(%@课时)",self.liveModel.BegDate, self.liveModel.EndDate, self.liveModel.LCount];
+    self.coursePlanTimeLabel.text = [NSString stringWithFormat:@"%@至%@(%@课时)",self.liveModel.BegDate, self.liveModel.EndDate, self.liveModel.LCount];
     self.livePriceLabel.text = [NSString stringWithFormat:@"￥%.2f",self.liveModel.Price.floatValue];
     self.liveBuyNumberLabel.text = [NSString stringWithFormat:@"参与人数 %@",self.liveModel.PurchCount];
     int endNumber = dateNumberFromDateToToday(self.liveModel.EndDate);
@@ -144,12 +130,17 @@
         self.liveLimitTimeLabel.text = @"已停售";
     }
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, downlineView.bottom, Screen_Width, Screen_Height-downlineView.bottom-44-TabbarSafeBottomMargin)];
+    self.tableView = [[UITableView alloc] init];
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(self.speatorView.mas_bottom);
+        make.bottom.equalTo(self.BuyBackView.mas_top);
+    }];
     
     if (@available(iOS 11.0, *)) {
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
@@ -165,7 +156,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)zixunAction:(id)sender{
+- (void)zixunAction{
     NSString *qq = @"3004628600";
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]];
@@ -175,43 +166,34 @@
         ZB_Toast(@"尚未检测到相关客户端，咨询失败");
     }
 }
+//课程介绍
+- (IBAction)courseIntroduceBtnAction:(id)sender{
+    self.courseIntroduceBtn.selected = YES;
+   self.coursePlanBtn.selected = NO;
+    self.teacherIntroduceBtn.selected = NO;
+    self.lineView.xl_centerX = self.courseIntroduceBtn.xl_centerX;
 
-- (IBAction)courseIntroduceBtnAction:(id)sender
-{
-    self.courseIntroduceBtn.backgroundColor = kColorNavigationBar;
-    [self.courseIntroduceBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.coursePlanBtn.backgroundColor = [UIColor whiteColor];
-    [self.coursePlanBtn setTitleColor:kColorDarkText forState:UIControlStateNormal];
-    self.teacherIntroduceBtn.backgroundColor = [UIColor whiteColor];
-    [self.teacherIntroduceBtn setTitleColor:kColorDarkText forState:UIControlStateNormal];
-    
     self.introduceWebViewHeight = nil;
     self.selectMainIndex = 0;
     [self.tableView reloadData];
 }
-
+//课程安排
 - (IBAction)coursePlanBtnAction:(id)sender
 {
-    self.courseIntroduceBtn.backgroundColor = [UIColor whiteColor];
-    [self.courseIntroduceBtn setTitleColor:kColorDarkText forState:UIControlStateNormal];
-    self.coursePlanBtn.backgroundColor = kColorNavigationBar;
-    [self.coursePlanBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.teacherIntroduceBtn.backgroundColor = [UIColor whiteColor];
-    [self.teacherIntroduceBtn setTitleColor:kColorDarkText forState:UIControlStateNormal];
-    
+    self.courseIntroduceBtn.selected = NO;
+    self.coursePlanBtn.selected = YES;
+     self.teacherIntroduceBtn.selected = NO;
+     self.lineView.xl_centerX = self.coursePlanBtn.xl_centerX;
     self.selectMainIndex = 1;
     [self.tableView reloadData];
 }
-
+//老师介绍
 - (IBAction)teacherIntroduceBtnAction:(id)sender
 {
-    self.courseIntroduceBtn.backgroundColor = [UIColor whiteColor];
-    [self.courseIntroduceBtn setTitleColor:kColorDarkText forState:UIControlStateNormal];
-    self.coursePlanBtn.backgroundColor = [UIColor whiteColor];
-    [self.coursePlanBtn setTitleColor:kColorDarkText forState:UIControlStateNormal];
-    self.teacherIntroduceBtn.backgroundColor = kColorNavigationBar;
-    [self.teacherIntroduceBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
+    self.courseIntroduceBtn.selected = NO;
+    self.coursePlanBtn.selected = NO;
+     self.teacherIntroduceBtn.selected = YES;
+     self.lineView.xl_centerX = self.teacherIntroduceBtn.xl_centerX;
     self.selectMainIndex = 2;
     [self.teacherWebHeightDict removeAllObjects];
     [self.tableView reloadData];

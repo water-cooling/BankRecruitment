@@ -31,13 +31,11 @@
     [self drawViews];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     if(self.examinationPaperType == ExaminationPaperDailyPracticeType){
         self.title = @"每日一练";
-        
         UIButton *dailyButton = [UIButton buttonWithType:UIButtonTypeCustom];
         dailyButton.frame = CGRectMake(0.0f, 0.0f, 20.0f, 20.0f);
         [dailyButton setImage:[UIImage imageNamed:@"day_btn_history"] forState:UIControlStateNormal];
@@ -51,8 +49,7 @@
         self.title = @"独家密卷";
     }
     
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     
     self.examList = [NSMutableArray arrayWithCapacity:9];
     [self NetworkGetExaminByType:self.title andSelectedIndexPath:nil];
@@ -84,13 +81,11 @@
     }
 }
 
-- (void)backButtonPressed
-{
+- (void)backButtonPressed{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)dailyButtonPressed
-{
+- (void)dailyButtonPressed{
     ExerciseCalendarViewController *vc = [[ExerciseCalendarViewController alloc] init];
     vc.title = self.title;
 //    vc.totalTimeEventList = [NSMutableArray arrayWithArray:self.examList];
@@ -122,19 +117,10 @@
     
     ExaminationPaperTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, ExaminationPaperTableViewCell, @"ExaminationPaperTableViewCell");
     ExaminationPaperModel *model = self.examList[indexPath.row];
-    
+    [loc_cell.editBtn addTarget:self action:@selector(detailClick:) forControlEvents:UIControlEventTouchUpInside];
+    loc_cell.editBtn.tag = indexPath.row;
     loc_cell.ExaminationPaperTitleLabel.text = model.Name;
-    float price = model.Price.floatValue;
-    if([model.IsGet isEqualToString:@"是"]||price == 0)
-    {
-        loc_cell.ExaminationPaperPriceLabel.text = @"";
-    }
-    else
-    {
-        loc_cell.ExaminationPaperPriceLabel.text = [NSString stringWithFormat:@"￥%.2f",price];
-    }
-    
-    loc_cell.ExaminationPaperBuyNumberLabel.text = [NSString stringWithFormat:@"参与人数 %@",model.iCount];
+    loc_cell.ExaminationPaperBuyNumberLabel.text = [NSString stringWithFormat:@"%@",model.iCount];
 
     NSDateFormatter* dateFmt = [[NSDateFormatter alloc] init];
     dateFmt.dateFormat = @"yyyy-MM-dd";
@@ -146,7 +132,11 @@
     int endNumber = dateNumberFromDateToToday(model.EndDate);
     if(endNumber>0)
     {
-        loc_cell.ExaminationPaperLimitTimeLabel.text = [NSString stringWithFormat:@"可参与练习时间还有%d天",endNumber];
+        NSString * tempStr = [NSString stringWithFormat:@"可参与练习时间还有%d天",endNumber];
+        NSMutableAttributedString *strAtt = [[NSMutableAttributedString alloc] initWithString:tempStr];
+        NSRange markRange = [tempStr rangeOfString:[NSString stringWithFormat:@"%d",endNumber]];
+        [strAtt addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:markRange];
+        loc_cell.ExaminationPaperLimitTimeLabel.attributedText = strAtt;
     }
     else
     {
@@ -201,12 +191,55 @@
     }
 }
 
+-(void)detailClick:(UIButton *)sender{
+    ExaminationPaperModel *model = self.examList[sender.tag];
+       if([model.IsGet isEqualToString:@"是"])
+       {
+           if([[DataBaseManager sharedManager] getExamOperationListByEID:model.ID isFromIntelligent:@"否"])
+           {
+               NSArray *examList = [[DataBaseManager sharedManager] getExamDetailListByEID:model.ID isFromIntelligent:@"否"];
+               if(examList.count > 0)
+               {
+                   DailyPracticeViewController *vc = [[DailyPracticeViewController alloc] init];
+                   vc.hidesBottomBarWhenPushed = YES;
+                   vc.practiceList = [NSMutableArray arrayWithArray:examList];
+                   vc.title = model.Name;
+                   vc.isSaveUserOperation = YES;
+                   [self.navigationController pushViewController:vc animated:YES];
+               }
+               else
+               {
+                   [self NetworkGetExamTitlesByEID:model.ID ExamTitle:model.Name];
+               }
+           }
+           else
+           {
+               [self NetworkGetExamTitlesByEID:model.ID ExamTitle:model.Name];
+           }
+       }
+       else
+       {
+           if(model.Price.floatValue == 0)
+           {
+               [self NetworkGetExamTitlesByEID:model.ID ExamTitle:model.Name];
+               [self NetworkSendZeroPaySuccessByLinkID:model.ID Abstract:model.Name];
+               return;
+           }
+           
+           
+           ExamDetailViewController *vc = [[ExamDetailViewController alloc] init];
+           vc.paperModel = model;
+           vc.title = self.title;
+           [self.navigationController pushViewController:vc animated:YES];
+       }
+    
+}
+
 #pragma -mark Network
 /**
  功能按钮获取试题  历年真题、独家密卷、每日一练
  */
-- (void)NetworkGetExaminByType:(NSString *)type andSelectedIndexPath:(NSIndexPath *)indexPath
-{
+- (void)NetworkGetExaminByType:(NSString *)type andSelectedIndexPath:(NSIndexPath *)indexPath{
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [LLRequestClass requestdoGetExaminByTypeInfo:type Success:^(id jsonData) {
         [SVProgressHUD dismiss];

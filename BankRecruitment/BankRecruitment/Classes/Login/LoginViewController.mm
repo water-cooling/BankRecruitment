@@ -33,8 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
-    self.navigationController.navigationBar.barTintColor = kColorBlackText;
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     [self initUI];
     
     self.isLogin = YES;
@@ -104,7 +103,7 @@
 
     self.registView = [[RegisterView alloc]initWithFrame:CGRectMake(Screen_Width, 180+StatusBarHeight, Screen_Width, Screen_Height-180-StatusBarHeight)];
     [self.registView.btnRegist addTarget:self action:@selector(registAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.registView.btnValidCode addTarget:self action:@selector(requestSendMessage) forControlEvents:UIControlEventTouchUpInside];
+    [self.registView.btnValidCode addTarget:self action:@selector(validcodeAction) forControlEvents:UIControlEventTouchUpInside];
     [self.registView.ruleBtn addTarget:self action:@selector(rulerAction) forControlEvents:UIControlEventTouchUpInside];
     [self.registView.ruleselectBtn addTarget:self action:@selector(rulerSelectAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.registView];
@@ -317,12 +316,11 @@
            return;
        }
        
-    if(![self.registView.btnValidCode.titleLabel.text isEqualToString:self.smsCodeString])
-       {
-           ZB_Toast(@"请输入正确的短信验证码");
-           return;
-       }
-       
+    if(strIsNullOrEmpty(self.registView.smsTextField.text))
+    {
+        ZB_Toast(@"请输入您的验证码");
+        return;
+    }
     if(strIsNullOrEmpty(self.registView.pwdTextField.text))
        {
            ZB_Toast(@"请输入密码");
@@ -415,18 +413,17 @@
                 ZB_Toast(@"请输入您的手机号码");
                 return;
             }
-        if(self.registView.phoneTextField.text.length != 11)
-            {
+    }
+    if(self.registView.phoneTextField.text.length != 11){
                 ZB_Toast(@"请输入合法的手机号码");
                 return;
-            }
-            
+    }
             self.registView.btnValidCode.userInteractionEnabled = NO;
             self.messageTimerIndex = 60;
             self.messageTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(messageTimerRefreshAction) userInfo:nil repeats:YES];
             [self.messageTimer fire];
             [self requestSendMessage];
-        }
+
 }
 
 - (void)messageTimerRefreshAction{
@@ -435,10 +432,11 @@
         {
             [self.messageTimer invalidate];
             [self.registView.btnValidCode setTitle:@"发送验证码" forState:UIControlStateNormal];
+            self.registView.layer.borderColor = KColorBlueText.CGColor;
             self.registView.btnValidCode.userInteractionEnabled = YES;
         }
-        else
-        {
+        else{
+            self.registView.layer.borderColor = kColorBlackText.CGColor;
             [self.registView.btnValidCode setTitle:[NSString stringWithFormat:@"%ldS", (long)self.messageTimerIndex] forState:UIControlStateNormal];
         }
     }

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RemoteMessageModel.h"
 @interface MessageWordDetailViewController : UIViewController
-@property (nonatomic, copy) NSString *detailString;
+@property (nonatomic, strong) RemoteMessageModel *model;
+ 
 @end
