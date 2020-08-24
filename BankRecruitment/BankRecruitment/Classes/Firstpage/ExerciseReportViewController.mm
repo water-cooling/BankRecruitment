@@ -46,7 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeTop;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.selectErrorIndex = MAXFLOAT;
 }
 
@@ -69,7 +69,7 @@
     self.title = self.DailyPracticeTitle;
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 6.0f, 12.0f);
-    [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
+    [backButton setBackgroundImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:0];
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
@@ -130,14 +130,7 @@
         [self.bottomView addSubview:self.retryErrorButton];
     }
     
-    if([LdGlobalObj sharedInstanse].isNightExamFlag){
-        [backButton setImage:[UIImage imageNamed:@"night_btn_top_back"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [backButton setImage:[UIImage imageNamed:@"back_nor"] forState:UIControlStateNormal];
-       
-    }
+   
     
     self.answerList = [NSMutableArray arrayWithCapacity:9];
     for(int index=0; index<self.practiceList.count; index++)
