@@ -154,11 +154,7 @@
 {
     MineMessageTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MineMessageTableViewCell, @"MineMessageTableViewCell");
     NSDictionary *dict = self.list[indexPath.row];
-    loc_cell.contentView.layer.cornerRadius = 4;
-    loc_cell.contentView.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor colorWithHex:@"#3C3C3C"]);
-    loc_cell.contentView.layer.shadowRadius = -M_PI_2;
-    loc_cell.contentView.layer.shadowRadius = 2;
-    loc_cell.contentView.layer.shadowOpacity = 1;
+   
     loc_cell.contentView.layer.shadowOffset = CGSizeMake(2.5, 0);
     loc_cell.messageTitleLabel.text = dict[@"Name"];
     loc_cell.messageDetailLabel.text = dict[@"Msg"];
