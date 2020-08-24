@@ -68,10 +68,9 @@
     
     self.title = self.DailyPracticeTitle;
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
+    backButton.frame = CGRectMake(0.0f, 0.0f, 6.0f, 12.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
     float buttonWidth = 0;
@@ -101,7 +100,7 @@
     {
         buttonWidth = (kScreenWidth-72)/3.0f;
         
-        self.errorAnalysisButton = [[UIButton alloc] initWithFrame:CGRectMake(26, 7.5, buttonWidth, 44)];
+        self.errorAnalysisButton = [[UIButton alloc] initWithFrame:CGRectMake(26, 7.5, buttonWidth, 40)];
         self.errorAnalysisButton.layer.cornerRadius = 20;
         [self.errorAnalysisButton setTitle:@"错题解析" forState:UIControlStateNormal];
         self.errorAnalysisButton.backgroundColor = [UIColor colorWithHex:@"#F79B38"];
@@ -110,7 +109,7 @@
         [self.errorAnalysisButton addTarget:self action:@selector(errorAnalysisButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.bottomView addSubview:self.errorAnalysisButton];
         
-        self.allAnalysisButton = [[UIButton alloc] initWithFrame:CGRectMake(self.errorAnalysisButton.right+10, 7.5, buttonWidth, 44)];
+        self.allAnalysisButton = [[UIButton alloc] initWithFrame:CGRectMake(self.errorAnalysisButton.right+10, 7.5, buttonWidth, 40)];
         self.allAnalysisButton.layer.cornerRadius = 20;
         [self.allAnalysisButton setTitle:@"全部解析" forState:UIControlStateNormal];
         self.allAnalysisButton.backgroundColor = KColorBlueText;
@@ -119,7 +118,7 @@
         [self.allAnalysisButton addTarget:self action:@selector(allAnalysisButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.bottomView addSubview:self.allAnalysisButton];
         
-        self.retryErrorButton = [[UIButton alloc] initWithFrame:CGRectMake(self.allAnalysisButton.right+10, 7.5, buttonWidth, 44)];
+        self.retryErrorButton = [[UIButton alloc] initWithFrame:CGRectMake(self.allAnalysisButton.right+10, 7.5, buttonWidth, 40)];
         self.retryErrorButton.layer.cornerRadius = 20;
 
         [self.retryErrorButton setTitle:@"错题重做" forState:UIControlStateNormal];
@@ -190,7 +189,7 @@
     [self.answerSheetScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(self.topView.mas_bottom);
-        make.bottom.equalTo(self.bottomView.mas_top).offset(10);
+        make.bottom.equalTo(self.bottomView.mas_top).offset(-100);
     }];
     
     UILabel *titleLab = [[UILabel alloc] init];

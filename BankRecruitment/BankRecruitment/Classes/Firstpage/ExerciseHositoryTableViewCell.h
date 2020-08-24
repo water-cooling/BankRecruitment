@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ExerciseHositoryTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (nonatomic, strong) IBOutlet UILabel* ExerciseHositoryTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel* ExerciseHositoryTimeLabel;
 @end

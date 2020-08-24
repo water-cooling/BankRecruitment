@@ -19,6 +19,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *answerCorrectNumLabel;
 @property (nonatomic, strong) IBOutlet UILabel *answerWrongNumLabel;
 @property (nonatomic, strong) IBOutlet UILabel *answerTimeLabel;
+@property (weak, nonatomic) IBOutlet UIView *firstBgView;
+@property (weak, nonatomic) IBOutlet UIView *secondBgView;
+@property (weak, nonatomic) IBOutlet UIView *threeBgView;
 @end
 
 @implementation DateReportDetailViewController
@@ -45,6 +48,16 @@
 
 - (void)drawViews
 {
+    self.firstBgView.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor colorWithHex:@"#3C3C3C"]);
+    self.firstBgView.layer.shadowOffset = CGSizeMake(2.5, 0);
+    self.firstBgView.layer.shadowRadius = -M_PI_2;
+    self.secondBgView.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor colorWithHex:@"#3C3C3C"]);
+      self.secondBgView.layer.shadowOffset = CGSizeMake(2.5, 0);
+      self.secondBgView.layer.shadowRadius = -M_PI_2;
+    self.threeBgView.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor colorWithHex:@"#3C3C3C"]);
+      self.threeBgView.layer.shadowOffset = CGSizeMake(2.5, 0);
+      self.threeBgView.layer.shadowRadius = -M_PI_2;
+    
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
@@ -79,8 +92,8 @@
                 self.getScoreLabel.text = self.detailDict[@"MyScore"];
                 self.totalScoreLabel.text = self.detailDict[@"AllScore"];
                 self.topScoreLabel.text = self.detailDict[@"MaxScore"];
-                self.answerNumLabel.text = self.detailDict[@"AnswerCount"];
-                self.correctRateLabel.text = [NSString stringWithFormat:@"%.2f", CorrectNum/TitleCount*100];
+                self.answerNumLabel.text = [NSString stringWithFormat:@"%@道",self.detailDict[@"AnswerCount"]];
+                self.correctRateLabel.text = [NSString stringWithFormat:@"%.2f%%", CorrectNum/TitleCount*100];
                 self.answerCorrectNumLabel.text = self.detailDict[@"OkCount"];
                 self.answerWrongNumLabel.text = self.detailDict[@"ErrCount"];
                 NSString* AllTime = self.detailDict[@"AllTime"];
@@ -91,6 +104,7 @@
                 NSMutableString *timeString = [NSMutableString stringWithFormat:@"%d秒", second];
                 if(hour>0)
                 {
+                    
                     [timeString insertString:[NSString stringWithFormat:@"%d时%d分", hour, min] atIndex:0];
                 }
                 else if(min>0)

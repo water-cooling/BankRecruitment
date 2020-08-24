@@ -126,21 +126,11 @@
                     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
                     NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:self.phone, @"userLoginname", self.passwdTextField.text, @"userPassword", nil];
                     [defaults setObject:userLoginDict forKey:@"userLoginDict"];
-                    [defaults synchronize];
-                    
-                    //进入主页
-                    if([LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock)
-                    {
-                        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                        [LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock();
-                    }
-                    else
-                    {
+                    [defaults synchronize];                  
                         TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
                         [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
                         appDelegate.window.rootViewController = homePageVC;
                         [appDelegate.window makeKeyAndVisible];
-                    }
                     
                     [self NetworkPutMsgToken];
                 }

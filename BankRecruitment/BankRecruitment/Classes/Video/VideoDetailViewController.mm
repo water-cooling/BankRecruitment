@@ -78,7 +78,7 @@
     
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     shareButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    [shareButton setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"zf"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
     self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareButton],[[UIBarButtonItem alloc] initWithCustomView:ContactServiceView]];
@@ -277,49 +277,21 @@
     });
 }
 
-- (void)shareAction:(id)sender
-{
-    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession), @(UMSocialPlatformType_WechatTimeLine), @(UMSocialPlatformType_QQ), @(UMSocialPlatformType_Qzone)]];
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        // 根据获取的platformType确定所选平台进行下一步操作
-        [self shareToPlatformType:platformType];
-    }];
+- (void)shareAction:(id)sender{
+    VideoModel *currentModel = self.videolist[self.videoIndex];
+
+    NSString *webpageUrl =  [NSString stringWithFormat:@"http://my.polyv.net/front/video/preview?vid=%@", currentModel.AFile];
+            RecruitMentShareViewController * shareVc = [RecruitMentShareViewController new];
+               shareVc.shareTitle = currentModel.Name;
+            shareVc.hidesBottomBarWhenPushed = YES;
+
+               shareVc.shareDesTitle = @"考银行就用银行易考";
+            shareVc.shareWebUrl = webpageUrl;
+            [self.navigationController presentViewController:shareVc animated:YES completion:nil];
+    
 }
 
-- (void)shareToPlatformType:(UMSocialPlatformType)platformType
-{
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    //创建网页内容对象
-    VideoModel *currentModel = self.videolist[self.videoIndex];
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:currentModel.Name descr:@"考银行就用银行易考！" thumImage:[UIImage imageNamed:@"shareIcon.png"]];
-    //设置网页地址
-    shareObject.webpageUrl = [NSString stringWithFormat:@"http://my.polyv.net/front/video/preview?vid=%@", currentModel.AFile];
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            ZB_Toast(@"分享失败");
-            UMSocialLogInfo(@"************Share fail with error %@*********",error);
-        }else{
-            ZB_Toast(@"分享成功");
-            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                UMSocialShareResponse *resp = data;
-                //分享结果消息
-                UMSocialLogInfo(@"response message is %@",resp.message);
-                //第三方原始返回的数据
-                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                
-            }else{
-                UMSocialLogInfo(@"response data is %@",data);
-            }
-        }
-    }];
-}
+
 
 - (IBAction)examButtonAction:(id)sender
 {

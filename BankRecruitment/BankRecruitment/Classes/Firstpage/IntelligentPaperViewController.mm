@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *hisList;
 @property (nonatomic, strong) UIButton *startButton;
+@property (strong, nonatomic) UIImageView *placehodleImg;
+@property (strong, nonatomic) UILabel *noAddressLab;
 @end
 
 @implementation IntelligentPaperViewController
@@ -33,7 +35,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
     [self.startButton setTitle:@"重新抽题" forState:UIControlStateNormal];
     [self NetworkGetIntelligentExamList];
@@ -53,6 +55,7 @@
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-44-TabbarSafeBottomMargin) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -63,10 +66,30 @@
         self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
     }
     
+    self.placehodleImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"无数据"]];
+
+    self.noAddressLab = [[UILabel alloc] init];
+    self.noAddressLab.font = [UIFont systemFontOfSize:15];
+    self.noAddressLab.textAlignment = NSTextAlignmentCenter;
+        self.noAddressLab.textColor = [UIColor colorWithHex:@"#999999"];
+        self.noAddressLab.text = @"暂无记录";
+    [self.view addSubview:self.noAddressLab];
+    
+    [self.view addSubview:self.placehodleImg];
+    [self.placehodleImg mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.center.equalTo(self.view);
+          make.size.mas_equalTo(CGSizeMake(142, 104));
+      }];
+      [self.noAddressLab mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.centerX.equalTo(self.view);
+            make.height.mas_equalTo(15);
+            make.top.equalTo(self.placehodleImg.mas_bottom).offset(33);
+        }];
+    
     _startButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 35)];
     _startButton.top = self.tableView.bottom + 4;
     _startButton.centerX = Screen_Width/2;
-    [_startButton setBackgroundColor:kColorNavigationBar];
+    [_startButton setBackgroundColor:KColorBlueText];
     [_startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _startButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:_startButton];
@@ -129,6 +152,8 @@
 {
     CalendarTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, CalendarTableViewCell, @"CalendarTableViewCell");
     NSDictionary *dict = self.hisList[indexPath.row];
+    loc_cell.editBtn.tag = indexPath.row;
+    [loc_cell.editBtn addTarget:self action:@selector(editClick:) forControlEvents:UIControlEventTouchUpInside];
     loc_cell.calendarTitleLabel.text = dict[@"KeyWord"];
     loc_cell.calendarTimeLabel.text = dict[@"PDate"];
     return loc_cell;
@@ -138,6 +163,33 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     NSDictionary *dict = self.hisList[indexPath.row];
+    
+    if([[DataBaseManager sharedManager] getExamOperationListByEID:dict[@"PID"] isFromIntelligent:@"是"])
+    {
+        NSArray *examList = [[DataBaseManager sharedManager] getExamDetailListByEID:dict[@"PID"] isFromIntelligent:@"是"];
+        if(examList.count > 0)
+        {
+            DailyPracticeViewController *vc = [[DailyPracticeViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.practiceList = [NSMutableArray arrayWithArray:examList];
+            vc.title = self.title;
+            vc.isSaveUserOperation = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else
+        {
+            [self NetworkGetHistoryPractTitleListByPID:dict[@"PID"] andTitle:self.title];
+        }
+    }
+    else
+    {
+        [self NetworkGetHistoryPractTitleListByPID:dict[@"PID"] andTitle:self.title];
+    }
+    
+}
+
+-(void)editClick:(UIButton *)sender{
+    NSDictionary *dict = self.hisList[sender.tag];
     
     if([[DataBaseManager sharedManager] getExamOperationListByEID:dict[@"PID"] isFromIntelligent:@"是"])
     {
@@ -178,12 +230,21 @@
             if([result isEqualToString:@"success"])
             {
                 self.hisList = [NSMutableArray arrayWithArray:contentArray];
+                self.tableView.hidden = NO;
+                self.placehodleImg.hidden = YES;
+                self.noAddressLab.hidden = YES;
                 [self.tableView reloadData];
                 return;
             }
         }
+        self.tableView.hidden = YES;
+        self.placehodleImg.hidden = NO;
+        self.noAddressLab.hidden = NO;
         ZB_Toast(@"没有找到历史记录");
     } failure:^(NSError *error) {
+        self.tableView.hidden = YES;
+        self.placehodleImg.hidden = NO;
+        self.noAddressLab.hidden = NO;
         ZB_Toast(@"没有找到历史记录");
     }];
 }

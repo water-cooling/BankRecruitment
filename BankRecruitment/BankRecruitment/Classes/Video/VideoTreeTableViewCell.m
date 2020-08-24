@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.actionBtn.layer.cornerRadius =3;
     // Initialization code
 }
 

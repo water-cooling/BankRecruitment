@@ -63,6 +63,9 @@
     self.viewControllers = @[FirstPageVCNAV, liveVCNav, videoVCNav, mineVCNav];
    
 }
+
+
+
 /*
 #pragma mark - Navigation
 

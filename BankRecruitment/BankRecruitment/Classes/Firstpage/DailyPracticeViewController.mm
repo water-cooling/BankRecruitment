@@ -1082,71 +1082,43 @@
     }
 }
 
-- (void)shareToPlatformType:(UMSocialPlatformType)platformType
-{
-    //设置网页地址
-    ExamDetailModel *examModel = self.practiceList[self.selectExamIndex];
-    
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    NSString* content = examModel.title;
-    NSString *des = @"考银行就用银行易考！";
-    if(!strIsNullOrEmpty(content)){
-        NSRange range = [content rangeOfString:@"<"];
-        float index_img = range.location;
-        if(index_img>=0 && index_img<=10){
-            des = examModel.content;
-        }else{
-            if(index_img == NSNotFound){
-                if([content length]>30){
-                    NSString* contents = [content substringToIndex:30];
-                    des = contents;
-                }else{
-                    des = content;
-                }
-            }else{
-                NSString* contents = [content substringToIndex:index_img-1];
-                des = contents;
-            }
-        }
-    }
-    
-    //创建网页内容对象
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.title descr:des thumImage:[UIImage imageNamed:@"shareIcon.png"]];
-    shareObject.webpageUrl = [NSString stringWithFormat:@"http://yk.yinhangzhaopin.com/bshWeb/exam/ViewTitle.jsp?ID=%@&FLAG=%d", examModel.ID, [self.title containsString:@"智能"]||[self.title containsString:@"专项"] ? 1 : 0];
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            ZB_Toast(@"分享失败");
-            UMSocialLogInfo(@"************Share fail with error %@*********",error);
-        }else{
-            ZB_Toast(@"分享成功");
-            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                UMSocialShareResponse *resp = data;
-                //分享结果消息
-                UMSocialLogInfo(@"response message is %@",resp.message);
-                //第三方原始返回的数据
-                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                
-            }else{
-                UMSocialLogInfo(@"response data is %@",data);
-            }
-        }
-    }];
-}
 
 - (void)shareAction:(id)sender
 {
-    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession), @(UMSocialPlatformType_WechatTimeLine), @(UMSocialPlatformType_QQ), @(UMSocialPlatformType_Qzone)]];
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        // 根据获取的platformType确定所选平台进行下一步操作
-        [self shareToPlatformType:platformType];
-    }];
+   //设置网页地址
+      ExamDetailModel *examModel = self.practiceList[self.selectExamIndex];
+      NSString* content = examModel.title;
+      NSString *des = @"考银行就用银行易考！";
+      if(!strIsNullOrEmpty(content)){
+          NSRange range = [content rangeOfString:@"<"];
+          float index_img = range.location;
+          if(index_img>=0 && index_img<=10){
+              des = examModel.content;
+          }else{
+              if(index_img == NSNotFound){
+                  if([content length]>30){
+                      NSString* contents = [content substringToIndex:30];
+                      des = contents;
+                  }else{
+                      des = content;
+                  }
+              }else{
+                  NSString* contents = [content substringToIndex:index_img-1];
+                  des = contents;
+              }
+          }
+      }
+      
+      //创建网页内容对象
+      NSString * webpageUrl = [NSString stringWithFormat:@"http://yk.yinhangzhaopin.com/bshWeb/exam/ViewTitle.jsp?ID=%@&FLAG=%d", examModel.ID, [self.title containsString:@"智能"]||[self.title containsString:@"专项"] ? 1 : 0];
+      RecruitMentShareViewController * shareVc = [RecruitMentShareViewController new];
+         shareVc.shareTitle = self.title;
+         shareVc.shareDesTitle = des;
+    shareVc.hidesBottomBarWhenPushed = YES;
+
+      shareVc.shareWebUrl = webpageUrl;
+      [self.navigationController presentViewController:shareVc animated:YES completion:nil];
+      
     
 }
 
@@ -1207,16 +1179,14 @@
         NSString *TagFlag = resultDict[@"TagFlag"];
         if([TagFlag isEqualToString:@"是"])
         {
-            if([LdGlobalObj sharedInstanse].isNightExamFlag)
-            {
+           
                 self.tagBtn.selected = YES;
-            }
+        }
             else
             {
                 self.tagBtn.selected = NO;
             }
             
-        }
     }
 }
 

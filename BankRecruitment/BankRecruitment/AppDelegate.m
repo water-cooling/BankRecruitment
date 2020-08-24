@@ -72,10 +72,11 @@
     return YES;
 }
 
-- (void)removeGuideView
-{
+- (void)removeGuideView{
     LoginViewController *homePageVC = [[LoginViewController alloc] init];
     [LdGlobalObj sharedInstanse].loginVC = homePageVC;
+    homePageVC.modalPresentationStyle = UIModalPresentationFullScreen;
+
     self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:homePageVC];
     [self.window makeKeyAndVisible];
 }

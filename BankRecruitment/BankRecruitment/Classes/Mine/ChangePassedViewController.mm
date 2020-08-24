@@ -24,7 +24,7 @@
     publishButton.frame = CGRectMake(0.0f, 0.0f, 35.0f, 30.0f);
     [publishButton setTitle:@"完成" forState:UIControlStateNormal];
     publishButton.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    [publishButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [publishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     publishButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [publishButton addTarget:self action:@selector(publishButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [publishButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];

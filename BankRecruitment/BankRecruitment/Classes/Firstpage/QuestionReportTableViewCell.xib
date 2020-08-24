@@ -9,39 +9,33 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="62" id="KGk-i7-Jjw" customClass="QuestionReportTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="QuestionReportTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="337" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                <rect key="frame" x="0.0" y="0.0" width="337" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6D0-sL-02C">
-                        <rect key="frame" x="34" y="3" width="1" height="31"/>
+                        <rect key="frame" x="22" y="11" width="1" height="27"/>
                         <color key="backgroundColor" red="0.30196078430000001" green="0.70588235290000001" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="31" id="WII-oV-TUC"/>
                             <constraint firstAttribute="width" constant="1" id="XZs-HF-7z9"/>
                         </constraints>
                     </view>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obj-kP-7JH">
-                        <rect key="frame" x="34" y="28" width="1" height="31"/>
+                        <rect key="frame" x="22" y="62.5" width="1" height="26.5"/>
                         <color key="backgroundColor" red="0.30196078430000001" green="0.70588235290000001" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="Lyd-JS-if2"/>
-                            <constraint firstAttribute="height" constant="31" id="Nmq-5S-gSG"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qGy-cs-o5H">
-                        <rect key="frame" x="10" y="6" width="50" height="50"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="AeW-wX-Jj8"/>
-                            <constraint firstAttribute="width" constant="50" id="szr-G4-UOt"/>
-                        </constraints>
+                        <rect key="frame" x="10" y="38" width="24.5" height="24.5"/>
                         <state key="normal" image="content_icon_add"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="语言理解与表达语言理解与表达语言理解与表达" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjL-Ai-yz5">
-                        <rect key="frame" x="55" y="14.5" width="172" height="33.5"/>
+                        <rect key="frame" x="55" y="33.5" width="189" height="33.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="33.5" id="mAV-E5-LvZ"/>
                         </constraints>
@@ -50,7 +44,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWG-ZI-8bt">
-                        <rect key="frame" x="224" y="-0.5" width="87" height="63"/>
+                        <rect key="frame" x="241" y="18.5" width="87" height="63"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="63" id="iEt-Ru-zBO"/>
                             <constraint firstAttribute="width" constant="87" id="xIN-1h-cjG"/>
@@ -62,15 +56,17 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="6D0-sL-02C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="1D7-eL-LAv"/>
+                    <constraint firstItem="qGy-cs-o5H" firstAttribute="top" secondItem="6D0-sL-02C" secondAttribute="bottom" id="0Se-Qc-iXw"/>
+                    <constraint firstItem="6D0-sL-02C" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="1D7-eL-LAv"/>
                     <constraint firstItem="qGy-cs-o5H" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3bY-at-IQz"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="obj-kP-7JH" secondAttribute="bottom" constant="-8" id="Afv-ds-03r"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="obj-kP-7JH" secondAttribute="bottom" id="Afv-ds-03r"/>
                     <constraint firstAttribute="trailingMargin" secondItem="vjL-Ai-yz5" secondAttribute="trailing" constant="78" id="F0P-Nc-9sZ"/>
-                    <constraint firstItem="obj-kP-7JH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="19" id="G6r-ur-Ywx"/>
                     <constraint firstItem="vjL-Ai-yz5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="IGE-37-kzR"/>
                     <constraint firstItem="vjL-Ai-yz5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Ncb-il-jZi"/>
                     <constraint firstItem="TWG-ZI-8bt" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="R4B-h2-vB2"/>
-                    <constraint firstItem="6D0-sL-02C" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="19" id="S7y-3K-UtG"/>
+                    <constraint firstItem="obj-kP-7JH" firstAttribute="height" secondItem="6D0-sL-02C" secondAttribute="height" id="WTv-a0-2Ji"/>
+                    <constraint firstItem="qGy-cs-o5H" firstAttribute="centerX" secondItem="6D0-sL-02C" secondAttribute="centerX" id="ahf-L1-UD7"/>
+                    <constraint firstItem="obj-kP-7JH" firstAttribute="centerX" secondItem="6D0-sL-02C" secondAttribute="centerX" id="feM-o6-ndO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="TWG-ZI-8bt" secondAttribute="trailing" constant="-6" id="jtj-3l-6e4"/>
                     <constraint firstItem="qGy-cs-o5H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-5" id="u0l-a7-DJl"/>
                 </constraints>
@@ -83,7 +79,7 @@
                 <outlet property="questionTitleLabel" destination="vjL-Ai-yz5" id="QK6-k9-SvI"/>
                 <outlet property="upLineView" destination="6D0-sL-02C" id="qCS-2E-mdJ"/>
             </connections>
-            <point key="canvasLocation" x="-129" y="-36"/>
+            <point key="canvasLocation" x="-116" y="-19.790104947526238"/>
         </tableViewCell>
     </objects>
     <resources>

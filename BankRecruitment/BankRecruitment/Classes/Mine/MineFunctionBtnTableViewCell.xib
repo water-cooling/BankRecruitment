@@ -63,7 +63,7 @@
                             <constraint firstAttribute="height" constant="49" id="Eg0-pL-gV1"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <inset key="titleEdgeInsets" minX="-28" minY="0.0" maxX="0.0" maxY="-35"/>
+                        <inset key="titleEdgeInsets" minX="-22" minY="0.0" maxX="0.0" maxY="-35"/>
                         <inset key="imageEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="14"/>
                         <state key="normal" title="智能组卷" image="组卷">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -75,7 +75,7 @@
                     <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KjD-ow-CNf">
                         <rect key="frame" x="183.5" y="136" width="74" height="49"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <inset key="titleEdgeInsets" minX="-28" minY="0.0" maxX="0.0" maxY="-35"/>
+                        <inset key="titleEdgeInsets" minX="-22" minY="0.0" maxX="0.0" maxY="-35"/>
                         <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
                         <state key="normal" title="数据报告" image="报告">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -87,7 +87,7 @@
                     <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8P-5X-IN2">
                         <rect key="frame" x="102" y="136" width="73.5" height="49"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <inset key="titleEdgeInsets" minX="-28" minY="0.0" maxX="0.0" maxY="-35"/>
+                        <inset key="titleEdgeInsets" minX="-22" minY="0.0" maxX="0.0" maxY="-35"/>
                         <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
                         <state key="normal" title="专项练习" image="练习">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -99,7 +99,7 @@
                     <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bS-yM-Qvf">
                         <rect key="frame" x="265.5" y="136" width="73.5" height="49"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <inset key="titleEdgeInsets" minX="-28" minY="0.0" maxX="0.0" maxY="-35"/>
+                        <inset key="titleEdgeInsets" minX="-22" minY="0.0" maxX="0.0" maxY="-35"/>
                         <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
                         <state key="normal" title="错题本" image="错题">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -111,7 +111,7 @@
                     <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PHu-em-c7P">
                         <rect key="frame" x="347" y="136" width="74" height="49"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <inset key="titleEdgeInsets" minX="-28" minY="0.0" maxX="0.0" maxY="-35"/>
+                        <inset key="titleEdgeInsets" minX="-22" minY="0.0" maxX="0.0" maxY="-35"/>
                         <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
                         <state key="normal" title="练习历史" image="历史回顾">
                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>

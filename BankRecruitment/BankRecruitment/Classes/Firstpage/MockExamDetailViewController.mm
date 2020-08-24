@@ -29,16 +29,17 @@
 @interface MockExamDetailViewController ()
 @property (nonatomic, strong) MockModel *mockModel;
 @property (nonatomic, strong) IBOutlet UIView *mockTitleBackView;
+//标题
 @property (nonatomic, strong) IBOutlet UILabel *mockTitleLabel;
+//报名人数
 @property (nonatomic, strong) IBOutlet UILabel *signNumLabel;
+//活动时间
 @property (nonatomic, strong) IBOutlet UILabel *mockTimeLabel;
-@property (nonatomic, strong) IBOutlet UILabel *mockExamLabel;
+//点击报名
 @property (nonatomic, strong) IBOutlet UIButton *mockExamBuyButton;
-@property (nonatomic, strong) IBOutlet UILabel *mockLiveLabel;
+//试卷类型
 @property (nonatomic, strong) IBOutlet UILabel *mockVideoLabel;
-@property (nonatomic, strong) IBOutlet UIButton *mockLiveBuyButton;
-@property (nonatomic, strong) IBOutlet UIButton *mockVideoBuyButton;
-@property (nonatomic, strong) IBOutlet UIButton *mockBuyButton;
+//报名按钮
 @property (nonatomic, strong) IBOutlet UIButton *reportButton;
 @property (nonatomic, strong) IBOutlet UIWebView *webView;
 @end
@@ -73,34 +74,13 @@
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    self.mockTitleBackView.layer.cornerRadius = 4;
-    self.mockTitleBackView.layer.masksToBounds = YES;
-    self.mockLiveBuyButton.layer.cornerRadius = 4;
-    self.mockLiveBuyButton.layer.masksToBounds = YES;
-    self.mockVideoBuyButton.layer.cornerRadius = 4;
-    self.mockVideoBuyButton.layer.masksToBounds = YES;
-    
-    self.mockBuyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 210, 110, 40)];
-    [self.mockBuyButton setTitle:@"点击报名" forState:UIControlStateNormal];
-    [self.mockBuyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.mockBuyButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    [self.mockBuyButton setBackgroundColor:kColorNavigationBar];
-    [self.mockBuyButton addTarget:self action:@selector(signMock:) forControlEvents:UIControlEventTouchUpInside];
-    [self.mockTitleBackView addSubview:self.mockBuyButton];
-    self.mockBuyButton.centerX = self.mockTitleBackView.width/2.0;
-    
-    self.reportButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 210, 110, 40)];
-    [self.reportButton setTitle:@"查看报告" forState:UIControlStateNormal];
-    [self.reportButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.reportButton.titleLabel.font = [UIFont systemFontOfSize:18];
-    [self.reportButton setBackgroundColor:kColorNavigationBar];
-    [self.reportButton addTarget:self action:@selector(reportButtonAction) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.mockBuyButton.layer.cornerRadius = 4;
-    self.mockBuyButton.layer.masksToBounds = YES;
-    self.reportButton.layer.cornerRadius = 4;
+   
+    self.mockExamBuyButton.layer.cornerRadius = 20;
+    self.mockExamBuyButton.layer.masksToBounds = YES;
+    self.reportButton.layer.cornerRadius = 12.5;
     self.reportButton.layer.masksToBounds = YES;
-    
+    [self.reportButton addTarget:self action:@selector(signMock:) forControlEvents:UIControlEventTouchUpInside];
+   
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
 
@@ -109,49 +89,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)refreshViewByData
-{
+- (void)refreshViewByData{
+    NSMutableAttributedString *titleAttributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"已有%@人报名", self.mockModel.iCount]];
+    [titleAttributeString addAttribute:NSForegroundColorAttributeName value:KColorBlueText range:NSMakeRange(2, [self.mockModel.iCount length])];
+    self.signNumLabel.attributedText = titleAttributeString;
+
     self.mockTitleLabel.text = self.mockModel.Name;
-    self.signNumLabel.text = [NSString stringWithFormat:@"已有%@人报名", self.mockModel.iCount];
-    self.mockTimeLabel.text = [NSString stringWithFormat:@"活动时间：%@至%@", self.mockModel.BegDate, self.mockModel.EndDate];
-    self.mockLiveBuyButton.hidden = YES;
-    self.mockLiveLabel.hidden = YES;
-    self.mockVideoBuyButton.hidden = YES;
-    self.mockVideoLabel.hidden = YES;
-    
-    if(!strIsNullOrEmpty(self.mockModel.LiveID))
-    {
-        self.mockLiveBuyButton.hidden = NO;
-        self.mockLiveLabel.hidden = NO;
-        self.mockLiveLabel.text = [NSString stringWithFormat:@"直播课：%@", self.mockModel.LivName];
-        if([self.mockModel.ZbIsGet isEqualToString:@"是"])
-        {
-            [self.mockLiveBuyButton setTitle:@"观看直播课" forState:UIControlStateNormal];
-        }
-        
-        if(!strIsNullOrEmpty(self.mockModel.VideoID))
-        {
-            self.mockVideoBuyButton.hidden = NO;
-            self.mockVideoLabel.hidden = NO;
-            self.mockVideoLabel.text = [NSString stringWithFormat:@"视频：%@", self.mockModel.VidName];
-            if([self.mockModel.SpIsGet isEqualToString:@"是"])
-            {
-                [self.mockVideoBuyButton setTitle:@"观看视频" forState:UIControlStateNormal];
-            }
-        }
-    }
-    else if (strIsNullOrEmpty(self.mockModel.LiveID) && !strIsNullOrEmpty(self.mockModel.VideoID))
-    {
-        self.mockLiveBuyButton.hidden = NO;
-        self.mockLiveLabel.hidden = NO;
-        self.mockLiveLabel.text = [NSString stringWithFormat:@"视频：%@", self.mockModel.VidName];
-        if([self.mockModel.SpIsGet isEqualToString:@"是"])
-        {
-            [self.mockLiveBuyButton setTitle:@"观看视频" forState:UIControlStateNormal];
-        }
-    }
-    
-    self.mockExamLabel.text = [NSString stringWithFormat:@"试卷：%@", self.mockModel.ExName];
+    NSMutableAttributedString *timeAttributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"活动时间：%@-%@", self.mockModel.BegDate, self.mockModel.EndDate]];
+     [timeAttributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#999999"] range:NSMakeRange(0, 4)];
+    self.mockTimeLabel.attributedText = timeAttributeString;
+    NSMutableAttributedString *testAttributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"试卷：%@", self.mockModel.ExName]];
+    [testAttributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#999999"] range:NSMakeRange(0, 2)];
+    self.mockVideoLabel.attributedText = testAttributeString;
     if([self.mockModel.SjIsGet isEqualToString:@"是"])
     {
         [self.mockExamBuyButton setTitle:@"开始考试" forState:UIControlStateNormal];
@@ -167,15 +116,6 @@
     NSDate *ExEndDate = [dateFmt dateFromString:ExEndDateString];
     NSDate *currentDate = [NSDate date];
     //模考报名 按钮显示规则： 模考 活动 开始时间 - 试卷 结束时间 之间 显示报名按钮，当试卷结束时间过后，报名按钮消失
-    if([currentDate earlierDate:BegDate]==BegDate&&[currentDate laterDate:ExEndDate]==ExEndDate)
-    {
-        self.mockBuyButton.hidden = NO;
-    }
-    else
-    {
-        self.mockBuyButton.hidden = YES;
-    }
-    
     //开始考试  按钮 显示规则：试卷开始时间-试卷结束时间 之间  显示开始考试 ，点击按钮 开始考试
     if([currentDate laterDate:ExEndDate]==currentDate)
     {
@@ -188,13 +128,8 @@
             self.mockExamBuyButton.hidden = YES;
         }
     }
-    
-    if([self.mockModel.IsGet isEqualToString:@"是"])
-    {
-        [self.mockBuyButton setTitle:@"报名成功" forState:UIControlStateNormal];
-        [self.mockBuyButton setBackgroundColor:kColorBarGrayBackground];
-        [self.mockBuyButton setTitleColor:UIColorFromHex(0xF0765B) forState:UIControlStateNormal];
-        self.mockBuyButton.userInteractionEnabled = NO;
+    if([self.mockModel.IsGet isEqualToString:@"是"]){
+        [self.reportButton setTitle:@"报名成功" forState:UIControlStateNormal];
     }
     
     NSString *html = [NSString stringWithFormat:@"<html> \n"
@@ -232,9 +167,7 @@
         NSDate *currentDate = [NSDate date];
         if([currentDate laterDate:ExEndDate] == currentDate)
         {
-            [self.mockTitleBackView addSubview:self.reportButton];;
-            self.mockBuyButton.hidden = YES;
-            self.reportButton.centerX = kScreenWidth/2.0;
+            self.reportButton.hidden = YES;
         }
     }
 }
@@ -281,65 +214,10 @@
     }
 }
 
-- (IBAction)buyLive:(UIButton *)sender
-{
-    if([sender.titleLabel.text isEqualToString:@"观看视频"])
-    {
-//        VideoCatalogModel *model = [VideoCatalogModel model];
-//        model.Name = self.mockModel.VidName;
-//        model.cID = self.mockModel.VideoID;
-//        model.Price = self.mockModel.VidPirce;
-//
-//        VideoSubViewController *vc = [[VideoSubViewController alloc] init];
-//        vc.hidesBottomBarWhenPushed = YES;
-//        vc.catalogModel = model;
-//        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    else if([sender.titleLabel.text isEqualToString:@"观看直播课"])
-    {
-        TimetablesViewController *vc = [[TimetablesViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        vc.LID = self.mockModel.LiveID;
-        vc.title = self.mockModel.LivName;
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    
-    if([self.mockLiveLabel.text containsString:@"视频："])
-    {
-        [self buyVideo:nil];
-    }
-    else
-    {
-        [self getModelDetailByType:@"关联课程" LindID:self.mockModel.LiveID];
-    }
-}
 
-- (IBAction)buyVideo:(UIButton *)sender
+- (void)signMock:(UIButton *)sender
 {
-    if([sender.titleLabel.text isEqualToString:@"观看视频"])
-    {
-//        VideoCatalogModel *model = [VideoCatalogModel model];
-//        model.Name = self.mockModel.VidName;
-//        model.cID = self.mockModel.VideoID;
-//        model.Price = self.mockModel.VidPirce;
-//
-//        VideoSubViewController *vc = [[VideoSubViewController alloc] init];
-//        vc.hidesBottomBarWhenPushed = YES;
-//        vc.catalogModel = model;
-//        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    else
-    {
-        [self getModelDetailByType:@"关联视频" LindID:self.mockModel.VideoID];
-    }
-}
-
-- (IBAction)signMock:(UIButton *)sender
-{
-    if([self.mockBuyButton.titleLabel.text isEqualToString:@"开始考试"])
+    if([self.reportButton.titleLabel.text isEqualToString:@"开始考试"])
     {
         if([[DataBaseManager sharedManager] getExamOperationListByEID:self.mockModel.ExaminID isFromIntelligent:@"否"])
         {
@@ -418,12 +296,13 @@
             NSString *result = [contentDict objectForKey:@"result"];
             if([result isEqualToString:@"success"])
             {
-                [self.mockBuyButton setTitle:@"报名成功" forState:UIControlStateNormal];
-                [self.mockBuyButton setBackgroundColor:kColorBarGrayBackground];
-                [self.mockBuyButton setTitleColor:UIColorFromHex(0xF0765B) forState:UIControlStateNormal];
-                self.mockBuyButton.userInteractionEnabled = NO;
-                
-                self.signNumLabel.text = [NSString stringWithFormat:@"已有%d人报名", self.mockModel.iCount.intValue + 1];
+                [self.reportButton setTitle:@"报名成功" forState:UIControlStateNormal];
+                [self.reportButton setBackgroundColor:kColorBarGrayBackground];
+                [self.reportButton setTitleColor:UIColorFromHex(0xF0765B) forState:UIControlStateNormal];
+                self.reportButton.userInteractionEnabled = NO;
+                NSMutableAttributedString *titleAttributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"已有%@人报名", self.mockModel.iCount]];
+                 [titleAttributeString addAttribute:NSForegroundColorAttributeName value:KColorBlueText range:NSMakeRange(2, [self.mockModel.iCount length])];
+                 self.signNumLabel.attributedText = titleAttributeString;
                 return;
             }
         }

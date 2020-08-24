@@ -16,8 +16,7 @@ typedef NS_ENUM(NSInteger, ErrorAnalysisOption) {
 
 @interface ErrorAnalysisOptionTableViewCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UIButton *examOptionButton;
-@property (nonatomic, strong) IBOutlet UIImageView *examOptionImageView;
-@property (nonatomic, strong) IBOutlet UILabel *examOptionTitleLabel;
+@property (nonatomic, strong) IBOutlet UIButton *examOptionImageView;
 @property (nonatomic, strong) IBOutlet UILabel *examOptionDetailLabel;
 
 - (void)setOptinalCellType:(ErrorAnalysisOption)type attributeString:(NSMutableAttributedString *)attributeString;

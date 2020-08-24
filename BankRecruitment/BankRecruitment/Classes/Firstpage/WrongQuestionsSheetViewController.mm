@@ -20,8 +20,11 @@
 @property (nonatomic, strong) IBOutlet UILabel *totalNumLabel;
 @property (nonatomic, strong) IBOutlet UILabel *correctNumLabel;
 @property (nonatomic, strong) IBOutlet UILabel *wrongNumLabel;
-@property (nonatomic, strong) IBOutlet UIScrollView *answerSheetScrollView;
+@property (nonatomic, strong)  UIScrollView *answerSheetScrollView;
 @property (nonatomic, strong) UIView *whiteScrollBackView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UILabel *percentLab;
 
 @end
 
@@ -70,13 +73,80 @@
 
 - (void)drawViews
 {
-    self.answerSheetScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 190+70, Screen_Width, Screen_Height-44-(190+64+10))];
-    if(IS_iPhoneX){
-        self.answerSheetScrollView.frame = CGRectMake(0, 190+StatusBarAndNavigationBarHeight+10, Screen_Width, Screen_Height-44-(190+StatusBarAndNavigationBarHeight+TabbarSafeBottomMargin+10));
-    }
+    self.answerSheetScrollView = [[UIScrollView alloc] init];
     [self.view addSubview:self.answerSheetScrollView];
-    self.view.backgroundColor=kColorBarGrayBackground;
-    self.answerSheetScrollView.backgroundColor = kColorBarGrayBackground;
+    [self.answerSheetScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.left.right.equalTo(self.view);
+           make.top.equalTo(self.topView.mas_bottom);
+           make.bottom.equalTo(self.bottomView.mas_top).offset(10);
+    }];
+    UILabel *titleLab = [[UILabel alloc] init];
+    titleLab.text = @"答题情况";
+    titleLab.font = [UIFont systemFontOfSize:15];
+    [self.answerSheetScrollView addSubview:titleLab];
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.answerSheetScrollView).offset(15);
+        make.left.equalTo(self.answerSheetScrollView).offset(11);
+        make.height.mas_equalTo(15);
+    }];
+    
+    UILabel *threeLab = [[UILabel alloc] init];
+    threeLab.text = @"未答";
+    threeLab.font = [UIFont systemFontOfSize:12];
+    [self.answerSheetScrollView addSubview:threeLab];
+    [threeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(titleLab);
+        make.right.equalTo(self.view.mas_right).offset(-12);
+        make.height.mas_equalTo(12);
+    }];
+    UIView *threeCricle = [UIView new];
+    threeCricle.layer.cornerRadius = 2.5;
+    threeCricle.backgroundColor = [UIColor colorWithHex:@"#EFEFEF"];
+    [self.answerSheetScrollView addSubview:threeCricle];
+    [threeCricle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(threeLab.mas_left).offset(-2);
+        make.centerY.equalTo(titleLab);
+        make.size.mas_equalTo(CGSizeMake(5, 5));
+    }];
+    UILabel *twoLab = [[UILabel alloc] init];
+       twoLab.text = @"答错";
+       twoLab.font = [UIFont systemFontOfSize:12];
+       [self.answerSheetScrollView addSubview:twoLab];
+       [twoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.centerY.equalTo(titleLab);
+           make.right.equalTo(threeCricle.mas_left).offset(-12);
+           make.height.mas_equalTo(12);
+       }];
+       UIView *twoCricle = [UIView new];
+       twoCricle.layer.cornerRadius = 2.5;
+       twoCricle.backgroundColor = [UIColor colorWithHex:@"#F79B38"];
+       [self.answerSheetScrollView addSubview:twoCricle];
+       [twoCricle mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.right.equalTo(twoLab.mas_left).offset(-2);
+           make.centerY.equalTo(titleLab);
+           make.size.mas_equalTo(CGSizeMake(5, 5));
+       }];
+    UILabel *oneLab = [[UILabel alloc] init];
+        oneLab.text = @"答对";
+        oneLab.font = [UIFont systemFontOfSize:12];
+        [self.answerSheetScrollView addSubview:oneLab];
+        [oneLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(titleLab);
+            make.right.equalTo(twoCricle.mas_left).offset(-12);
+            make.height.mas_equalTo(12);
+        }];
+        UIView *oneCricle = [UIView new];
+        oneCricle.layer.cornerRadius = 2.5;
+        oneCricle.backgroundColor = [UIColor colorWithHex:@"#35C356"];
+        [self.answerSheetScrollView addSubview:oneCricle];
+        [oneCricle mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(oneLab.mas_left).offset(-2);
+            make.centerY.equalTo(titleLab);
+            make.size.mas_equalTo(CGSizeMake(5, 5));
+        }];
+     
+    
+    self.answerSheetScrollView.backgroundColor = [UIColor whiteColor];
     int rightIndex = 0;
     int wrongIndex = 0;
     UIButton *lastButton = nil;
@@ -85,15 +155,17 @@
         //创建一个视图
         UIButton *functionBtn = [[UIButton alloc] initWithFrame:CGRectZero];
         ExaminationTitleModel *model = self.practiceList[index];
+        functionBtn.layer.cornerRadius = 20;
+
         [functionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         if([model.isOK isEqualToString:@"是"])
         {
             rightIndex++;
-            [functionBtn setBackgroundImage:[UIImage imageNamed:@"datika_circle_right"] forState:UIControlStateNormal];
+            [functionBtn setBackgroundColor:[UIColor colorWithHex:@"#35C356"]];
         }
         else if([model.isOK isEqualToString:@"否"])
         {
-            [functionBtn setBackgroundImage:[UIImage imageNamed:@"datika_circle_wrong-1"] forState:UIControlStateNormal];
+            [functionBtn setBackgroundColor:[UIColor colorWithHex:@"#F79B38"]];
             wrongIndex++;
         }
         else
@@ -128,29 +200,10 @@
 
 - (void)drawChartView:(int)rightIndex wrongIndex:(int)wrongIndex
 {
-    PieCharView *pieChar = [[PieCharView alloc] initWithFrame:CGRectMake(10, StatusBarAndNavigationBarHeight+5, kScreenWidth - 20, 190) withYoffset:78];
-    pieChar.backgroundColor = kColorBarGrayBackground;
-    pieChar.textColor = [UIColor whiteColor];
-    pieChar.textFont = [UIFont systemFontOfSize:12];
-    pieChar.radius = 65;
-    pieChar.centreString = [NSString stringWithFormat:@" 答对率:%.2f%% ", (float)rightIndex/(float)self.practiceList.count*100.0];
-    [self.view addSubview:pieChar];
-    PieCharModel *model1 = [[PieCharModel alloc] init];
-    model1.title = [NSString stringWithFormat:@" 答错:%d ", wrongIndex];
-    model1.percent = [NSString stringWithFormat:@"%.2f", (float)wrongIndex/(float)self.practiceList.count];
-    model1.color = [UIColor colorWithHex:@"#fb7656"];
-    
-    PieCharModel *model2 = [[PieCharModel alloc] init];
-    model2.title = [NSString stringWithFormat:@" 答对:%d ", rightIndex];
-    model2.percent = [NSString stringWithFormat:@"%.2f", (float)rightIndex/(float)self.practiceList.count];
-    model2.color = [UIColor colorWithHex:@"#4cc05f"];
-    
-    PieCharModel *model3 = [[PieCharModel alloc] init];
-    model3.title = [NSString stringWithFormat:@" 未答:%d ", (int)self.practiceList.count - rightIndex- wrongIndex];
-    model3.percent = [NSString stringWithFormat:@"%.2f", (float)(self.practiceList.count - rightIndex- wrongIndex)/(float)self.practiceList.count];
-    model3.color = [UIColor colorWithHex:@"#8c9fb0"];
-    
-    pieChar.dataArray = @[model1, model2, model3];
+   self.wrongNumLabel.text = [NSString stringWithFormat:@"%d ", wrongIndex];
+   self.correctNumLabel.text= [NSString stringWithFormat:@"%d ", rightIndex];
+   self.totalNumLabel.text =  [NSString stringWithFormat:@"%d", (int)self.practiceList.count - rightIndex- wrongIndex];
+   self.percentLab.text = [NSString stringWithFormat:@"%.f ", (float)rightIndex/(float)self.practiceList.count*100.0];
     
 }
 

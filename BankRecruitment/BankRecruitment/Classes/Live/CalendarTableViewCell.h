@@ -11,5 +11,6 @@
 @interface CalendarTableViewCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *calendarTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *calendarTimeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (nonatomic, strong) UIView *lineView;
 @end

@@ -16,7 +16,7 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.numBackView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.numBackView.layer.borderColor = [UIColor colorWithHex:@"#EFEFEF"].CGColor;
     self.numBackView.layer.borderWidth = 1;
     self.numBackView.layer.masksToBounds = YES;
     

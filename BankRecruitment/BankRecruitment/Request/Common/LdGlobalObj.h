@@ -58,6 +58,8 @@ typedef void (^BuyObjectSuccessBlock)();
 @property (strong, nonatomic) NSString* user_name;
 @property (strong, nonatomic) NSString* tech_id;
 @property (assign, nonatomic) BOOL islive;
+@property (assign, nonatomic) BOOL islogin;
+
 @property (assign, nonatomic) BOOL istecher;
 @property (strong, nonatomic) NSString* user_acc;//积分
 @property (strong, nonatomic) NSString* user_LastSign;//最后一次签到

@@ -33,6 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     [self initUI];
     
@@ -51,6 +52,7 @@
 -(void)initUI{
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
        backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
+    backButton.hidden = YES;
        [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
        [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
@@ -170,6 +172,7 @@
                 [LdGlobalObj sharedInstanse].user_name = contentDict[@"pet"];
                 [LdGlobalObj sharedInstanse].tech_id = contentDict[@"tech"];
                 [LdGlobalObj sharedInstanse].islive = [contentDict[@"islive"] isEqualToString:@"是"] ? YES : NO ;
+                [LdGlobalObj sharedInstanse].islogin = YES;
                 [LdGlobalObj sharedInstanse].istecher = [contentDict[@"istecher"] isEqualToString:@"是"] ? YES : NO ;
                 [LdGlobalObj sharedInstanse].user_acc = contentDict[@"acc"];
                 [LdGlobalObj sharedInstanse].user_LastSign = contentDict[@"LastSign"];
@@ -179,18 +182,10 @@
                 NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:self.loginView.phoneTextField.text, @"userLoginname", self.loginView.pwdTextField.text, @"userPassword", nil];
                 [defaults setObject:userLoginDict forKey:@"userLoginDict"];
                 [defaults synchronize];
-                
-                if(self.loginSuccessBlock)
-                {
-                    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                    self.loginSuccessBlock();
-                }
-                else{
                     TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
                     [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
                     appDelegate.window.rootViewController = homePageVC;
                     [appDelegate.window makeKeyAndVisible];
-                }
                 
                 [self NetworkPutMsgToken];
                 return;
@@ -254,18 +249,10 @@
                            }else{
                                [self saveAutoLoginMes];
                                
-                               if(self.loginSuccessBlock)
-                               {
-                                   [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                                   self.loginSuccessBlock();
-                               }
-                               else
-                               {
-                                   TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
+                                    TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
                                    [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
                                    appDelegate.window.rootViewController = homePageVC;
                                    [appDelegate.window makeKeyAndVisible];
-                               }
                                
                                [self NetworkPutMsgToken];
                            }
@@ -334,7 +321,7 @@
        }
        
     if(![self judgePassWordLegal:self.registView.pwdTextField.text]){
-           ZB_Toast(@"密码格式非法");
+           ZB_Toast(@"请输入密码（6-16位数字字母）");
            return;
        }
        
@@ -364,22 +351,11 @@
                    NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:self.self.registView.phoneTextField.text, @"userLoginname", self.registView.pwdTextField.text, @"userPassword", nil];
                    [defaults setObject:userLoginDict forKey:@"userLoginDict"];
                    [defaults synchronize];
-                   if([LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock)
-                   {
-                       [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                       [LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock();
-                   }
-                   else
-                   {
-                       TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
+                TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
                        [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
                        appDelegate.window.rootViewController = homePageVC;
                        [appDelegate.window makeKeyAndVisible];
-                   }
-                   
                    [self NetworkPutMsgToken];
-                   
-                   return ;
                }
                else
                {
@@ -478,7 +454,7 @@
     BOOL result = false;
     if ([str length] >= 6){
         // 判断长度大于6位后再接着判断是否同时包含数字和字符
-        NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,12}$";
+        NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
         NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
         result = [pred evaluateWithObject:str];
     }

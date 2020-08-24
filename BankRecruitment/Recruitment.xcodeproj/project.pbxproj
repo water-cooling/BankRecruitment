@@ -479,6 +479,8 @@
 		60F90E4D1E89172F00151728 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F90E4C1E89172F00151728 /* SMPageControl.m */; };
 		60F90E541E8A0D8A00151728 /* TestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F90E521E8A0D8A00151728 /* TestTableViewCell.m */; };
 		60F90E551E8A0D8A00151728 /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60F90E531E8A0D8A00151728 /* TestTableViewCell.xib */; };
+		BE5AE1D424F014E1009CDD34 /* MyCoursesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */; };
+		BE5AE1D524F014E1009CDD34 /* MyCoursesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5AE1D324F014E1009CDD34 /* MyCoursesViewController.xib */; };
 		BE88B90324E1688E003F3B06 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE88B8EB24E1688D003F3B06 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		BE88B90424E1688E003F3B06 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = BE88B8F424E1688D003F3B06 /* ViewController+MASAdditions.m */; };
 		BE88B90524E1688E003F3B06 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = BE88B8F824E1688D003F3B06 /* MASCompositeConstraint.m */; };
@@ -489,6 +491,7 @@
 		BE88B90A24E1688E003F3B06 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = BE88B8FF24E1688D003F3B06 /* MASConstraint.m */; };
 		BE88B90B24E1688E003F3B06 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = BE88B90124E1688D003F3B06 /* MASViewConstraint.m */; };
 		BE88B90C24E1688E003F3B06 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = BE88B90224E1688D003F3B06 /* MASViewAttribute.m */; };
+		BEAFCC9C24F11BFA00CEDC40 /* RecruitMentShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAFCC9B24F11BFA00CEDC40 /* RecruitMentShareViewController.m */; };
 		BEB2A28024E296EA00B3C098 /* InviteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB2A27E24E296EA00B3C098 /* InviteTableViewCell.m */; };
 		BEB2A28124E296EA00B3C098 /* InviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB2A27F24E296EA00B3C098 /* InviteTableViewCell.xib */; };
 		BEB2A28824E3BF6000B3C098 /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BEB2A28724E3BF6000B3C098 /* LoginViewController.mm */; };
@@ -1308,6 +1311,9 @@
 		60F90E511E8A0D8A00151728 /* TestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableViewCell.h; sourceTree = "<group>"; };
 		60F90E521E8A0D8A00151728 /* TestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewCell.m; sourceTree = "<group>"; };
 		60F90E531E8A0D8A00151728 /* TestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
+		BE5AE1D124F014E1009CDD34 /* MyCoursesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCoursesViewController.h; sourceTree = "<group>"; };
+		BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyCoursesViewController.mm; sourceTree = "<group>"; };
+		BE5AE1D324F014E1009CDD34 /* MyCoursesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyCoursesViewController.xib; sourceTree = "<group>"; };
 		BE88B8EA24E1688D003F3B06 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		BE88B8EB24E1688D003F3B06 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
 		BE88B8EC24E1688D003F3B06 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -1333,6 +1339,8 @@
 		BE88B90024E1688D003F3B06 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ViewController+MASAdditions.h"; sourceTree = "<group>"; };
 		BE88B90124E1688D003F3B06 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
 		BE88B90224E1688D003F3B06 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		BEAFCC9A24F11BFA00CEDC40 /* RecruitMentShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecruitMentShareViewController.h; sourceTree = "<group>"; };
+		BEAFCC9B24F11BFA00CEDC40 /* RecruitMentShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecruitMentShareViewController.m; sourceTree = "<group>"; };
 		BEB2A27D24E296EA00B3C098 /* InviteTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteTableViewCell.h; sourceTree = "<group>"; };
 		BEB2A27E24E296EA00B3C098 /* InviteTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteTableViewCell.m; sourceTree = "<group>"; };
 		BEB2A27F24E296EA00B3C098 /* InviteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteTableViewCell.xib; sourceTree = "<group>"; };
@@ -1895,6 +1903,9 @@
 				6076CCFA1EC2FC2A000A6968 /* TimetablesViewController.h */,
 				6076CCFB1EC2FC2A000A6968 /* TimetablesViewController.mm */,
 				6076CCFC1EC2FC2A000A6968 /* TimetablesViewController.xib */,
+				BE5AE1D124F014E1009CDD34 /* MyCoursesViewController.h */,
+				BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */,
+				BE5AE1D324F014E1009CDD34 /* MyCoursesViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -2024,6 +2035,8 @@
 				606DC5E41EFBEA3400467686 /* DataBaseManager.m */,
 				60F90C571E88F77A00151728 /* LLRequestClass.h */,
 				60F90C581E88F77A00151728 /* LLRequestClass.mm */,
+				BEAFCC9A24F11BFA00CEDC40 /* RecruitMentShareViewController.h */,
+				BEAFCC9B24F11BFA00CEDC40 /* RecruitMentShareViewController.m */,
 				60F90C591E88F77A00151728 /* Common */,
 				60D78F761F03B20500D122B2 /* WSCycle */,
 				BE88B8E924E1688D003F3B06 /* Masonry */,
@@ -2924,6 +2937,7 @@
 				BEB2A28124E296EA00B3C098 /* InviteTableViewCell.xib in Resources */,
 				602E33D71EFCEBA900417BC9 /* ReportErrorViewController.xib in Resources */,
 				601232CE1E9277F300868FC3 /* AboutTableViewCell.xib in Resources */,
+				BE5AE1D524F014E1009CDD34 /* MyCoursesViewController.xib in Resources */,
 				60D78F811F03B50000D122B2 /* FirstPageAdScrollTableViewCell.xib in Resources */,
 				60A2404E1EE4FE1C00C15F5B /* MineMessageTableViewCell.xib in Resources */,
 				60D542121E8DE98A0004AA31 /* OldExamsSubTableViewCell.xib in Resources */,
@@ -3157,6 +3171,7 @@
 				60A895EB20BD4BAF00566494 /* InformationViewController.mm in Sources */,
 				60D5F9901E8B42810004AA31 /* DAYUtils.m in Sources */,
 				60F90DE51E88F77B00151728 /* SDWebImagePrefetcher.m in Sources */,
+				BEAFCC9C24F11BFA00CEDC40 /* RecruitMentShareViewController.m in Sources */,
 				BE88B90624E1688E003F3B06 /* MASConstraintMaker.m in Sources */,
 				604AC00420CBA2A8006AB73C /* InformationDetailViewController.m in Sources */,
 				60F90D8E1E88F77B00151728 /* AFHTTPSessionManager.m in Sources */,
@@ -3278,6 +3293,7 @@
 				60D5423B1E8F467D0004AA31 /* WDDrawView.m in Sources */,
 				60F90DDE1E88F77B00151728 /* NSData+ImageContentType.m in Sources */,
 				60DE043D1EA73CE800CF1FD0 /* ExamDetailOptionModel.m in Sources */,
+				BE5AE1D424F014E1009CDD34 /* MyCoursesViewController.mm in Sources */,
 				60D644B41ED2CD18003983CD /* DateReportDetailViewController.m in Sources */,
 				60F90DAA1E88F77B00151728 /* FMDatabaseQueue.m in Sources */,
 				60F90DEA1E88F77B00151728 /* UIImageView+HighlightedWebCache.m in Sources */,

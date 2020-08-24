@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,28 +25,25 @@
                         <constraint firstAttribute="height" constant="229" id="vzN-c8-4qe"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行易考APP是一款专为参加银行招聘考试的考生设计开发的应用，银行易考APP有历年银行校园招聘考试真题、智能考试题库、在线模考、视频课程及直播课程，并每日更新发布各大银行招聘信息及银行考试资讯。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-Xj-J0R">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行易考APP是一款专为参加银行招聘考试的考生设计开发的应用，银行易考APP有历年银行校园招聘考试真题、智能考试题库、在线模考、视频课程及直播课程，并每日更新发布各大银行招聘信息及银行考试资讯。" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPG-Xj-J0R">
                     <rect key="frame" x="15" y="168" width="344" height="113"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="113" id="cJS-tq-5Ax"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about_logo" translatesAutoresizingMaskIntoConstraints="NO" id="hwO-sc-goi">
-                    <rect key="frame" x="67" y="79" width="240" height="90"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="90" id="zdD-cQ-0ur"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="hwO-sc-goi">
+                    <rect key="frame" x="156" y="59" width="62" height="81"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Fu-OU-7im">
                     <rect key="frame" x="0.0" y="293" width="375" height="44"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系我们" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9X-hN-bVs">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系我们" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9X-hN-bVs">
                             <rect key="frame" x="15" y="12" width="137" height="20"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="025-83692169" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqr-Aw-DBn">
@@ -58,7 +52,7 @@
                                 <constraint firstAttribute="width" constant="134" id="YAr-8T-oDu"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqw-r5-i2E">
@@ -119,18 +113,16 @@
                 <constraint firstItem="3lF-oJ-WaV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="52" id="1iO-QC-t1U"/>
                 <constraint firstItem="sm3-nH-WSW" firstAttribute="top" secondItem="2Xj-j1-Akv" secondAttribute="bottom" id="3ng-Jq-pJy"/>
                 <constraint firstItem="2Fu-OU-7im" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9en-5u-QVx"/>
-                <constraint firstItem="hwO-sc-goi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="67" id="BoW-mu-Gg1"/>
                 <constraint firstItem="sm3-nH-WSW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="88" id="D2Q-53-MbL"/>
                 <constraint firstItem="3lF-oJ-WaV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DEa-N1-XmS"/>
                 <constraint firstItem="uh6-hA-sOg" firstAttribute="bottom" secondItem="sm3-nH-WSW" secondAttribute="bottom" priority="750" constant="44" id="GCo-r6-pGH"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0Pk-Dp-BHV" secondAttribute="bottom" constant="20" id="HMm-CA-Syu"/>
+                <constraint firstItem="WPG-Xj-J0R" firstAttribute="top" secondItem="hwO-sc-goi" secondAttribute="bottom" constant="28" id="IzQ-x2-pbl"/>
                 <constraint firstItem="WPG-Xj-J0R" firstAttribute="bottom" secondItem="3lF-oJ-WaV" secondAttribute="bottom" id="QNQ-A5-doT"/>
-                <constraint firstItem="WPG-Xj-J0R" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RAv-oS-bmB"/>
                 <constraint firstAttribute="trailing" secondItem="2Fu-OU-7im" secondAttribute="trailing" id="UXo-Kb-Eat"/>
                 <constraint firstItem="2Fu-OU-7im" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="293" id="WPQ-yY-oZ8"/>
                 <constraint firstItem="2Fu-OU-7im" firstAttribute="top" secondItem="uh6-hA-sOg" secondAttribute="top" priority="750" constant="229" id="bXd-1t-TdQ"/>
                 <constraint firstItem="0Pk-Dp-BHV" firstAttribute="top" secondItem="2Xj-j1-Akv" secondAttribute="bottom" constant="24" id="gIJ-rT-Jxh"/>
-                <constraint firstItem="hwO-sc-goi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="79" id="irR-FY-6gq"/>
                 <constraint firstAttribute="trailing" secondItem="WPG-Xj-J0R" secondAttribute="trailing" constant="16" id="kEC-G0-e4z"/>
                 <constraint firstItem="3lF-oJ-WaV" firstAttribute="top" secondItem="uh6-hA-sOg" secondAttribute="top" priority="750" constant="-12" id="nXh-Sp-d2v"/>
                 <constraint firstItem="WPG-Xj-J0R" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="qew-ig-O9B"/>
@@ -146,6 +138,6 @@
         </view>
     </objects>
     <resources>
-        <image name="about_logo" width="78" height="78"/>
+        <image name="logo" width="62" height="61"/>
     </resources>
 </document>

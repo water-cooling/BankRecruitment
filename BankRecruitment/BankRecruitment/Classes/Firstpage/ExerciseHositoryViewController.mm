@@ -15,12 +15,14 @@
 #import "ExaminationTitleModel.h"
 
 @interface ExerciseHositoryViewController ()<UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, strong) UISegmentedControl *titleSegmentedControl;
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong)  UITableView *tableView;
 
 @property (nonatomic, assign) NSInteger selectMainIndex;
 @property (nonatomic, strong) NSMutableArray *intelligentList;
 @property (nonatomic, strong) NSMutableArray *examList;
+@property (nonatomic, strong) UIButton *intelligentBtn;
+@property (nonatomic, strong) UIButton *testPaperBtn;
+@property (nonatomic, strong) UIView *lineView;
 @end
 
 @implementation ExerciseHositoryViewController
@@ -29,40 +31,97 @@
     [super viewDidLoad];
     self.intelligentList = [NSMutableArray arrayWithCapacity:9];
     self.examList = [NSMutableArray arrayWithCapacity:9];
-    self.selectMainIndex = 0;
+    self.selectMainIndex = 100;
     [self drawViews];
     
     [self NetworkGetHistoryIntelligentExamList];
     [self NetworkGetExamList];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
+    self.navigationController.navigationBar.hidden = YES;
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+      self.navigationController.navigationBar.hidden = NO;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)drawViews
-{
-    _titleSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"   智能       ",@"   试卷       "]];
-    _titleSegmentedControl.tintColor = [UIColor whiteColor];
-    _titleSegmentedControl.selectedSegmentIndex = 0;
-    [_titleSegmentedControl addTarget:self action:@selector(titleSegmentedControlAction) forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = _titleSegmentedControl;
-    
+- (void)drawViews{
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
+    backButton.frame = CGRectMake(0.0f, 0.0f, 6.0f, 12.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    [self.view addSubview:backButton];
+    [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(StatusBarHeight+15);
+        make.left.equalTo(self.view).offset(15);
+    }];
+    [self.view addSubview:self.intelligentBtn];
+    [self.intelligentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view.mas_centerX).offset(-47);
+        make.top.equalTo(self.view).offset(StatusBarHeight+15);
+    }];
+    [self.view addSubview:self.testPaperBtn];
+    [self.testPaperBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.left.equalTo(self.view.mas_centerX).offset(47);
+          make.top.equalTo(self.view).offset(StatusBarHeight+15);
+      }];
+    self.lineView = [[UIView alloc]init];
+    self.lineView.backgroundColor = KColorBlueText;
+    [self.view addSubview:self.lineView];
+    [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.intelligentBtn);
+        make.top.equalTo(self.intelligentBtn.mas_bottom).offset(2);
+        make.size.mas_equalTo(CGSizeMake(12, 2));
+    }];
+        
+        UIView *speatorView = [[UIView alloc]init];
+        speatorView.backgroundColor = kColorBarGrayBackground;
+        [self.view addSubview:speatorView];
+        [speatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view);
+            make.top.equalTo(self.view).offset(StatusBarAndNavigationBarHeight);
+            make.size.mas_equalTo(CGSizeMake(Screen_Width, 1));
+        }];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Height-TabbarHeight-StatusBarAndNavigationBarHeight) style:UITableViewStylePlain];
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
+    }else{
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    
+}
+
+- (void)mainButtonAction:(UIButton *)btn{
+    NSInteger index = btn.tag;
+    if (btn.tag == self.selectMainIndex) {
+        return;
+    }
+    UIButton * lastBtn = [self.view viewWithTag:self.selectMainIndex];
+    lastBtn.selected = NO;
+    btn.selected = YES;
+    self.selectMainIndex = index;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.lineView.xl_centerX = btn.xl_centerX;
+    }];
+    [self.tableView reloadData];
 }
 
 - (void)backButtonPressed
@@ -70,11 +129,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)titleSegmentedControlAction
-{
-    self.selectMainIndex = _titleSegmentedControl.selectedSegmentIndex;
-    [self.tableView reloadData];
-}
+
 
 #pragma -mark UITableView delegate
 
@@ -85,7 +140,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(self.selectMainIndex == 0)
+    if(self.selectMainIndex == 100)
     {
         return self.intelligentList.count;
     }
@@ -100,10 +155,12 @@
     ExerciseHositoryTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, ExerciseHositoryTableViewCell, @"ExerciseHositoryTableViewCell");
     
     NSDictionary *dict = nil;
-    if(self.selectMainIndex == 0)
+    if(self.selectMainIndex == 100)
     {
         dict = self.intelligentList[indexPath.row];
         loc_cell.ExerciseHositoryTitleLabel.text = [NSString stringWithFormat:@"%@（考点类型）：%@", dict[@"PType"], dict[@"KeyWord"]];
+        loc_cell.editBtn.tag = indexPath.row;
+        [loc_cell.editBtn addTarget:self action:@selector(editAction:) forControlEvents:UIControlEventTouchUpInside];
         loc_cell.ExerciseHositoryTimeLabel.text = [NSString stringWithFormat:@"组卷时间：%@", dict[@"PDate"]];
     }
     else
@@ -116,12 +173,70 @@
     return loc_cell;
 }
 
+-(void)editAction:(UIButton *)sender{
+    NSDictionary *dict = nil;
+   if(self.selectMainIndex == 100)
+   {
+       dict = self.intelligentList[sender.tag];
+       
+       if([[DataBaseManager sharedManager] getExamOperationListByEID:dict[@"PID"] isFromIntelligent:@"是"])
+       {
+           NSArray *examList = [[DataBaseManager sharedManager] getExamDetailListByEID:dict[@"PID"] isFromIntelligent:@"是"];
+           if(examList.count > 0)
+           {
+               DailyPracticeViewController *vc = [[DailyPracticeViewController alloc] init];
+               vc.hidesBottomBarWhenPushed = YES;
+               vc.practiceList = [NSMutableArray arrayWithArray:examList];
+               vc.title = self.title;
+               vc.isSaveUserOperation = YES;
+               [self.navigationController pushViewController:vc animated:YES];
+           }
+           else
+           {
+               [self NetworkGetHistoryPractTitleListByPID:dict[@"PID"] andTitle:dict[@"PType"]];
+           }
+       }
+       else
+       {
+           [self NetworkGetHistoryPractTitleListByPID:dict[@"PID"] andTitle:dict[@"PType"]];
+       }
+   }
+   else
+   {
+       PurchedModel *model = self.examList[sender.tag];
+       
+       if([[DataBaseManager sharedManager] getExamOperationListByEID:model.LinkID isFromIntelligent:@"否"])
+       {
+           NSArray *examList = [[DataBaseManager sharedManager] getExamDetailListByEID:model.LinkID isFromIntelligent:@"否"];
+           if(examList.count > 0)
+           {
+               DailyPracticeViewController *vc = [[DailyPracticeViewController alloc] init];
+               vc.hidesBottomBarWhenPushed = YES;
+               vc.practiceList = [NSMutableArray arrayWithArray:examList];
+               vc.title = self.title;
+               vc.isSaveUserOperation = YES;
+               [self.navigationController pushViewController:vc animated:YES];
+           }
+           else
+           {
+               [self NetworkGetExamTitlesByEID:model.LinkID ExamTitle:@"试卷历史"];
+           }
+       }
+       else
+       {
+           [self NetworkGetExamTitlesByEID:model.LinkID ExamTitle:@"试卷历史"];
+       }
+       
+   }
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     NSDictionary *dict = nil;
-    if(self.selectMainIndex == 0)
+    if(self.selectMainIndex == 100)
     {
         dict = self.intelligentList[indexPath.row];
         
@@ -403,4 +518,30 @@
     }];
 }
 
+- (UIButton *)intelligentBtn {
+        if (!_intelligentBtn) {
+            _intelligentBtn = [[UIButton alloc] init];
+            [_intelligentBtn setTitleColor:kColorBlackText forState:UIControlStateNormal];
+            [_intelligentBtn setTitleColor:KColorBlueText forState:UIControlStateSelected];
+            _intelligentBtn.tag = 100;
+            _intelligentBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+            [_intelligentBtn setTitle:@"智能" forState:UIControlStateNormal];
+            [_intelligentBtn addTarget:self action:@selector(mainButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        return _intelligentBtn;
+    }
+
+- (UIButton *)testPaperBtn {
+        if (!_testPaperBtn) {
+            _testPaperBtn = [[UIButton alloc] init];
+           [_testPaperBtn setTitleColor:kColorBlackText forState:UIControlStateNormal];
+            _testPaperBtn.tag = 101;
+            [_testPaperBtn setTitleColor:KColorBlueText forState:UIControlStateSelected];
+            _testPaperBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+            [_testPaperBtn setTitle:@"试卷" forState:UIControlStateNormal];
+            _testPaperBtn.selected = YES;
+            [_testPaperBtn addTarget:self action:@selector(mainButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        return _testPaperBtn;
+    }
 @end

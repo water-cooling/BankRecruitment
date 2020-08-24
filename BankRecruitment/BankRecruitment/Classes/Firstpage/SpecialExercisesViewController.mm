@@ -34,7 +34,7 @@
 {
     [super viewWillAppear:animated];
     self.title = self.intelligentType;
-    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :[UIColor whiteColor] ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
     self.navigationController.navigationBar.barTintColor = kColorNavigationBar;
     
     if([self.intelligentType isEqualToString:@"智能组卷"])
@@ -76,7 +76,7 @@
     _startButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 90, 35)];
     _startButton.top = self.tableView.bottom + 4;
     _startButton.centerX = Screen_Width/2;
-    [_startButton setBackgroundColor:kColorNavigationBar];
+    [_startButton setBackgroundColor:KColorBlueText];
     [_startButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _startButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [self.view addSubview:_startButton];
@@ -153,11 +153,11 @@
     IntelligenceTypeTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, IntelligenceTypeTableViewCell, @"IntelligenceTypeTableViewCell");
     if(indexPath.row == self.selectIndex)
     {
-        loc_cell.selectedImageView1.image = [UIImage imageNamed:@"radio_checked"];
+        loc_cell.selectedImageView1.image = [UIImage imageNamed:@"choose"];
     }
     else
     {
-        loc_cell.selectedImageView1.image = [UIImage imageNamed:@"radio_normal"];
+        loc_cell.selectedImageView1.image = [UIImage imageNamed:@"椭圆"];
     }
     
     NSDictionary *dict = self.typeList[indexPath.row];

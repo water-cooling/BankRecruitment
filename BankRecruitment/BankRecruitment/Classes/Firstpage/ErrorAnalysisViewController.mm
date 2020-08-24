@@ -31,7 +31,7 @@
 @property (nonatomic, strong) IBOutlet UIScrollView *examScrollView;
 @property (retain, nonatomic) IBOutlet UIPageControl *examPageControl;
 @property (strong, nonatomic) AnalysisMoreView *moreView;
-@property (nonatomic, strong) IBOutlet UIButton *moreBtn;
+@property (nonatomic, strong)  UIButton *moreBtn;
 @property (strong, nonatomic) IBOutlet UIView *functionBackView;
 @property (strong, nonatomic) IBOutlet UILabel *analysisTypeLabel;
 @property (strong, nonatomic) UIButton *quitMoreButton;
@@ -40,9 +40,7 @@
 @property (nonatomic, strong) UIButton *shareBtn;
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) BBAlertView *alertView;
-@property (nonatomic, strong) IBOutlet UILabel *bottomTitleLabel;
-@property (nonatomic, strong) IBOutlet UIButton *PreBtn;
-@property (nonatomic, strong) IBOutlet UIButton *NextBtn;
+
 @property (nonatomic, strong) IBOutlet UIView *bottomContentView;
 
 @property (nonatomic, assign) NSInteger selectExamIndex;
@@ -422,10 +420,14 @@
     [_backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [_backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_backButton];
+    self.moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+       self.moreBtn.frame = CGRectMake(0.0f, 0.0f, 19.0f, 4.0f);
+       [self.moreBtn addTarget:self action:@selector(moreButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+       [self.moreBtn setImage:[UIImage imageNamed:@"night_icon_more"] forState:UIControlStateNormal];
+       self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
     
     if(self.isFromFirstPageSearch){
-        self.NextBtn.hidden = YES;
-        self.PreBtn.hidden = YES;
+       
 //        self.scrollViewBottomConstraint = 0;
 //        self.safeViewsScrollViewBottomConstraint = 0;
     }
@@ -511,10 +513,7 @@
         [self.collectBtn setImage:[UIImage imageNamed:@"night_icon_collect"] forState:UIControlStateNormal];
         [self.shareBtn setImage:[UIImage imageNamed:@"night_icon_share"] forState:UIControlStateNormal];
         [self.moreBtn setImage:[UIImage imageNamed:@"night_icon_more"] forState:UIControlStateNormal];
-        self.bottomContentView.backgroundColor = UIColorFromHex(0x29323a);
-        [self.PreBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-        [self.NextBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-        self.bottomTitleLabel.textColor = UIColorFromHex(0x666666);
+        
     }
     else
     {
@@ -535,13 +534,9 @@
         [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
         [self.shareBtn setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
         [self.moreBtn setImage:[UIImage imageNamed:@"day_shiti_icon_more"] forState:UIControlStateNormal];
-        self.bottomContentView.backgroundColor = [UIColor whiteColor];
-        [self.PreBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-        [self.NextBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-        self.bottomTitleLabel.textColor = kColorDarkText;
+       
     }
     
-    self.bottomTitleLabel.text = [NSString stringWithFormat:@"1/%d", (int)self.practiceList.count];
 }
 
 - (void)refreshViewByDayNightType
@@ -563,14 +558,9 @@
         
         self.analysisTypeLabel.textColor = UIColorFromHex(0x7a8596);
         [self.backButton setImage:[UIImage imageNamed:@"night_btn_top_back"] forState:UIControlStateNormal];
-        [self.answerSheetBtn setImage:[UIImage imageNamed:@"night_icon_datika"] forState:UIControlStateNormal];
-        [self.collectBtn setImage:[UIImage imageNamed:@"night_icon_collect"] forState:UIControlStateNormal];
+        
         [self.shareBtn setImage:[UIImage imageNamed:@"night_icon_share"] forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"night_icon_more"] forState:UIControlStateNormal];
-        self.bottomContentView.backgroundColor = UIColorFromHex(0x29323a);
-        [self.PreBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-        [self.NextBtn setTitleColor:UIColorFromHex(0x284a92) forState:UIControlStateNormal];
-        self.bottomTitleLabel.textColor = UIColorFromHex(0x666666);
+        
     }
     else
     {
@@ -588,14 +578,8 @@
         
         self.analysisTypeLabel.textColor = [UIColor whiteColor];
         [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
-        [self.answerSheetBtn setImage:[UIImage imageNamed:@"shiti_icon_datika"] forState:UIControlStateNormal];
-        [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
         [self.shareBtn setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"day_shiti_icon_more"] forState:UIControlStateNormal];
-        self.bottomContentView.backgroundColor = [UIColor whiteColor];
-        [self.PreBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-        [self.NextBtn setTitleColor:kColorNavigationBar forState:UIControlStateNormal];
-        self.bottomTitleLabel.textColor = kColorDarkText;
+       
     }
     
     if(self.practiceList.count > 0)
@@ -670,8 +654,6 @@
     {
         self.selectExamIndex = index;
     }
-    
-    self.bottomTitleLabel.text = [NSString stringWithFormat:@"%d/%d", (int)index+1, (int)self.practiceList.count];
     [self NetworkGetNote];
     //判断是否收藏
     [self showIsCollectView];
@@ -810,14 +792,7 @@
     }
     
     ExamDetailModel *examModel = self.practiceList[self.selectExamIndex];
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
-        [self.collectBtn setImage:[UIImage imageNamed:@"night_icon_collect"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
-    }
+    
     
     for(NSDictionary *dict in self.favoriteExamList)
     {
@@ -825,7 +800,7 @@
         NSString *FType = dict[@"FType"];
         if([LinkID isEqualToString:examModel.ID]&&[FType isEqualToString:examType])
         {
-            [self.collectBtn setImage:[UIImage imageNamed:@"zhibo_detail_icon_collect_press"] forState:UIControlStateNormal];
+            self.collectBtn.selected = YES;
             break;
         }
     }
@@ -895,7 +870,7 @@
     }
 }
 
-- (IBAction)moreButtonPressed
+- (void)moreButtonPressed
 {
     if(self.moreView)
     {
@@ -1024,72 +999,42 @@
     }
 }
 
-- (void)shareToPlatformType:(UMSocialPlatformType)platformType
-{
-    ExamDetailModel *examModel = self.practiceList[self.selectExamIndex];
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    NSString* content = examModel.title;
-    NSString *des = @"考银行就用银行易考！";
-    if(!strIsNullOrEmpty(content)){
-        NSRange range = [content rangeOfString:@"<"];
-        float index_img = range.location;
-        if(index_img>=0 && index_img<=10){
-            des = examModel.content;
-        }else{
-            if(index_img == NSNotFound){
-                if([content length]>30){
-                    NSString* contents = [content substringToIndex:30];
-                    des = contents;
-                }else{
-                    des = content;
-                }
-            }else{
-                NSString* contents = [content substringToIndex:index_img-1];
-                des = contents;
-            }
-        }
-    }
-    
-    //创建网页内容对象
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"银行易考" descr:des thumImage:[UIImage imageNamed:@"shareIcon.png"]];
-    //设置网页地址
-    shareObject.webpageUrl = [NSString stringWithFormat:@"http://yk.yinhangzhaopin.com/bshWeb/exam/ViewTitle.jsp?ID=%@&FLAG=%d", examModel.ID, [self.DailyPracticeTitle containsString:@"智能"]||[self.DailyPracticeTitle containsString:@"专项"] ? 1 : 0];
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            UMSocialLogInfo(@"************Share fail with error %@*********",error);
-        }else{
-            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                UMSocialShareResponse *resp = data;
-                //分享结果消息
-                UMSocialLogInfo(@"response message is %@",resp.message);
-                //第三方原始返回的数据
-                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                
-            }else{
-                UMSocialLogInfo(@"response data is %@",data);
-            }
-        }
-        //        [self alertWithError:error];
-    }];
-}
 
 - (void)shareAction:(id)sender
 {
-    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession), @(UMSocialPlatformType_WechatTimeLine), @(UMSocialPlatformType_QQ), @(UMSocialPlatformType_Qzone)]];
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        // 根据获取的platformType确定所选平台进行下一步操作
-        [self shareToPlatformType:platformType];
-    }];
+   //设置网页地址
+   ExamDetailModel *examModel = self.practiceList[self.selectExamIndex];
+   NSString* content = examModel.title;
+   NSString *des = @"考银行就用银行易考！";
+   if(!strIsNullOrEmpty(content)){
+       NSRange range = [content rangeOfString:@"<"];
+       float index_img = range.location;
+       if(index_img>=0 && index_img<=10){
+           des = examModel.content;
+       }else{
+           if(index_img == NSNotFound){
+               if([content length]>30){
+                   NSString* contents = [content substringToIndex:30];
+                   des = contents;
+               }else{
+                   des = content;
+               }
+           }else{
+               NSString* contents = [content substringToIndex:index_img-1];
+               des = contents;
+           }
+       }
+   }
+   
+   //创建网页内容对象
+   NSString * webpageUrl = [NSString stringWithFormat:@"http://yk.yinhangzhaopin.com/bshWeb/exam/ViewTitle.jsp?ID=%@&FLAG=%d", examModel.ID, [self.title containsString:@"智能"]||[self.title containsString:@"专项"] ? 1 : 0];
+   RecruitMentShareViewController * shareVc = [RecruitMentShareViewController new];
+      shareVc.shareTitle = @"银行易考";
+    shareVc.hidesBottomBarWhenPushed = YES;
+
+      shareVc.shareDesTitle = des;
+   shareVc.shareWebUrl = webpageUrl;
+   [self.navigationController presentViewController:shareVc animated:YES completion:nil];
     
 }
 
@@ -1167,7 +1112,7 @@
     else if (indexPath.section == 2)
     {
         CGSize size = [LdGlobalObj sizeWithAttributedString:[attributedDict objectForKey:@"globalAnalysisAttributeString"] width:Screen_Width-45];
-        return size.height + 165;
+        return size.height + 180;
     }
     else
     {
@@ -1305,8 +1250,11 @@
             NSMutableAttributedString *attributeString = globalOptionAttributeStringList[indexPath.row];
             NSRange range = [examModel.answer rangeOfString:optionModel.single];
             NSRange range1 = [examModel.solution rangeOfString:optionModel.single];
+            [loc_cell.examOptionImageView setTitle:optionModel.single forState:0];
+
             if(range1.length == optionModel.single.length)
             {
+
                 [loc_cell setOptinalCellType:ErrorAnalysisOptionRight attributeString:attributeString];
             }
             else if(range.length == optionModel.single.length)
@@ -1318,8 +1266,6 @@
                 [loc_cell setOptinalCellType:ErrorAnalysisOptionNomal attributeString:attributeString];
             }
             
-            loc_cell.examOptionTitleLabel.text = optionModel.single;
-            loc_cell.examOptionTitleLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:[LdGlobalObj sharedInstanse].examFontSize+3];
             loc_cell.examOptionDetailLabel.attributedText = attributeString;
         }
         
@@ -1329,7 +1275,16 @@
     {
         AnalysisTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, AnalysisTableViewCell, @"AnalysisTableViewCell");
         int userTime = examModel.userTime.intValue;
-        loc_cell.AnalysisAnswerLabel.text = [NSString stringWithFormat:@"正确答案是：%@      用时：%02d分%02d秒", examModel.solution, userTime/60, userTime%60];
+
+       NSString * attri = [NSString stringWithFormat:@"正确答案是：%@  您的答案是%@    用时：%02d分%02d秒", examModel.solution,examModel.answer, userTime/60, userTime%60];
+        NSRange firstRange = [attri rangeOfString:examModel.solution];
+        //设置颜色
+        NSMutableAttributedString *resultStr = [[NSMutableAttributedString alloc] initWithString:attri];
+        [resultStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#35C356"] range:firstRange];
+        NSRange twoRange = [attri rangeOfString:examModel.answer];
+               //设置颜色
+        [resultStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#F73838"] range:twoRange];
+        loc_cell.AnalysisAnswerLabel.attributedText =resultStr;
         NSMutableAttributedString *attributeString = [attributedDict objectForKey:@"globalAnalysisAttributeString"];
         if([LdGlobalObj sharedInstanse].isNightExamFlag)
         {
@@ -1738,6 +1693,7 @@
             NSString *result = [contentDict objectForKey:@"result"];
             if([result isEqualToString:@"success"])
             {
+                self.collectBtn.selected = YES;
                 [SNToast toast:@"收藏成功"];
                 self.favoriteExamList = [NSMutableArray arrayWithArray:contentArray];
                 [self showIsCollectView];
@@ -1769,6 +1725,7 @@
             NSString *result = [contentDict objectForKey:@"result"];
             if([result isEqualToString:@"success"])
             {
+                self.collectBtn.selected = NO;
                 [SNToast toast:@"取消收藏成功"];
                 self.favoriteExamList = [NSMutableArray arrayWithArray:contentArray];
                 [self showIsCollectView];
@@ -1776,6 +1733,7 @@
             }
             else if([result isEqualToString:@"noresult"])
             {
+                self.collectBtn.selected = NO;
                 [SNToast toast:@"取消收藏成功"];
                 [self.favoriteExamList removeAllObjects];
                 [self showIsCollectView];

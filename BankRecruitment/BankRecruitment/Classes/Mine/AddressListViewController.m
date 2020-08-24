@@ -32,7 +32,6 @@
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeTop;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.placehodleImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"noaddress"]];
     self.title = @"地址列表";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
@@ -40,6 +39,8 @@
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.placehodleImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"noaddress"]];
+
     self.noAddressLab = [[UILabel alloc] init];
     self.noAddressLab.font = [UIFont systemFontOfSize:15];
     self.noAddressLab.textAlignment = NSTextAlignmentCenter;

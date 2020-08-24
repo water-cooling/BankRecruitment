@@ -19,11 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(10);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(136);
-    }];
+    self.title =@"设置";
+    self.view.backgroundColor= [UIColor whiteColor];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
@@ -33,11 +33,15 @@
     [self.view addSubview:self.btnLogOut];
     [self.btnLogOut addTarget:self action:@selector(loginOutClick) forControlEvents:UIControlEventTouchUpInside];
     [self.btnLogOut mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(self.tableView.mas_bottom).offset(83.5);
+        make.center.equalTo(self.view);
            make.width.mas_equalTo(Screen_Width-64);
            make.height.mas_equalTo(40);
        }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(10);
+        make.left.right.equalTo(self.view);
+        make.bottom.equalTo(self.btnLogOut.mas_top);
+    }];
 }
 - (void)backButtonPressed
 {
@@ -69,6 +73,9 @@
             }else {
                 loc_cell.textLabel.text = @"关于我们";
             }
+    loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    loc_cell.textLabel.font = [UIFont systemFontOfSize:14];
+    loc_cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return loc_cell;
 }
 
@@ -92,29 +99,48 @@
 }
 
 -(void)loginOutClick{
+    
+    UIAlertController * alerView = [UIAlertController alertControllerWithTitle:@"" message:@"确定退出吗" preferredStyle:UIAlertControllerStyleAlert];
+             UIAlertAction *aler = [UIAlertAction actionWithTitle:@"确定退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                 
+                 [self cleanUserInfo];
+              }];
+              
+              [alerView addAction:aler];
+
+             UIAlertAction *  cancel  = [UIAlertAction actionWithTitle:@"点错了" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                  
+              }];
+              
+              [alerView addAction:cancel];
+      
+    [self.navigationController presentViewController:alerView animated:YES completion:nil];
+}
+-(void)cleanUserInfo{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:@"userLoginDict"];
     [defaults removeObjectForKey:@"VisitorID"];
     [defaults synchronize];
-    
     [LdGlobalObj sharedInstanse].user_id = @"0";
     [LdGlobalObj sharedInstanse].user_mobile = @"";
     [LdGlobalObj sharedInstanse].user_name = @"";
     [LdGlobalObj sharedInstanse].tech_id = @"";
     [LdGlobalObj sharedInstanse].islive = NO;
+    [LdGlobalObj sharedInstanse].islogin = NO;
     [LdGlobalObj sharedInstanse].istecher = NO;
     [LdGlobalObj sharedInstanse].user_acc = @"";
     [LdGlobalObj sharedInstanse].user_LastSign = @"";
     [LdGlobalObj sharedInstanse].user_SignDays = @"";
-
-    [LdGlobalObj sharedInstanse].loginVC = [[LoginViewController alloc] init];
-    [LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock = ^(void){};
-    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:[LdGlobalObj sharedInstanse].loginVC] animated:YES completion:nil];
-    [self performSelector:@selector(popViewController) withObject:nil afterDelay:0.5];
+    self.tabBarController.selectedIndex = 0;
+    LoginViewController *homePageVC = [[LoginViewController alloc] init];
+       [LdGlobalObj sharedInstanse].loginVC = homePageVC;
+       homePageVC.modalPresentationStyle = UIModalPresentationFullScreen;
+    appDelegate.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:homePageVC];
+    [appDelegate.window makeKeyAndVisible];
+    
 }
-- (void)popViewController
-{
-    [self.navigationController popViewControllerAnimated:NO];
+- (void)popViewController{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (UITableView *)tableView{
@@ -123,6 +149,8 @@
         _tableView.delegate        = self;
         _tableView.dataSource      = self;
         _tableView.scrollEnabled   = NO;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = [UIView new];
         _tableView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_tableView];
     }

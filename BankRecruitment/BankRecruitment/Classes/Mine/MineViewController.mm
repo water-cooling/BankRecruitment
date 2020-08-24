@@ -56,38 +56,17 @@
 
 
 
-- (void)shareToPlatformType:(UMSocialPlatformType)platformType
+- (void)shareToPlatformType
 {
-    //创建分享消息对象
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
-    //创建网页内容对象
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"考银行就用银行易考！" descr:@"考银行就用银行易考！" thumImage:[UIImage imageNamed:@"shareIcon.png"]];
     //设置网页地址
-    shareObject.webpageUrl = @"http://yk.yinhangzhaopin.com/bshApp/download/index.jsp";
-    
-    //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
-    
-    
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            UMSocialLogInfo(@"************Share fail with error %@*********",error);
-        }else{
-            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
-                UMSocialShareResponse *resp = data;
-                //分享结果消息
-                UMSocialLogInfo(@"response message is %@",resp.message);
-                //第三方原始返回的数据
-                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
-                
-            }else{
-                UMSocialLogInfo(@"response data is %@",data);
-            }
-        }
-        //        [self alertWithError:error];
-    }];
+    NSString *webpageUrl = @"http://yk.yinhangzhaopin.com/bshApp/download/index.jsp";
+
+  RecruitMentShareViewController * shareVc = [RecruitMentShareViewController new];
+          shareVc.shareTitle = @"考银行就用银行易考！";
+          shareVc.shareDesTitle = @"考银行就用银行易考！";
+       shareVc.shareWebUrl = webpageUrl;
+    shareVc.hidesBottomBarWhenPushed = YES;
+       [self.navigationController presentViewController:shareVc animated:YES completion:nil];
 }
 
 - (void)titleCommonSwitchAction:(UISwitch *)commonSwitch
@@ -265,11 +244,7 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }else if(indexPath.row == 5){
-            [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession), @(UMSocialPlatformType_WechatTimeLine), @(UMSocialPlatformType_QQ), @(UMSocialPlatformType_Qzone)]];
-            [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-                // 根据获取的platformType确定所选平台进行下一步操作
-                [self shareToPlatformType:platformType];
-            }];
+                [self shareToPlatformType];
         }else if(indexPath.row == 6){
             AddressListViewController *vc = [[AddressListViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
@@ -283,7 +258,7 @@
 }
 
 -(void)settingClick{
-    SettingViewController * settingVC = [SettingViewController new];
+    SettingViewController * settingVC = [[SettingViewController alloc]init];
     settingVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:settingVC animated:YES];
 }

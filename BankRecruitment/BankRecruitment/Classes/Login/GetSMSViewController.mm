@@ -219,24 +219,12 @@
                 NSString *type = [contentDict objectForKey:@"type"];
                 [LdGlobalObj sharedInstanse].user_mobile = self.phoneTextField.text;
                 if([type isEqualToString:@"0"]){
-                    
+                [self NetworkPutMsgToken];
+
                     [[LdGlobalObj sharedInstanse].loginVC saveAutoLoginMes];
                     
                     //进入主页
-                    if([LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock)
-                    {
-                        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                        [LdGlobalObj sharedInstanse].loginVC.loginSuccessBlock();
-                    }
-                    else
-                    {
-                        TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
-                        [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
-                        appDelegate.window.rootViewController = homePageVC;
-                        [appDelegate.window makeKeyAndVisible];
-                    }
-                    
-                    [self NetworkPutMsgToken];
+                   
                     
                 }else if ([type isEqualToString:@"1"]){
                     ResetPasswordViewController *vc = [[ResetPasswordViewController alloc] init];
@@ -265,6 +253,18 @@
                 NSLog(@"deviceToken Update success");
             }
         }
+        if(self.getSMSType == FindPassWordType){
+                [self.navigationController popToRootViewControllerAnimated:YES];
+        }else
+        {
+            TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
+                [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
+                appDelegate.window.rootViewController = homePageVC;
+                [appDelegate.window makeKeyAndVisible];
+                           
+                       }
+        
+        
     } failure:^(NSError *error) {
         ZB_Toast(@"注册Token失败");
     }];

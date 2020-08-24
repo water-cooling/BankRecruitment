@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.enterBtn.layer.cornerRadius = 12.5;
     // Initialization code
 }
 

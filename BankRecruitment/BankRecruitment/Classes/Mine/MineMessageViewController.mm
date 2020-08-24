@@ -125,26 +125,41 @@
 }
 
 #pragma -mark UITableView
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *speatorView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_Width, 16)];
+    speatorView.backgroundColor = [UIColor whiteColor];
+    return speatorView;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    NSDictionary *dict = self.list[indexPath.row];
-    CGSize size = [LdGlobalObj sizeWithString:dict[@"Msg"] font:[UIFont systemFontOfSize:13] width:Screen_Width-30];
-    return size.height + 72;
+    return 16;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return  125 ;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.list.count;
+
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MineMessageTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MineMessageTableViewCell, @"MineMessageTableViewCell");
     NSDictionary *dict = self.list[indexPath.row];
-    loc_cell.layer.cornerRadius = 4;
-    loc_cell.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor colorWithHex:@"#3C3C3C"]);
-    loc_cell.layer.shadowRadius = -M_PI_2;
-    loc_cell.layer.shadowOffset = CGSizeMake(2.5, 0);
+    loc_cell.contentView.layer.cornerRadius = 4;
+    loc_cell.contentView.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor colorWithHex:@"#3C3C3C"]);
+    loc_cell.contentView.layer.shadowRadius = -M_PI_2;
+    loc_cell.contentView.layer.shadowRadius = 2;
+    loc_cell.contentView.layer.shadowOpacity = 1;
+    loc_cell.contentView.layer.shadowOffset = CGSizeMake(2.5, 0);
     loc_cell.messageTitleLabel.text = dict[@"Name"];
     loc_cell.messageDetailLabel.text = dict[@"Msg"];
     loc_cell.messageTimeLabel.text = dict[@"BegTime"];

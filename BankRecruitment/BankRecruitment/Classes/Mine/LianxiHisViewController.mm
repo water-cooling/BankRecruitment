@@ -8,7 +8,7 @@
 
 #import "LianxiHisViewController.h"
 #import "OutlineModel.h"
-#import "QuestionReportTableViewCell.h"
+#import "QuestionTableViewCell.h"
 #import "ExaminationTitleModel.h"
 #import "DailyPracticeViewController.h"
 #import "ExamDetailModel.h"
@@ -232,57 +232,70 @@
     return number;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    OutlineModel *model = [self getModelOfOutLineSection:indexPath.section andRow:indexPath.row];
-    
-    QuestionReportTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, QuestionReportTableViewCell, @"QuestionReportTableViewCell");
-    loc_cell.actionBtn.tag = indexPath.section*10000+indexPath.row;
-    [loc_cell.actionBtn addTarget:self action:@selector(outLineCellAction:) forControlEvents:UIControlEventTouchUpInside];
-    [loc_cell.actionBtn setImage:nil forState:UIControlStateNormal];
-    loc_cell.questionTitleLabel.text = model.Name;
-    loc_cell.questionExamButton.hidden = YES;
-    loc_cell.upLineView.hidden = NO;
-    loc_cell.downLineView.hidden = NO;
-    loc_cell.BottomLine.hidden = YES;
-    if(indexPath.row == 0)
-    {
-        loc_cell.upLineView.hidden = YES;
-    }
-    if(indexPath.row == ([tableView numberOfRowsInSection:indexPath.section]-1))
-    {
-        loc_cell.BottomLine.hidden = NO;
-        loc_cell.downLineView.hidden = YES;
-    }
-    
-    if(model.ceng == 0)
-    {
-        if(model.isSpread)
-        {
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_minus"] forState:UIControlStateNormal];
-        }
-        else
-        {
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_add"] forState:UIControlStateNormal];
-        }
-    }
-    else if(model.list_outlineinfo.count > 0)
-    {
-        if(model.isSpread)
-        {
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_smallicon_minus"] forState:UIControlStateNormal];
-        }
-        else
-        {
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_smallicon_add"] forState:UIControlStateNormal];
-        }
-    }
-    else
-    {
-        [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_circle_blue"] forState:UIControlStateNormal];
-    }
-    
-    return loc_cell;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+          OutlineModel *model = [self getModelOfOutLineSection:indexPath.section andRow:indexPath.row];
+          
+          QuestionTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, QuestionTableViewCell, @"QuestionTableViewCell");
+          loc_cell.actionBtn.tag = indexPath.section*10000+indexPath.row;
+      loc_cell.editBtn.tag = indexPath.section*2000+indexPath.row;
+
+          [loc_cell.actionBtn addTarget:self action:@selector(outLineCellAction:) forControlEvents:UIControlEventTouchUpInside];
+          [loc_cell.actionBtn setImage:nil forState:UIControlStateNormal];
+          loc_cell.questionNumberLabel.hidden = YES;
+          loc_cell.questionTitleLabel.text = model.Name;
+          loc_cell.totelCountLabel.text = [NSString stringWithFormat:@"%@/%@",model.doCount, model.TCount];
+      [loc_cell.editBtn addTarget:self action:@selector(editClick:) forControlEvents:UIControlEventTouchUpInside];
+          loc_cell.upLineView.hidden = NO;
+          loc_cell.downLineView.hidden = NO;
+          loc_cell.BottomLine.hidden = YES;
+          if(indexPath.row == 0)
+          {
+              loc_cell.upLineView.hidden = YES;
+          }
+          if(indexPath.row == ([tableView numberOfRowsInSection:indexPath.section]-1))
+          {
+              loc_cell.BottomLine.hidden = NO;
+              loc_cell.downLineView.hidden = YES;
+          }
+          
+          if(model.ceng == 0)
+          {
+              if(model.isSpread)
+              {
+                  [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_minus"] forState:UIControlStateNormal];
+                  loc_cell.actionBtn.size = CGSizeMake(25, 25);
+
+              }
+              else
+              {
+                  [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_add"] forState:UIControlStateNormal];
+                  loc_cell.actionBtn.size = CGSizeMake(25, 25);
+
+              }
+          }
+          else if(model.list_outlineinfo.count > 0)
+          {
+              if(model.isSpread)
+              {
+                  [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_minus"] forState:UIControlStateNormal];
+                  loc_cell.actionBtn.size = CGSizeMake(17, 17);
+
+              }
+              else
+              {
+                  [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_icon_add"] forState:UIControlStateNormal];
+                  loc_cell.actionBtn.size = CGSizeMake(17, 17);
+
+              }
+          }
+          else
+          {
+              [loc_cell.actionBtn setImage:[UIImage imageNamed:@"content_circle_blue"] forState:UIControlStateNormal];
+              loc_cell.actionBtn.size = CGSizeMake(15, 15);
+
+          }
+          return loc_cell;
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -292,6 +305,13 @@
     OutlineModel *model = [self getModelOfOutLineSection:indexPath.section andRow:indexPath.row];
     [self NetworkGetOutLineTitleHisBy:model];
     
+}
+
+- (void)editClick:(UIButton *)button
+{
+    OutlineModel *model = [self getModelOfOutLineSection:button.tag/20000 andRow:button.tag%20000];
+  [self NetworkGetOutLineTitleHisBy:model];
+
 }
 
 #pragma -mark Network

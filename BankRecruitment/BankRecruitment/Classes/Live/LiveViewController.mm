@@ -18,6 +18,7 @@
 #import "VideoTypeModel.h"
 #import "VideoSelectTableViewCell.h"
 #import "VideoViewController.h"
+#import "MyCoursesViewController.h"
 @interface LiveViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
@@ -37,6 +38,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.selectMainIndex = 100;
+    self.view.backgroundColor = [UIColor whiteColor];
     self.liveList = [NSMutableArray arrayWithCapacity:9];
     self.typeList = [NSMutableArray arrayWithCapacity:9];
     [self initUI];
@@ -45,8 +47,8 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
-    [self NetworkGetAllLiveList];
     [self NetworkGetVideoTypes];
+    [self NetworkGetAllLiveList];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -59,6 +61,7 @@
 }
 
 -(void)initUI{
+    
 UIButton *myCourseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [myCourseButton setTitle:@"我的课程" forState:UIControlStateNormal];
     [myCourseButton setTitleColor:kColorBlackText forState:0];
@@ -93,7 +96,7 @@ self.lineView.backgroundColor = KColorBlueText;
     speatorView.backgroundColor = kColorBarGrayBackground;
     [self.view addSubview:speatorView];
     [speatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.videoBtn);
+        make.left.equalTo(self.view);
         make.top.equalTo(self.view).offset(StatusBarAndNavigationBarHeight);
         make.size.mas_equalTo(CGSizeMake(Screen_Width, 1));
     }];
@@ -102,6 +105,7 @@ self.lineView.backgroundColor = KColorBlueText;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [UIView new];
     [self.view addSubview:self.tableView];
     
     self.tableView.estimatedRowHeight = 0;
@@ -116,7 +120,9 @@ self.lineView.backgroundColor = KColorBlueText;
 }
 
 -(void)courseClick{
-    
+    MyCoursesViewController * coureseVc = [MyCoursesViewController new];
+    coureseVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:coureseVc animated:YES];
 }
 
 - (void)mainButtonAction:(UIButton *)btn{
@@ -131,6 +137,7 @@ self.lineView.backgroundColor = KColorBlueText;
     [UIView animateWithDuration:0.3 animations:^{
         self.lineView.xl_centerX = btn.xl_centerX;
     }];
+   
     [self.tableView reloadData];
 }
 
@@ -157,15 +164,13 @@ self.lineView.backgroundColor = KColorBlueText;
     return footerView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
         return 120;
     
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if(self.selectMainIndex == 101)
     {
         return self.liveList.count;
@@ -177,12 +182,10 @@ self.lineView.backgroundColor = KColorBlueText;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
         return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.selectMainIndex == 101)
     {
         LiveTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, LiveTableViewCell, @"LiveTableViewCell");
@@ -239,8 +242,7 @@ self.lineView.backgroundColor = KColorBlueText;
 }
 
 #pragma -mark Network
-- (void)NetworkGetAllLiveList
-{
+- (void)NetworkGetAllLiveList{
     [LLRequestClass requestGetAllLiveListBySuccess:^(id jsonData) {
         NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         NSLog(@"%@", contentArray);
@@ -261,7 +263,6 @@ self.lineView.backgroundColor = KColorBlueText;
             }
         }
         
-        [self.tableView reloadData];
     } failure:^(NSError *error) {
         //ZB_Toast(@"失败");
     }];
@@ -288,6 +289,7 @@ self.lineView.backgroundColor = KColorBlueText;
             
         }
         [self.tableView reloadData];
+
     } failure:^(NSError *error) {
         
     }];

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,11 +13,11 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张三－言语表达能力" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HcY-3y-XcT">
-                        <rect key="frame" x="15" y="13" width="290" height="21"/>
+                        <rect key="frame" x="22" y="16" width="258" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="gBp-F2-110"/>
                         </constraints>
@@ -29,27 +26,41 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018 0305" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4P-Vi-dmd">
-                        <rect key="frame" x="15" y="36" width="290" height="22"/>
+                        <rect key="frame" x="22" y="39" width="258" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQp-Gh-yfv">
+                        <rect key="frame" x="290" y="27.5" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Ub7-wR-DVI"/>
+                            <constraint firstAttribute="width" constant="15" id="Uts-Nd-ml8"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="zt"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="HcY-3y-XcT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="532-2S-wgG"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="HcY-3y-XcT" secondAttribute="trailing" constant="7" id="591-AT-f8Y"/>
                     <constraint firstItem="E4P-Vi-dmd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="BW9-F3-wq5"/>
                     <constraint firstItem="E4P-Vi-dmd" firstAttribute="top" secondItem="HcY-3y-XcT" secondAttribute="bottom" constant="2" id="IFf-er-WfL"/>
+                    <constraint firstItem="KQp-Gh-yfv" firstAttribute="leading" secondItem="E4P-Vi-dmd" secondAttribute="trailing" constant="10" id="KLX-DP-c44"/>
+                    <constraint firstItem="KQp-Gh-yfv" firstAttribute="leading" secondItem="HcY-3y-XcT" secondAttribute="trailing" constant="10" id="LNi-wZ-j04"/>
                     <constraint firstAttribute="bottomMargin" secondItem="E4P-Vi-dmd" secondAttribute="bottom" constant="3" id="SPe-SI-Hj6"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="E4P-Vi-dmd" secondAttribute="trailing" constant="7" id="aUj-HZ-8v1"/>
+                    <constraint firstAttribute="trailing" secondItem="KQp-Gh-yfv" secondAttribute="trailing" constant="15" id="VXl-WR-Lf4"/>
                     <constraint firstItem="HcY-3y-XcT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="7" id="dA1-4X-8eb"/>
+                    <constraint firstItem="KQp-Gh-yfv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rS9-xc-UKd"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="calendarTimeLabel" destination="E4P-Vi-dmd" id="4WO-WD-0gQ"/>
                 <outlet property="calendarTitleLabel" destination="HcY-3y-XcT" id="ms6-9i-9As"/>
+                <outlet property="editBtn" destination="KQp-Gh-yfv" id="TJ5-mb-oUs"/>
             </connections>
-            <point key="canvasLocation" x="-137" y="10"/>
+            <point key="canvasLocation" x="-137.59999999999999" y="9.8950524737631191"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="zt" width="15.5" height="15.5"/>
+    </resources>
 </document>
