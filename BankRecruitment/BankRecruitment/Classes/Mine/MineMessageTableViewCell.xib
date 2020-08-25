@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,6 +17,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellBg" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-1f-DTi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nkg-dI-INN">
                         <rect key="frame" x="29.5" y="5.5" width="275.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -65,20 +69,26 @@
                 </constraints>
             </tableViewCellContentView>
             <constraints>
+                <constraint firstItem="3VK-1f-DTi" firstAttribute="top" secondItem="vJ7-f5-MNL" secondAttribute="top" id="BbF-nC-rYX"/>
                 <constraint firstAttribute="trailing" secondItem="7UN-Jd-sfS" secondAttribute="trailing" constant="15" id="FKf-Gc-3m0"/>
                 <constraint firstAttribute="trailing" secondItem="Nkg-dI-INN" secondAttribute="trailing" constant="15" id="Ip4-5y-2WM"/>
+                <constraint firstItem="3VK-1f-DTi" firstAttribute="leading" secondItem="vJ7-f5-MNL" secondAttribute="leading" id="bAk-Vf-1HX"/>
                 <constraint firstAttribute="trailing" secondItem="FnU-r1-ZtZ" secondAttribute="trailing" constant="16" id="c5p-kX-Twx"/>
+                <constraint firstItem="3VK-1f-DTi" firstAttribute="bottom" secondItem="vJ7-f5-MNL" secondAttribute="bottom" id="n0o-BP-BBj"/>
+                <constraint firstItem="3VK-1f-DTi" firstAttribute="trailing" secondItem="vJ7-f5-MNL" secondAttribute="trailing" id="zP0-8f-5B6"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="vJ7-f5-MNL"/>
             <connections>
                 <outlet property="messageDetailLabel" destination="7UN-Jd-sfS" id="2gb-YN-GbQ"/>
                 <outlet property="messageTimeLabel" destination="FnU-r1-ZtZ" id="7Zn-31-i0h"/>
                 <outlet property="messageTitleLabel" destination="Nkg-dI-INN" id="2TA-wi-gut"/>
                 <outlet property="moreBtn" destination="eCV-6f-E8v" id="efO-Qu-klz"/>
             </connections>
-            <point key="canvasLocation" x="-484.05797101449281" y="-183.81696428571428"/>
+            <point key="canvasLocation" x="-455.07246376811599" y="-183.14732142857142"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="cellBg" width="358.5" height="137.5"/>
         <image name="voiceIcon" width="16" height="13"/>
     </resources>
 </document>

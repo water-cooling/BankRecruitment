@@ -18,6 +18,8 @@
 #import "LianxiHisViewController.h"
 #import "WrongQuestionsViewController.h"
 #import "ExaminationPaperViewController.h"
+#import "SignViewController.h"
+
 @interface VideoSelectViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *outLineList;
@@ -25,6 +27,7 @@
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @property (nonatomic, assign) NSInteger FirstCnt; //获取首页做题n题：FirstCnt   ；客户端限制取得的数量显示出来
 @property (nonatomic, assign) NSInteger OutlineCnt; //首页提纲n题：OutlineCnt
+@property (nonatomic, strong) UIButton*signBtn;
 @end
 
 @implementation VideoSelectViewController
@@ -34,6 +37,13 @@
     self.outLineList = [NSMutableArray array];
     self.OutlineCnt = 20;
     [self NetworkGetFirstContentsOutline];
+    [self.view addSubview:self.signBtn];
+    [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.view);
+        make.right.equalTo(self.view.mas_right).offset(-5);
+        make.width.mas_equalTo(43);
+        make.height.mas_equalTo(43);
+    }];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -182,6 +192,12 @@
     OutlineModel *model = [self getModelOfOutLineSection:button.tag/10000 andRow:button.tag%10000];
     model.isSpread = !model.isSpread;
     [self.tableView reloadData];
+}
+
+-(void)signClick{
+    SignViewController * signVC = [[SignViewController alloc]initWithNibName:@"SignViewController" bundle:nil];
+    signVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:signVC animated:YES];
 }
 
 #pragma -mark UITableView delegate
@@ -530,5 +546,13 @@
             [self NetworkGetOutlineTitleByOID:model.ID ExamTitle:model.Name];
             self.selectedIndexPath = [NSIndexPath indexPathForRow:button.tag%20000 inSection:button.tag/20000];
         }
+}
+- (UIButton *)signBtn {
+    if (!_signBtn) {
+        _signBtn = [[UIButton alloc] init];
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@"签到"] forState:0];
+        [_signBtn addTarget:self action:@selector(signClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _signBtn;
 }
 @end

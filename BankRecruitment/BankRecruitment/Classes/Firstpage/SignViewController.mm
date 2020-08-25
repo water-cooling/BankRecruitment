@@ -7,7 +7,7 @@
 //
 
 #import "SignViewController.h"
-
+#import "ExaminationPaperViewController.h"
 @interface SignViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *signDayLab;
 @property (weak, nonatomic) IBOutlet UIImageView *signBg;
@@ -36,10 +36,17 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)signClick:(id)sender {
+    [self NetworkAppEveryDaySign];
 }
 
 - (void)backButtonPressed{
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)dayPractiiesClick:(id)sender {
+    ExaminationPaperViewController *vc = [[ExaminationPaperViewController alloc] init];
+           vc.examinationPaperType = ExaminationPaperDailyPracticeType;
+           vc.hidesBottomBarWhenPushed = YES;
+           [self.navigationController pushViewController:vc animated:YES];
 }
 
 /**

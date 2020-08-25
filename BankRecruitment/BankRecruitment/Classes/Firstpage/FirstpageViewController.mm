@@ -472,10 +472,15 @@
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section > 1) {
         UIView *Headview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 154)];
+
         Headview.backgroundColor = [UIColor colorWithHex:@"#F5F5F5"];
     NSString *advStr = section == 2 ? @"sectionone": @"sectiontwo";
         UIImageView *advImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:advStr]];
         [Headview addSubview:advImg];
+        advImg.userInteractionEnabled = YES;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(expandClick:)];
+            [advImg addGestureRecognizer:tap];
+        advImg.tag = section+1000;
     [advImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(Headview);
         make.left.equalTo(Headview).offset(16);
@@ -524,6 +529,26 @@
     return nil;
 }
 
+-(void)expandClick:(UITapGestureRecognizer *)ges{
+    UIImageView * img = (UIImageView *)ges.view;
+    switch (img.tag-1000) {
+        case 2:{
+            self.tabBarController.selectedIndex =2;
+        }
+            break;
+        case 3:{
+            InformationViewController *vc = [[InformationViewController alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.title = @"报考指南";
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
             return 150;

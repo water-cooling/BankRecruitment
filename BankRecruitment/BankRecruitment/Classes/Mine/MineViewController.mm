@@ -25,9 +25,11 @@
 #import "LianxiHisViewController.h"
 #import "SettingViewController.h"
 #import "AddressListViewController.h"
+#import "SignViewController.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource, MineFunctionBtnFunc>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *offsetTop;
+@property (nonatomic, strong) UIButton*signBtn;
 
 @end
 
@@ -36,7 +38,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.offsetTop.constant = -StatusBarHeight;
-    
+    [self.view addSubview:self.signBtn];
+       [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.centerY.equalTo(self.view);
+           make.right.equalTo(self.view.mas_right).offset(-5);
+           make.width.mas_equalTo(43);
+           make.height.mas_equalTo(43);
+       }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -112,6 +120,12 @@
     }
 }
 
+-(void)signClick{
+    SignViewController * signVC = [[SignViewController alloc]initWithNibName:@"SignViewController" bundle:nil];
+    signVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:signVC animated:YES];
+}
+
 - (void)hiddenSVProgressHUD
 {
     [SVProgressHUD dismiss];
@@ -164,7 +178,10 @@
         if(indexPath.row == 0){
             return 220+(IS_iPhoneX ? 24:0);
     }
-    return 54;
+    if (indexPath.row == 1) {
+        return 60;
+    }
+    return 48;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -186,13 +203,14 @@
             loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
            
             return loc_cell;
-    }else {
-       
+    }else if (indexPath.row == 1) {
+           LiveWarnTableViewCell *cell = GET_TABLE_CELL_FROM_NIB(tableView, LiveWarnTableViewCell, @"LiveWarnTableViewCell");
+           cell.titleCommonSwitch.on = [LdGlobalObj sharedInstanse].isWarnExamFlag;
+           [cell.titleCommonSwitch addTarget:self action:@selector(titleCommonSwitchAction:) forControlEvents:UIControlEventValueChanged];
+        return cell;
+    }else{
             AccountInfoTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, AccountInfoTableViewCell, @"AccountInfoTableViewCell");
-       if(indexPath.row == 1){
-            loc_cell.titleCommonLabel.text = @"直播课提醒";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"zbtx-icon"];
-       }else if(indexPath.row == 2){
+            if(indexPath.row == 2){
                 loc_cell.titleCommonLabel.text = @"我的试卷";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"wdsj-icon"];
             }else if(indexPath.row == 3){
@@ -220,26 +238,17 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
    
-        if(indexPath.row == 1)
-        {
-            MineMessageViewController *vc = [[MineMessageViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        else if(indexPath.row == 2)
-        {
+    if(indexPath.row == 2){
             ExerciseHositoryViewController *vc = [[ExerciseHositoryViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (indexPath.row == 3)
-        {
+        else if (indexPath.row == 3){
             CollectionQuestionViewController *vc = [[CollectionQuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (indexPath.row == 4)
-        {
+        else if (indexPath.row == 4){
             NoteQuestionViewController *vc = [[NoteQuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
@@ -268,5 +277,14 @@
                vc.hidesBottomBarWhenPushed = YES;
                [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+- (UIButton *)signBtn {
+    if (!_signBtn) {
+        _signBtn = [[UIButton alloc] init];
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@"签到"] forState:0];
+        [_signBtn addTarget:self action:@selector(signClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _signBtn;
 }
 @end

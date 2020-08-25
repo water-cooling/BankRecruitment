@@ -19,6 +19,7 @@
 #import "VideoSelectTableViewCell.h"
 #import "VideoViewController.h"
 #import "MyCoursesViewController.h"
+#import "SignViewController.h"
 @interface LiveViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
@@ -30,6 +31,7 @@
 @property (nonatomic, strong)  UIView*lineView;
 @property (nonatomic, strong) NSMutableArray *liveList;
 @property (nonatomic, strong) NSMutableArray *typeList;
+@property (nonatomic, strong) UIButton *signBtn;
 
 @end
 
@@ -61,7 +63,7 @@
 }
 
 -(void)initUI{
-    
+
 UIButton *myCourseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [myCourseButton setTitle:@"我的课程" forState:UIControlStateNormal];
     [myCourseButton setTitleColor:kColorBlackText forState:0];
@@ -117,6 +119,13 @@ self.lineView.backgroundColor = KColorBlueText;
     }else{
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    [self.view addSubview:self.signBtn];
+    [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.view);
+        make.right.equalTo(self.view.mas_right).offset(-5);
+        make.width.mas_equalTo(43);
+        make.height.mas_equalTo(43);
+    }];
 }
 
 -(void)courseClick{
@@ -124,6 +133,13 @@ self.lineView.backgroundColor = KColorBlueText;
     coureseVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:coureseVc animated:YES];
 }
+
+-(void)signClick{
+    SignViewController * signVC = [[SignViewController alloc]initWithNibName:@"SignViewController" bundle:nil];
+    signVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:signVC animated:YES];
+}
+
 
 - (void)mainButtonAction:(UIButton *)btn{
     NSInteger index = btn.tag;
@@ -201,7 +217,7 @@ self.lineView.backgroundColor = KColorBlueText;
     }
     else{
       VideoSelectTableViewCell *cell = GET_TABLE_CELL_FROM_NIB(tableView, VideoSelectTableViewCell, @"VideoSelectTableViewCell");
-      VideoTypeModel *model = self.typeList[indexPath.row];
+      VideoTypeModel *model = self.typeList[indexPath.section];
       cell.videoTypeLabel.text = model.VType;
       [cell.videoTypeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [LdGlobalObj sharedInstanse].fileServIp, model.picture]] placeholderImage:kDefaultHorizontalRectangleImage completed:nil];
       cell.countLabel.text = [NSString stringWithFormat:@"视频:%@", model.video_num];
@@ -225,9 +241,9 @@ self.lineView.backgroundColor = KColorBlueText;
     }
     else    {
         VideoViewController *vc = [[VideoViewController alloc] init];
-          vc.typeModel =self.typeList[indexPath.row];
+          vc.typeModel =self.typeList[indexPath.section];
+            vc.hidesBottomBarWhenPushed = YES;
           [self.navigationController pushViewController:vc animated:YES];
-          vc.hidesBottomBarWhenPushed = YES;
     }
     
 }
@@ -321,7 +337,14 @@ self.lineView.backgroundColor = KColorBlueText;
             [_videoBtn addTarget:self action:@selector(mainButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         return _videoBtn;
+}
+- (UIButton *)signBtn {
+    if (!_signBtn) {
+        _signBtn = [[UIButton alloc] init];
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@"签到"] forState:0];
+        [_signBtn addTarget:self action:@selector(signClick) forControlEvents:UIControlEventTouchUpInside];
     }
-
+    return _signBtn;
+}
 
 @end

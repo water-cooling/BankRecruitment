@@ -84,6 +84,7 @@
     [self.btnLogin mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_centerX).offset(-47);
         make.top.equalTo(self.imgLogo.mas_bottom).offset(38);
+
     }];
     [self.view addSubview:self.btnRegister];
     [self.btnRegister mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -117,10 +118,14 @@
         if (!self.isLogin) {
             self.btnLogin.selected = !self.btnLogin.selected;
             self.btnRegister.selected = !self.btnRegister.selected;
-           
+           self.typeLab.text = @"登录";
             [UIView animateWithDuration:0.2 animations:^{
-               
-                self.lineView.xl_centerX = self.btnLogin.xl_centerX;
+               [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                               make.centerX.equalTo(self.btnLogin);
+                   make.top.equalTo(self.btnLogin.mas_bottom).offset(2);
+                   make.size.mas_equalTo(CGSizeMake(12, 2));
+
+                    }];
                 self.loginView.xl_x = 0;
                 self.registView.xl_x = Screen_Width;
 
@@ -132,9 +137,14 @@
       if (self.isLogin) {
                 self.btnLogin.selected = !self.btnLogin.selected;
                  self.btnRegister.selected = !self.btnRegister.selected;
-            
+            self.typeLab.text = @"注册";
           [UIView animateWithDuration:0.2 animations:^{
-                self.lineView.xl_centerX = self.btnRegister.xl_centerX;
+              [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+                  make.centerX.equalTo(self.btnRegister);
+                  make.top.equalTo(self.btnRegister.mas_bottom).offset(2);
+                  make.size.mas_equalTo(CGSizeMake(12, 2));
+
+              }];
                         self.loginView.xl_x = Screen_Width;
                         self.registView.xl_x = 0;
             }];
@@ -142,6 +152,8 @@
         }
         
     }
+    [self.view setNeedsLayout];
+
 }
 
 #pragma mark --UIuttonClick
@@ -308,6 +320,14 @@
         ZB_Toast(@"请输入您的验证码");
         return;
     }
+    
+    if(![self.registView.smsTextField.text isEqualToString:self.smsCodeString])
+      {
+          ZB_Toast(@"请输入正确的短信验证码");
+          return;
+      }
+      
+    
     if(strIsNullOrEmpty(self.registView.pwdTextField.text))
        {
            ZB_Toast(@"请输入密码");

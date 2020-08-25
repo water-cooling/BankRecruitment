@@ -12,5 +12,4 @@
 @property (nonatomic, strong) IBOutlet UIImageView *newsImageView;
 @property (nonatomic, strong) IBOutlet UILabel *newsTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *newsTimeLabel;
-@property (nonatomic, strong) IBOutlet UILabel *newsCountLabel;
 @end

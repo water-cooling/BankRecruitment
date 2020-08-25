@@ -101,14 +101,14 @@
     
     UIButton *contactButton = [UIButton buttonWithType:UIButtonTypeCustom];
        contactButton.frame = CGRectMake(0.0f, 0.0f, 17.0f, 18.0f);
-       [contactButton setImage:[UIImage imageNamed:@"zf"] forState:UIControlStateNormal];
+       [contactButton setImage:[UIImage imageNamed:@"zhibo_btn_zixun"] forState:UIControlStateNormal];
        [contactButton addTarget:self action:@selector(zixunAction) forControlEvents:UIControlEventTouchUpInside];
        [contactButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
     [rightItems addSubview:contactButton];
     
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     shareButton.frame = CGRectMake(41.0f, 0.0f, 17.0f, 18.0f);
-    [shareButton setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"zf"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
     [rightItems addSubview:shareButton];
@@ -250,7 +250,7 @@
     }
     
     self.BuyBackView.hidden = YES;
-    self.tableView.height+=44;
+    self.tableView.xl_height+=44;
     [self.tableView reloadData];
 }
 

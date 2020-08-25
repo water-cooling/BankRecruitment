@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) IBOutlet UIView *upLineView;
 @property (nonatomic, strong) IBOutlet UIView *downLineView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *littleBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cricleHeight;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @end

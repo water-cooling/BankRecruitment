@@ -21,7 +21,7 @@
     self.Screen = dic[@"Screen"];
     self.AllScreen = dic[@"AllScreen"];
     self.Name = dic[@"Name"];
-    self.PurchCount = dic[@"PurchCount"];
+    self.PurchCount = dic[@"PurchCount"] ? dic[@"PurchCount"] : @"";
     self.LCount = dic[@"LCount"];
     self.Price = dic[@"Price"];
     self.BegDate = dic[@"BegDate"];

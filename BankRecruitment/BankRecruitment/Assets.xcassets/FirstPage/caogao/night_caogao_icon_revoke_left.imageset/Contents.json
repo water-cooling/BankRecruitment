@@ -1,22 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "shuaxin-w 拷贝.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "shuaxin-w 拷贝@2x.png",
       "idiom" : "universal",
-      "filename" : "night_caogao_icon_revoke_left.png",
       "scale" : "2x"
     },
     {
+      "filename" : "shuaxin-w 拷贝@3x.png",
       "idiom" : "universal",
-      "filename" : "night_caogao_icon_revoke_left@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

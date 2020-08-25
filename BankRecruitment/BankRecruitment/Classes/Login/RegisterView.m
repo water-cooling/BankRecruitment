@@ -81,6 +81,7 @@
           eyesBtn.frame = CGRectMake(0, 0, 20, 14);
           [RightView addSubview:eyesBtn];
         pwdTextField.rightView = RightView;
+        pwdTextField.secureTextEntry = YES;
         pwdTextField.rightViewMode = UITextFieldViewModeWhileEditing;
                pwdTextField.returnKeyType =  UIReturnKeySearch;
                pwdTextField.backgroundColor = [UIColor whiteColor];
@@ -119,6 +120,7 @@
                       NSFontAttributeName:[UIFont systemFontOfSize:14.0 weight:UIFontWeightRegular]}];
                   pwdAgainTextField.attributedPlaceholder = pwdAginAttrString;
                   pwdAgainTextField.leftViewMode = UITextFieldViewModeAlways;
+                    pwdAgainTextField.secureTextEntry = YES;
                    pwdAgainTextField.leftView = pwdAgainView;
                   pwdAgainTextField.borderStyle = UITextBorderStyleNone;
                   pwdAgainTextField.textColor = [UIColor colorWithHex:@"#333333"];

@@ -17,8 +17,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="389" height="124"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellBg" translatesAutoresizingMaskIntoConstraints="NO" id="yJ7-o8-Jkt">
+                        <rect key="frame" x="37" y="12" width="340" height="97"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="语言理解与表达语言理解与表达语言理解与表达" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37V-wF-hl4">
-                        <rect key="frame" x="32" y="45.5" width="300" height="33.5"/>
+                        <rect key="frame" x="52" y="45.5" width="280" height="33.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="33.5" id="uOL-Ki-10V"/>
                         </constraints>
@@ -43,7 +46,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oys-PY-N8E">
-                        <rect key="frame" x="344" y="45" width="30" height="34"/>
+                        <rect key="frame" x="334" y="45" width="30" height="34"/>
                     </button>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXn-lQ-W1t">
                         <rect key="frame" x="13.5" y="0.0" width="1" height="59"/>
@@ -54,17 +57,21 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="yJ7-o8-Jkt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="37" id="6ZH-TF-vem"/>
                     <constraint firstItem="hXn-lQ-W1t" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="BXW-j5-e70"/>
                     <constraint firstItem="7Cc-6s-5wT" firstAttribute="centerX" secondItem="hXn-lQ-W1t" secondAttribute="centerX" id="FZF-l0-nCC"/>
-                    <constraint firstItem="37V-wF-hl4" firstAttribute="leading" secondItem="Rc3-CR-mfH" secondAttribute="trailing" constant="15" id="LTh-pb-Q28"/>
+                    <constraint firstAttribute="bottom" secondItem="yJ7-o8-Jkt" secondAttribute="bottom" constant="15" id="FsG-6X-dth"/>
+                    <constraint firstItem="37V-wF-hl4" firstAttribute="leading" secondItem="Rc3-CR-mfH" secondAttribute="trailing" constant="35" id="LTh-pb-Q28"/>
+                    <constraint firstItem="yJ7-o8-Jkt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="P9z-1u-yEj"/>
                     <constraint firstItem="Rc3-CR-mfH" firstAttribute="top" secondItem="hXn-lQ-W1t" secondAttribute="bottom" id="Qja-Sz-9TT"/>
                     <constraint firstItem="oys-PY-N8E" firstAttribute="centerY" secondItem="37V-wF-hl4" secondAttribute="centerY" id="SYE-qt-Ld2"/>
+                    <constraint firstAttribute="trailing" secondItem="yJ7-o8-Jkt" secondAttribute="trailing" constant="12" id="TTN-Am-5Az"/>
                     <constraint firstItem="Rc3-CR-mfH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="11" id="bB7-bd-oE6"/>
                     <constraint firstItem="7Cc-6s-5wT" firstAttribute="top" secondItem="Rc3-CR-mfH" secondAttribute="bottom" id="e4U-gk-eL6"/>
                     <constraint firstAttribute="trailing" secondItem="37V-wF-hl4" secondAttribute="trailing" constant="57" id="g9l-SG-7k1"/>
                     <constraint firstItem="Rc3-CR-mfH" firstAttribute="centerX" secondItem="hXn-lQ-W1t" secondAttribute="centerX" id="hnk-jH-QIV"/>
                     <constraint firstAttribute="bottom" secondItem="7Cc-6s-5wT" secondAttribute="bottom" id="lc5-JZ-ggg"/>
-                    <constraint firstAttribute="trailing" secondItem="oys-PY-N8E" secondAttribute="trailing" constant="15" id="luR-rx-eP8"/>
+                    <constraint firstAttribute="trailing" secondItem="oys-PY-N8E" secondAttribute="trailing" constant="25" id="luR-rx-eP8"/>
                     <constraint firstItem="37V-wF-hl4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uph-Fx-W3T"/>
                     <constraint firstItem="Rc3-CR-mfH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zTF-Tq-goz"/>
                 </constraints>
@@ -75,10 +82,14 @@
                 <outlet property="cricleHeight" destination="GRL-i5-NCy" id="kNY-Ye-xOy"/>
                 <outlet property="downLineView" destination="7Cc-6s-5wT" id="OLa-QM-s77"/>
                 <outlet property="leftConstraint" destination="LTh-pb-Q28" id="fpy-I4-MCB"/>
+                <outlet property="littleBtn" destination="Rc3-CR-mfH" id="Kif-KV-Hro"/>
                 <outlet property="titleLab" destination="37V-wF-hl4" id="FG4-eg-O4W"/>
                 <outlet property="upLineView" destination="hXn-lQ-W1t" id="QsX-60-aXJ"/>
             </connections>
             <point key="canvasLocation" x="181.8840579710145" y="93.080357142857139"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="cellBg" width="358.5" height="137.5"/>
+    </resources>
 </document>

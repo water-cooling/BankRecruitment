@@ -64,6 +64,7 @@
            pwdTextField.attributedPlaceholder = pwdattrString;
            pwdTextField.leftViewMode = UITextFieldViewModeAlways;
             pwdTextField.leftView = pwdView;
+        pwdTextField.secureTextEntry = YES;
            pwdTextField.borderStyle = UITextBorderStyleNone;
            pwdTextField.textColor = [UIColor colorWithHex:@"#333333"];
            self.pwdTextField= pwdTextField;

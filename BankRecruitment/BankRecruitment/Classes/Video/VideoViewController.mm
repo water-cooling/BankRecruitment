@@ -279,7 +279,7 @@
     [loc_cell.actionBtn setImage:nil forState:UIControlStateNormal];
     if(indexPath.row == 0){
         loc_cell.titleLab.text = mainModel.Name;
-        loc_cell.leftConstraint.constant = 6.8;
+        loc_cell.leftConstraint.constant = 37;
         loc_cell.cricleHeight.constant = 6;
         if (mainModel.isSpread) {
             [loc_cell.actionBtn setImage:[UIImage imageNamed:@"arrowdown"] forState: 0];
@@ -288,7 +288,7 @@
         }
     }else{
         loc_cell.titleLab.text = subModel.Name;
-        loc_cell.leftConstraint.constant = 33;
+        loc_cell.leftConstraint.constant = 50;
         loc_cell.cricleHeight.constant = 0;
         [loc_cell.actionBtn setImage:[UIImage imageNamed:@"播放"] forState:0];
     }

@@ -11,11 +11,10 @@
 #import "UIImageView+WebCache.h"
 #import "UIButton+WebCache.h"
 
-@interface PersonalInformationViewController ()
+@interface PersonalInformationViewController ()<UITextFieldDelegate>
 
-@property (nonatomic, strong) IBOutlet UIButton *headBtn;
-@property (nonatomic, strong) IBOutlet UITextField *nameTextField;
-@property (nonatomic, strong) IBOutlet UITextField *sexTextField;
+@property (nonatomic, weak) IBOutlet UIButton *saveBtn;
+@property (nonatomic, weak) IBOutlet UITextField *nameTextField;
 
 @property (nonatomic, strong) NSString *imageUrlString;
 
@@ -26,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"个人信息";
+    self.title = @"昵称";
     self.imageUrlString = @"";
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -49,18 +48,10 @@
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightButton.frame = CGRectMake(0.0f, 0.0f, 35.0f, 20.0f);
-    [rightButton setTitle:@"完成" forState:UIControlStateNormal];
-    [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    rightButton.titleLabel.font = [UIFont systemFontOfSize:14];
-    [rightButton addTarget:self action:@selector(submitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [rightButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, -8)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    
-    self.headBtn.layer.cornerRadius = 40;
-    self.headBtn.layer.masksToBounds = YES;
+    self.saveBtn.layer.cornerRadius = 20;
+    self.saveBtn.layer.masksToBounds = YES;
+    [self.saveBtn addTarget:self action:@selector(submitButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.nameTextField.delegate = self;
     self.nameTextField.text = [LdGlobalObj sharedInstanse].user_name;
 }
 
@@ -69,6 +60,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)textFieldDidChangeSelection:(UITextField *)textField{
+    NSLog(@"改变");
+    //手机号码校验
+    if (self.nameTextField.text.length > 0) {
+            self.saveBtn.enabled = YES;
+            self.saveBtn.backgroundColor = [UIColor colorWithHex:@"#558CF4"];
+        } else {
+            self.saveBtn.enabled = NO;
+            self.saveBtn.backgroundColor = [UIColor colorWithHex:@"#DCDCDC"];
+        }
+    
+}
 - (void)submitButtonPressed
 {
     if(strIsNullOrEmpty(self.nameTextField.text))
@@ -86,19 +89,7 @@
     return YES;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if(textField == self.sexTextField)
-    {
-        LdActionSheet *sheet = [[LdActionSheet alloc] initWithTitle:@"选择性别" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"男", @"女", nil];
-        [sheet showInView:self.view];
-        return NO;
-    }
-    else
-    {
-        return YES;
-    }
-}
+
 
 #pragma mark - UIImagePickerController
 

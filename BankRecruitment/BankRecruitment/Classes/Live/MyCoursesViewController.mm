@@ -14,7 +14,8 @@
 @interface MyCoursesViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic, strong) NSMutableArray *myClassesList;
-
+@property (strong, nonatomic) UIImageView *placehodleImg;
+@property (strong, nonatomic) UILabel *noAddressLab;
 @end
 
 @implementation MyCoursesViewController
@@ -22,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.myClassesList = [NSMutableArray arrayWithCapacity:9];
-    [self drawViews];    // Do any additional setup after loading the view from its nib.
+    [self drawViews];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -40,6 +41,24 @@
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.placehodleImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"noaddress"]];
+    self.noAddressLab = [[UILabel alloc] init];
+    self.noAddressLab.font = [UIFont systemFontOfSize:15];
+    self.noAddressLab.textAlignment = NSTextAlignmentCenter;
+        self.noAddressLab.textColor = [UIColor colorWithHex:@"#333333"];
+        self.noAddressLab.text = @"您还没有收获地址哦～";
+    [self.view addSubview:self.noAddressLab];
+    [self.view addSubview:self.placehodleImg];
+    self.tableview.hidden = YES;
+    [self.placehodleImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(145, 145));
+    }];
+    [self.noAddressLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+          make.height.mas_equalTo(15);
+          make.top.equalTo(self.placehodleImg.mas_bottom).offset(33);
+      }];
 }
 - (void)backButtonPressed{
     [self.navigationController popViewControllerAnimated:YES];
@@ -51,17 +70,13 @@
 }
 
 #pragma -mark UITableView delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return 10;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 0.1;
-}
-
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, 10)];
     footerView.backgroundColor = [UIColor clearColor];
@@ -90,7 +105,7 @@
     [loc_cell.enterBtn addTarget:self action:@selector(enterClcik:) forControlEvents:UIControlEventTouchUpInside];
     loc_cell.enterBtn.tag = indexPath.section;
 
-    loc_cell.liveClassPlanLabel.text = [NSString stringWithFormat:@"课程安排：%@至%@(%@课时)",model.BegDate, model.EndDate, model.LCount];
+    loc_cell.liveClassPlanLabel.text = [NSString stringWithFormat:@"课程安排：%@-%@",model.BegDate, model.EndDate];
     loc_cell.liveClassTeacherLabel.text = [NSString stringWithFormat:@"%@已购",model.PurchCount];
     loc_cell.classTImeLab.text = [NSString stringWithFormat:@"%@课时",model.LCount];
             return loc_cell;
@@ -141,9 +156,20 @@
                     [model setDataWithDic:dict];
                     [self.myClassesList addObject:model];
                 }
+                self.tableview.hidden = NO;
+                self.placehodleImg.hidden = YES;
+                self.noAddressLab.hidden = YES;
+                                
             }
+            self.tableview.hidden = NO;
+            self.placehodleImg.hidden = YES;
+            self.noAddressLab.hidden = YES;
+            
         }else{
             ZB_Toast(@"暂无数据");
+            self.tableview.hidden = NO;
+            self.placehodleImg.hidden = YES;
+            self.noAddressLab.hidden = YES;
         }
         
         [self.tableview reloadData];

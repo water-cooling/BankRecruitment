@@ -13,5 +13,6 @@
 @property (nonatomic, retain) IBOutlet UITextField *prePassedTextField;
 @property (nonatomic, retain) IBOutlet UITextField *NewPassedTextField;
 @property (nonatomic, retain) IBOutlet UITextField *reTryPassedTextField;
+@property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 
 @end

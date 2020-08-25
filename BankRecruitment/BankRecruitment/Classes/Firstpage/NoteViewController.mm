@@ -45,6 +45,7 @@
     UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
     saveButton.frame = CGRectMake(0.0f, 0.0f, 35.0f, 25.0f);
     [saveButton setTitle:@"保存" forState:UIControlStateNormal];
+    [saveButton setTitleColor:[UIColor blackColor] forState:0];
     saveButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [saveButton addTarget:self action:@selector(saveButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [saveButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];

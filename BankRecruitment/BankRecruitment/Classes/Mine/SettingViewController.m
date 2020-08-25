@@ -69,7 +69,7 @@
                if(indexPath.row == 0){
                 loc_cell.textLabel.text = @"账号信息";
             }else if(indexPath.row == 1){
-                loc_cell.textLabel.text = @"缓存数据";
+                loc_cell.textLabel.text = @"缓存清理";
             }else {
                 loc_cell.textLabel.text = @"关于我们";
             }

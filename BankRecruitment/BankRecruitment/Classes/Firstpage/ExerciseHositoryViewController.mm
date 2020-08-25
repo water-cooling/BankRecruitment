@@ -94,6 +94,7 @@
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.tableFooterView = [UIView new];
     [self.view addSubview:self.tableView];
     
     self.tableView.estimatedRowHeight = 0;

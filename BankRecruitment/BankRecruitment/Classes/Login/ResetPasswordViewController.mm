@@ -98,10 +98,9 @@
         return;
     }
     
-    if(self.passwdTextField.text.length < 6 || self.passwdTextField.text.length > 16)
-    {
-        ZB_Toast(@"密码格式非法");
-        return;
+   if(![self judgePassWordLegal:self.passwdTextField.text]){
+              ZB_Toast(@"请输入密码（6-16位数字字母）");
+              return;
     }
     
     [self requestResetPasword];
@@ -166,6 +165,19 @@
     } failure:^(NSError *error) {
         ZB_Toast(@"注册Token失败");
     }];
+}
+
+-(BOOL)judgePassWordLegal:(NSString *)str{
+    
+    BOOL result = false;
+    if ([str length] >= 6){
+        // 判断长度大于6位后再接着判断是否同时包含数字和字符
+        NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        result = [pred evaluateWithObject:str];
+    }
+    return result;
+
 }
 
 @end

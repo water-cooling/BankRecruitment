@@ -12,12 +12,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.layer.cornerRadius = 4;
-       self.layer.shadowColor = [UIColor colorWithHex:@"#3C3C3C"].CGColor;
-       self.layer.shadowRadius = -M_PI_2;
-       self.layer.shadowOpacity = 1;
-    self.layer.masksToBounds =NO;
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
     
 }
 

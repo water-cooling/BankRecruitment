@@ -50,7 +50,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-35" minY="0.0" maxX="0.0" maxY="-35"/>
                             <inset key="imageEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="14"/>
-                            <state key="normal" title="智能组卷" image="组卷">
+                            <state key="normal" title="错题本" image="错题">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
                             <connections>
@@ -74,7 +74,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-34" minY="0.0" maxX="0.0" maxY="-35"/>
                             <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
-                            <state key="normal" title="错题本" image="错题">
+                            <state key="normal" title="练习历史" image="历史回顾">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
                             <connections>
@@ -86,7 +86,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                             <inset key="titleEdgeInsets" minX="-33" minY="0.0" maxX="0.0" maxY="-35"/>
                             <inset key="imageEdgeInsets" minX="24" minY="0.0" maxX="0.0" maxY="14"/>
-                            <state key="normal" title="练习历史" image="历史回顾">
+                            <state key="normal" title="智能组卷" image="组卷">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
                             <connections>

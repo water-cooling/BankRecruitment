@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,45 +46,24 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ine-do-4sa">
                     <rect key="frame" x="38" y="686.66666666666663" width="338" height="14.333333333333371"/>
                     <attributedString key="attributedText">
-                        <fragment content="连续签到">
-                            <attributes>
-                                <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="30">
+                        <fragment content="连续签到30天免费获取银行招聘">
                             <attributes>
                                 <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <font key="NSFont" metaFont="cellTitle"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                             </attributes>
                         </fragment>
-                        <fragment content="天免费获取银行招聘">
-                            <attributes>
-                                <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
                         <fragment content="考试指定教材">
                             <attributes>
                                 <color key="NSColor" red="0.90980392160000001" green="0.76078431369999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
+                                <font key="NSFont" metaFont="cellTitle"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                             </attributes>
                         </fragment>
-                        <fragment content=" ">
+                        <fragment content=" ；">
                             <attributes>
                                 <color key="NSColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="12" name=".SFNS-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="；">
-                            <attributes>
-                                <color key="NSColor" red="0.95294117649999999" green="0.95294117649999999" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
+                                <font key="NSFont" metaFont="cellTitle"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                             </attributes>
                         </fragment>
@@ -94,56 +73,21 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KE9-xQ-S0l">
                     <rect key="frame" x="38" y="662.33333333333337" width="338" height="14.333333333333371"/>
                     <attributedString key="attributedText">
-                        <fragment content="连续签到">
-                            <attributes>
-                                <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="15">
+                        <fragment content="连续签到15天免费获取银行招聘考试">
                             <attributes>
                                 <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <font key="NSFont" metaFont="cellTitle"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                             </attributes>
                         </fragment>
-                        <fragment content="天免费获取银行招聘考试">
-                            <attributes>
-                                <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="历年真题">
-                            <attributes>
-                                <color key="NSColor" red="0.90980392160000001" green="0.76078431369999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="1">
+                        <fragment content="历年真题1本">
                             <attributes>
                                 <color key="NSColor" red="0.90980392160000001" green="0.76078431369999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <font key="NSFont" metaFont="cellTitle"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                             </attributes>
                         </fragment>
-                        <fragment content="本">
-                            <attributes>
-                                <color key="NSColor" red="0.90980392160000001" green="0.76078431369999999" blue="0.30588235289999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content="；">
-                            <attributes>
-                                <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <font key="NSFont" size="12" name=".PingFangSC-Regular"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                            </attributes>
-                        </fragment>
-                        <fragment content=" ">
+                        <fragment content="； ">
                             <attributes>
                                 <color key="NSColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <font key="NSFont" metaFont="cellTitle"/>
@@ -153,6 +97,16 @@
                     </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zC-W6-D2w">
+                    <rect key="frame" x="69.666666666666686" y="267.66666666666669" width="275" height="201"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="201" id="0V8-5C-uV8"/>
+                        <constraint firstAttribute="width" constant="275" id="ESR-FV-25V"/>
+                    </constraints>
+                    <connections>
+                        <action selector="dayPractiiesClick:" destination="-1" eventType="touchUpInside" id="lUo-0T-TA2"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
@@ -169,14 +123,16 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="dW2-Nc-ZCB" secondAttribute="bottom" id="Vvf-vR-dvX"/>
                 <constraint firstItem="ine-do-4sa" firstAttribute="top" secondItem="KE9-xQ-S0l" secondAttribute="bottom" constant="10" id="Xz1-Y9-ooQ"/>
                 <constraint firstItem="KE9-xQ-S0l" firstAttribute="trailing" secondItem="ps0-w3-hrV" secondAttribute="trailing" id="aka-tA-EMW"/>
+                <constraint firstItem="3zC-W6-D2w" firstAttribute="centerY" secondItem="dW2-Nc-ZCB" secondAttribute="centerY" id="lth-Eb-liT"/>
                 <constraint firstItem="dW2-Nc-ZCB" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="nXk-8U-cMl"/>
+                <constraint firstItem="3zC-W6-D2w" firstAttribute="centerX" secondItem="dW2-Nc-ZCB" secondAttribute="centerX" id="pAX-Eg-LzB"/>
                 <constraint firstItem="mCX-JW-VkD" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="50" id="pav-Ky-tAN"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="dW2-Nc-ZCB" secondAttribute="trailing" id="tu7-VY-rmR"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="mCX-JW-VkD" secondAttribute="trailing" constant="50" id="v68-tI-8ke"/>
                 <constraint firstItem="KE9-xQ-S0l" firstAttribute="top" secondItem="ps0-w3-hrV" secondAttribute="bottom" constant="10" id="yBt-KW-Xit"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="137.68115942028987" y="119.86607142857142"/>
+            <point key="canvasLocation" x="137.68115942028987" y="119.83695652173914"/>
         </view>
     </objects>
     <resources>

@@ -14,10 +14,6 @@
     [super awakeFromNib];
     // Initialization code
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 99.5, Screen_Width, 0.5)];
-    lineView.backgroundColor = kColorLineSepBackground;
-    [self addSubview:lineView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

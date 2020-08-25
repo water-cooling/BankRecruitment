@@ -556,6 +556,7 @@
             vc.userResultDict = [NSMutableDictionary dictionaryWithDictionary:self.userResultDict];
             vc.isMockExamType = self.isMockExamType;
             [[NSUserDefaults standardUserDefaults]setObject:@(YES) forKey:@"today"];
+            
             [weakself.navigationController pushViewController:vc animated:NO];
             
             [weakself performSelector:@selector(laterSubmitAction:) withObject:vc afterDelay:0.3];
@@ -1384,51 +1385,29 @@
         if([self.drawView isCanUndo])
         {
             _undoDraftButton.userInteractionEnabled = YES;
-            if([LdGlobalObj sharedInstanse].isNightExamFlag)
-            {
+            
                 [_undoDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_revoke_right"] forState:UIControlStateNormal];
-            }
-            else
-            {
-                [_undoDraftButton setImage:[UIImage imageNamed:@"caogao_icon_revoke_right"] forState:UIControlStateNormal];
-            }
+     
+           
         }
-        else
-        {
+        else{
             _undoDraftButton.userInteractionEnabled = NO;
-            if([LdGlobalObj sharedInstanse].isNightExamFlag)
-            {
-                [_undoDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_revoke_right_none"] forState:UIControlStateNormal];
-            }
-            else
-            {
-                [_undoDraftButton setImage:[UIImage imageNamed:@"caogao_icon_revoke_right_none"] forState:UIControlStateNormal];
-            }
+            [_undoDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_revoke_right_none"] forState:UIControlStateNormal];
+           
         }
         
         if([self.drawView isCanResume])
         {
             _forwordDraftButton.userInteractionEnabled = YES;
-            if([LdGlobalObj sharedInstanse].isNightExamFlag)
-            {
+           
                 [_forwordDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_revoke_left"] forState:UIControlStateNormal];
-            }
-            else
-            {
-                [_forwordDraftButton setImage:[UIImage imageNamed:@"caogao_icon_revoke_left"] forState:UIControlStateNormal];
-            }
+           
         }
         else
         {
             _forwordDraftButton.userInteractionEnabled = NO;
-            if([LdGlobalObj sharedInstanse].isNightExamFlag)
-            {
                 [_forwordDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_revoke_left_none"] forState:UIControlStateNormal];
-            }
-            else
-            {
-                [_forwordDraftButton setImage:[UIImage imageNamed:@"caogao_icon_revoke_left_none"] forState:UIControlStateNormal];
-            }
+            
         }
     }
 }
@@ -1454,27 +1433,16 @@
     
     UIButton *closeDraftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     closeDraftButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
         [closeDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_cancle"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [closeDraftButton setImage:[UIImage imageNamed:@"caogao_icon_cancle"] forState:UIControlStateNormal];
-    }
+
+   
     [closeDraftButton addTarget:self action:@selector(closeDraftButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:closeDraftButton];
     
     _forwordDraftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _forwordDraftButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
+  
         [_forwordDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_revoke_left_none"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [_forwordDraftButton setImage:[UIImage imageNamed:@"caogao_icon_revoke_left_none"] forState:UIControlStateNormal];
-    }
     [_forwordDraftButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
     [_forwordDraftButton addTarget:self action:@selector(forwordDraftButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     
@@ -1485,27 +1453,17 @@
     
     _undoDraftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _undoDraftButton.frame = CGRectMake(50.0f, 0.0f, 44.0f, 44.0f);
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
+
         [_undoDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_revoke_right_none"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [_undoDraftButton setImage:[UIImage imageNamed:@"caogao_icon_revoke_right_none"] forState:UIControlStateNormal];
-    }
+ 
     [_undoDraftButton addTarget:self action:@selector(undoDraftButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [titleBarView addSubview:_undoDraftButton];
     
     UIButton *clearDraftButton = [UIButton buttonWithType:UIButtonTypeCustom];
     clearDraftButton.frame = CGRectMake(titleBarView.width-94, 0.0f, 44.0f, 44.0f);
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
+   
         [clearDraftButton setImage:[UIImage imageNamed:@"night_caogao_icon_rubbish"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [clearDraftButton setImage:[UIImage imageNamed:@"caogao_icon_rubbish"] forState:UIControlStateNormal];
-    }
+   
     [clearDraftButton addTarget:self action:@selector(clearDraftButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [titleBarView addSubview:clearDraftButton];
 }
@@ -1528,7 +1486,7 @@
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
         
-       
+          self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.moreBtn];
     }];
 }
 //

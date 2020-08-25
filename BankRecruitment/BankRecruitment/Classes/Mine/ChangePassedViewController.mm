@@ -20,16 +20,9 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-    UIButton *publishButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    publishButton.frame = CGRectMake(0.0f, 0.0f, 35.0f, 30.0f);
-    [publishButton setTitle:@"完成" forState:UIControlStateNormal];
-    publishButton.titleLabel.font = [UIFont systemFontOfSize:16.0f];
-    [publishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    publishButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    [publishButton addTarget:self action:@selector(publishButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [publishButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:publishButton];
-    
+    [self.sureBtn addTarget:self action:@selector(publishButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.sureBtn.layer.cornerRadius = 20;
+      self.sureBtn.layer.masksToBounds = YES;
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
@@ -46,6 +39,23 @@
 - (void)backButtonPressed
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
+- (void)textFieldDidChangeSelection:(UITextField *)textField{
+    NSLog(@"改变");
+    //手机号码校验
+    if (self.NewPassedTextField.text.length > 0 && self.prePassedTextField.text.length > 0 && self.reTryPassedTextField.text.length > 0) {
+            self.sureBtn.enabled = YES;
+            self.sureBtn.backgroundColor = [UIColor colorWithHex:@"#558CF4"];
+        } else {
+            self.sureBtn.enabled = NO;
+            self.sureBtn.backgroundColor = [UIColor colorWithHex:@"#DCDCDC"];
+        }
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

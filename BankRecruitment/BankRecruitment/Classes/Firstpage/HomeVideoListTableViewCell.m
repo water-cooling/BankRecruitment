@@ -47,10 +47,7 @@
     VideoSelectCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     VideoTypeModel *model = self.dataArr[indexPath.row];
-    cell.layer.cornerRadius = 4;
-    cell.layer.shadowColor = (__bridge CGColorRef _Nullable)([UIColor colorWithHex:@"#3C3C3C"]);
-    cell.layer.shadowRadius = -M_PI_2;
-    cell.layer.shadowOffset = CGSizeMake(2.5, 0);
+    
     cell.videoTypeLabel.text = model.VType;
     [cell.videoTypeImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [LdGlobalObj sharedInstanse].fileServIp, model.picture]] placeholderImage:kDefaultHorizontalRectangleImage completed:nil];
     cell.countLabel.text = [NSString stringWithFormat:@"视频:%@", model.video_num];

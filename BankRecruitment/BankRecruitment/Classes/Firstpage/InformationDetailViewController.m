@@ -27,7 +27,7 @@
     
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     shareButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
-    [shareButton setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"zf"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];

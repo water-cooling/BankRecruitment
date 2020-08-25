@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,14 +13,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="to1-9q-DCZ">
-                        <rect key="frame" x="255" y="6.5" width="51" height="31"/>
+                        <rect key="frame" x="256" y="6.5" width="51" height="31"/>
                     </switch>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="直播课提醒" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXJ-dG-QqV">
-                        <rect key="frame" x="48" y="14" width="91" height="15.5"/>
+                        <rect key="frame" x="48" y="14" width="91" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="91" id="Y25-26-NON"/>
                         </constraints>
@@ -31,7 +28,7 @@
                         <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="p_icon_zhiboke" translatesAutoresizingMaskIntoConstraints="NO" id="ezL-tk-hRY">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zbtx-icon" translatesAutoresizingMaskIntoConstraints="NO" id="ezL-tk-hRY">
                         <rect key="frame" x="23" y="14" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="0WZ-OI-bRC"/>
@@ -54,9 +51,10 @@
             <connections>
                 <outlet property="titleCommonSwitch" destination="to1-9q-DCZ" id="CcT-q4-YUU"/>
             </connections>
+            <point key="canvasLocation" x="131" y="147"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="p_icon_zhiboke" width="25" height="25"/>
+        <image name="zbtx-icon" width="15" height="15"/>
     </resources>
 </document>
