@@ -60,18 +60,18 @@
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(StatusBarHeight+15);
+        make.top.equalTo(self.view).offset(StatusBarHeight);
         make.left.equalTo(self.view).offset(15);
     }];
     [self.view addSubview:self.intelligentBtn];
     [self.intelligentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_centerX).offset(-47);
-        make.top.equalTo(self.view).offset(StatusBarHeight+15);
+        make.top.equalTo(self.view).offset(StatusBarHeight);
     }];
     [self.view addSubview:self.testPaperBtn];
     [self.testPaperBtn mas_makeConstraints:^(MASConstraintMaker *make) {
           make.left.equalTo(self.view.mas_centerX).offset(47);
-          make.top.equalTo(self.view).offset(StatusBarHeight+15);
+          make.top.equalTo(self.view).offset(StatusBarHeight);
       }];
     self.lineView = [[UIView alloc]init];
     self.lineView.backgroundColor = KColorBlueText;
@@ -120,7 +120,11 @@
     btn.selected = YES;
     self.selectMainIndex = index;
     [UIView animateWithDuration:0.3 animations:^{
-        self.lineView.xl_centerX = btn.xl_centerX;
+        [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(btn);
+        make.top.equalTo(btn.mas_bottom).offset(2);
+        make.size.mas_equalTo(CGSizeMake(12, 2));
+         }];
     }];
     [self.tableView reloadData];
 }
@@ -526,6 +530,7 @@
             [_intelligentBtn setTitleColor:KColorBlueText forState:UIControlStateSelected];
             _intelligentBtn.tag = 100;
             _intelligentBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+            _intelligentBtn.selected = YES;
             [_intelligentBtn setTitle:@"智能" forState:UIControlStateNormal];
             [_intelligentBtn addTarget:self action:@selector(mainButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -540,7 +545,6 @@
             [_testPaperBtn setTitleColor:KColorBlueText forState:UIControlStateSelected];
             _testPaperBtn.titleLabel.font = [UIFont systemFontOfSize:16];
             [_testPaperBtn setTitle:@"试卷" forState:UIControlStateNormal];
-            _testPaperBtn.selected = YES;
             [_testPaperBtn addTarget:self action:@selector(mainButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
         return _testPaperBtn;

@@ -16,8 +16,7 @@
     [super awakeFromNib];
     self.messageTop.constant = IS_iPhoneX ? 50:26;
     self.headImgtop.constant = IS_iPhoneX ? 72:48;
-    self.nameLab.text = [LdGlobalObj sharedInstanse].user_name;
-    self.telephoneLab.text = [LdGlobalObj sharedInstanse].user_mobile;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

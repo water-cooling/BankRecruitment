@@ -61,27 +61,17 @@
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     
-    UIView *ContactServiceView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 34, 40)];
-    UILabel *ContactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 34, 10)];
-    ContactServiceLabel.backgroundColor = [UIColor clearColor];
-    ContactServiceLabel.textColor = [UIColor whiteColor];
-    ContactServiceLabel.font = [UIFont systemFontOfSize:10];
-    ContactServiceLabel.textAlignment = NSTextAlignmentCenter;
-    ContactServiceLabel.text = @"客服";
-    [ContactServiceView addSubview:ContactServiceLabel];
-    
     UIButton *ContactServiceButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    ContactServiceButton.frame = CGRectMake(7.0f, 5.0f, 20.0f, 20.0f);
+    ContactServiceButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [ContactServiceButton setImage:[UIImage imageNamed:@"zhibo_btn_zixun"] forState:UIControlStateNormal];
     [ContactServiceButton addTarget:self action:@selector(ContactServiceButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [ContactServiceView addSubview:ContactServiceButton];
     
     UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
     shareButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [shareButton setImage:[UIImage imageNamed:@"zf"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareAction:) forControlEvents:UIControlEventTouchUpInside];
     [shareButton setImageEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
-    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareButton],[[UIBarButtonItem alloc] initWithCustomView:ContactServiceView]];
+    self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:shareButton],[[UIBarButtonItem alloc] initWithCustomView:ContactServiceButton]];
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 320+(IS_iPhoneX?24:0), Screen_Width, Screen_Height-320-44-TabbarSafeBottomMargin)];
     self.scrollView.clipsToBounds = YES;
@@ -113,7 +103,7 @@
     
     self.preVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 95, 35)];
     self.preVideoButton.backgroundColor = kColorNavigationBar;
-    [self.preVideoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.preVideoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.preVideoButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.preVideoButton setTitle:@"上一个知识点" forState:UIControlStateNormal];
     self.preVideoButton.layer.cornerRadius = 4;
@@ -124,7 +114,7 @@
     
     self.nextVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 95, 35)];
     self.nextVideoButton.backgroundColor = kColorNavigationBar;
-    [self.nextVideoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.nextVideoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.nextVideoButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.nextVideoButton setTitle:@"下一个知识点" forState:UIControlStateNormal];
     self.nextVideoButton.layer.cornerRadius = 4;

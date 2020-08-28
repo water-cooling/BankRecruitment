@@ -11,7 +11,6 @@
 @interface MyCourseTableViewCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *liveTitleLabel;
 @property (nonatomic, strong) IBOutlet UILabel *liveClassPlanLabel;
-@property (nonatomic, strong) IBOutlet UILabel *liveClassTeacherLabel;
 @property (weak, nonatomic) IBOutlet UILabel *classTImeLab;
 @property (weak, nonatomic) IBOutlet UIButton *enterBtn;
 

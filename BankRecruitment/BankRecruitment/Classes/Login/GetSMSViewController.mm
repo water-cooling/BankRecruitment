@@ -46,7 +46,7 @@
            typeLab.textColor = [UIColor colorWithHex:@"#333333"];
            typeLab.text = @"登录";
     if(self.getSMSType == FindPassWordType){
-        typeLab.text = @"找回密码";
+        typeLab.text = @"忘记密码";
     }else if (self.getSMSType == BindPhoneNumType){
        typeLab.text= @"绑定手机号";
     }

@@ -106,7 +106,6 @@
     loc_cell.enterBtn.tag = indexPath.section;
 
     loc_cell.liveClassPlanLabel.text = [NSString stringWithFormat:@"课程安排：%@-%@",model.BegDate, model.EndDate];
-    loc_cell.liveClassTeacherLabel.text = [NSString stringWithFormat:@"%@已购",model.PurchCount];
     loc_cell.classTImeLab.text = [NSString stringWithFormat:@"%@课时",model.LCount];
             return loc_cell;
 

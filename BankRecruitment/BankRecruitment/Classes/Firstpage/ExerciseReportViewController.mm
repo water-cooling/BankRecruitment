@@ -327,9 +327,8 @@
 
 }
 
-- (void)backButtonPressed
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+- (void)backButtonPressed{
+    [Common popUrl:@"DailyPracticeViewController" withTarget:self];
 }
 //错题解析
 - (IBAction)errorAnalysisButtonAction:(id)sender

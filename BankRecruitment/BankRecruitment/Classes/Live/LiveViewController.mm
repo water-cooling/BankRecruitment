@@ -207,6 +207,16 @@ self.lineView.backgroundColor = KColorBlueText;
         LiveTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, LiveTableViewCell, @"LiveTableViewCell");
         LiveModel *model = self.liveList[indexPath.section];
         loc_cell.liveTitleLabel.text = model.Name;
+        int endNumber = dateNumberFromDateToToday(model.EndDate);
+        if(endNumber>0){
+            [loc_cell.enterBtn setTitle:@"进入详情" forState:0];
+            [loc_cell.enterBtn setBackgroundColor:KColorBlueText];
+               }
+        else{
+            [loc_cell.enterBtn setTitle:@"已停售" forState:0];
+            [loc_cell.enterBtn setBackgroundColor:[UIColor colorWithHex:@"#EFEFEF"]];
+
+        }
         [loc_cell.enterBtn addTarget:self action:@selector(enterClcik:) forControlEvents:UIControlEventTouchUpInside];
         loc_cell.enterBtn.tag = indexPath.section;
         

@@ -49,6 +49,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
     self.navigationController.navigationBar.hidden = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -196,6 +197,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
             MineFunctionBtnTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MineFunctionBtnTableViewCell, @"MineFunctionBtnTableViewCell");
+        loc_cell.nameLab.text = [LdGlobalObj sharedInstanse].user_name;
+        loc_cell.telephoneLab.text = [LdGlobalObj sharedInstanse].user_mobile;
             loc_cell.delegate = self;
         [loc_cell.settingBtn addTarget:self action:@selector(settingClick) forControlEvents:UIControlEventTouchUpInside];
         [loc_cell.messageBtn addTarget:self action:@selector(messageClick) forControlEvents:UIControlEventTouchUpInside];

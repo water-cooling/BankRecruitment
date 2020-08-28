@@ -18,6 +18,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIView+XLExtension.h"
 #import "RecruitMentShareViewController.h"
+#import "Common.h"
 #endif
 
 

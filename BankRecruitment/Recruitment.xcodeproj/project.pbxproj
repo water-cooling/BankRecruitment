@@ -505,6 +505,7 @@
 		BEC1F48B24E98F1000EADCC3 /* NewExamTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC1F48924E98F1000EADCC3 /* NewExamTitleTableViewCell.xib */; };
 		BEC77B8324E4E0BB0022A404 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B8224E4E0BB0022A404 /* SettingViewController.m */; };
 		BED1F39E24E571C600EE4E4A /* AddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED1F39D24E571C600EE4E4A /* AddressListViewController.m */; };
+		BEF8AEDA24F8E31200CDDF3B /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8AED824F8E31200CDDF3B /* Common.m */; };
 		D2D70D8A217AD2F60050AE8B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D70D89217AD2F60050AE8B /* UserNotifications.framework */; };
 /* End PBXBuildFile section */
 
@@ -1363,6 +1364,8 @@
 		BEC77B8224E4E0BB0022A404 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		BED1F39C24E571C600EE4E4A /* AddressListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressListViewController.h; sourceTree = "<group>"; };
 		BED1F39D24E571C600EE4E4A /* AddressListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressListViewController.m; sourceTree = "<group>"; };
+		BEF8AED824F8E31200CDDF3B /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		BEF8AED924F8E31200CDDF3B /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		D2D70D89217AD2F60050AE8B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -2851,6 +2854,8 @@
 		BEB2A28224E3879E00B3C098 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				BEF8AED924F8E31200CDDF3B /* Common.h */,
+				BEF8AED824F8E31200CDDF3B /* Common.m */,
 				BEB2A28A24E3D73700B3C098 /* UIView+XLExtension.h */,
 				BEB2A28924E3D73600B3C098 /* UIView+XLExtension.m */,
 			);
@@ -3125,6 +3130,7 @@
 				27AA388624E2F12300736AFA /* LoginView.m in Sources */,
 				60C505871EE2B3CE00B145A2 /* MockExamDetailViewController.mm in Sources */,
 				604F7CBF1ED67D90007BB56E /* PersonalInformationViewController.mm in Sources */,
+				BEF8AEDA24F8E31200CDDF3B /* Common.m in Sources */,
 				60D542811E8FAD320004AA31 /* PayMethodTableViewCell.m in Sources */,
 				60F90D7C1E88F77B00151728 /* NSNumber+Additions.m in Sources */,
 				60F90DCD1E88F77B00151728 /* MJRefreshHeader.m in Sources */,
