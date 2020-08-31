@@ -1812,5 +1812,19 @@ NSMutableArray *examResultArray;
         }
     }];
 }
-
+/**
+ 获取首页招聘信息
+ */
++ (void)requestdoGetApplicationBySuccess:(HttpSuccess)success failure:(HttpFailure)failure{
+//    NSString *url = [NSString stringWithFormat:@"%@?action=doGetAllMock&uid=%@", [LdGlobalObj sharedInstanse].webAppIp, [LdGlobalObj sharedInstanse].user_id];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:9];
+ NSString * url =  @"http://yhyk.project.njagan.org//dw.yikao/api/yikao/index/getIndex";
+    [LLRequestClass postWithURL:url params:dict success:^(id jsonData) {
+        success(jsonData);
+    } failure:^(NSError *error) {
+        if (error) {
+            failure(error);
+        }
+    }];
+}
 @end

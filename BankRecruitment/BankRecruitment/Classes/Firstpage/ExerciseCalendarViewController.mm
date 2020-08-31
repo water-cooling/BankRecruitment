@@ -202,7 +202,13 @@
     loc_cell.accessoryType = UITableViewCellAccessoryNone;
     ExaminationPaperModel *model = self.selectedDayEventList[indexPath.row];
     loc_cell.calendarTitleLabel.text = model.Name;
-    
+    [loc_cell.editBtn setTitle:@"去练习" forState:0];
+    loc_cell.editWidth.constant = 75;
+    loc_cell.editheight.constant = 25;
+    loc_cell.editBtn.layer.cornerRadius = 12.5;
+    loc_cell.editBtn.backgroundColor = KColorBlueText;
+    [loc_cell.editBtn addTarget:self action:@selector(goexamClick:) forControlEvents:UIControlEventTouchUpInside];
+    loc_cell.editBtn.tag = indexPath.row+100;
     NSDateFormatter* dateFmt = [[NSDateFormatter alloc] init];
     dateFmt.dateFormat = @"yyyy-MM-dd";
     NSDate *BegDate = [dateFmt dateFromString:model.BegDate];
@@ -222,6 +228,45 @@
     return loc_cell;
 }
 
+-(void)goexamClick:(UIButton *)sender{
+    
+    ExaminationPaperModel *model = self.selectedDayEventList[sender.tag-100];
+    if([model.IsGet isEqualToString:@"是"])
+    {
+        if([[DataBaseManager sharedManager] getExamOperationListByEID:model.ID isFromIntelligent:@"否"])
+        {
+            NSArray *examList = [[DataBaseManager sharedManager] getExamDetailListByEID:model.ID isFromIntelligent:@"否"];
+            if(examList.count > 0)
+            {
+                DailyPracticeViewController *vc = [[DailyPracticeViewController alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.practiceList = [NSMutableArray arrayWithArray:examList];
+                vc.title = self.title;
+                vc.isSaveUserOperation = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else
+            {
+                [self NetworkGetExamTitlesByEID:model.ID ExamTitle:self.title];
+            }
+        }
+        else
+        {
+            [self NetworkGetExamTitlesByEID:model.ID ExamTitle:self.title];
+        }
+    }
+    else if(model.Price.floatValue == 0)
+    {
+        [self NetworkSendZeroPaySuccessByLinkID:model.ID PaperName:model.Name];
+    }
+    else
+    {
+        ExamDetailViewController *vc = [[ExamDetailViewController alloc] init];
+        vc.paperModel = model;
+        vc.title = self.title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];

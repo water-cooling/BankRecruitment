@@ -13,4 +13,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *calendarTimeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (nonatomic, strong) UIView *lineView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *editWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *editheight;
+
 @end

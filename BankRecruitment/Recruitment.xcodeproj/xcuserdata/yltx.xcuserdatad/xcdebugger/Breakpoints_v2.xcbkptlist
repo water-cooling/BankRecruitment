@@ -19,22 +19,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "586BEDA7-1AF3-4242-84B3-F3907627FD31"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BankRecruitment/Classes/Firstpage/DailyPracticeViewController.mm"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "-viewDidAppear:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E0A3ED03-883E-4ABE-B7A9-23911FAC6050"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -42,8 +26,8 @@
             filePath = "BankRecruitment/Classes/Firstpage/ExerciseReportViewController.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "516"
-            endingLineNumber = "516"
+            startingLineNumber = "515"
+            endingLineNumber = "515"
             landmarkName = "-allAnalysisButtonAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,8 +42,8 @@
             filePath = "BankRecruitment/Classes/Firstpage/ExerciseReportViewController.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
+            startingLineNumber = "511"
+            endingLineNumber = "511"
             landmarkName = "-allAnalysisButtonAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,8 +58,8 @@
             filePath = "BankRecruitment/Classes/Firstpage/ExerciseReportViewController.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
             landmarkName = "-ErrorReTryExamAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,8 +74,8 @@
             filePath = "BankRecruitment/Classes/Firstpage/ExerciseReportViewController.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "485"
+            endingLineNumber = "485"
             landmarkName = "-ErrorReTryExamAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,8 +90,8 @@
             filePath = "BankRecruitment/Classes/Firstpage/ExerciseReportViewController.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "546"
-            endingLineNumber = "546"
+            startingLineNumber = "545"
+            endingLineNumber = "545"
             landmarkName = "-NetworkGetExamDetailListByTitleList:isRetry:"
             landmarkType = "7">
          </BreakpointContent>

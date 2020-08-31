@@ -8,7 +8,6 @@
 
 #import "ExerciseReportViewController.h"
 #import "ReportAnswerSheetTableViewCell.h"
-#import "CalendarTableViewCell.h"
 #import "OldExamsSubTableViewCell.h"
 #import "ErrorAnalysisViewController.h"
 #import "ExamDetailModel.h"
@@ -328,7 +327,7 @@
 }
 
 - (void)backButtonPressed{
-    [Common popUrl:@"DailyPracticeViewController" withTarget:self];
+    [Common popUrl:@"ExerciseCalendarViewController" withTarget:self];
 }
 //错题解析
 - (IBAction)errorAnalysisButtonAction:(id)sender

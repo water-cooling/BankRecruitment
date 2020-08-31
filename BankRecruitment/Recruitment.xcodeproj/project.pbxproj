@@ -506,6 +506,7 @@
 		BEC77B8324E4E0BB0022A404 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B8224E4E0BB0022A404 /* SettingViewController.m */; };
 		BED1F39E24E571C600EE4E4A /* AddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED1F39D24E571C600EE4E4A /* AddressListViewController.m */; };
 		BEF8AEDA24F8E31200CDDF3B /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8AED824F8E31200CDDF3B /* Common.m */; };
+		BEF8AEDD24FC916100CDDF3B /* InviteJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8AEDC24FC916100CDDF3B /* InviteJobModel.m */; };
 		D2D70D8A217AD2F60050AE8B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D70D89217AD2F60050AE8B /* UserNotifications.framework */; };
 /* End PBXBuildFile section */
 
@@ -1366,6 +1367,8 @@
 		BED1F39D24E571C600EE4E4A /* AddressListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressListViewController.m; sourceTree = "<group>"; };
 		BEF8AED824F8E31200CDDF3B /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		BEF8AED924F8E31200CDDF3B /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		BEF8AEDB24FC916000CDDF3B /* InviteJobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteJobModel.h; sourceTree = "<group>"; };
+		BEF8AEDC24FC916100CDDF3B /* InviteJobModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteJobModel.m; sourceTree = "<group>"; };
 		D2D70D89217AD2F60050AE8B /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -1725,6 +1728,8 @@
 		60341ECD1EA49B66008E565B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BEF8AEDB24FC916000CDDF3B /* InviteJobModel.h */,
+				BEF8AEDC24FC916100CDDF3B /* InviteJobModel.m */,
 				60341ECE1EA49BC3008E565B /* OutlineModel.h */,
 				60341ECF1EA49BC3008E565B /* OutlineModel.mm */,
 				60341ED11EA62DBC008E565B /* ExaminationTitleModel.h */,
@@ -3312,6 +3317,7 @@
 				60F90D791E88F77B00151728 /* UIView+SNFoundation.m in Sources */,
 				60F90DF41E88F77B00151728 /* TPKeyboardAvoidingTableView.m in Sources */,
 				60A240481EE4FD2400C15F5B /* MineMessageViewController.mm in Sources */,
+				BEF8AEDD24FC916100CDDF3B /* InviteJobModel.m in Sources */,
 				60F90DDF1E88F77B00151728 /* SDImageCache.m in Sources */,
 				60F90DC31E88F77B00151728 /* LoadingHUDView.m in Sources */,
 				60D542721E8F94E90004AA31 /* WrongQuestionsSheetViewController.mm in Sources */,

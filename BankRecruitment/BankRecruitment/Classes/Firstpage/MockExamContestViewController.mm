@@ -106,6 +106,7 @@ return self.mockList.count ;
     
         MockExamTitleTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MockExamTitleTableViewCell, @"MockExamTitleTableViewCell");
         loc_cell.examTitleLabel.text = model.Name;
+      [loc_cell.leftImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", [LdGlobalObj sharedInstanse].fileServIp, model.Screen]] placeholderImage:[UIImage imageNamed:@"Info_Default"] completed:nil];
         loc_cell.examNumberLabel.text = [NSString stringWithFormat:@"%@", model.iCount];
         NSDateFormatter* dateFmt = [[NSDateFormatter alloc] init];
         dateFmt.dateFormat = @"yyyy-MM-dd";

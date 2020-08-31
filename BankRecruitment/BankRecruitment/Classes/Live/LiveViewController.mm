@@ -210,10 +210,12 @@ self.lineView.backgroundColor = KColorBlueText;
         int endNumber = dateNumberFromDateToToday(model.EndDate);
         if(endNumber>0){
             [loc_cell.enterBtn setTitle:@"进入详情" forState:0];
+            loc_cell.enterBtn.enabled = YES;
             [loc_cell.enterBtn setBackgroundColor:KColorBlueText];
                }
         else{
             [loc_cell.enterBtn setTitle:@"已停售" forState:0];
+            loc_cell.enterBtn.enabled = NO;
             [loc_cell.enterBtn setBackgroundColor:[UIColor colorWithHex:@"#EFEFEF"]];
 
         }

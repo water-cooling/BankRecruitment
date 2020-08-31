@@ -153,6 +153,7 @@
     CalendarTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, CalendarTableViewCell, @"CalendarTableViewCell");
     NSDictionary *dict = self.hisList[indexPath.row];
     loc_cell.editBtn.tag = indexPath.row;
+    [loc_cell.editBtn setImage:[UIImage imageNamed:@"zt"] forState:0];
     [loc_cell.editBtn addTarget:self action:@selector(editClick:) forControlEvents:UIControlEventTouchUpInside];
     loc_cell.calendarTitleLabel.text = dict[@"KeyWord"];
     loc_cell.calendarTimeLabel.text = dict[@"PDate"];

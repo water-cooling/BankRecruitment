@@ -316,6 +316,8 @@
                 [self.tableView reloadData];
                 return;
             }
+        }else{
+             ZB_Toast(@"暂无数据");
         }
         
     } failure:^(NSError *error) {
@@ -349,6 +351,8 @@
                 
                 [self.tableView reloadData];
             }
+        }else{
+            ZB_Toast(@"暂无数据");
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);

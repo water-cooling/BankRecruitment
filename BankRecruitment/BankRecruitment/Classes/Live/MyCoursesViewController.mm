@@ -41,18 +41,18 @@
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.placehodleImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"noaddress"]];
+    self.placehodleImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"noclass"]];
     self.noAddressLab = [[UILabel alloc] init];
     self.noAddressLab.font = [UIFont systemFontOfSize:15];
     self.noAddressLab.textAlignment = NSTextAlignmentCenter;
         self.noAddressLab.textColor = [UIColor colorWithHex:@"#333333"];
-        self.noAddressLab.text = @"您还没有收获地址哦～";
+        self.noAddressLab.text = @"暂无课程";
     [self.view addSubview:self.noAddressLab];
     [self.view addSubview:self.placehodleImg];
     self.tableview.hidden = YES;
     [self.placehodleImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
-        make.size.mas_equalTo(CGSizeMake(145, 145));
+        make.size.mas_equalTo(CGSizeMake(141, 104));
     }];
     [self.noAddressLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
@@ -160,15 +160,15 @@
                 self.noAddressLab.hidden = YES;
                                 
             }
-            self.tableview.hidden = NO;
-            self.placehodleImg.hidden = YES;
-            self.noAddressLab.hidden = YES;
+            self.tableview.hidden = YES;
+            self.placehodleImg.hidden = NO;
+            self.noAddressLab.hidden = NO;
             
         }else{
             ZB_Toast(@"暂无数据");
-            self.tableview.hidden = NO;
-            self.placehodleImg.hidden = YES;
-            self.noAddressLab.hidden = YES;
+            self.tableview.hidden = YES;
+            self.placehodleImg.hidden = NO;
+            self.noAddressLab.hidden =NO;
         }
         
         [self.tableview reloadData];

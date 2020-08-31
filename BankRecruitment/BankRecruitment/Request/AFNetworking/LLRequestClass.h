@@ -424,6 +424,9 @@
  uid：由微信注册接口 传回来的UID
  */
 + (void)requestCheckWXBymobile:(NSString *)mobile uid:(NSString *)uid success:(HttpSuccess)success failure:(HttpFailure)failure;
-
+/**
+获取首页招聘信息
+*/
++ (void)requestdoGetApplicationBySuccess:(HttpSuccess)success failure:(HttpFailure)failure;
 @end
 

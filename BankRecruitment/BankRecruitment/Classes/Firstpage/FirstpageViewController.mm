@@ -44,6 +44,9 @@
 #import "VideoTypeModel.h"
 #import "VideoViewController.h"
 #import "SignViewController.h"
+#import "InviteJobModel.h"
+#import <WebKit/WebKit.h>
+#import "WebViewController.h"
 #define kHeadScrollHeight 150
 
 @interface FirstpageViewController ()<UITableViewDelegate, UITableViewDataSource, FirstTableCellHeadFunctionBtnFunc, FirstpageModulesFunctionBtnFunc, UISearchBarDelegate, UIWebViewDelegate, WSPageViewDataSource, WSPageViewDelegate>
@@ -51,6 +54,7 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, copy) NSMutableArray *moduleList;//首页的8个图标
 @property (nonatomic, strong) NSMutableArray *typeList;//获取视频list
+@property (nonatomic, strong) NSMutableArray *inviteJobList;//获取招聘list
 @property (nonatomic, assign) NSInteger tempOutLineCellNumber;
 @property (nonatomic, strong) dispatch_group_t group;
 @property (nonatomic, strong)  dispatch_queue_t queue;
@@ -94,7 +98,9 @@
     dispatch_group_async(self.group, self.queue, ^{
                  [self NetworkGetAllAdByIndex:9999];
     });
-       
+    dispatch_group_async(self.group, self.queue, ^{
+            [self requestdoGetApplication];
+    });
     dispatch_group_async(self.group, self.queue, ^{
               [self NetworkGetFirstPageModule];
         });
@@ -513,20 +519,32 @@
         make.right.equalTo(moreView).offset(-12);
     }];
         
-      UILabel *label2 = [[UILabel alloc] init];
-        label2.font = [UIFont systemFontOfSize:12];
-        label2.textAlignment = NSTextAlignmentRight;
-        label2.textColor = [UIColor colorWithHex:@"#999999"];
-        label2.text = @"更多精彩";
-        [moreView addSubview:label2];
-    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+      UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        moreBtn.titleLabel.textAlignment = NSTextAlignmentRight;
+        [moreBtn setTitleColor: [UIColor colorWithHex:@"#999999"]forState:0];
+        [moreBtn setTitle:@"更多精彩" forState:0];
+        moreBtn.tag = section+2000;
+        [moreBtn addTarget:self action:@selector(moreClick:) forControlEvents:UIControlEventTouchUpInside];
+        [moreView addSubview:moreBtn];
+    [moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(rightImg.mas_left).offset(-6.5);
         make.centerY.equalTo(label1);
     }];
-        
         return Headview;
     }
     return nil;
+}
+
+-(void)moreClick:(UIButton *)sender{
+    if (sender.tag == 2003) {
+        WebViewController *webVc = [WebViewController new];
+        webVc.urlString = @"http://m.yinhangzhaopin.com/";
+        webVc.title = @"招聘详情";
+        webVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webVc animated:YES];
+    }
+    
 }
 
 -(void)expandClick:(UITapGestureRecognizer *)ges{
@@ -569,7 +587,7 @@
     if(section <= 2){
         return 1;
     }else{
-        return 4;
+        return self.inviteJobList ? self.inviteJobList.count : 0;
     }
 }
 
@@ -615,6 +633,10 @@
             return loc_cell;
         }else{
        InviteTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, InviteTableViewCell, @"InviteTableViewCell");
+            if (self.inviteJobList.count) {
+                InviteJobModel *model  = self.inviteJobList[indexPath.row];
+                loc_cell.titleLab.text = model.title;
+            }
         loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
                  return loc_cell;
     }
@@ -622,6 +644,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.section > 2) {
+        InviteJobModel *model  = self.inviteJobList[indexPath.row];
+        WebViewController *webVc = [WebViewController new];
+        webVc.urlString = model.h5Url;
+        webVc.title = @"招聘详情";
+        webVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webVc animated:YES];
+    }
     
    
 }
@@ -766,6 +796,33 @@
 
     }];
 }
+
+//获取招聘信息
+- (void)requestdoGetApplication{
+    dispatch_group_enter(self.group);
+    self.inviteJobList = [NSMutableArray arrayWithCapacity:9];
+    [LLRequestClass requestdoGetApplicationBySuccess:^(id jsonData) {
+        NSDictionary *contentDic=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        if([contentDic[@"code"]intValue] == 200){
+            NSArray * arr = contentDic[@"data"][@"response"][@"zhaopins"];
+            if (arr) {
+                for(NSDictionary *dict in arr)
+                {
+                    InviteJobModel *model = [InviteJobModel new];
+                    [model setDataWithDic:dict];
+                    [self.inviteJobList addObject:model];
+                }
+                
+            }
+
+        }
+        dispatch_group_leave(self.group);
+    } failure:^(NSError *error) {
+        dispatch_group_leave(self.group);
+    }];
+}
+
+
 //获取推荐的视频
 - (void)NetworkGetVideoTypes{
     dispatch_group_enter(self.group);

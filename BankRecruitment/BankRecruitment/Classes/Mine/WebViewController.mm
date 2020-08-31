@@ -77,6 +77,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    
     [_progressView setProgress:1.0f animated:YES];
     [self performSelector:@selector(cb_clearProgress) withObject:nil afterDelay:0.8f];//延迟进度条的销毁
     

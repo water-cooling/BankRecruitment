@@ -15,6 +15,7 @@
 #import "DataBaseManager.h"
 #import "UMessage.h"
 #import "MineMessageViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AppDelegate ()<UseGuideDelegate, UNUserNotificationCenterDelegate, UIAlertViewDelegate>
 @property (nonatomic, strong) RemoteMessageModel *remoteMessageModel;
@@ -25,7 +26,13 @@
     
     [DataBaseManager sharedManager];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    BOOL ok;
+    NSError *setCategoryError = nil;
+    ok = [audioSession setCategory:AVAudioSessionCategoryPlayback        error:&setCategoryError];
+    if (!ok) {
+        NSLog(@"%s setCategoryError=%@", __PRETTY_FUNCTION__, setCategoryError);
+    }
     // Override point for customization after application launch.
     /* 打开调试日志 */
 #ifdef DEBUG
