@@ -126,17 +126,8 @@
 
 #pragma -mark UITableView
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *speatorView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, Screen_Width, 16)];
-    speatorView.backgroundColor = [UIColor whiteColor];
-    return speatorView;
-}
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return  125 ;
 }
 
@@ -152,21 +143,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MineMessageTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MineMessageTableViewCell, @"MineMessageTableViewCell");
-    NSDictionary *dict = self.list[indexPath.row];
+    NSDictionary *dict = self.list[indexPath.section];
    
     loc_cell.contentView.layer.shadowOffset = CGSizeMake(2.5, 0);
     loc_cell.messageTitleLabel.text = dict[@"Name"];
     loc_cell.messageDetailLabel.text = dict[@"Msg"];
     loc_cell.messageTimeLabel.text = dict[@"BegTime"];
     [loc_cell.moreBtn addTarget:self action:@selector(moreClick:) forControlEvents:UIControlEventTouchUpInside];
-    loc_cell.moreBtn.tag = indexPath.row;
+    loc_cell.moreBtn.tag = indexPath.section;
     return loc_cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSDictionary *dict = self.list[indexPath.row];
+    NSDictionary *dict = self.list[indexPath.section];
     RemoteMessageModel *model = [RemoteMessageModel model];
     model.msg = dict[@"Msg"];
     model.msgUrl = dict[@"MsgURL"];
@@ -174,6 +165,7 @@
     model.name = dict[@"Name"];
     model.linkId = dict[@"LinkID"];
     model.notify_id = dict[@"ID"];
+    model.BegTime = dict[@"BegTime"];
     [[LdGlobalObj sharedInstanse] processRemoteMessage:model];
 }
 -(void)moreClick:(UIButton *)sender{
@@ -185,6 +177,7 @@
        model.name = dict[@"Name"];
        model.linkId = dict[@"LinkID"];
        model.notify_id = dict[@"ID"];
+        model.BegTime = dict[@"BegTime"];
        [[LdGlobalObj sharedInstanse] processRemoteMessage:model];
 }
 

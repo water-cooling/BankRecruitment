@@ -32,6 +32,7 @@
 @property (nonatomic, copy) NSString *msgUrl;
 @property (nonatomic, copy) NSString *mType;
 @property (nonatomic, copy) NSString *linkId;
+@property (nonatomic, copy) NSString *BegTime;
 
 + (instancetype)model;
 - (void)setDataWithDic:(NSDictionary *)dic;

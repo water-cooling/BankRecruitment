@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,26 +23,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thc-HU-9vO">
-                    <rect key="frame" x="16" y="106.5" width="343" height="523.5"/>
+                    <rect key="frame" x="16" y="65" width="343" height="565"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVa-7H-FbM">
-                    <rect key="frame" x="12" y="16" width="351" height="19.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVa-7H-FbM">
+                    <rect key="frame" x="12" y="16" width="351" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="银行易考" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ADU-tT-hjl">
-                    <rect key="frame" x="12" y="50" width="49.5" height="14.5"/>
+                    <rect key="frame" x="12" y="30.5" width="49.5" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5I0-PU-pKg">
-                    <rect key="frame" x="332" y="50" width="31" height="14.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5I0-PU-pKg">
+                    <rect key="frame" x="363" y="38" width="0.0" height="0.0"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -56,7 +56,7 @@
                 <constraint firstItem="ADU-tT-hjl" firstAttribute="top" secondItem="yVa-7H-FbM" secondAttribute="bottom" constant="14.6" id="IkW-Vi-A4R"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="thc-HU-9vO" secondAttribute="bottom" constant="37" id="LEJ-YK-xD3"/>
                 <constraint firstItem="ADU-tT-hjl" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="12" id="WT2-Ie-jz8"/>
-                <constraint firstItem="thc-HU-9vO" firstAttribute="top" secondItem="ADU-tT-hjl" secondAttribute="bottom" constant="42" id="Ymp-Zb-qY2"/>
+                <constraint firstItem="thc-HU-9vO" firstAttribute="top" secondItem="ADU-tT-hjl" secondAttribute="bottom" constant="20" id="Ymp-Zb-qY2"/>
                 <constraint firstItem="yVa-7H-FbM" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="16" id="Ywl-8Y-D5j"/>
                 <constraint firstItem="5I0-PU-pKg" firstAttribute="centerY" secondItem="ADU-tT-hjl" secondAttribute="centerY" id="s6W-wm-OjE"/>
                 <constraint firstItem="thc-HU-9vO" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="viP-45-8x7"/>

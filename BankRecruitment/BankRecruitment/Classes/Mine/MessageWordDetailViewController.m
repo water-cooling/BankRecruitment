@@ -21,15 +21,17 @@
     [super viewDidLoad];
     self.title = @"我的消息详情";
     // Do any additional setup after loading the view from its nib.
-    self.appTitleLab.text = self.model.name;
+    self.titleLab.text = self.model.name;
     self.textView.text = self.model.msg;
-    
+    self.timeLab.text = self.model.BegTime;
+    self.textView.userInteractionEnabled = NO;
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+
 }
 
 - (void)backButtonPressed

@@ -192,7 +192,7 @@
     [_messageButton addTarget:self action:@selector(messageButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [messageView addSubview:_messageButton];
     
-    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_messageButton.frame)-8, _messageButton.frame.origin.y+5, 13, 13)];
+    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_messageButton.frame)-16, _messageButton.frame.origin.y+3, 13, 13)];
     messageLabel.backgroundColor = [UIColor redColor];
     messageLabel.textColor = [UIColor whiteColor];
     messageLabel.font = [UIFont systemFontOfSize:10];
@@ -540,7 +540,7 @@
     if (sender.tag == 2003) {
         WebViewController *webVc = [WebViewController new];
         webVc.urlString = @"http://m.yinhangzhaopin.com/";
-        webVc.title = @"招聘详情";
+        webVc.title = @"招聘信息";
         webVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webVc animated:YES];
     }
@@ -648,7 +648,7 @@
         InviteJobModel *model  = self.inviteJobList[indexPath.row];
         WebViewController *webVc = [WebViewController new];
         webVc.urlString = model.h5Url;
-        webVc.title = @"招聘详情";
+        webVc.title = @"招聘信息";
         webVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webVc animated:YES];
     }
