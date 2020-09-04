@@ -152,13 +152,13 @@ static LdGlobalObj* _glbObj;
     self.webAppPort     = [self getSettingForKey:_SET_WEB_PORT default:@"10007"];
     self.fileGetPort    = [self getSettingForKey:_SET_FILE_GET_IP default:@"10008"];
     self.fileSetPort    = [self getSettingForKey:_SET_FILE_SET_IP default:@"10009"];
-//    self.webAppIp       = @"http://yk.yinhangzhaopin.com/bshApp/AppAction";
-//    self.fileServIp     = @"http://yk.yinhangzhaopin.com/";
-//    self.htmlServIp     = @"http://yk.yinhangzhaopin.com/zlh5/";
+    self.webAppIp       = @"http://yk.yinhangzhaopin.com/bshApp/AppAction";
+    self.fileServIp     = @"http://yk.yinhangzhaopin.com/";
+    self.htmlServIp     = @"http://yk.yinhangzhaopin.com/zlh5/";
     //测试
-    self.webAppIp = @"http://yhyk.project.njagan.org/bshApp/AppAction";
-    self.fileServIp = @"http://yhyk.project.njagan.org/";
-    self.htmlServIp = @"http://yhyk.project.njagan.org/zlh5/";
+//    self.webAppIp = @"http://yhyk.project.njagan.org/bshApp/AppAction";
+//    self.fileServIp = @"http://yhyk.project.njagan.org/";
+//    self.htmlServIp = @"http://yhyk.project.njagan.org/zlh5/";
 
     //
     // 路径初始化

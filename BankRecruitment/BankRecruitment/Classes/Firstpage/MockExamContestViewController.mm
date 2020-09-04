@@ -71,20 +71,6 @@
 {
     return 0.1;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 10;
-}
-
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, 10)];
-    footerView.backgroundColor = [UIColor clearColor];
-    
-    return footerView;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    return 120;
@@ -95,14 +81,13 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 return self.mockList.count ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MockModel *model = self.mockList[indexPath.section];
+    MockModel *model = self.mockList[indexPath.row];
     
         MockExamTitleTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MockExamTitleTableViewCell, @"MockExamTitleTableViewCell");
         loc_cell.examTitleLabel.text = model.Name;
@@ -122,7 +107,7 @@ return self.mockList.count ;
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    MockModel *model = self.mockList[indexPath.section];
+    MockModel *model = self.mockList[indexPath.row];
     MockExamDetailViewController *vc = [[MockExamDetailViewController alloc] init];
     vc.mockModelID = model.ID;
     [self.navigationController pushViewController:vc animated:YES];

@@ -1655,8 +1655,8 @@
            loc_cell.examIndexLabel.text = [NSString stringWithFormat:@"%d/%d", (int)tableView.tag+1, (int)self.practiceList.count];
         loc_cell.totalLab.text =  [NSString stringWithFormat:@"/%ld",self.practiceList.count];
         loc_cell.examIndexLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:[LdGlobalObj sharedInstanse].examFontSize];
-     
-        
+        loc_cell.desTitleLabel.text = [NSString stringWithFormat:@"%@(%@)", examModel.content, examModel.QPoint];
+
         if([LdGlobalObj sharedInstanse].isNightExamFlag)
         {
             loc_cell.examTitleLabel.textColor = UIColorFromHex(0x666666);

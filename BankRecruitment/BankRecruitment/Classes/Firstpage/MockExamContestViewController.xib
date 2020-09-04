@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,12 +30,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="m08-RO-h9A" secondAttribute="trailing" id="Gtd-cJ-Vx2"/>
-                <constraint firstItem="m08-RO-h9A" firstAttribute="bottom" secondItem="Pek-t5-eji" secondAttribute="bottom" priority="800" id="Mos-cK-aqe"/>
-                <constraint firstItem="m08-RO-h9A" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Rq1-5Q-f1d"/>
-                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="m08-RO-h9A" secondAttribute="bottom" id="aID-FS-5eD"/>
-                <constraint firstItem="m08-RO-h9A" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="evD-5h-oQD"/>
-                <constraint firstItem="m08-RO-h9A" firstAttribute="top" secondItem="Pek-t5-eji" secondAttribute="top" priority="800" constant="-20" id="rcx-cV-fIA"/>
+                <constraint firstItem="m08-RO-h9A" firstAttribute="leading" secondItem="Pek-t5-eji" secondAttribute="leading" id="Haz-Ac-AFa"/>
+                <constraint firstItem="m08-RO-h9A" firstAttribute="top" secondItem="Pek-t5-eji" secondAttribute="top" id="V1F-wc-38g"/>
+                <constraint firstItem="m08-RO-h9A" firstAttribute="trailing" secondItem="Pek-t5-eji" secondAttribute="trailing" id="kdb-bD-ocu"/>
+                <constraint firstItem="m08-RO-h9A" firstAttribute="bottom" secondItem="Pek-t5-eji" secondAttribute="bottom" id="mYI-Vw-A8n"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Pek-t5-eji"/>
             <point key="canvasLocation" x="-111.5" y="42.5"/>
