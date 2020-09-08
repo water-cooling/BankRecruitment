@@ -33,6 +33,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    [self.view endEditing:YES];
+}
 - (void)drawViews
 {
     self.title = @"编辑笔记";
@@ -51,18 +55,6 @@
     [saveButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, -5)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:saveButton];
     
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
-        self.view.backgroundColor = UIColorFromHex(0x2b3f5d);
-        [backButton setImage:[UIImage imageNamed:@"night_btn_top_back"] forState:UIControlStateNormal];
-        [saveButton setTitleColor:UIColorFromHex(0x7a8596) forState:UIControlStateNormal];
-    }
-    else
-    {
-        self.view.backgroundColor = [UIColor whiteColor];
-        [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
-        [saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
 }
 
 - (void)backButtonPressed

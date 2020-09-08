@@ -78,7 +78,7 @@
     [self.answerSheetScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
            make.left.right.equalTo(self.view);
            make.top.equalTo(self.topView.mas_bottom);
-           make.bottom.equalTo(self.bottomView.mas_top).offset(10);
+           make.bottom.equalTo(self.bottomView.mas_top).offset(-10);
     }];
     UILabel *titleLab = [[UILabel alloc] init];
     titleLab.text = @"答题情况";
@@ -182,8 +182,7 @@
         int lie = index%4;
         int firstkongxi = 30;
         int kongxi = (Screen_Width - 160 - firstkongxi*2)/3;
-        
-        functionBtn.frame = CGRectMake(firstkongxi+kongxi*(lie)+40*lie, 15*(hang+1)+50*hang, 40, 40);
+        functionBtn.frame = CGRectMake(firstkongxi+kongxi*(lie)+40*lie, 49*(hang+1)+50*hang, 40, 40);
         
         //把视图添加到当前的滚动视图中
         [self.answerSheetScrollView addSubview:functionBtn];

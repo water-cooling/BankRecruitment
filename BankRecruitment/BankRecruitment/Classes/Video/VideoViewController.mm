@@ -276,15 +276,16 @@
     }
     
     VideoTreeTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, VideoTreeTableViewCell, @"VideoTreeTableViewCell");
-    [loc_cell.actionBtn setImage:nil forState:UIControlStateNormal];
+   
     if(indexPath.row == 0){
         loc_cell.titleLab.text = mainModel.Name;
         loc_cell.leftConstraint.constant = 37;
         loc_cell.cricleHeight.constant = 6;
         if (mainModel.isSpread) {
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"arrowdown"] forState: 0];
+            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"Arrowdown"] forState:0];
+           
         }else{
-            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"arrowtop"] forState: 0];
+            [loc_cell.actionBtn setImage:[UIImage imageNamed:@"Arrowtop"] forState:0];
         }
     }else{
         loc_cell.titleLab.text = subModel.Name;
@@ -308,8 +309,59 @@
 }
 
 -(void)actionClick:(UIButton *)sender{
-    NSIndexPath * index = [NSIndexPath indexPathForRow:sender.tag%10000 inSection:sender.tag/10000];
-    [self tableView:self.tableView didSelectRowAtIndexPath:index];
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:sender.tag%10000 inSection:sender.tag/10000];
+    VideoCatalogModel *mainModel = self.videoMainList[indexPath.section];
+       NSArray *subArray = [self.mainIDAndSubValueDict objectForKey:mainModel.cID];
+       VideoModel *subModel = nil;
+       if(indexPath.row != 0){
+           subModel = subArray[indexPath.row-1];
+       }
+       
+       if(indexPath.row == 0){
+           float price = mainModel.Price.floatValue;
+           if([mainModel.IsGet isEqualToString:@"是"] || (price == 0))
+           {
+               [self outLineCellAction:indexPath.section];
+               
+               if(![mainModel.IsGet isEqualToString:@"是"])
+               {
+                   [self NetworkSendZeroPaySuccessByLinkID:mainModel.cID Abstract:mainModel.Name];
+               }
+           }
+           else
+           {
+               if([LdGlobalObj sharedInstanse].user_id.floatValue > 0)
+               {
+                   [[LdGlobalObj sharedInstanse] payActionByType:@"视频" payID:mainModel.cID];
+                   [LdGlobalObj sharedInstanse].buyObjectSuccessBlock = ^(){
+                       ZB_Toast(@"购买成功");
+                       [self refreshCurrentVideoList];
+                  
+                       [self outLineCellAction:indexPath.section];
+                   };
+               }
+               else
+               {
+                   BBAlertView *alertView = [[BBAlertView alloc] initWithTitle:@"提示" message:@"直接购买，会为当前设备购买视频；您可以去我的页面先注册再购买" delegate:nil cancelButtonTitle:@"返回" otherButtonTitles:@"游客身份购买"];
+                   LL_WEAK_OBJC(self);
+                   [alertView setConfirmBlock:^{
+                       [[LdGlobalObj sharedInstanse] payActionByType:@"视频" payID:mainModel.cID];
+                       [LdGlobalObj sharedInstanse].buyObjectSuccessBlock = ^(){
+                           ZB_Toast(@"购买成功");
+                           [weakself refreshCurrentVideoList];
+                       
+                           [self outLineCellAction:indexPath.section];
+                       };
+                   }];
+                   [alertView show];
+               }
+           }
+       }else{
+           VideoDetailViewController *vc = [[VideoDetailViewController alloc] init];
+           vc.videolist = subArray;
+           vc.videoIndex = (int)indexPath.row-1;
+           [self.navigationController pushViewController:vc animated:YES];
+       }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

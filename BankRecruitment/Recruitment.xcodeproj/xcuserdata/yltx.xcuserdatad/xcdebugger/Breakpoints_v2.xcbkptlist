@@ -94,6 +94,38 @@
             endingLineNumber = "545"
             landmarkName = "-NetworkGetExamDetailListByTitleList:isRetry:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B70CBDB4-CAF5-443E-8B94-0BEF392BAB02 - 20bf36ac8829284d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__76-[ExerciseReportViewController NetworkGetExamDetailListByTitleList:isRetry:]_block_invoke"
+                  moduleName = "Recruitment"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yltx/Documents/BankRecruitment/BankRecruitment/BankRecruitment/Classes/Firstpage/ExerciseReportViewController.mm"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "545"
+                  endingLineNumber = "545"
+                  offsetFromSymbolStart = "668">
+               </Location>
+               <Location
+                  uuid = "B70CBDB4-CAF5-443E-8B94-0BEF392BAB02 - 20bf36ac8829284d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__76-[ExerciseReportViewController NetworkGetExamDetailListByTitleList:isRetry:]_block_invoke"
+                  moduleName = "Recruitment"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yltx/Documents/BankRecruitment/BankRecruitment/BankRecruitment/Classes/Firstpage/ExerciseReportViewController.mm"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "545"
+                  endingLineNumber = "545"
+                  offsetFromSymbolStart = "692">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -126,38 +158,6 @@
             endingLineNumber = "664"
             landmarkName = "-NetworkGetPayInfoByType:payID:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "22856065-4A13-4A8B-8A8D-FA4A054560E0 - d1997cb97c714448"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LdGlobalObj NetworkGetPayInfoByType:payID:]"
-                  moduleName = "Recruitment"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yltx/Documents/BankRecruitment/BankRecruitment/BankRecruitment/Request/Common/LdGlobalObj.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "664"
-                  endingLineNumber = "664"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "22856065-4A13-4A8B-8A8D-FA4A054560E0 - ffeddebb985790bd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__45-[LdGlobalObj NetworkGetPayInfoByType:payID:]_block_invoke"
-                  moduleName = "Recruitment"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yltx/Documents/BankRecruitment/BankRecruitment/BankRecruitment/Request/Common/LdGlobalObj.mm"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "664"
-                  endingLineNumber = "664"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

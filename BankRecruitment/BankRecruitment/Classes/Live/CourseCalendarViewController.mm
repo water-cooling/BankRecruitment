@@ -83,23 +83,25 @@
     }
     
     self.calendarView = [[DAYCalendarView alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Width)];
-    self.calendarView.boldPrimaryComponentText = NO;
-    self.calendarView.allEventDateList = dateList;
-    if([LdGlobalObj sharedInstanse].isNightExamFlag)
-    {
-        self.calendarView.weekdayHeaderTextColor = [UIColor colorWithHex:@"#495262"];
-        self.calendarView.weekdayHeaderWeekendTextColor = [UIColor colorWithHex:@"#495262"];
-        self.calendarView.selectedIndicatorColor = kColorNavigationBar;
-        self.calendarView.todayIndicatorColor = UIColorFromHex(0x3a75cc);
-        self.calendarView.backgroundColor = [UIColor colorWithHex:@"#20282f"];
-    }else{
-        self.calendarView.weekdayHeaderTextColor = [UIColor colorWithHex:@"#8792ae"];
-        self.calendarView.weekdayHeaderWeekendTextColor = [UIColor colorWithHex:@"#8792ae"];
-        self.calendarView.selectedIndicatorColor = kColorNavigationBar;
-        self.calendarView.todayIndicatorColor = [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1];
-        self.calendarView.backgroundColor = [UIColor whiteColor];
-    }
-    [self.calendarView makeUIElements];
+    self.calendarView = [[DAYCalendarView alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Width)];
+       self.calendarView.boldPrimaryComponentText = NO;
+       self.calendarView.allEventDateList = dateList;
+   //    if([LdGlobalObj sharedInstanse].isNightExamFlag)
+   //    {
+   //        self.calendarView.weekdayHeaderTextColor = [UIColor colorWithHex:@"#495262"];
+   //        self.calendarView.weekdayHeaderWeekendTextColor = [UIColor colorWithHex:@"#495262"];
+   //        self.calendarView.selectedIndicatorColor = kColorNavigationBar;
+   //        self.calendarView.todayIndicatorColor = UIColorFromHex(0x3a75cc);
+   //        self.calendarView.backgroundColor = [UIColor colorWithHex:@"#20282f"];
+   //    }else{
+           self.calendarView.weekdayHeaderTextColor = [UIColor colorWithHex:@"#8792ae"];
+           self.calendarView.weekdayHeaderWeekendTextColor = [UIColor colorWithHex:@"#8792ae"];
+           self.calendarView.selectedIndicatorColor = KColorBlueText;
+           self.calendarView.todayIndicatorColor = KColorBlueText;
+       self.calendarView.componentTextColor = [UIColor colorWithHex:@"#999999"];
+           self.calendarView.backgroundColor = [UIColor whiteColor];
+   //    }
+       [self.calendarView makeUIElements];
     [self.view addSubview:self.calendarView];
     [self.calendarView addTarget:self action:@selector(calendarViewDidChange:) forControlEvents:UIControlEventValueChanged];
     

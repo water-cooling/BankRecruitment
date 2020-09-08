@@ -264,6 +264,26 @@
 }
 
 /**
+ 苹果登录
+ unionid  苹果唯一ID
+ nickname：苹果昵称
+ */
++ (void)requestRegisterAppleByunionid:(NSString *)unionid nickname:(NSString *)nickname success:(HttpSuccess)success failure:(HttpFailure)failure{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:9];
+    [dict setObject:@"doRegisterWX" forKey:@"action"];
+    [dict setObject:[NSString stringWithFormat:@"IOS_%@",unionid] forKey:@"unionid"];
+    [dict setObject:nickname ? nickname : @"" forKey:@"nickname"];
+    [LLRequestClass postWithURL:[LdGlobalObj sharedInstanse].webAppIp params:dict success:^(id jsonData) {
+        success(jsonData);
+    } failure:^(NSError *error) {
+        if (error) {
+            failure(error);
+        }
+    }];
+}
+
+
+/**
  微信登录 注册手机号码
  mobile：手机号码
  uid：由微信注册接口 传回来的UID

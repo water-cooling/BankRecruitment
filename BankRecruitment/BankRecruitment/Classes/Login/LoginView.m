@@ -122,8 +122,8 @@
        }];
     [self addSubview:self.btnWeChat];
        [_btnWeChat mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.centerX.equalTo(self);
-           make.top.equalTo(moreLab.mas_bottom).offset(15);
+           make.centerX.equalTo(self).offset(-60);
+           make.top.equalTo(moreLab.mas_bottom).offset(25);
            make.width.mas_equalTo(40);
            make.height.mas_equalTo(40);
        }];
@@ -131,14 +131,30 @@
     self.btnWeChat.imageView.layer.masksToBounds = YES;
     self.btnWeChat.layer.borderWidth = 0.5;
     self.btnWeChat.layer.borderColor = [UIColor colorWithHex:@"#51C300"].CGColor;
+    
+    [self addSubview:self.btnApple];
+    [self.btnApple mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self).offset(60);
+              make.top.equalTo(moreLab.mas_bottom).offset(25);
+              make.width.mas_equalTo(40);
+              make.height.mas_equalTo(40);
+        }];
+        self.btnApple.imageView.layer.cornerRadius = 20;
+       self.btnApple.imageView.layer.masksToBounds = YES;
     if([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession]){
          self.btnWeChat.hidden = NO;
-         moreLab.hidden = NO;
+        self.btnApple.hidden = NO;
+        moreLab.hidden = NO;
      }else{
          self.btnWeChat.hidden = YES;
+         self.btnApple.hidden = YES;
          moreLab.hidden = YES;
      }
-    
+    if (@available(iOS 13.0, *)) {
+       self.btnApple.hidden = NO;
+    }else{
+        self.btnApple.hidden = YES;
+    }
      NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
      NSDictionary *loginDict = [defaults objectForKey:@"userLoginDict"];
      if(loginDict){
@@ -230,5 +246,12 @@
         [_btnWeChat setBackgroundImage:[UIImage imageNamed:@"weixinlogin"] forState:UIControlStateNormal];
     }
     return _btnWeChat;
+}
+- (UIButton *)btnApple {
+    if (!_btnApple) {
+        _btnApple = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_btnApple setBackgroundImage:[UIImage imageNamed:@"AppleAuth"] forState:UIControlStateNormal];
+    }
+    return _btnApple;
 }
 @end

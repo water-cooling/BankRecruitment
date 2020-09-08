@@ -47,6 +47,7 @@
 #import "InviteJobModel.h"
 #import <WebKit/WebKit.h>
 #import "WebViewController.h"
+#import "HomeVideoViewController.h"
 #define kHeadScrollHeight 150
 
 @interface FirstpageViewController ()<UITableViewDelegate, UITableViewDataSource, FirstTableCellHeadFunctionBtnFunc, FirstpageModulesFunctionBtnFunc, UISearchBarDelegate, UIWebViewDelegate, WSPageViewDataSource, WSPageViewDelegate>
@@ -198,8 +199,9 @@
     messageLabel.font = [UIFont systemFontOfSize:10];
     messageLabel.layer.cornerRadius = 7.5;
     messageLabel.layer.masksToBounds = YES;
+    messageLabel.hidden = YES;
     messageLabel.textAlignment = NSTextAlignmentCenter;
-    messageLabel.text = @"2";
+    messageLabel.text = @"";
     [messageView addSubview:messageLabel];
     self.navigationItem.rightBarButtonItems = @[[[UIBarButtonItem alloc] initWithCustomView:messageView], negativeSpacer1];
 }
@@ -544,7 +546,11 @@
         webVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webVc animated:YES];
     }
-    
+    if (sender.tag == 2002) {
+        HomeVideoViewController * videoVc = [[HomeVideoViewController alloc]initWithNibName:@"HomeVideoViewController" bundle:nil];
+        videoVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:videoVc animated:YES];
+    }
 }
 
 -(void)expandClick:(UITapGestureRecognizer *)ges{

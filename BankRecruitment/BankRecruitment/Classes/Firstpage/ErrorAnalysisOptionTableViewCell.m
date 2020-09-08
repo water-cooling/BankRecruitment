@@ -55,7 +55,7 @@
             self.examOptionButton.layer.borderColor = [UIColor colorWithHex:@"#207154"].CGColor;
             self.examOptionButton.layer.borderWidth = 1;
             self.examOptionButton.layer.masksToBounds = YES;
-            [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#207154"] range:NSMakeRange(0, [attributeString length])];
+            [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#333333"] range:NSMakeRange(0, [attributeString length])];
 //            [self.examOptionButton setTitleColor:[UIColor colorWithHex:@"#207154"] forState:UIControlStateNormal];
         }
         else if(type == ErrorAnalysisOptionWrong)
@@ -65,7 +65,7 @@
             self.examOptionButton.layer.borderColor = [UIColor colorWithHex:@"#a13c25"].CGColor;
             self.examOptionButton.layer.borderWidth = 1;
             self.examOptionButton.layer.masksToBounds = YES;
-            [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#a13c25"] range:NSMakeRange(0, [attributeString length])];
+            [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#333333"] range:NSMakeRange(0, [attributeString length])];
 //            [self.examOptionButton setTitleColor:[UIColor colorWithHex:@"#a13c25"] forState:UIControlStateNormal];
         }
     }
@@ -87,7 +87,7 @@
             self.examOptionButton.layer.borderColor = [UIColor colorWithHex:@"#60d49e"].CGColor;
             self.examOptionButton.layer.borderWidth = 1;
             self.examOptionButton.layer.masksToBounds = YES;
-            [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#60d49e"] range:NSMakeRange(0, [attributeString length])];
+            [attributeString addAttribute:NSForegroundColorAttributeName value:kColorDarkText range:NSMakeRange(0, [attributeString length])];
 //            [self.examOptionButton setTitleColor:[UIColor colorWithHex:@"#60d49e"] forState:UIControlStateNormal];
         }
         else if(type == ErrorAnalysisOptionWrong)
@@ -98,7 +98,7 @@
             self.examOptionButton.layer.borderColor = [UIColor colorWithHex:@"#eb472d"].CGColor;
             self.examOptionButton.layer.borderWidth = 1;
             self.examOptionButton.layer.masksToBounds = YES;
-            [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#eb472d"] range:NSMakeRange(0, [attributeString length])];
+            [attributeString addAttribute:NSForegroundColorAttributeName value:kColorDarkText range:NSMakeRange(0, [attributeString length])];
 //            [self.examOptionButton setTitleColor:[UIColor colorWithHex:@"#eb472d"] forState:UIControlStateNormal];
         }
     }

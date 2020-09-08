@@ -13,7 +13,10 @@
 #import "GetSMSViewController.h"
 #import "BBAlertView.h"
 #import "UserKnowViewController.h"
-@interface LoginViewController ()
+#import <AuthenticationServices/AuthenticationServices.h>
+#import <objc/runtime.h>
+
+@interface LoginViewController ()<ASAuthorizationControllerDelegate,ASWebAuthenticationPresentationContextProviding>
 @property (nonatomic, strong) UIImageView *imgLogo;
 @property (nonatomic, strong) UILabel *typeLab;
 @property (nonatomic, strong) UIButton *btnLogin;
@@ -101,6 +104,8 @@
     }];
     self.loginView = [[LoginView alloc]initWithFrame:CGRectMake(0, 180+StatusBarHeight, Screen_Width, Screen_Height-StatusBarHeight-180)];
     [self.loginView.btnWeChat addTarget:self action:@selector(weChatAuth) forControlEvents:UIControlEventTouchUpInside];
+    [self.loginView.btnApple addTarget:self action:@selector(appleAuth) forControlEvents:UIControlEventTouchUpInside];
+
     [self.loginView.btnLogin addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     [self.loginView.btnForget addTarget:self action:@selector(forgerPwdAction) forControlEvents:UIControlEventTouchUpInside];
 
@@ -278,6 +283,140 @@
            }
        }];
 }
+
+-(void)appleAuth API_AVAILABLE(ios(13.0)){
+        if (@available(iOS 13.0, *)) {
+             // 基于用户的Apple ID授权用户，生成用户授权请求的一种机制
+            ASAuthorizationAppleIDProvider *appleIdProvider = [[ASAuthorizationAppleIDProvider alloc] init];
+            // 创建新的AppleID 授权请求
+            ASAuthorizationAppleIDRequest *request = appleIdProvider.createRequest;
+             // 在用户授权期间请求的联系信息
+            request.requestedScopes = @[ASAuthorizationScopeEmail,ASAuthorizationScopeFullName];
+            
+             //需要考虑用户已经登录过，可以直接使用keychain密码来进行登录-这个很智能 (但是这个有问题)
+    //        ASAuthorizationPasswordProvider *appleIDPasswordProvider = [[ASAuthorizationPasswordProvider alloc] init];
+    //        ASAuthorizationPasswordRequest *passwordRequest = appleIDPasswordProvider.createRequest;
+            
+            // 由ASAuthorizationAppleIDProvider创建的授权请求 管理授权请求的控制器
+            ASAuthorizationController *controller = [[ASAuthorizationController alloc] initWithAuthorizationRequests:@[request]];
+             // 设置授权控制器通知授权请求的成功与失败的代理
+            controller.delegate = self;
+            // 设置提供 展示上下文的代理，在这个上下文中 系统可以展示授权界面给用户
+//            controller.presentationContextProvider = self;
+             // 在控制器初始化期间启动授权流
+            [controller performRequests];
+        } else {
+            NSLog(@"system is lower");
+        }
+}
+    #pragma mark - 授权成功的回调
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithAuthorization:(ASAuthorization *)authorization  API_AVAILABLE(ios(13.0)) {
+    NSString *user;
+    NSString *nickName;
+        if ([authorization.credential isKindOfClass:[ASAuthorizationAppleIDCredential class]]) {
+            // 用户登录使用ASAuthorizationAppleIDCredential
+            ASAuthorizationAppleIDCredential *credential = authorization.credential;
+            user = credential.user;
+            NSData *identityToken = credential.identityToken;
+            nickName = credential.fullName.givenName;
+            NSLog(@"fullName -     %@",credential.fullName);
+            //授权成功后，你可以拿到苹果返回的全部数据，根据需要和后台交互。
+            NSLog(@"user   -   %@  %@",user,identityToken);
+            //保存apple返回的唯一标识符
+            [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"userIdentifier"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        } else if ([authorization.credential isKindOfClass:[ASPasswordCredential class]]) {
+            // 用户登录使用现有的密码凭证
+            ASPasswordCredential *psdCredential = authorization.credential;
+            // 密码凭证对象的用户标识 用户的唯一标识
+            user = psdCredential.user;
+            nickName = @"";
+            NSString *psd = psdCredential.password;
+            NSLog(@"psduser -  %@   %@",psd,user);
+        } else {
+           NSLog(@"授权信息不符");
+        }
+    [LLRequestClass requestRegisterAppleByunionid:user nickname:nickName success:^(id jsonData) {
+                     NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+                     NSLog(@"%@", contentArray);
+                     if(contentArray.count > 0)
+                     {
+                         NSDictionary *contentDict = contentArray.firstObject;
+                         NSString *result = [contentDict objectForKey:@"result"];
+                         if([result isEqualToString:@"success"]){
+                             [LdGlobalObj sharedInstanse].user_id = contentDict[@"uid"];
+                             [LdGlobalObj sharedInstanse].user_mobile = contentDict[@"mobile"];
+                             [LdGlobalObj sharedInstanse].user_name = contentDict[@"pet"];
+                             [LdGlobalObj sharedInstanse].tech_id = contentDict[@"tech"];
+                             [LdGlobalObj sharedInstanse].islive = [contentDict[@"islive"] isEqualToString:@"是"] ? YES : NO ;
+                             [LdGlobalObj sharedInstanse].istecher = [contentDict[@"istecher"] isEqualToString:@"是"] ? YES : NO ;
+                             [LdGlobalObj sharedInstanse].user_acc = contentDict[@"acc"];
+                             [LdGlobalObj sharedInstanse].user_LastSign = contentDict[@"LastSign"];
+                             [LdGlobalObj sharedInstanse].user_SignDays = contentDict[@"SignDays"];
+                             
+                             self.pass = contentDict[@"pass"];
+                             
+                             //如果没有mobile值，则转到手机绑定页面
+                             if(strIsNullOrEmpty(contentDict[@"mobile"])){
+                                 BindPhoneViewController *vc = [[BindPhoneViewController alloc] init];
+                                 [self.navigationController pushViewController:vc animated:YES];
+                             }else{
+                                 [self saveAutoLoginMes];
+                                 
+                                      TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
+                                     [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
+                                     appDelegate.window.rootViewController = homePageVC;
+                                     [appDelegate.window makeKeyAndVisible];
+                                 
+                                 [self NetworkPutMsgToken];
+                             }
+                         }else{
+                             ZB_Toast(@"微信授权登录失败");
+                         }
+                     }
+                 } failure:^(NSError *error) {
+                     ZB_Toast(@"登录失败");
+                 }];
+}
+
+    #pragma mark - 授权回调失败
+- (void)authorizationController:(ASAuthorizationController *)controller didCompleteWithError:(NSError *)error  API_AVAILABLE(ios(13.0)){
+        
+         NSLog(@"错误信息：%@", error);
+         NSString *errorMsg;
+        switch (error.code) {
+            case ASAuthorizationErrorCanceled:
+                errorMsg = @"用户取消了授权请求";
+                NSLog(@"errorMsg -   %@",errorMsg);
+                break;
+                
+            case ASAuthorizationErrorFailed:
+                errorMsg = @"授权请求失败";
+                NSLog(@"errorMsg -   %@",errorMsg);
+                break;
+                
+            case ASAuthorizationErrorInvalidResponse:
+                errorMsg = @"授权请求响应无效";
+                NSLog(@"errorMsg -   %@",errorMsg);
+                break;
+                
+            case ASAuthorizationErrorNotHandled:
+                errorMsg = @"未能处理授权请求";
+                NSLog(@"errorMsg -   %@",errorMsg);
+                break;
+                
+            case ASAuthorizationErrorUnknown:
+                errorMsg = @"授权请求失败未知原因";
+                NSLog(@"errorMsg -   %@",errorMsg);
+                break;
+                            
+            default:
+                break;
+        }
+    ZB_Toast(errorMsg);
+}
+
+
 
 - (void)NetworkPutMsgToken{
     [LLRequestClass requestdoPutMsgTokenBytoken:[LdGlobalObj sharedInstanse].deviceToken Success:^(id jsonData) {

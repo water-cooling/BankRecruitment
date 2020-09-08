@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *btnForget;
 @property (nonatomic, strong) UIButton *btnLogin;
 @property (nonatomic, strong) UIButton *btnWeChat;
+@property (nonatomic, strong) UIButton *btnApple;
+
 @property (nonatomic, strong) UITextField *phoneTextField;
 @property (nonatomic, strong) UITextField *pwdTextField;
 @end

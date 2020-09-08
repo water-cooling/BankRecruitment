@@ -498,7 +498,7 @@
     {
         [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         
-        self.functionBackView.backgroundColor = UIColorFromHex(0x213451);
+        
         for(UIView *subView in self.examScrollView.subviews)
         {
             if([subView isKindOfClass:[UITableView class]])
@@ -509,17 +509,16 @@
         
         self.analysisTypeLabel.textColor = UIColorFromHex(0x7a8596);
         [self.backButton setImage:[UIImage imageNamed:@"night_btn_top_back"] forState:UIControlStateNormal];
-        [self.answerSheetBtn setImage:[UIImage imageNamed:@"night_icon_datika"] forState:UIControlStateNormal];
-        [self.collectBtn setImage:[UIImage imageNamed:@"night_icon_collect"] forState:UIControlStateNormal];
+
         [self.shareBtn setImage:[UIImage imageNamed:@"night_icon_share"] forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"night_icon_more"] forState:UIControlStateNormal];
+    
         
     }
     else
     {
         [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
         
-        self.functionBackView.backgroundColor = UIColorFromHex(0x1e9aed);
+        
         for(UIView *subView in self.examScrollView.subviews)
         {
             if([subView isKindOfClass:[UITableView class]])
@@ -530,10 +529,9 @@
         
         self.analysisTypeLabel.textColor = [UIColor whiteColor];
         [self.backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
-        [self.answerSheetBtn setImage:[UIImage imageNamed:@"shiti_icon_datika"] forState:UIControlStateNormal];
-        [self.collectBtn setImage:[UIImage imageNamed:@"shiti_icon_collect"] forState:UIControlStateNormal];
+
         [self.shareBtn setImage:[UIImage imageNamed:@"shiti_icon_share"] forState:UIControlStateNormal];
-        [self.moreBtn setImage:[UIImage imageNamed:@"day_shiti_icon_more"] forState:UIControlStateNormal];
+
        
     }
     
@@ -547,7 +545,6 @@
         self.navigationController.navigationBar.barTintColor = UIColorFromHex(0x2b3f5d);
         
         self.view.backgroundColor = UIColorFromHex(0x20282f);
-        self.functionBackView.backgroundColor = UIColorFromHex(0x213451);
         for(UIView *subView in self.examScrollView.subviews)
         {
             if([subView isKindOfClass:[UITableView class]])
@@ -567,7 +564,7 @@
         [self.navigationController.navigationBar setTitleTextAttributes:@{ NSForegroundColorAttributeName :kColorBlackText ,NSFontAttributeName:[UIFont boldSystemFontOfSize:18.0f]}];
 
         self.view.backgroundColor = [UIColor whiteColor];
-        self.functionBackView.backgroundColor = UIColorFromHex(0x1e9aed);
+  
         for(UIView *subView in self.examScrollView.subviews)
         {
             if([subView isKindOfClass:[UITableView class]])
@@ -1111,6 +1108,7 @@
     }
     else if (indexPath.section == 2)
     {
+        
         CGSize size = [LdGlobalObj sizeWithAttributedString:[attributedDict objectForKey:@"globalAnalysisAttributeString"] width:Screen_Width-45];
         return size.height + 180;
     }
@@ -1203,10 +1201,11 @@
 //            loc_cell.examTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 //            loc_cell.examTitleLabel.autoresizesSubviews = YES;
 //            [loc_cell.examTitleLabel sizeToFit];
-        loc_cell.examTopTitleLabel.text = [NSString stringWithFormat:@"%@(%@)", examModel.content, examModel.QPoint];
+        loc_cell.desTitleLabel.text = [NSString stringWithFormat:@"%@(%@)", examModel.content, examModel.QPoint];
         loc_cell.examIndexLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:[LdGlobalObj sharedInstanse].examFontSize];
         loc_cell.examTopTitleLabel.font = [UIFont fontWithName:@"Microsoft YaHei UI" size:[LdGlobalObj sharedInstanse].examFontSize];
         loc_cell.numLab.text = [NSString stringWithFormat:@"%ld",self.selectExamIndex+1];
+          loc_cell.totalLab.text =  [NSString stringWithFormat:@"/%ld",self.practiceList.count];
         loc_cell.examIndexLabel.text = [NSString stringWithFormat:@"%d/%d", (int)tableView.tag+1, (int)self.practiceList.count];
         
         if([LdGlobalObj sharedInstanse].isNightExamFlag)
@@ -1303,7 +1302,7 @@
             loc_cell.AnalysisAnswerLabel.textColor = UIColorFromHex(0x8C9FB0);
         }
         
-        loc_cell.AnalysisLabel.attributedText = attributeString;
+        loc_cell.AnalysisLabel.text = examModel.analysis;
         loc_cell.numLabel1.text = examModel.totalCount;
         loc_cell.numLabel2.text = examModel.rightCount;
         loc_cell.numLabel3.text = examModel.errCount;

@@ -24,6 +24,7 @@
 #import "CourseDetailViewController.h"
 #import <StoreKit/StoreKit.h>
 #import "BBAlertView.h"
+#import "UILabel+YGZExt.h"
 #import "MessageWordDetailViewController.h"
 
 #define _FIRST_RUN              @"_FIRST_RUN_"
@@ -211,17 +212,8 @@ static LdGlobalObj* _glbObj;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 9000)];
     label.numberOfLines = 0;
     label.attributedText = string;
-    [label sizeToFit];
-    CGSize size = [label sizeThatFits:label.frame.size];
-//    NSInteger rowNum = size.height/[UIFont systemFontOfSize:[LdGlobalObj sharedInstanse].examFontSize].lineHeight;
-//    if(rowNum==1)
-//    {
-//        return CGSizeMake(size.width, size.height-15);
-//    }
-//    else
-//    {
-        return size;
-//    }
+    
+    return [label textSizeForLimitedSize:label.size];
 }
 
 - (void)startExamTimer

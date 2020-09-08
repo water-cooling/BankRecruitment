@@ -96,16 +96,55 @@
     return loc_cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ErrorAnalysisViewController *vc = [[ErrorAnalysisViewController alloc] init];
-    vc.practiceList = @[self.questionList[indexPath.row]];
-    vc.DailyPracticeTitle = @"笔记题目";
-    [self.navigationController pushViewController:vc animated:YES];
+    ExamDetailModel *model = self.questionList[indexPath.row];
+        NSMutableArray *list = [NSMutableArray arrayWithCapacity:9];
+            NSDictionary *dict = [NSDictionary dictionaryWithObject:model.ID forKey:@"ID"];
+            [list addObject:dict];
+        
+        [SVProgressHUD showWithStatus:@"正在分析" maskType:SVProgressHUDMaskTypeClear];
+       
+        [self NetworkGetExamDetailListByTitleList:[NSArray arrayWithArray:list] isRetry:NO];
+  
 }
 
+- (void)NetworkGetExamDetailListByTitleList:(NSArray *)titleList isRetry:(BOOL)isRetry{
+    [LLRequestClass requestGetExamDetailsByTitleList:titleList Success:^(id jsonData) {
+        NSDictionary *contentDict=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        NSLog(@"%@", contentDict);
+        NSString *result = contentDict[@"result"];
+        if([result isEqualToString:@"success"]){
+            NSArray *array = contentDict[@"list"];
+            NSMutableArray *examList = [NSMutableArray arrayWithCapacity:9];
+            for(NSDictionary *dict in array)
+            {
+                ExamDetailModel *model = [ExamDetailModel model];
+                [model setDataWithDic:dict];
+                [examList addObject:model];
+            }
+            
+            if(examList.count > 0){
+               
+                    ErrorAnalysisViewController *vc = [[ErrorAnalysisViewController alloc] init];
+                    vc.practiceList = [NSMutableArray arrayWithArray:examList];
+                    vc.DailyPracticeTitle = self.title;
+                    if(examList.count == 1){
+                        vc.isFromFirstPageSearch = YES;
+                    }
+                    vc.DailyPracticeTitle = @"笔记题目";
+                    [self.navigationController pushViewController:vc animated:YES];
+                   
+                }
+        }
+        [SVProgressHUD dismiss];
+        //ZB_Toast(@"失败");
+    } failure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        //ZB_Toast(@"失败");
+    }];
+}
 #pragma -mark Network
 - (void)NetworkGetNoteTitles
 {

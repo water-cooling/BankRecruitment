@@ -327,7 +327,13 @@
 }
 
 - (void)backButtonPressed{
-    [Common popUrl:@"ExerciseCalendarViewController" withTarget:self];
+    NSArray *arr = self.navigationController.viewControllers;
+    if (arr[1]) {
+        [self.navigationController popToViewController:arr[1] animated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+  
 }
 //错题解析
 - (IBAction)errorAnalysisButtonAction:(id)sender

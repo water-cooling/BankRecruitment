@@ -159,10 +159,11 @@
                 self.placehodleImg.hidden = YES;
                 self.noAddressLab.hidden = YES;
                                 
-            }
+            }else{
             self.tableview.hidden = YES;
             self.placehodleImg.hidden = NO;
             self.noAddressLab.hidden = NO;
+            }
             
         }else{
             ZB_Toast(@"暂无数据");

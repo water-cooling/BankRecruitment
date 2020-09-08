@@ -417,7 +417,12 @@
  nickname：微信昵称
  */
 + (void)requestRegisterWXByunionid:(NSString *)unionid nickname:(NSString *)nickname success:(HttpSuccess)success failure:(HttpFailure)failure;
-
+/**
+苹果登录
+unionid：苹果唯一ID
+nickname：苹果昵称
+*/
++ (void)requestRegisterAppleByunionid:(NSString *)unionid nickname:(NSString *)nickname success:(HttpSuccess)success failure:(HttpFailure)failure;
 /**
  微信登录 注册手机号码
  mobile：手机号码
