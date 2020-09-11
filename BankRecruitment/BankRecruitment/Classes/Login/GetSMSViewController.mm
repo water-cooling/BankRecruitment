@@ -35,51 +35,20 @@
           backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
           [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
           [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-       [self.view addSubview:backButton];
-       [backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.left.equalTo(self.view).offset(12);
-           make.top.equalTo(self.view).offset(StatusBarHeight+15);
-       }];
-          UILabel * typeLab = [[UILabel alloc] init];
-           typeLab.font = [UIFont systemFontOfSize:16];
-           typeLab.textAlignment = NSTextAlignmentCenter;
-           typeLab.textColor = [UIColor colorWithHex:@"#333333"];
-           typeLab.text = @"登录";
+          self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+           self.title = @"登录";
     if(self.getSMSType == FindPassWordType){
-        typeLab.text = @"忘记密码";
+        self.title =  @"忘记密码";
     }else if (self.getSMSType == BindPhoneNumType){
-       typeLab.text= @"绑定手机号";
+       self.title = @"绑定手机号";
     }
-       [self.view addSubview:typeLab];
-    [typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.centerX.equalTo(self.view);
-           make.height.mas_equalTo(12);
-           make.top.equalTo(self.view).offset(StatusBarHeight+15);
-    }];
     self.smsCodeString = @"99995698e";
-}
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self.navigationController.navigationBar setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)textFieldDidChangeSelection:(UITextField *)textField{
-    NSLog(@"改变");
-    //手机号码校验
-        if (self.phoneTextField.text.length > 0 && self.smsTextField.text.length > 0) {
-            self.submitBtn.enabled = YES;
-            self.submitBtn.backgroundColor = [UIColor colorWithHex:@"#558CF4"];
-        } else {
-            self.submitBtn.enabled = NO;
-            self.submitBtn.backgroundColor = [UIColor colorWithHex:@"#DCDCDC"];
-        }
-    
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];

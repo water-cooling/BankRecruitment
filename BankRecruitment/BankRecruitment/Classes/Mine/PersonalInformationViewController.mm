@@ -59,19 +59,6 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)textFieldDidChangeSelection:(UITextField *)textField{
-    NSLog(@"改变");
-    //手机号码校验
-    if (self.nameTextField.text.length > 0) {
-            self.saveBtn.enabled = YES;
-            self.saveBtn.backgroundColor = [UIColor colorWithHex:@"#558CF4"];
-        } else {
-            self.saveBtn.enabled = NO;
-            self.saveBtn.backgroundColor = [UIColor colorWithHex:@"#DCDCDC"];
-        }
-    
-}
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];

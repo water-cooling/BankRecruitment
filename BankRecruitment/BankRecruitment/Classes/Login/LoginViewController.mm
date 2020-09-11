@@ -174,7 +174,6 @@
         ZB_Toast(@"请输入账号密码");
         return;
     }
-    
     [LLRequestClass requestLoginByPhone:self.loginView.phoneTextField.text Password:self.loginView.pwdTextField.text success:^(id jsonData) {
         NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         NSLog(@"%@", contentArray);
@@ -480,7 +479,7 @@
        }
        
     if(![self judgePassWordLegal:self.registView.pwdTextField.text]){
-           ZB_Toast(@"请输入密码（6-16位数字字母）");
+           ZB_Toast(@"请输入至少6-16字符，包含英文和数字");
            return;
        }
        

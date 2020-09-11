@@ -10,6 +10,7 @@
 
 @interface ResetPasswordViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) IBOutlet UITextField *passwdTextField;
+@property (weak, nonatomic) IBOutlet UIButton *SaveBtn;
 @property (nonatomic, strong) IBOutlet UITextField *rePasswdTextField;
 @property (nonatomic, strong) IBOutlet UIButton *showPasswordButton;
 @property (nonatomic, strong) IBOutlet UIButton *showRePasswordButton;
@@ -32,7 +33,7 @@
     [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
+    self.SaveBtn.layer.cornerRadius = 20;
     self.navigationController.navigationBarHidden = NO;
 }
 
@@ -58,13 +59,13 @@
     self.rePasswdTextField.secureTextEntry = !self.rePasswdTextField.secureTextEntry;
     if(self.passwdTextField.secureTextEntry)
     {
-        [self.showPasswordButton setImage:[UIImage imageNamed:@"eye_close"] forState:UIControlStateNormal];
-        [self.showRePasswordButton setImage:[UIImage imageNamed:@"eye_close"] forState:UIControlStateNormal];
+        [self.showPasswordButton setImage:[UIImage imageNamed:@"guanyan"] forState:UIControlStateNormal];
+        [self.showRePasswordButton setImage:[UIImage imageNamed:@"guanyan"] forState:UIControlStateNormal];
     }
     else
     {
-        [self.showPasswordButton setImage:[UIImage imageNamed:@"eye_open"] forState:UIControlStateNormal];
-        [self.showRePasswordButton setImage:[UIImage imageNamed:@"eye_open"] forState:UIControlStateNormal];
+        [self.showPasswordButton setImage:[UIImage imageNamed:@"kaiyan"] forState:UIControlStateNormal];
+        [self.showRePasswordButton setImage:[UIImage imageNamed:@"kaiyan"] forState:UIControlStateNormal];
     }
 }
 
@@ -74,13 +75,13 @@
     self.rePasswdTextField.secureTextEntry = !self.rePasswdTextField.secureTextEntry;
     if(self.passwdTextField.secureTextEntry)
     {
-        [self.showPasswordButton setImage:[UIImage imageNamed:@"eye_close"] forState:UIControlStateNormal];
-        [self.showRePasswordButton setImage:[UIImage imageNamed:@"eye_close"] forState:UIControlStateNormal];
+        [self.showPasswordButton setImage:[UIImage imageNamed:@"guanyan"] forState:UIControlStateNormal];
+        [self.showRePasswordButton setImage:[UIImage imageNamed:@"guanyan"] forState:UIControlStateNormal];
     }
     else
     {
-        [self.showPasswordButton setImage:[UIImage imageNamed:@"eye_open"] forState:UIControlStateNormal];
-        [self.showRePasswordButton setImage:[UIImage imageNamed:@"eye_open"] forState:UIControlStateNormal];
+        [self.showPasswordButton setImage:[UIImage imageNamed:@"kaiyan"] forState:UIControlStateNormal];
+        [self.showRePasswordButton setImage:[UIImage imageNamed:@"kaiyan"] forState:UIControlStateNormal];
     }
 }
 
@@ -99,7 +100,7 @@
     }
     
    if(![self judgePassWordLegal:self.passwdTextField.text]){
-              ZB_Toast(@"请输入密码（6-16位数字字母）");
+              ZB_Toast(@"请输入至少6-16字符，包含英文和数字");
               return;
     }
     

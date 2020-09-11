@@ -22,7 +22,6 @@
            iphoneIcon.frame = CGRectMake(0, 0, 15, 15);
            [iphoneView addSubview:iphoneIcon];
         UITextField *phoneTextField = [[UITextField alloc] init];
-        phoneTextField.delegate = self;
             phoneTextField.returnKeyType =  UIReturnKeySearch;
             phoneTextField.backgroundColor = [UIColor whiteColor];
             NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"请输入手机号" attributes:
@@ -46,7 +45,6 @@
               smsIcon.frame = CGRectMake(0, 0, 15, 15);
               [smsView addSubview:smsIcon];
     UITextField *smsTextField = [[UITextField alloc] init];
-           smsTextField.delegate = self;
     UIView *smsRightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 75, 26)];
     [smsRightView addSubview:self.btnValidCode];
     smsTextField.rightView = smsRightView;
@@ -73,7 +71,6 @@
             [pwdView addSubview:pwdIcon];
            UITextField *pwdTextField = [[UITextField alloc] init];
         UIView *RightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 55, 14)];
-        pwdTextField.delegate = self;
           UIButton * eyesBtn= [UIButton buttonWithType:UIButtonTypeCustom];
           [eyesBtn setImage:[UIImage imageNamed:@"guanyan"] forState:UIControlStateNormal];
           [eyesBtn setImage:[UIImage imageNamed:@"kaiyan"] forState:UIControlStateSelected];
@@ -105,7 +102,6 @@
                [pwdAgainView addSubview:pwdAgainIcon];
         UITextField *pwdAgainTextField = [[UITextField alloc] init];
            UIView *RightAgainView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 55, 14)];
-           pwdAgainTextField.delegate = self;
              UIButton * eyesAgainBtn= [UIButton buttonWithType:UIButtonTypeCustom];
              [eyesAgainBtn setImage:[UIImage imageNamed:@"guanyan"] forState:UIControlStateNormal];
              [eyesAgainBtn setImage:[UIImage imageNamed:@"kaiyan"] forState:UIControlStateSelected];
@@ -224,19 +220,7 @@
         
     }
 }
-- (void)textFieldDidChangeSelection:(UITextField *)textField{
-    NSLog(@"改变");
-    //手机号码校验
-        if (self.phoneTextField.text.length > 0 && self.pwdTextField.text.length > 0 &&self.smsTextField.text.length > 0 && self.pwdAgainTextField.text.length > 0) {
-            self.btnRegist.enabled = YES;
-            self.btnRegist.backgroundColor = [UIColor colorWithHex:@"#558CF4"];
-            
-        } else {
-            self.btnRegist.enabled = NO;
-            self.btnRegist.backgroundColor = [UIColor colorWithHex:@"#DCDCDC"];
-        }
-    
-}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     //    NSLog(@"%ld",textField.tag);
     if (string == nil || string.length == 0) {
@@ -303,9 +287,8 @@
         _btnRegist = [[UIButton alloc] init];
         [_btnRegist setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _btnRegist.titleLabel.font = [UIFont systemFontOfSize:15];
-        _btnRegist.enabled = NO;
         _btnRegist.layer.cornerRadius = 20;
-        _btnRegist.backgroundColor = [UIColor colorWithHex:@"#DCDCDC"];
+        _btnRegist.backgroundColor = [UIColor colorWithHex:@"#558CF4"];
         [_btnRegist setTitle:@"注册" forState:UIControlStateNormal];
     }
     return _btnRegist;

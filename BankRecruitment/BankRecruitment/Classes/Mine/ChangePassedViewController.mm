@@ -45,19 +45,6 @@
     [self.view endEditing:YES];
 }
 
-- (void)textFieldDidChangeSelection:(UITextField *)textField{
-    NSLog(@"改变");
-    //手机号码校验
-    if (self.NewPassedTextField.text.length > 0 && self.prePassedTextField.text.length > 0 && self.reTryPassedTextField.text.length > 0) {
-            self.sureBtn.enabled = YES;
-            self.sureBtn.backgroundColor = [UIColor colorWithHex:@"#558CF4"];
-        } else {
-            self.sureBtn.enabled = NO;
-            self.sureBtn.backgroundColor = [UIColor colorWithHex:@"#DCDCDC"];
-        }
-    
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -83,12 +70,15 @@
         [SVProgressHUD dismissWithError:@"原始密码错误" afterDelay:2.0f];
         return;
     }
-    
     if(![self.NewPassedTextField.text isEqualToString:self.reTryPassedTextField.text])
     {
         [SVProgressHUD show];
         [SVProgressHUD dismissWithError:@"新旧密码不能一样哦" afterDelay:2.0f];
         return;
+    }
+    if(![self judgePassWordLegal:self.NewPassedTextField.text]){
+                    ZB_Toast(@"请输入至少6-16字符，包含英文和数字");
+                    return;
     }
     
     [self requestSetPasswd:self.NewPassedTextField.text];
@@ -122,4 +112,16 @@
     }];
 }
 
+-(BOOL)judgePassWordLegal:(NSString *)str{
+    
+    BOOL result = false;
+    if ([str length] >= 6){
+        // 判断长度大于6位后再接着判断是否同时包含数字和字符
+        NSString * regex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+        result = [pred evaluateWithObject:str];
+    }
+    return result;
+
+}
 @end
