@@ -9,6 +9,7 @@
 #import "TabbarViewController.h"
 #import "FirstpageViewController.h"
 #import "LiveViewController.h"
+#import "QAViewController.h"
 #import "NewsViewController.h"
 #import "MineViewController.h"
 #import "VideoSelectViewController.h"
@@ -43,6 +44,14 @@
     liveVCNav.tabBarItem.title = @"课程";
     [liveVCNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kColorSelect, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
+    QAViewController *QAPageVC = [[QAViewController alloc] init];
+    UINavigationController *QAPageVCNAV = [[UINavigationController alloc] initWithRootViewController:QAPageVC];
+    [LdGlobalObj sharedInstanse].firstPageVC = FirstPageVC;
+    QAPageVCNAV.tabBarItem.image = [[UIImage imageNamed:@"wd-w"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    QAPageVCNAV.tabBarItem.selectedImage = [[UIImage imageNamed:@"wd-x"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    QAPageVCNAV.tabBarItem.title = @"问答";
+    [QAPageVCNAV.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kColorSelect, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    
     VideoSelectViewController *videoVC = [[VideoSelectViewController alloc] init];
     UINavigationController *videoVCNav = [[UINavigationController alloc] initWithRootViewController:videoVC];
 //    [videoVC NetworkGetVideoTypes];
@@ -60,7 +69,7 @@
     mineVCNav.tabBarItem.selectedImage = [[UIImage imageNamed:@"home_icon_my_press"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     mineVCNav.tabBarItem.title = @"我的";
     [mineVCNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kColorSelect, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-    self.viewControllers = @[FirstPageVCNAV, liveVCNav, videoVCNav, mineVCNav];
+    self.viewControllers = @[FirstPageVCNAV, liveVCNav,QAPageVCNAV, videoVCNav, mineVCNav];
    
 }
 

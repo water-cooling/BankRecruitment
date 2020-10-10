@@ -283,15 +283,10 @@
         return loc_cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    if(indexPath.section != 0)
-    {
         OutlineModel *model = [self getModelOfOutLineSection:indexPath.section andRow:indexPath.row];
-        if([[DataBaseManager sharedManager] getExamOperationListByOID:model.ID isFromOutLine:@"是"])
-        {
+        if([[DataBaseManager sharedManager] getExamOperationListByOID:model.ID isFromOutLine:@"是"]){
             NSArray *examList = [[DataBaseManager sharedManager] getExamDetailListByOID:model.ID];
             if(examList.count > 0)
             {
@@ -315,7 +310,6 @@
             [self NetworkGetOutlineTitleByOID:model.ID ExamTitle:model.Name];
             self.selectedIndexPath = indexPath;
         }
-    }
 }
 - (IBAction)topBtnClick:(UIButton *)sender {
     switch (sender.tag) {

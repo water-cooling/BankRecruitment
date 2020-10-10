@@ -482,6 +482,8 @@
 		60F90E4D1E89172F00151728 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F90E4C1E89172F00151728 /* SMPageControl.m */; };
 		60F90E541E8A0D8A00151728 /* TestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F90E521E8A0D8A00151728 /* TestTableViewCell.m */; };
 		60F90E551E8A0D8A00151728 /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60F90E531E8A0D8A00151728 /* TestTableViewCell.xib */; };
+		BE1D2CAD2530101500C43C21 /* QAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CAC2530101500C43C21 /* QAViewController.m */; };
+		BE1D2CB4253043B900C43C21 /* SPPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CB3253043B900C43C21 /* SPPageMenu.m */; };
 		BE48A1B425071990001B4352 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE48A1B325071990001B4352 /* AuthenticationServices.framework */; };
 		BE5AE1D424F014E1009CDD34 /* MyCoursesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */; };
 		BE5AE1D524F014E1009CDD34 /* MyCoursesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5AE1D324F014E1009CDD34 /* MyCoursesViewController.xib */; };
@@ -1322,6 +1324,10 @@
 		60F90E511E8A0D8A00151728 /* TestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTableViewCell.h; sourceTree = "<group>"; };
 		60F90E521E8A0D8A00151728 /* TestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTableViewCell.m; sourceTree = "<group>"; };
 		60F90E531E8A0D8A00151728 /* TestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestTableViewCell.xib; sourceTree = "<group>"; };
+		BE1D2CAB2530101500C43C21 /* QAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QAViewController.h; sourceTree = "<group>"; };
+		BE1D2CAC2530101500C43C21 /* QAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QAViewController.m; sourceTree = "<group>"; };
+		BE1D2CB2253043B900C43C21 /* SPPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPageMenu.h; sourceTree = "<group>"; };
+		BE1D2CB3253043B900C43C21 /* SPPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPageMenu.m; sourceTree = "<group>"; };
 		BE48A1B325071990001B4352 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		BE5AE1D124F014E1009CDD34 /* MyCoursesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCoursesViewController.h; sourceTree = "<group>"; };
 		BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyCoursesViewController.mm; sourceTree = "<group>"; };
@@ -2564,10 +2570,8 @@
 		60F90E141E88FA6E00151728 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2721BF7E24DEEA5300BE8381 /* TabbarViewController.h */,
-				2721BF7F24DEEA5300BE8381 /* TabbarViewController.m */,
-				60F90E351E88FB6D00151728 /* UseGuideViewController.h */,
-				60F90E361E88FB6D00151728 /* UseGuideViewController.mm */,
+				BE1D2CA92530067400C43C21 /* Tabbar */,
+				BE1D2CA82530066600C43C21 /* QAPage */,
 				60F90E151E88FA6E00151728 /* Firstpage */,
 				60F90E161E88FA6E00151728 /* Live */,
 				60F90E171E88FA6E00151728 /* Mine */,
@@ -2837,6 +2841,44 @@
 				60E9FC071EFE427F00F137F8 /* ZhaopinViewController.xib */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BE1D2CA82530066600C43C21 /* QAPage */ = {
+			isa = PBXGroup;
+			children = (
+				BE1D2CAE253014B600C43C21 /* Views */,
+				BE1D2CAA25300FF200C43C21 /* ViewControllers */,
+			);
+			path = QAPage;
+			sourceTree = "<group>";
+		};
+		BE1D2CA92530067400C43C21 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				2721BF7E24DEEA5300BE8381 /* TabbarViewController.h */,
+				2721BF7F24DEEA5300BE8381 /* TabbarViewController.m */,
+				60F90E351E88FB6D00151728 /* UseGuideViewController.h */,
+				60F90E361E88FB6D00151728 /* UseGuideViewController.mm */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		BE1D2CAA25300FF200C43C21 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE1D2CAB2530101500C43C21 /* QAViewController.h */,
+				BE1D2CAC2530101500C43C21 /* QAViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BE1D2CAE253014B600C43C21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE1D2CB2253043B900C43C21 /* SPPageMenu.h */,
+				BE1D2CB3253043B900C43C21 /* SPPageMenu.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		BE88B8E924E1688D003F3B06 /* Masonry */ = {
@@ -3333,6 +3375,7 @@
 				60D78F8A1F05F75500D122B2 /* SignCalendarViewController.m in Sources */,
 				60E9FC121EFE665000F137F8 /* MineFunctionBtnTableViewCell.m in Sources */,
 				2759A09B2502879000B8891F /* HomeVideoViewController.mm in Sources */,
+				BE1D2CB4253043B900C43C21 /* SPPageMenu.m in Sources */,
 				60F90D791E88F77B00151728 /* UIView+SNFoundation.m in Sources */,
 				60F90DF41E88F77B00151728 /* TPKeyboardAvoidingTableView.m in Sources */,
 				60A240481EE4FD2400C15F5B /* MineMessageViewController.mm in Sources */,
@@ -3359,6 +3402,7 @@
 				60D78F7C1F03B20500D122B2 /* WSPageView.m in Sources */,
 				60D542681E8F90C70004AA31 /* MockExamTableViewCell.m in Sources */,
 				60F90D701E88F77B00151728 /* Preferences.m in Sources */,
+				BE1D2CAD2530101500C43C21 /* QAViewController.m in Sources */,
 				BEB2A28C24E3D73800B3C098 /* UIView+XLExtension.m in Sources */,
 				60D541F81E8D25FB0004AA31 /* QuestionTableViewCell.m in Sources */,
 				605C15711F063B560060C397 /* LianxiHisViewController.mm in Sources */,
@@ -3565,7 +3609,7 @@
 					"$(PROJECT_DIR)/BankRecruitment/Request/UMSocial/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/BankRecruitment/Request/UMSocial/SocialLibraries/WeChat/WechatSDK",
 				);
-				MARKETING_VERSION = 1.38;
+				MARKETING_VERSION = 1.39;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DongwuEducation.longlian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3614,7 +3658,7 @@
 					"$(PROJECT_DIR)/BankRecruitment/Request/UMSocial/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/BankRecruitment/Request/UMSocial/SocialLibraries/WeChat/WechatSDK",
 				);
-				MARKETING_VERSION = 1.38;
+				MARKETING_VERSION = 1.39;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DongwuEducation.longlian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
