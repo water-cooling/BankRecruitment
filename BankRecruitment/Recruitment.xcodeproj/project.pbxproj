@@ -484,6 +484,8 @@
 		60F90E551E8A0D8A00151728 /* TestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 60F90E531E8A0D8A00151728 /* TestTableViewCell.xib */; };
 		BE1D2CAD2530101500C43C21 /* QAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CAC2530101500C43C21 /* QAViewController.m */; };
 		BE1D2CB4253043B900C43C21 /* SPPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CB3253043B900C43C21 /* SPPageMenu.m */; };
+		BE1D2CB8253433C100C43C21 /* QATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CB6253433C100C43C21 /* QATableViewCell.m */; };
+		BE1D2CB9253433C100C43C21 /* QATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1D2CB7253433C100C43C21 /* QATableViewCell.xib */; };
 		BE48A1B425071990001B4352 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE48A1B325071990001B4352 /* AuthenticationServices.framework */; };
 		BE5AE1D424F014E1009CDD34 /* MyCoursesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */; };
 		BE5AE1D524F014E1009CDD34 /* MyCoursesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5AE1D324F014E1009CDD34 /* MyCoursesViewController.xib */; };
@@ -1328,6 +1330,9 @@
 		BE1D2CAC2530101500C43C21 /* QAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QAViewController.m; sourceTree = "<group>"; };
 		BE1D2CB2253043B900C43C21 /* SPPageMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPPageMenu.h; sourceTree = "<group>"; };
 		BE1D2CB3253043B900C43C21 /* SPPageMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPPageMenu.m; sourceTree = "<group>"; };
+		BE1D2CB5253433C100C43C21 /* QATableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QATableViewCell.h; sourceTree = "<group>"; };
+		BE1D2CB6253433C100C43C21 /* QATableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QATableViewCell.m; sourceTree = "<group>"; };
+		BE1D2CB7253433C100C43C21 /* QATableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QATableViewCell.xib; sourceTree = "<group>"; };
 		BE48A1B325071990001B4352 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		BE5AE1D124F014E1009CDD34 /* MyCoursesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCoursesViewController.h; sourceTree = "<group>"; };
 		BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyCoursesViewController.mm; sourceTree = "<group>"; };
@@ -2877,6 +2882,9 @@
 			children = (
 				BE1D2CB2253043B900C43C21 /* SPPageMenu.h */,
 				BE1D2CB3253043B900C43C21 /* SPPageMenu.m */,
+				BE1D2CB5253433C100C43C21 /* QATableViewCell.h */,
+				BE1D2CB6253433C100C43C21 /* QATableViewCell.m */,
+				BE1D2CB7253433C100C43C21 /* QATableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3023,6 +3031,7 @@
 				60A895E220BCF88A00566494 /* BindPhoneViewController.xib in Resources */,
 				60D542731E8F94E90004AA31 /* WrongQuestionsSheetViewController.xib in Resources */,
 				607FFB2B1EB0C01100CDD25A /* icon_152*152.png in Resources */,
+				BE1D2CB9253433C100C43C21 /* QATableViewCell.xib in Resources */,
 				60F90BCB1E88F66000151728 /* Assets.xcassets in Resources */,
 				60E9FC041EFE394E00F137F8 /* EveryDayExamTableViewCell.xib in Resources */,
 				60C110061ECAE60D00D9F7B3 /* IntelligenceTypeHeaderView.xib in Resources */,
@@ -3378,6 +3387,7 @@
 				BE1D2CB4253043B900C43C21 /* SPPageMenu.m in Sources */,
 				60F90D791E88F77B00151728 /* UIView+SNFoundation.m in Sources */,
 				60F90DF41E88F77B00151728 /* TPKeyboardAvoidingTableView.m in Sources */,
+				BE1D2CB8253433C100C43C21 /* QATableViewCell.m in Sources */,
 				60A240481EE4FD2400C15F5B /* MineMessageViewController.mm in Sources */,
 				BEF8AEDD24FC916100CDDF3B /* InviteJobModel.m in Sources */,
 				60F90DDF1E88F77B00151728 /* SDImageCache.m in Sources */,
