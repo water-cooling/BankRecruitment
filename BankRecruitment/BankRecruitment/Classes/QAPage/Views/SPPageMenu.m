@@ -91,9 +91,6 @@
     
     if (self.buttons.count) {
         // 默认选中selectedItemIndex对应的按钮
-        if (self.selectedItemIndex ) {
-            <#statements#>
-        }
         SPItem *selectedButton = [self.buttons objectAtIndex:selectedItemIndex];
         [self buttonInPageMenuClicked:selectedButton];
         [self.itemScrollView insertSubview:self.tracker atIndex:0];

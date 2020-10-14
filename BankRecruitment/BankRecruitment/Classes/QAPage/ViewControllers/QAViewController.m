@@ -9,10 +9,10 @@
 #import "QAViewController.h"
 #import "SPPageMenu.h"
 #import "QATableViewCell.h"
+#import "SubmitQuestionViewController.h"
 @interface QAViewController ()<UITableViewDelegate,UITableViewDataSource,SPPageMenuDelegate,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, strong)  SPPageMenu*pageMenu;
-
 @property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, assign) NSUInteger pageNo;
 @property (nonatomic, copy) NSString *status;
@@ -67,7 +67,7 @@
 
 #pragma -mark UITableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 44;
+    return 120;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 10;
@@ -96,6 +96,7 @@
     view.backgroundColor = [UIColor colorWithHex:@"#F3F3F3"];
     return view;
 }
+
 
 
 #pragma mark - SPPageMenuDelegate
@@ -128,7 +129,8 @@
 }
 
 -(void)signClick{
-    
+    SubmitQuestionViewController *submitVc = [SubmitQuestionViewController new];
+    [self.navigationController pushViewController:submitVc animated:YES];
 }
 
 #pragma mark - Getter

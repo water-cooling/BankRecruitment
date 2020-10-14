@@ -486,6 +486,8 @@
 		BE1D2CB4253043B900C43C21 /* SPPageMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CB3253043B900C43C21 /* SPPageMenu.m */; };
 		BE1D2CB8253433C100C43C21 /* QATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CB6253433C100C43C21 /* QATableViewCell.m */; };
 		BE1D2CB9253433C100C43C21 /* QATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1D2CB7253433C100C43C21 /* QATableViewCell.xib */; };
+		BE1D2CBC25358E2400C43C21 /* SubmitQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CBB25358E2400C43C21 /* SubmitQuestionViewController.m */; };
+		BE1D2CBF2535A13C00C43C21 /* UITextView+FGPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CBE2535A13C00C43C21 /* UITextView+FGPlaceholder.m */; };
 		BE48A1B425071990001B4352 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE48A1B325071990001B4352 /* AuthenticationServices.framework */; };
 		BE5AE1D424F014E1009CDD34 /* MyCoursesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */; };
 		BE5AE1D524F014E1009CDD34 /* MyCoursesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5AE1D324F014E1009CDD34 /* MyCoursesViewController.xib */; };
@@ -1333,6 +1335,10 @@
 		BE1D2CB5253433C100C43C21 /* QATableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QATableViewCell.h; sourceTree = "<group>"; };
 		BE1D2CB6253433C100C43C21 /* QATableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QATableViewCell.m; sourceTree = "<group>"; };
 		BE1D2CB7253433C100C43C21 /* QATableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QATableViewCell.xib; sourceTree = "<group>"; };
+		BE1D2CBA25358E2300C43C21 /* SubmitQuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitQuestionViewController.h; sourceTree = "<group>"; };
+		BE1D2CBB25358E2400C43C21 /* SubmitQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitQuestionViewController.m; sourceTree = "<group>"; };
+		BE1D2CBD2535A13B00C43C21 /* UITextView+FGPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+FGPlaceholder.h"; sourceTree = "<group>"; };
+		BE1D2CBE2535A13C00C43C21 /* UITextView+FGPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+FGPlaceholder.m"; sourceTree = "<group>"; };
 		BE48A1B325071990001B4352 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		BE5AE1D124F014E1009CDD34 /* MyCoursesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCoursesViewController.h; sourceTree = "<group>"; };
 		BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyCoursesViewController.mm; sourceTree = "<group>"; };
@@ -2871,6 +2877,8 @@
 		BE1D2CAA25300FF200C43C21 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BE1D2CBA25358E2300C43C21 /* SubmitQuestionViewController.h */,
+				BE1D2CBB25358E2400C43C21 /* SubmitQuestionViewController.m */,
 				BE1D2CAB2530101500C43C21 /* QAViewController.h */,
 				BE1D2CAC2530101500C43C21 /* QAViewController.m */,
 			);
@@ -2924,6 +2932,8 @@
 		BEB2A28224E3879E00B3C098 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				BE1D2CBD2535A13B00C43C21 /* UITextView+FGPlaceholder.h */,
+				BE1D2CBE2535A13C00C43C21 /* UITextView+FGPlaceholder.m */,
 				27094E1F2503A14B00B56424 /* UILabel+YGZExt.h */,
 				27094E1E2503A14B00B56424 /* UILabel+YGZExt.m */,
 				BEF8AED924F8E31200CDDF3B /* Common.h */,
@@ -3432,6 +3442,7 @@
 				60F90D7B1E88F77B00151728 /* NSDate+Helper.m in Sources */,
 				60D541E11E8CE74C0004AA31 /* WrongQuestionsViewController.mm in Sources */,
 				60F90DF21E88F77B00151728 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				BE1D2CBC25358E2400C43C21 /* SubmitQuestionViewController.m in Sources */,
 				60D5F9B21E8BAE760004AA31 /* TeacherIntroduceTableViewCell.m in Sources */,
 				6000BBB21E96662A00F38DC3 /* AnalysisMoreView.m in Sources */,
 				6076CCFD1EC2FC2A000A6968 /* TimetablesViewController.mm in Sources */,
@@ -3469,6 +3480,7 @@
 				60F90DAD1E88F77B00151728 /* CHANGELOG.md in Sources */,
 				60F90DD21E88F77B00151728 /* UIView+MJExtension.m in Sources */,
 				60F90BC01E88F66000151728 /* main.m in Sources */,
+				BE1D2CBF2535A13C00C43C21 /* UITextView+FGPlaceholder.m in Sources */,
 				60F90D7D1E88F77B00151728 /* NSString+Additions.m in Sources */,
 				60F90DAB1E88F77B00151728 /* FMResultSet.m in Sources */,
 				60D5F99B1E8B5A7B0004AA31 /* MyLiveCommonTableViewCell.m in Sources */,
