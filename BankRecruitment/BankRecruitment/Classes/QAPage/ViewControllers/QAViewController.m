@@ -10,39 +10,36 @@
 #import "SPPageMenu.h"
 #import "QATableViewCell.h"
 #import "SubmitQuestionViewController.h"
+#import "MyQuestionViewController.h"
+#import "YLSPGoodsSearchView.h"
+#import "SearchViewController.h"
 @interface QAViewController ()<UITableViewDelegate,UITableViewDataSource,SPPageMenuDelegate,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, strong)  SPPageMenu*pageMenu;
 @property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, assign) NSUInteger pageNo;
 @property (nonatomic, copy) NSString *status;
-@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) YLSPGoodsSearchView * searchView;
+@property (nonatomic, strong) SearchViewController * searchListVc;
 @property (nonatomic, strong) UIButton *QABtn;
 @property (nonatomic, strong) UIButton *signBtn;
 @end
 
 @implementation QAViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self topView];
-    [self.view addSubview:self.pageMenu];
-    [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.pageMenu.mas_bottom);
-        make.bottom.equalTo(self.view).offset(-TabbarSafeBottomMargin);
-    }];
-    [self.view addSubview:self.signBtn];
-          [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-              make.centerY.equalTo(self.view).offset(100);
-              make.right.equalTo(self.view.mas_right).offset(-5);
-          }];
-}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+}
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self topView];
+    [self initUI];
+}
 -(void)topView{
     UIView *topView = [UIView new];
     [self.view addSubview:topView];
@@ -51,20 +48,75 @@
         make.top.equalTo(self.view).offset(StatusBarHeight);
         make.height.mas_equalTo(StatusBarAndNavigationBarHeight-StatusBarHeight);
     }];
-    [topView addSubview:self.searchBar];
+     self.searchView = [[YLSPGoodsSearchView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, 64)];
+    [topView addSubview:self.searchView];
+    [self.searchView.SeachBar addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
+       
+       [self.searchView.BackBtn addTarget:self action:@selector(ReturnBack) forControlEvents:UIControlEventTouchUpInside];
+       [self.searchView.cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+       [self.searchView.SeachBar addTarget:self action:@selector(textFieldDidBegin:) forControlEvents:UIControlEventEditingDidBegin];
     [topView addSubview:self.QABtn];
-    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(topView).offset(12);
-        make.top.equalTo(topView).offset(9);
-        make.right.equalTo(topView).offset(-52);
-        make.height.mas_equalTo(30);
-    }];
     [self.QABtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(topView).offset(-18);
-        make.centerY.equalTo(self.searchBar);
+        make.centerY.equalTo(self.searchView);
     }];
 }
+-(void)initUI{
+  [self.view addSubview:self.pageMenu];
+       [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.left.right.equalTo(self.view);
+           make.top.equalTo(self.pageMenu.mas_bottom);
+           make.bottom.equalTo(self.view).offset(-TabbarSafeBottomMargin);
+       }];
+    [self.view addSubview:self.signBtn];
+  [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.centerY.equalTo(self.view).offset(100);
+      make.right.equalTo(self.view.mas_right).offset(-5);
+}];
+    self.searchListVc = [SearchViewController new];
+    self.searchListVc.view.frame = CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Height-StatusBarAndNavigationBarHeight);
+    [self.view addSubview:self.searchListVc.view];
+   [self setupChildView:NO];
+}
+#pragma mark - UITextFieldActions
+- (void)textFieldDidBegin:(UITextField *)field {
+    [self.searchView showCanncelAnimation];
+    [self setupChildView:NO];
+}
+- (void)textFieldChanged:(UITextField *)field {
 
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if ([textField.text isEqualToString:@""]) {
+        [SVProgressHUD showErrorWithStatus:@"请输入内容"];
+        return NO;
+    }
+    [textField resignFirstResponder];
+    [self setupChildView:YES];
+    [self.searchView showSearchViewAnimation];
+    return YES;
+}
+
+- (void)cancelBtnClicked:(UIButton *)sender {
+    if (self.searchView.SeachBar.text.length) {
+        [self.searchView showSearchViewAnimation];
+        [self setupChildView: YES];
+        [self.searchView.SeachBar resignFirstResponder];
+    } else {
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+}
+- (void)setupChildView:(BOOL)Send {
+    if (Send) {
+        [self.view sendSubviewToBack:self.searchListVc.view];
+    }else{
+        [self.view bringSubviewToFront:self.searchListVc.view];
+    }
+}
+-(void)ReturnBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma -mark UITableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 120;
@@ -96,9 +148,6 @@
     view.backgroundColor = [UIColor colorWithHex:@"#F3F3F3"];
     return view;
 }
-
-
-
 #pragma mark - SPPageMenuDelegate
 - (void)pageMenu:(SPPageMenu *)pageMenu itemSelectedAtIndex:(NSInteger)index{
     switch (index) {
@@ -130,7 +179,14 @@
 
 -(void)signClick{
     SubmitQuestionViewController *submitVc = [SubmitQuestionViewController new];
+    submitVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:submitVc animated:YES];
+}
+
+-(void)myQuestionClick{
+    MyQuestionViewController *MyQuestionVc = [MyQuestionViewController new];
+       MyQuestionVc.hidesBottomBarWhenPushed = YES;
+       [self.navigationController pushViewController:MyQuestionVc animated:YES];
 }
 
 #pragma mark - Getter
@@ -167,38 +223,7 @@
     }
     return _dataArr;
 }
--(UISearchBar *)searchBar{
-    if (!_searchBar) {
-        _searchBar =[[UISearchBar alloc]init];
-        _searchBar.placeholder = @"搜索问题";
-        _searchBar.delegate = self;
-        UITextField *textfield;
-       if (@available(iOS 13.0, *)) {
-       // 针对 13.0 以上的iOS系统进行处理
-           textfield = _searchBar.searchTextField;
-        }else {
-        // 针对 13.0 以下的iOS系统进行处理
-            textfield = [_searchBar valueForKey:@"_searchField"];
-       }
-        textfield.layer.cornerRadius = 15;
-        textfield.layer.masksToBounds = YES;
-       textfield.borderStyle = UITextBorderStyleNone;
-       [textfield setBackgroundColor:[UIColor colorWithHex:@"#FFFFFF"]];
-       for (UIView *view in _searchBar.subviews) {
-           for (UIView * subviews in view.subviews) {
-               if ( [ subviews isKindOfClass:NSClassFromString(@"UISearchBarBackground").class]) {
-                   subviews.alpha = 0;
-               }
-           }
-       }
-        [[UISearchBar appearance] setSearchFieldBackgroundImage:[self searchFieldBackgroundImage] forState:UIControlStateNormal];
-        [textfield setDefaultTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13.5]}];
-        _searchBar.searchTextPositionAdjustment = UIOffsetMake(7, 0);
-//        _searchBar.inputAccessoryView = [self addToolbar];
 
-    }
-    return _searchBar;
-}
 - (UIImage*)searchFieldBackgroundImage {
     UIColor*color = [UIColor colorWithHex:@"#F0F0F0"];
     CGFloat cornerRadius = 12.5;
@@ -224,6 +249,7 @@
         _QABtn.titleLabel.font = [UIFont systemFontOfSize:9];
         _QABtn.titleLabel.numberOfLines = 0;
         [_QABtn setBackgroundImage:[UIImage imageNamed:@"椭圆蓝"] forState:0];
+        [_QABtn addTarget:self action:@selector(myQuestionClick) forControlEvents:UIControlEventTouchUpInside];
         [_QABtn setTitle:@"我的\n问题" forState:UIControlStateNormal];
     }
     return _QABtn;

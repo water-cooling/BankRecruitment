@@ -488,6 +488,10 @@
 		BE1D2CB9253433C100C43C21 /* QATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1D2CB7253433C100C43C21 /* QATableViewCell.xib */; };
 		BE1D2CBC25358E2400C43C21 /* SubmitQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CBB25358E2400C43C21 /* SubmitQuestionViewController.m */; };
 		BE1D2CBF2535A13C00C43C21 /* UITextView+FGPlaceholder.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CBE2535A13C00C43C21 /* UITextView+FGPlaceholder.m */; };
+		BE1D2CC72537FED100C43C21 /* MyQuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CC62537FED000C43C21 /* MyQuestionViewController.m */; };
+		BE1D2CCA25383A2B00C43C21 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CC925383A2B00C43C21 /* SearchViewController.m */; };
+		BE1D2CCD25383EA100C43C21 /* YLSPGoodsSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CCB25383E9F00C43C21 /* YLSPGoodsSearchView.m */; };
+		BE1D2CD02538487500C43C21 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CCF2538487500C43C21 /* SearchResultViewController.m */; };
 		BE48A1B425071990001B4352 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE48A1B325071990001B4352 /* AuthenticationServices.framework */; };
 		BE5AE1D424F014E1009CDD34 /* MyCoursesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */; };
 		BE5AE1D524F014E1009CDD34 /* MyCoursesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5AE1D324F014E1009CDD34 /* MyCoursesViewController.xib */; };
@@ -1339,6 +1343,14 @@
 		BE1D2CBB25358E2400C43C21 /* SubmitQuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitQuestionViewController.m; sourceTree = "<group>"; };
 		BE1D2CBD2535A13B00C43C21 /* UITextView+FGPlaceholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+FGPlaceholder.h"; sourceTree = "<group>"; };
 		BE1D2CBE2535A13C00C43C21 /* UITextView+FGPlaceholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+FGPlaceholder.m"; sourceTree = "<group>"; };
+		BE1D2CC52537FED000C43C21 /* MyQuestionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyQuestionViewController.h; sourceTree = "<group>"; };
+		BE1D2CC62537FED000C43C21 /* MyQuestionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyQuestionViewController.m; sourceTree = "<group>"; };
+		BE1D2CC825383A2A00C43C21 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		BE1D2CC925383A2B00C43C21 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		BE1D2CCB25383E9F00C43C21 /* YLSPGoodsSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLSPGoodsSearchView.m; sourceTree = "<group>"; };
+		BE1D2CCC25383EA000C43C21 /* YLSPGoodsSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSPGoodsSearchView.h; sourceTree = "<group>"; };
+		BE1D2CCE2538487500C43C21 /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
+		BE1D2CCF2538487500C43C21 /* SearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
 		BE48A1B325071990001B4352 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		BE5AE1D124F014E1009CDD34 /* MyCoursesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCoursesViewController.h; sourceTree = "<group>"; };
 		BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyCoursesViewController.mm; sourceTree = "<group>"; };
@@ -2877,10 +2889,16 @@
 		BE1D2CAA25300FF200C43C21 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BE1D2CC825383A2A00C43C21 /* SearchViewController.h */,
+				BE1D2CC925383A2B00C43C21 /* SearchViewController.m */,
 				BE1D2CBA25358E2300C43C21 /* SubmitQuestionViewController.h */,
 				BE1D2CBB25358E2400C43C21 /* SubmitQuestionViewController.m */,
 				BE1D2CAB2530101500C43C21 /* QAViewController.h */,
 				BE1D2CAC2530101500C43C21 /* QAViewController.m */,
+				BE1D2CC52537FED000C43C21 /* MyQuestionViewController.h */,
+				BE1D2CC62537FED000C43C21 /* MyQuestionViewController.m */,
+				BE1D2CCE2538487500C43C21 /* SearchResultViewController.h */,
+				BE1D2CCF2538487500C43C21 /* SearchResultViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2888,6 +2906,8 @@
 		BE1D2CAE253014B600C43C21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE1D2CCC25383EA000C43C21 /* YLSPGoodsSearchView.h */,
+				BE1D2CCB25383E9F00C43C21 /* YLSPGoodsSearchView.m */,
 				BE1D2CB2253043B900C43C21 /* SPPageMenu.h */,
 				BE1D2CB3253043B900C43C21 /* SPPageMenu.m */,
 				BE1D2CB5253433C100C43C21 /* QATableViewCell.h */,
@@ -3222,6 +3242,7 @@
 				BE88B90324E1688E003F3B06 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				60F90D981E88F77B00151728 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				60F90DE21E88F77B00151728 /* SDWebImageDownloader.m in Sources */,
+				BE1D2CCD25383EA100C43C21 /* YLSPGoodsSearchView.m in Sources */,
 				601232C31E9277C400868FC3 /* AccountInfoTableViewCell.m in Sources */,
 				60F90E481E89156500151728 /* FirstpageModulesTableViewCell.m in Sources */,
 				6000BBCC1E989F8D00F38DC3 /* TTTAttributedLabel.m in Sources */,
@@ -3293,6 +3314,7 @@
 				60F90DC01E88F77B00151728 /* WeatherModel.m in Sources */,
 				60D776331F4EA68200AE92DE /* VideoModel.m in Sources */,
 				60F90D711E88F77B00151728 /* SNCache.m in Sources */,
+				BE1D2CC72537FED100C43C21 /* MyQuestionViewController.m in Sources */,
 				BEB2A28824E3BF6000B3C098 /* LoginViewController.mm in Sources */,
 				604AC00020CB76AA006AB73C /* InformationModel.m in Sources */,
 				60F90DE71E88F77B00151728 /* UIImage+GIF.m in Sources */,
@@ -3337,6 +3359,7 @@
 				606DC5E51EFBEA3400467686 /* DataBaseManager.m in Sources */,
 				60D776381F4EA68200AE92DE /* VideoSubTableViewCell.m in Sources */,
 				BED1F39E24E571C600EE4E4A /* AddressListViewController.m in Sources */,
+				BE1D2CCA25383A2B00C43C21 /* SearchViewController.m in Sources */,
 				601FB1951F666A4500423FEF /* DBY1v1OnlinePlaybackViewController.m in Sources */,
 				60F90DAC1E88F77B00151728 /* GTMBase64.m in Sources */,
 				60F90E461E89156500151728 /* FirstPageHeadTableViewCell.mm in Sources */,
@@ -3402,6 +3425,7 @@
 				BEF8AEDD24FC916100CDDF3B /* InviteJobModel.m in Sources */,
 				60F90DDF1E88F77B00151728 /* SDImageCache.m in Sources */,
 				60F90DC31E88F77B00151728 /* LoadingHUDView.m in Sources */,
+				BE1D2CD02538487500C43C21 /* SearchResultViewController.m in Sources */,
 				60D542721E8F94E90004AA31 /* WrongQuestionsSheetViewController.mm in Sources */,
 				60F90D821E88F77B00151728 /* UIButton+Addition.m in Sources */,
 				60C505731EE25C5300B145A2 /* RemoteMessageModel.m in Sources */,

@@ -45,13 +45,14 @@
 
 -(void)initUI{
     UILabel * titleLabel = [UILabel new];
+    titleLabel.text = @"选择分类";
         titleLabel.font = [UIFont systemFontOfSize:15.f];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.textAlignment = NSTextAlignmentLeft;
+        titleLabel.textColor = [UIColor colorWithHex:@"#333333"];
            [self.view addSubview:titleLabel];
            [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                make.left.equalTo(self.view).offset(13);
-               make.top.mas_equalTo(self.view).offset(14);
+               make.top.mas_equalTo(self.view).offset(14+StatusBarAndNavigationBarHeight);
            }];
     [self.view addSubview:self.pageMenu];
     UIView * speatorView = [UIView new];
@@ -59,18 +60,10 @@
     [self.view addSubview:speatorView];
     [speatorView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(89);
+        make.top.equalTo(self.view).offset(89+StatusBarAndNavigationBarHeight);
         make.height.mas_equalTo(1);
     }];
-    UILabel * textViewTitleLabel = [UILabel new];
-    textViewTitleLabel.font = [UIFont systemFontOfSize:15.f weight:UIFontWeightBold];
-    textViewTitleLabel.textAlignment = NSTextAlignmentCenter;
-    textViewTitleLabel.textColor = [UIColor blackColor];
-       [self.view addSubview:textViewTitleLabel];
-    [textViewTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-           make.left.equalTo(self.view).offset(13);
-        make.top.mas_equalTo(speatorView.mas_bottom).offset(17);
-       }];
+   
     [self.view addSubview:self.submitBtn];
     [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(15);
@@ -78,13 +71,13 @@
         make.bottom.equalTo(self.view).offset(-30);
         make.height.mas_equalTo(40);
     }];
-    [self.view addSubview:self.textView];
+    [self.view addSubview:self.headlineTextView];
     
     [self.headlineTextView mas_makeConstraints:^(MASConstraintMaker *make) {
          make.left.equalTo(self.view).offset(13);
          make.right.equalTo(self.view).offset(-13);
-         make.top.equalTo(textViewTitleLabel.mas_bottom).offset(17);
-        make.height.mas_equalTo(100);
+         make.top.equalTo(speatorView.mas_bottom).offset(5);
+        make.height.mas_equalTo(40);
      }];
     
     UIView * titleSpeatorView = [UIView new];
@@ -92,10 +85,10 @@
        [self.view addSubview:titleSpeatorView];
        [titleSpeatorView mas_makeConstraints:^(MASConstraintMaker *make) {
            make.left.right.equalTo(self.view);
-           make.top.equalTo(self.headlineTextView.mas_bottom).offset(2);
+           make.top.equalTo(self.headlineTextView.mas_bottom).offset(5);
            make.height.mas_equalTo(1);
        }];
-    
+    [self.view addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(13);
         make.right.equalTo(self.view).offset(-13);
@@ -108,6 +101,10 @@
     
 }
 
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    [self.view endEditing:YES];
+}
 
 #pragma mark textviewDelegate
 
@@ -122,7 +119,7 @@
         NSInteger startOffset = [textView offsetFromPosition:textView.beginningOfDocument toPosition:selectedRange.start];
         NSInteger endOffset = [textView offsetFromPosition:textView.beginningOfDocument toPosition:selectedRange.end];
         NSRange offsetRange = NSMakeRange(startOffset, endOffset - startOffset);
-        if ([self.textView isEqual:self.textView]) {
+        if ([textView isEqual:self.textView]) {
             if (offsetRange.location < MAX_LIMIT_NUMS) {
                        return YES;
                    }
@@ -140,18 +137,15 @@
     }
     NSString *comcatstr = [textView.text stringByReplacingCharactersInRange:range withString:text];
     NSInteger caninputlen;
-    if ([self.textView isEqual:self.textView]) {
+    if ([textView isEqual:self.textView]) {
         caninputlen = MAX_LIMIT_NUMS - comcatstr.length;
     }else{
         caninputlen = MAX_LIMIT_TITLE_NUMS - comcatstr.length;
 
     }
-    if (caninputlen >= 0)
-    {
+    if (caninputlen >= 0){
         return YES;
-    }
-    else
-    {
+    }else{
         NSInteger len = text.length + caninputlen;
         //防止当text.length + caninputlen < 0时，使得rg.length为一个非法最大正数出错
         NSRange rg = {0,MAX(len,0)};
@@ -177,7 +171,7 @@
     }
     NSString  *nsTextContent = textView.text;
     NSInteger existTextNum = nsTextContent.length;
-    if ([self.textView isEqual:self.textView]) {
+    if ([textView isEqual:self.textView]) {
         if (existTextNum > MAX_LIMIT_NUMS){
             //截取到最大位置的字符
             NSString *s = [nsTextContent substringToIndex:MAX_LIMIT_NUMS];
@@ -196,7 +190,7 @@
 
 - (SPPageMenu *)pageMenu {
     if (!_pageMenu) {
-        _pageMenu = [SPPageMenu pageMenuWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight+30, Screen_Width, 60)];
+        _pageMenu = [SPPageMenu pageMenuWithFrame:CGRectMake(0, 36+StatusBarAndNavigationBarHeight, Screen_Width, 50)];
         [_pageMenu setItems:@[@"全部",@"待支付",@"已支付",@"已取消"] selectedItemIndex:0];
         _pageMenu.delegate = self;
     }
@@ -237,6 +231,9 @@
         [_submitBtn setTitle:@"提交" forState:0];
         [_submitBtn setTitleColor:[UIColor whiteColor] forState:0];
         _submitBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        _submitBtn.layer.cornerRadius = 20;
+        _submitBtn.layer.masksToBounds = YES;
+
         _submitBtn.backgroundColor = KColorBlueText;
         [_submitBtn addTarget:self action:@selector(submitClick) forControlEvents:UIControlEventTouchUpInside];
     }
