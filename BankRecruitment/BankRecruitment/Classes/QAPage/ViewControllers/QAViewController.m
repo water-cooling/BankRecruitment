@@ -41,26 +41,12 @@
     [self initUI];
 }
 -(void)topView{
-    UIView *topView = [UIView new];
-    [self.view addSubview:topView];
-    [topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.view).offset(StatusBarHeight);
-        make.height.mas_equalTo(StatusBarAndNavigationBarHeight-StatusBarHeight);
-    }];
-     self.searchView = [[YLSPGoodsSearchView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, 64)];
-    [topView addSubview:self.searchView];
+     self.searchView = [[YLSPGoodsSearchView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, StatusBarAndNavigationBarHeight)];
+    [self.view addSubview:self.searchView];
     [self.searchView.SeachBar addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
-       
-       [self.searchView.BackBtn addTarget:self action:@selector(ReturnBack) forControlEvents:UIControlEventTouchUpInside];
+    [self.searchView.QABtn addTarget:self action:@selector(myQuestionClick) forControlEvents:UIControlEventTouchUpInside];
        [self.searchView.cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-
        [self.searchView.SeachBar addTarget:self action:@selector(textFieldDidBegin:) forControlEvents:UIControlEventEditingDidBegin];
-    [topView addSubview:self.QABtn];
-    [self.QABtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(topView).offset(-18);
-        make.centerY.equalTo(self.searchView);
-    }];
 }
 -(void)initUI{
   [self.view addSubview:self.pageMenu];
@@ -75,10 +61,15 @@
       make.right.equalTo(self.view.mas_right).offset(-5);
 }];
     self.searchListVc = [SearchViewController new];
-    self.searchListVc.view.frame = CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Height-StatusBarAndNavigationBarHeight);
+    self.searchListVc.view.frame = CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Height-StatusBarAndNavigationBarHeight-TabbarSafeBottomMargin);
     [self.view addSubview:self.searchListVc.view];
-   [self setupChildView:NO];
+    [self setupChildView:YES];
 }
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    [self.searchView.SeachBar resignFirstResponder];
+}
+
 #pragma mark - UITextFieldActions
 - (void)textFieldDidBegin:(UITextField *)field {
     [self.searchView showCanncelAnimation];
@@ -242,18 +233,7 @@
     UIGraphicsEndImageContext();
     return image;
 }
-- (UIButton *)QABtn {
-    if (!_QABtn) {
-        _QABtn = [[UIButton alloc] init];
-        [_QABtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _QABtn.titleLabel.font = [UIFont systemFontOfSize:9];
-        _QABtn.titleLabel.numberOfLines = 0;
-        [_QABtn setBackgroundImage:[UIImage imageNamed:@"椭圆蓝"] forState:0];
-        [_QABtn addTarget:self action:@selector(myQuestionClick) forControlEvents:UIControlEventTouchUpInside];
-        [_QABtn setTitle:@"我的\n问题" forState:UIControlStateNormal];
-    }
-    return _QABtn;
-}
+
 - (UIButton *)signBtn {
     if (!_signBtn) {
         _signBtn = [[UIButton alloc] init];

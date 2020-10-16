@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, SearchBarStyle) {
     SearchBarStyleBack,
 };
 @interface YLSPGoodsSearchView : UIView
-@property (nonatomic, strong)UIButton *BackBtn;
+@property (nonatomic, strong) UIButton *QABtn;
 @property (nonatomic, strong) UITextField *SeachBar;
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, assign) SearchBarStyle Style;
