@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *shareTitle;
 @property (nonatomic, copy) NSString *shareDesTitle;
 @property (nonatomic, copy) NSString *shareWebUrl;
+@property (nonatomic, assign) BOOL onlyWeChat;
 
 @end
 

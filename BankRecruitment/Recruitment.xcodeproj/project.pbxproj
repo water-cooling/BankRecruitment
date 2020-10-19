@@ -492,6 +492,16 @@
 		BE1D2CCA25383A2B00C43C21 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CC925383A2B00C43C21 /* SearchViewController.m */; };
 		BE1D2CCD25383EA100C43C21 /* YLSPGoodsSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CCB25383E9F00C43C21 /* YLSPGoodsSearchView.m */; };
 		BE1D2CD02538487500C43C21 /* SearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CCF2538487500C43C21 /* SearchResultViewController.m */; };
+		BE1D2CDD253D338200C43C21 /* QuestionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CDB253D338200C43C21 /* QuestionDetailViewController.m */; };
+		BE1D2CE5253D339500C43C21 /* DKSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CDE253D339300C43C21 /* DKSTextView.m */; };
+		BE1D2CE6253D339500C43C21 /* QAContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CE1253D339400C43C21 /* QAContactTableViewCell.m */; };
+		BE1D2CE7253D339500C43C21 /* DKSKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CE2253D339400C43C21 /* DKSKeyboardView.m */; };
+		BE1D2CE8253D339500C43C21 /* QAContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1D2CE3253D339400C43C21 /* QAContactTableViewCell.xib */; };
+		BE1D2CF5253DAFD700C43C21 /* InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CF3253DAFD700C43C21 /* InviteViewController.m */; };
+		BE1D2CF6253DAFD700C43C21 /* InviteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1D2CF4253DAFD700C43C21 /* InviteViewController.xib */; };
+		BE1D2CF9253DB1D800C43C21 /* InviteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CF8253DB1D800C43C21 /* InviteListViewController.m */; };
+		BE1D2CFD253DB28600C43C21 /* InviteListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1D2CFB253DB28600C43C21 /* InviteListTableViewCell.m */; };
+		BE1D2CFE253DB28600C43C21 /* InviteListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE1D2CFC253DB28600C43C21 /* InviteListTableViewCell.xib */; };
 		BE48A1B425071990001B4352 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE48A1B325071990001B4352 /* AuthenticationServices.framework */; };
 		BE5AE1D424F014E1009CDD34 /* MyCoursesViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */; };
 		BE5AE1D524F014E1009CDD34 /* MyCoursesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5AE1D324F014E1009CDD34 /* MyCoursesViewController.xib */; };
@@ -1351,6 +1361,23 @@
 		BE1D2CCC25383EA000C43C21 /* YLSPGoodsSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLSPGoodsSearchView.h; sourceTree = "<group>"; };
 		BE1D2CCE2538487500C43C21 /* SearchResultViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultViewController.h; sourceTree = "<group>"; };
 		BE1D2CCF2538487500C43C21 /* SearchResultViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultViewController.m; sourceTree = "<group>"; };
+		BE1D2CDB253D338200C43C21 /* QuestionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailViewController.m; sourceTree = "<group>"; };
+		BE1D2CDC253D338200C43C21 /* QuestionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailViewController.h; sourceTree = "<group>"; };
+		BE1D2CDE253D339300C43C21 /* DKSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKSTextView.m; sourceTree = "<group>"; };
+		BE1D2CDF253D339400C43C21 /* QAContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAContactTableViewCell.h; sourceTree = "<group>"; };
+		BE1D2CE0253D339400C43C21 /* DKSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKSTextView.h; sourceTree = "<group>"; };
+		BE1D2CE1253D339400C43C21 /* QAContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAContactTableViewCell.m; sourceTree = "<group>"; };
+		BE1D2CE2253D339400C43C21 /* DKSKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKSKeyboardView.m; sourceTree = "<group>"; };
+		BE1D2CE3253D339400C43C21 /* QAContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QAContactTableViewCell.xib; sourceTree = "<group>"; };
+		BE1D2CE4253D339400C43C21 /* DKSKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKSKeyboardView.h; sourceTree = "<group>"; };
+		BE1D2CF2253DAFD700C43C21 /* InviteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteViewController.h; sourceTree = "<group>"; };
+		BE1D2CF3253DAFD700C43C21 /* InviteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteViewController.m; sourceTree = "<group>"; };
+		BE1D2CF4253DAFD700C43C21 /* InviteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteViewController.xib; sourceTree = "<group>"; };
+		BE1D2CF7253DB1D800C43C21 /* InviteListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteListViewController.h; sourceTree = "<group>"; };
+		BE1D2CF8253DB1D800C43C21 /* InviteListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteListViewController.m; sourceTree = "<group>"; };
+		BE1D2CFA253DB28600C43C21 /* InviteListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteListTableViewCell.h; sourceTree = "<group>"; };
+		BE1D2CFB253DB28600C43C21 /* InviteListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteListTableViewCell.m; sourceTree = "<group>"; };
+		BE1D2CFC253DB28600C43C21 /* InviteListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteListTableViewCell.xib; sourceTree = "<group>"; };
 		BE48A1B325071990001B4352 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		BE5AE1D124F014E1009CDD34 /* MyCoursesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCoursesViewController.h; sourceTree = "<group>"; };
 		BE5AE1D224F014E1009CDD34 /* MyCoursesViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyCoursesViewController.mm; sourceTree = "<group>"; };
@@ -1598,6 +1625,11 @@
 				BEC77B8224E4E0BB0022A404 /* SettingViewController.m */,
 				BED1F39C24E571C600EE4E4A /* AddressListViewController.h */,
 				BED1F39D24E571C600EE4E4A /* AddressListViewController.m */,
+				BE1D2CF2253DAFD700C43C21 /* InviteViewController.h */,
+				BE1D2CF3253DAFD700C43C21 /* InviteViewController.m */,
+				BE1D2CF4253DAFD700C43C21 /* InviteViewController.xib */,
+				BE1D2CF7253DB1D800C43C21 /* InviteListViewController.h */,
+				BE1D2CF8253DB1D800C43C21 /* InviteListViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1625,6 +1657,9 @@
 				60E9FC0F1EFE665000F137F8 /* MineFunctionBtnTableViewCell.h */,
 				60E9FC101EFE665000F137F8 /* MineFunctionBtnTableViewCell.m */,
 				60E9FC111EFE665000F137F8 /* MineFunctionBtnTableViewCell.xib */,
+				BE1D2CFA253DB28600C43C21 /* InviteListTableViewCell.h */,
+				BE1D2CFB253DB28600C43C21 /* InviteListTableViewCell.m */,
+				BE1D2CFC253DB28600C43C21 /* InviteListTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2889,6 +2924,8 @@
 		BE1D2CAA25300FF200C43C21 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BE1D2CDC253D338200C43C21 /* QuestionDetailViewController.h */,
+				BE1D2CDB253D338200C43C21 /* QuestionDetailViewController.m */,
 				BE1D2CC825383A2A00C43C21 /* SearchViewController.h */,
 				BE1D2CC925383A2B00C43C21 /* SearchViewController.m */,
 				BE1D2CBA25358E2300C43C21 /* SubmitQuestionViewController.h */,
@@ -2906,6 +2943,13 @@
 		BE1D2CAE253014B600C43C21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE1D2CE4253D339400C43C21 /* DKSKeyboardView.h */,
+				BE1D2CE2253D339400C43C21 /* DKSKeyboardView.m */,
+				BE1D2CE0253D339400C43C21 /* DKSTextView.h */,
+				BE1D2CDE253D339300C43C21 /* DKSTextView.m */,
+				BE1D2CDF253D339400C43C21 /* QAContactTableViewCell.h */,
+				BE1D2CE1253D339400C43C21 /* QAContactTableViewCell.m */,
+				BE1D2CE3253D339400C43C21 /* QAContactTableViewCell.xib */,
 				BE1D2CCC25383EA000C43C21 /* YLSPGoodsSearchView.h */,
 				BE1D2CCB25383E9F00C43C21 /* YLSPGoodsSearchView.m */,
 				BE1D2CB2253043B900C43C21 /* SPPageMenu.h */,
@@ -3097,6 +3141,7 @@
 				607FFB2D1EB0C01100CDD25A /* icon.png in Resources */,
 				6000BB941E95CF5400F38DC3 /* QuestionReportTableViewCell.xib in Resources */,
 				601FB1961F666A4500423FEF /* DBY1v1OnlinePlaybackViewController.xib in Resources */,
+				BE1D2CE8253D339500C43C21 /* QAContactTableViewCell.xib in Resources */,
 				604AC00520CBA2A8006AB73C /* InformationDetailViewController.xib in Resources */,
 				605C15771F064FD90060C397 /* EveryDayTableViewCell.xib in Resources */,
 				609847591EE8FF13006D944F /* ExamTitleTableViewCell.xib in Resources */,
@@ -3132,6 +3177,7 @@
 				60F90E1E1E88FA8600151728 /* FirstpageViewController.xib in Resources */,
 				60D644B51ED2CD18003983CD /* DateReportDetailViewController.xib in Resources */,
 				60D542081E8DE3130004AA31 /* OldExamsTableViewCell.xib in Resources */,
+				BE1D2CF6253DAFD700C43C21 /* InviteViewController.xib in Resources */,
 				605B421C1E937820007B7BFF /* NoteQuestionViewController.xib in Resources */,
 				60D78F8B1F05F75500D122B2 /* SignCalendarViewController.xib in Resources */,
 				6000BBAA1E96558900F38DC3 /* ErrorAnalysisOptionTableViewCell.xib in Resources */,
@@ -3185,6 +3231,7 @@
 				60F90DBB1E88F77B00151728 /* weather_sleet@2x.png in Resources */,
 				6000BB9B1E95EA8300F38DC3 /* ExerciseHositoryViewController.xib in Resources */,
 				60D5F9C81E8BB4B10004AA31 /* GetSMSViewController.xib in Resources */,
+				BE1D2CFE253DB28600C43C21 /* InviteListTableViewCell.xib in Resources */,
 				60D5426E1E8F90E40004AA31 /* MockExamLearnTableViewCell.xib in Resources */,
 				607BD4A81ECED01B00207C70 /* AboutViewController.xib in Resources */,
 				6000BB961E95E52A00F38DC3 /* banner.png in Resources */,
@@ -3209,6 +3256,7 @@
 				60F90DE41E88F77B00151728 /* SDWebImageManager.m in Sources */,
 				27AA388524E2F12300736AFA /* RegisterView.m in Sources */,
 				6000BB891E94F03500F38DC3 /* ExerciseReportViewController.mm in Sources */,
+				BE1D2CF5253DAFD700C43C21 /* InviteViewController.m in Sources */,
 				60F90D931E88F77B00151728 /* AFURLSessionManager.m in Sources */,
 				60D776361F4EA68200AE92DE /* VideoSelectViewController.mm in Sources */,
 				BEB2A28024E296EA00B3C098 /* InviteTableViewCell.m in Sources */,
@@ -3218,6 +3266,7 @@
 				60F90D9C1E88F77B00151728 /* UIRefreshControl+AFNetworking.m in Sources */,
 				600763E11ED5631300BCCBB0 /* SearchTitleTableViewCell.m in Sources */,
 				601FB1851F666A4500423FEF /* DBY1VNLiveViewController.m in Sources */,
+				BE1D2CF9253DB1D800C43C21 /* InviteListViewController.m in Sources */,
 				60D776341F4EA68200AE92DE /* VideoSelectTableViewCell.m in Sources */,
 				60F90D631E88F77B00151728 /* BBTipView.m in Sources */,
 				6000BBAE1E965AE600F38DC3 /* AnalysisTableViewCell.m in Sources */,
@@ -3246,6 +3295,7 @@
 				601232C31E9277C400868FC3 /* AccountInfoTableViewCell.m in Sources */,
 				60F90E481E89156500151728 /* FirstpageModulesTableViewCell.m in Sources */,
 				6000BBCC1E989F8D00F38DC3 /* TTTAttributedLabel.m in Sources */,
+				BE1D2CE6253D339500C43C21 /* QAContactTableViewCell.m in Sources */,
 				60F90D8F1E88F77B00151728 /* AFNetworkReachabilityManager.m in Sources */,
 				60F90D811E88F77B00151728 /* UIBarButtonItem+Additions.m in Sources */,
 				605B42161E9377E9007B7BFF /* CollectionQuestionViewController.mm in Sources */,
@@ -3322,6 +3372,7 @@
 				60F90D7E1E88F77B00151728 /* NSString+MD5.m in Sources */,
 				60F90E381E88FB6D00151728 /* UseGuideViewController.mm in Sources */,
 				60F90D9D1E88F77B00151728 /* UIWebView+AFNetworking.m in Sources */,
+				BE1D2CE5253D339500C43C21 /* DKSTextView.m in Sources */,
 				60D5F9CC1E8BB4BF0004AA31 /* ResetPasswordViewController.mm in Sources */,
 				BE88B90924E1688E003F3B06 /* View+MASAdditions.m in Sources */,
 				60F90D951E88F77B00151728 /* AFAutoPurgingImageCache.m in Sources */,
@@ -3406,6 +3457,7 @@
 				60D5423B1E8F467D0004AA31 /* WDDrawView.m in Sources */,
 				60F90DDE1E88F77B00151728 /* NSData+ImageContentType.m in Sources */,
 				60DE043D1EA73CE800CF1FD0 /* ExamDetailOptionModel.m in Sources */,
+				BE1D2CE7253D339500C43C21 /* DKSKeyboardView.m in Sources */,
 				BE5AE1D424F014E1009CDD34 /* MyCoursesViewController.mm in Sources */,
 				60D644B41ED2CD18003983CD /* DateReportDetailViewController.m in Sources */,
 				60F90DAA1E88F77B00151728 /* FMDatabaseQueue.m in Sources */,
@@ -3473,6 +3525,7 @@
 				601FB1901F666A4500423FEF /* DBYUIUtils.m in Sources */,
 				60D5F9A81E8B8F6D0004AA31 /* CalendarTableViewCell.m in Sources */,
 				60F90DE01E88F77B00151728 /* SDWebImageCompat.m in Sources */,
+				BE1D2CFD253DB28600C43C21 /* InviteListTableViewCell.m in Sources */,
 				BEC77B8324E4E0BB0022A404 /* SettingViewController.m in Sources */,
 				6080D0251ECC384600C0B806 /* BuyExaminationPaperInfoTableViewCell.m in Sources */,
 				60242EB61EC4434F00EA32B0 /* LiveUserClassScheduleModel.m in Sources */,
@@ -3493,6 +3546,7 @@
 				60F90DA51E88F77B00151728 /* DefineConstant.m in Sources */,
 				602E33D61EFCEBA900417BC9 /* ReportErrorViewController.mm in Sources */,
 				60F90DC41E88F77B00151728 /* MBProgressHUD.m in Sources */,
+				BE1D2CDD253D338200C43C21 /* QuestionDetailViewController.m in Sources */,
 				6098475D1EE8FF28006D944F /* ExamStemTableViewCell.m in Sources */,
 				60D644AE1ED2C551003983CD /* PurchedModel.m in Sources */,
 				601FB1941F666A4500423FEF /* UINavigationController+Rotation.m in Sources */,

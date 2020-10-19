@@ -26,6 +26,7 @@
 #import "SettingViewController.h"
 #import "AddressListViewController.h"
 #import "SignViewController.h"
+#import "InviteViewController.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource, MineFunctionBtnFunc>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *offsetTop;
@@ -65,15 +66,10 @@
 
 
 
-- (void)shareToPlatformType
-{
-    //设置网页地址
-    NSString *webpageUrl = @"http://yk.yinhangzhaopin.com/bshApp/download/index.jsp";
+- (void)shareToPlatformType{
 
-  RecruitMentShareViewController * shareVc = [RecruitMentShareViewController new];
-          shareVc.shareTitle = @"考银行就用银行易考！";
-          shareVc.shareDesTitle = @"考银行就用银行易考！";
-       shareVc.shareWebUrl = webpageUrl;
+  InviteViewController * shareVc = [InviteViewController new];
+    
     shareVc.hidesBottomBarWhenPushed = YES;
        [self.navigationController presentViewController:shareVc animated:YES completion:nil];
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InviteViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inviteBackImg" translatesAutoresizingMaskIntoConstraints="NO" id="tvc-8o-RcG">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4K-bZ-Llm">
+                    <rect key="frame" x="10" y="736" width="394" height="55"/>
+                    <state key="normal" image="inviteBtn"/>
+                    <connections>
+                        <action selector="InviteShowClick:" destination="-1" eventType="touchUpInside" id="M1H-9t-YZP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frj-gi-Cdy">
+                    <rect key="frame" x="322" y="806" width="52" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="3PA-l9-ZYv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".AppleSimplifiedChineseFont" pointSize="13"/>
+                    <state key="normal" title="邀请记录">
+                        <color key="titleColor" red="0.2274509804" green="0.52941176469999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="inviteListClick:" destination="-1" eventType="touchUpInside" id="fc8-bC-Aq1"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2Y-m6-Ru6">
+                    <rect key="frame" x="322" y="819" width="52" height="1"/>
+                    <color key="backgroundColor" red="0.2274509804" green="0.52941176469999995" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="A9a-lC-ecc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="L4K-bZ-Llm" secondAttribute="trailing" constant="10" id="AXG-I1-Cn5"/>
+                <constraint firstItem="tvc-8o-RcG" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="CI5-gT-83Q"/>
+                <constraint firstItem="T2Y-m6-Ru6" firstAttribute="leading" secondItem="frj-gi-Cdy" secondAttribute="leading" id="D7j-aY-Lkt"/>
+                <constraint firstItem="T2Y-m6-Ru6" firstAttribute="bottom" secondItem="frj-gi-Cdy" secondAttribute="bottom" id="Hd9-MN-vpW"/>
+                <constraint firstItem="tvc-8o-RcG" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="LbO-5i-VHE"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="frj-gi-Cdy" secondAttribute="trailing" constant="40" id="NB5-m6-4HZ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="L4K-bZ-Llm" secondAttribute="bottom" constant="71" id="QuT-1b-1eu"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="tvc-8o-RcG" secondAttribute="bottom" id="cQo-nO-ljc"/>
+                <constraint firstItem="T2Y-m6-Ru6" firstAttribute="trailing" secondItem="frj-gi-Cdy" secondAttribute="trailing" id="mfd-QP-GGQ"/>
+                <constraint firstItem="L4K-bZ-Llm" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="10" id="msr-dt-aLr"/>
+                <constraint firstItem="frj-gi-Cdy" firstAttribute="top" secondItem="L4K-bZ-Llm" secondAttribute="bottom" constant="15" id="prP-TD-PLX"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="tvc-8o-RcG" secondAttribute="trailing" id="tL9-iw-LuN"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="131.8840579710145" y="115.84821428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="inviteBackImg" width="375" height="603"/>
+        <image name="inviteBtn" width="354.5" height="54.5"/>
+    </resources>
+</document>

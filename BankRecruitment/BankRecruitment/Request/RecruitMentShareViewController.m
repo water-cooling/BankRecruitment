@@ -196,14 +196,20 @@
 }
 -(NSMutableArray *)shareArr{
     if (!_shareArr) {
-        NSArray *ShareTypeArr = @[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)];
-        _shareArr = [NSMutableArray array];
+        NSArray *ShareTypeArr ;
+        if (self.onlyWeChat) {
+             ShareTypeArr   = @[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)];
+                _shareArr = [NSMutableArray array];
+        }else{
+            ShareTypeArr = @[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)];
+            _shareArr = [NSMutableArray array];
+        }
         for (NSNumber *type in ShareTypeArr) {
             if ([[UMSocialManager defaultManager]isInstall:type.integerValue]) {
-                [_shareArr addObject:type];
-            }
+                           [_shareArr addObject:type];
+                }
         }
-    }
+  }
     return _shareArr;
 }
 
