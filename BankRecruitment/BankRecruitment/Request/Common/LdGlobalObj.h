@@ -86,6 +86,7 @@ typedef void (^BuyObjectSuccessBlock)();
 
 // 服务器信息
 @property (strong, nonatomic) NSString* webAppIp;
+@property (strong, nonatomic) NSString* webNewAppIp;
 @property (strong, nonatomic) NSString* webAppPort;
 @property (strong, nonatomic) NSString* fileServIp;
 @property (strong, nonatomic) NSString* fileGetPort;

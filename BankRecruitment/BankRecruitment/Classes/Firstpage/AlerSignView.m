@@ -19,6 +19,7 @@
     if (self = [super initWithFrame:frame]) {
         self.clipsToBounds = YES;
         self.backgroundColor = [[UIColor colorWithHex:@"#000000"]colorWithAlphaComponent:0.4];
+        UITapGestureRecognizer * gestap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidden)];
         self.signBackImg = [[UIImageView alloc]init];
         self.signBackImg.image = [UIImage imageNamed:@"签到成功"];
         [self addSubview:self.signBackImg];
@@ -37,6 +38,12 @@
     return self;
 }
 
-
+-(void)hidden{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.height = 0;
+        [self removeFromSuperview];
+    }];
+    
+}
 
 @end

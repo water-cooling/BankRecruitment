@@ -13,7 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *signDayLab;
 @property (weak, nonatomic) IBOutlet UIImageView *signBg;
 @property (weak, nonatomic) IBOutlet UIButton *signBtn;
-@property (nonatomic,strong)AlerSignView *signViw;
+@property (nonatomic,strong)AlerSignView *signView;
 
 @end
 
@@ -75,6 +75,8 @@
                 [LdGlobalObj sharedInstanse].user_SignDays = contentDict[@"SignDays"];
                 
                 self.signBtn.userInteractionEnabled = NO;
+                AlerSignView *signView = [[AlerSignView alloc] initWithFrame:CGRectMake(0, 0,0,0)withSignDay:contentDict[@"SignDays"]];
+                [self.view addSubview:signView];
                 self.signDayLab.text = [NSString stringWithFormat:@"已连续签到%@天", [LdGlobalObj sharedInstanse].user_SignDays];
                 [self.signBtn setTitle:self.signDayLab.text forState:0];
                 return;
@@ -85,29 +87,5 @@
         //ZB_Toast(@"失败");
     }];
 }
--(TypeSelectView *)typeViw{
-    if (!_typeViw) {
-        MJWeakSelf;
-        _typeViw = [[TypeSelectView alloc] initWithFrame:CGRectMake(0, 266, SCREENWIDTH, SCREENHEIGHT-266)];
-        _typeViw.typeBlock = ^(TypeListModel * _Nonnull model) {
-            [weakSelf.view beginLoading];
-            [weakSelf.searchView.typeBtn setTitle:model.name forState:UIControlStateNormal];
-            weakSelf.searchView.typeBtn.selected = NO;
-            weakSelf.typeValue = model.category;
-            [weakSelf.arr_data removeAllObjects];
-            [weakSelf productListRequest];
-        };
-        _typeViw.sortBlock = ^(SortListModel * _Nonnull model) {
-            [weakSelf.view beginLoading];
-            [weakSelf.searchView.sortBtn setTitle:model.value forState:UIControlStateNormal];
-            weakSelf.searchView.sortBtn.selected = NO;
-            weakSelf.sortValue = model.code;
-            [weakSelf.arr_data removeAllObjects];
-            [weakSelf productListRequest];
-        };
-        [self.view addSubview:_typeViw];
 
-    }
-    return _typeViw;
-}
 @end

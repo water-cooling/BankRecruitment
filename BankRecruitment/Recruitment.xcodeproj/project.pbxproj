@@ -14,6 +14,7 @@
 		2721BF8D24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2721BF8B24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib */; };
 		2759A09B2502879000B8891F /* HomeVideoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2759A0982502878F00B8891F /* HomeVideoViewController.mm */; };
 		2759A09C2502879000B8891F /* HomeVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2759A09A2502879000B8891F /* HomeVideoViewController.xib */; };
+		27A8E2D7253F3721006AAEBF /* NewRequestClass.mm in Sources */ = {isa = PBXBuildFile; fileRef = 27A8E2D6253F3721006AAEBF /* NewRequestClass.mm */; };
 		27AA387124E1AB2500736AFA /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27AA385B24E1AB2400736AFA /* libUMessage_Sdk_1.5.0a.a */; };
 		27AA387224E1AB2500736AFA /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 27AA385F24E1AB2400736AFA /* UMSocialSDKResources.bundle */; };
 		27AA387324E1AB2500736AFA /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27AA386024E1AB2400736AFA /* UShareUI.framework */; };
@@ -551,6 +552,8 @@
 		2759A0982502878F00B8891F /* HomeVideoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HomeVideoViewController.mm; sourceTree = "<group>"; };
 		2759A0992502879000B8891F /* HomeVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVideoViewController.h; sourceTree = "<group>"; };
 		2759A09A2502879000B8891F /* HomeVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVideoViewController.xib; sourceTree = "<group>"; };
+		27A8E2D5253F3721006AAEBF /* NewRequestClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRequestClass.h; sourceTree = "<group>"; };
+		27A8E2D6253F3721006AAEBF /* NewRequestClass.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = NewRequestClass.mm; sourceTree = "<group>"; };
 		27AA385B24E1AB2400736AFA /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
 		27AA385C24E1AB2400736AFA /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		27AA385F24E1AB2400736AFA /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
@@ -2135,6 +2138,8 @@
 				BEDAD62C253E7ED200D4ADE5 /* HeadImageManager.h */,
 				606DC5E31EFBEA3400467686 /* DataBaseManager.h */,
 				606DC5E41EFBEA3400467686 /* DataBaseManager.m */,
+				27A8E2D5253F3721006AAEBF /* NewRequestClass.h */,
+				27A8E2D6253F3721006AAEBF /* NewRequestClass.mm */,
 				60F90C571E88F77A00151728 /* LLRequestClass.h */,
 				60F90C581E88F77A00151728 /* LLRequestClass.mm */,
 				BEAFCC9A24F11BFA00CEDC40 /* RecruitMentShareViewController.h */,
@@ -3563,6 +3568,7 @@
 				60D5427C1E8FAC050004AA31 /* AddressTableViewCell.m in Sources */,
 				60F90DC81E88F77B00151728 /* MJRefreshComponent.m in Sources */,
 				6000BB9A1E95EA8300F38DC3 /* ExerciseHositoryViewController.mm in Sources */,
+				27A8E2D7253F3721006AAEBF /* NewRequestClass.mm in Sources */,
 				60A895E120BCF88A00566494 /* BindPhoneViewController.m in Sources */,
 				60F90D911E88F77B00151728 /* AFURLRequestSerialization.m in Sources */,
 				60F90DA51E88F77B00151728 /* DefineConstant.m in Sources */,
