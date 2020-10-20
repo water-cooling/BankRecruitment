@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -120,6 +120,14 @@
                             <action selector="funcActionClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vOa-5N-gBn"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K22-PZ-RT7">
+                        <rect key="frame" x="404.5" y="60" width="15" height="29"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="PbM-Cl-C4u"/>
+                            <constraint firstAttribute="height" constant="29" id="vJ2-7Q-i2d"/>
+                        </constraints>
+                        <state key="normal" image="calendar_btn_arrow_right"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -137,8 +145,10 @@
                     <constraint firstItem="6nv-EI-KxN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="Hcz-6K-ujE"/>
                     <constraint firstAttribute="trailing" secondItem="6nv-EI-KxN" secondAttribute="trailing" constant="20" id="J7w-b9-E6h"/>
                     <constraint firstItem="SMi-wH-27v" firstAttribute="height" secondItem="KjD-ow-CNf" secondAttribute="height" id="JPQ-bb-vfI"/>
+                    <constraint firstItem="K22-PZ-RT7" firstAttribute="centerX" secondItem="6nv-EI-KxN" secondAttribute="centerX" id="MPJ-gE-51m"/>
                     <constraint firstItem="PHu-em-c7P" firstAttribute="width" secondItem="KjD-ow-CNf" secondAttribute="width" id="PCg-ti-yMH"/>
                     <constraint firstItem="B8P-5X-IN2" firstAttribute="leading" secondItem="SMi-wH-27v" secondAttribute="trailing" constant="8" symbolic="YES" id="RjU-6q-uRq"/>
+                    <constraint firstItem="K22-PZ-RT7" firstAttribute="centerY" secondItem="km1-pL-RRL" secondAttribute="centerY" id="SAE-QO-LMq"/>
                     <constraint firstItem="B8P-5X-IN2" firstAttribute="centerY" secondItem="KjD-ow-CNf" secondAttribute="centerY" id="UlB-gK-4NP"/>
                     <constraint firstItem="km1-pL-RRL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="48" id="WHg-DT-97u"/>
                     <constraint firstItem="6nv-EI-KxN" firstAttribute="trailing" secondItem="vRo-Rm-sII" secondAttribute="trailing" constant="-3" id="Yrq-dK-WrQ"/>
@@ -162,6 +172,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="PersonInfoBtn" destination="K22-PZ-RT7" id="y27-M1-moi"/>
                 <outlet property="headImg" destination="km1-pL-RRL" id="nBd-rh-vVn"/>
                 <outlet property="headImgtop" destination="WHg-DT-97u" id="rjN-sE-hye"/>
                 <outlet property="messageBtn" destination="6nv-EI-KxN" id="X2v-9R-JLa"/>
@@ -176,6 +187,7 @@
     </objects>
     <resources>
         <image name="MineBg" width="375" height="228"/>
+        <image name="calendar_btn_arrow_right" width="8" height="15"/>
         <image name="head" width="53" height="54.5"/>
         <image name="icn_message" width="18" height="18"/>
         <image name="历史回顾" width="28" height="28"/>

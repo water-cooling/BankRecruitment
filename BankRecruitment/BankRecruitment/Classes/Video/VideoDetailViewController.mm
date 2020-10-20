@@ -101,23 +101,23 @@
     [self.view addSubview:self.examButton];
     self.examButton.center = CGPointMake(kScreenWidth/2, self.bottonCenterY);
     
-    self.preVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 95, 35)];
-    self.preVideoButton.backgroundColor = kColorNavigationBar;
+    self.preVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 95, 40)];
+    self.preVideoButton.backgroundColor = [UIColor colorWithHex:@"#F79B39"];
     [self.preVideoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.preVideoButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.preVideoButton setTitle:@"上一个知识点" forState:UIControlStateNormal];
-    self.preVideoButton.layer.cornerRadius = 4;
+    self.preVideoButton.layer.cornerRadius = 20;
     self.preVideoButton.layer.masksToBounds = YES;
     [self.preVideoButton addTarget:self action:@selector(preVideoButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.preVideoButton];
     self.preVideoButton.center = CGPointMake(kScreenWidth/2, self.bottonCenterY);
     
-    self.nextVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 95, 35)];
-    self.nextVideoButton.backgroundColor = kColorNavigationBar;
-    [self.nextVideoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.nextVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 95, 40)];
+    [self.nextVideoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     self.nextVideoButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.nextVideoButton.backgroundColor = KColorBlueText;
     [self.nextVideoButton setTitle:@"下一个知识点" forState:UIControlStateNormal];
-    self.nextVideoButton.layer.cornerRadius = 4;
+    self.nextVideoButton.layer.cornerRadius = 20;
     self.nextVideoButton.layer.masksToBounds = YES;
     [self.nextVideoButton addTarget:self action:@selector(nextVideoButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.nextVideoButton];
@@ -190,14 +190,42 @@
 
 - (void)ContactServiceButtonPressed
 {
-    NSString *qq = @"3004628600";
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]];
-    }
-    else
-    {
-        ZB_Toast(@"尚未检测到相关客户端，咨询失败");
-    }
+        UIAlertController * alerView = [UIAlertController alertControllerWithTitle:@"" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
+            UIAlertAction *phoneAler = [UIAlertAction actionWithTitle:@"电话号码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                      [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@",@"13770690067"]]];
+
+            }];
+    [phoneAler setValue:[UIColor colorWithHex:@"#333333"] forKey:@"_titleTextColor"];
+
+        [alerView addAction:phoneAler];
+        UIAlertAction *wechatAler = [UIAlertAction actionWithTitle:@"微信号" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                    pasteboard.string = @"13770690067";
+                    ZB_Toast(@"微信号复制成功");
+            }];
+            [wechatAler setValue:[UIColor colorWithHex:@"#333333"] forKey:@"_titleTextColor"];
+
+            [alerView addAction:wechatAler];
+    UIAlertAction *qqAler = [UIAlertAction actionWithTitle:@"在线客服" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSString *qq = @"3004628600";
+                       if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]]) {
+                           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]];
+                       }
+                       else
+                       {
+                           ZB_Toast(@"尚未检测到相关客户端，咨询失败");
+                       }
+               }];
+               [alerView addAction:qqAler];
+    [qqAler setValue:[UIColor colorWithHex:@"#333333"] forKey:@"_titleTextColor"];
+
+        UIAlertAction *  cancel  = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                       
+        }];
+        [alerView addAction:cancel];
+    [cancel setValue:[UIColor colorWithHex:@"#333333"] forKey:@"_titleTextColor"];
+        [self.navigationController presentViewController:alerView animated:YES completion:nil];
+
 }
 
 - (void)refreshVideoDetailView:(NSMutableAttributedString *)attributeString{

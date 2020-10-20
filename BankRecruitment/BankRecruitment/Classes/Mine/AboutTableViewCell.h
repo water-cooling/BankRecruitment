@@ -10,4 +10,6 @@
 
 @interface AboutTableViewCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UILabel *titleCommonLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleDesLab;
+@property (weak, nonatomic) IBOutlet UIImageView *headImg;
 @end

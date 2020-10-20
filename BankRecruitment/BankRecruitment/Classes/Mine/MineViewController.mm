@@ -27,6 +27,7 @@
 #import "AddressListViewController.h"
 #import "SignViewController.h"
 #import "InviteViewController.h"
+#import "AccountInfoViewController.h"
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource, MineFunctionBtnFunc>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *offsetTop;
@@ -198,6 +199,7 @@
             loc_cell.delegate = self;
         [loc_cell.settingBtn addTarget:self action:@selector(settingClick) forControlEvents:UIControlEventTouchUpInside];
         [loc_cell.messageBtn addTarget:self action:@selector(messageClick) forControlEvents:UIControlEventTouchUpInside];
+        [loc_cell.PersonInfoBtn addTarget:self action:@selector(personInfoClick) forControlEvents:UIControlEventTouchUpInside];
 
             loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
            
@@ -276,6 +278,11 @@
                vc.hidesBottomBarWhenPushed = YES;
                [self.navigationController pushViewController:vc animated:YES];
     
+}
+-(void)personInfoClick{
+    AccountInfoViewController * accountInfoVc = [AccountInfoViewController new];
+    accountInfoVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:accountInfoVc animated:YES];
 }
 
 - (UIButton *)signBtn {

@@ -529,6 +529,10 @@
 		BEC1F48B24E98F1000EADCC3 /* NewExamTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEC1F48924E98F1000EADCC3 /* NewExamTitleTableViewCell.xib */; };
 		BEC77B8324E4E0BB0022A404 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B8224E4E0BB0022A404 /* SettingViewController.m */; };
 		BED1F39E24E571C600EE4E4A /* AddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BED1F39D24E571C600EE4E4A /* AddressListViewController.m */; };
+		BEDAD62A253E79D900D4ADE5 /* PrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDAD628253E79D800D4ADE5 /* PrivacyViewController.m */; };
+		BEDAD62D253E7ED300D4ADE5 /* HeadImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDAD62B253E7ED100D4ADE5 /* HeadImageManager.m */; };
+		BEDAD62F253E839600D4ADE5 /* 银行易考最新隐私协议.txt in Resources */ = {isa = PBXBuildFile; fileRef = BEDAD62E253E839500D4ADE5 /* 银行易考最新隐私协议.txt */; };
+		BEDAD637253EE48600D4ADE5 /* AlerSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDAD636253EE48600D4ADE5 /* AlerSignView.m */; };
 		BEF8AEDA24F8E31200CDDF3B /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8AED824F8E31200CDDF3B /* Common.m */; };
 		BEF8AEDD24FC916100CDDF3B /* InviteJobModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8AEDC24FC916100CDDF3B /* InviteJobModel.m */; };
 		D2D70D8A217AD2F60050AE8B /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2D70D89217AD2F60050AE8B /* UserNotifications.framework */; };
@@ -1431,6 +1435,13 @@
 		BEC77B8224E4E0BB0022A404 /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		BED1F39C24E571C600EE4E4A /* AddressListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressListViewController.h; sourceTree = "<group>"; };
 		BED1F39D24E571C600EE4E4A /* AddressListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressListViewController.m; sourceTree = "<group>"; };
+		BEDAD628253E79D800D4ADE5 /* PrivacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyViewController.m; sourceTree = "<group>"; };
+		BEDAD629253E79D800D4ADE5 /* PrivacyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyViewController.h; sourceTree = "<group>"; };
+		BEDAD62B253E7ED100D4ADE5 /* HeadImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageManager.m; sourceTree = "<group>"; };
+		BEDAD62C253E7ED200D4ADE5 /* HeadImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadImageManager.h; sourceTree = "<group>"; };
+		BEDAD62E253E839500D4ADE5 /* 银行易考最新隐私协议.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "银行易考最新隐私协议.txt"; sourceTree = "<group>"; };
+		BEDAD635253EE48600D4ADE5 /* AlerSignView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlerSignView.h; sourceTree = "<group>"; };
+		BEDAD636253EE48600D4ADE5 /* AlerSignView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlerSignView.m; sourceTree = "<group>"; };
 		BEF8AED824F8E31200CDDF3B /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		BEF8AED924F8E31200CDDF3B /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		BEF8AEDB24FC916000CDDF3B /* InviteJobModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteJobModel.h; sourceTree = "<group>"; };
@@ -1591,6 +1602,8 @@
 		601232BE1E92775B00868FC3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BEDAD629253E79D800D4ADE5 /* PrivacyViewController.h */,
+				BEDAD628253E79D800D4ADE5 /* PrivacyViewController.m */,
 				60F90E241E88FAA200151728 /* MineViewController.h */,
 				60F90E251E88FAA200151728 /* MineViewController.mm */,
 				60F90E261E88FAA200151728 /* MineViewController.xib */,
@@ -2092,6 +2105,7 @@
 			children = (
 				BEB2A28224E3879E00B3C098 /* Category */,
 				60EFB9EA1F2C27AA0039A9D5 /* BankRecruitment.entitlements */,
+				BEDAD62E253E839500D4ADE5 /* 银行易考最新隐私协议.txt */,
 				60D53EFC1E8CB4270004AA31 /* Pics */,
 				60F90E141E88FA6E00151728 /* Classes */,
 				60F90BD51E88F77A00151728 /* Request */,
@@ -2117,6 +2131,8 @@
 			isa = PBXGroup;
 			children = (
 				605C15781F06594B0060C397 /* Yahei.ttc */,
+				BEDAD62B253E7ED100D4ADE5 /* HeadImageManager.m */,
+				BEDAD62C253E7ED200D4ADE5 /* HeadImageManager.h */,
 				606DC5E31EFBEA3400467686 /* DataBaseManager.h */,
 				606DC5E41EFBEA3400467686 /* DataBaseManager.m */,
 				60F90C571E88F77A00151728 /* LLRequestClass.h */,
@@ -2692,6 +2708,8 @@
 		60F90E4F1E8A020300151728 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BEDAD635253EE48600D4ADE5 /* AlerSignView.h */,
+				BEDAD636253EE48600D4ADE5 /* AlerSignView.m */,
 				6000BBB01E96662A00F38DC3 /* AnalysisMoreView.h */,
 				6000BBB11E96662A00F38DC3 /* AnalysisMoreView.m */,
 				6000BBB31E96663F00F38DC3 /* AnalysisMoreView.xib */,
@@ -3092,6 +3110,7 @@
 				60D78F811F03B50000D122B2 /* FirstPageAdScrollTableViewCell.xib in Resources */,
 				60A2404E1EE4FE1C00C15F5B /* MineMessageTableViewCell.xib in Resources */,
 				60D542121E8DE98A0004AA31 /* OldExamsSubTableViewCell.xib in Resources */,
+				BEDAD62F253E839600D4ADE5 /* 银行易考最新隐私协议.txt in Resources */,
 				6027AE3B1EAB09AC0019BC02 /* NoteTableViewCell.xib in Resources */,
 				60D5421F1E8DF63C0004AA31 /* DailyPracticeViewController.xib in Resources */,
 				60D644AB1ED2C005003983CD /* DataReportViewController.xib in Resources */,
@@ -3462,6 +3481,7 @@
 				60D644B41ED2CD18003983CD /* DateReportDetailViewController.m in Sources */,
 				60F90DAA1E88F77B00151728 /* FMDatabaseQueue.m in Sources */,
 				60F90DEA1E88F77B00151728 /* UIImageView+HighlightedWebCache.m in Sources */,
+				BEDAD637253EE48600D4ADE5 /* AlerSignView.m in Sources */,
 				60F90DCA1E88F77B00151728 /* MJRefreshFooter.m in Sources */,
 				60369BBC1EE79A5B00FFC158 /* AddressModel.m in Sources */,
 				60F90D861E88F77B00151728 /* UIView+ActivityIndicator.m in Sources */,
@@ -3484,6 +3504,7 @@
 				6027AE3A1EAB09AC0019BC02 /* NoteTableViewCell.m in Sources */,
 				2721BF8024DEEA5300BE8381 /* TabbarViewController.m in Sources */,
 				600763D51ED52CF400BCCBB0 /* SearchTitleViewController.mm in Sources */,
+				BEDAD62D253E7ED300D4ADE5 /* HeadImageManager.m in Sources */,
 				6000BBA91E96558900F38DC3 /* ErrorAnalysisOptionTableViewCell.m in Sources */,
 				604F7CBD1ED67D90007BB56E /* ChangePassedViewController.mm in Sources */,
 				60F90DE31E88F77B00151728 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -3504,6 +3525,7 @@
 				605C15711F063B560060C397 /* LianxiHisViewController.mm in Sources */,
 				60F90D9B1E88F77B00151728 /* UIProgressView+AFNetworking.m in Sources */,
 				60D7763F1F4EA68200AE92DE /* VideoViewController.mm in Sources */,
+				BEDAD62A253E79D900D4ADE5 /* PrivacyViewController.m in Sources */,
 				60F90E221E88FA9600151728 /* LiveViewController.mm in Sources */,
 				60341ED01EA49BC3008E565B /* OutlineModel.mm in Sources */,
 				60494C9520BFEA8300BC5EE4 /* MessageWordDetailViewController.m in Sources */,

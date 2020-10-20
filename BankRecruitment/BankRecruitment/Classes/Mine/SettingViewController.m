@@ -8,11 +8,12 @@
 
 #import "SettingViewController.h"
 #import "AccountInfoTableViewCell.h"
-#import "AccountInfoViewController.h"
 #import "AboutViewController.h"
+#import "PrivacyViewController.h"
 @interface SettingViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)  UITableView*tableView;
 @property (nonatomic, strong)UIButton *btnLogOut;
+@property (nonatomic, strong)NSString *app_Version;
 @end
 
 @implementation SettingViewController
@@ -21,9 +22,9 @@
     [super viewDidLoad];
     self.title =@"设置";
     self.view.backgroundColor= [UIColor whiteColor];
-    
+NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+self.app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
@@ -58,20 +59,25 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * loc_cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     if (!loc_cell) {
-        loc_cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+        loc_cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"UITableViewCell"];
     }
-               if(indexPath.row == 0){
-                loc_cell.textLabel.text = @"账号信息";
-            }else if(indexPath.row == 1){
-                loc_cell.textLabel.text = @"缓存清理";
-            }else {
-                loc_cell.textLabel.text = @"关于我们";
+       if (indexPath.row == 0) {
+        loc_cell.textLabel.text = @"隐私协议";
+       }else if(indexPath.row == 1){
+           loc_cell.textLabel.text = @"缓存清理";
+                
+            }else if(indexPath.row == 2){
+              loc_cell.textLabel.text = @"关于我们";
+            }else{
+                loc_cell.textLabel.text = @"版本号";
+                loc_cell.detailTextLabel.text = self.app_Version;
+                
             }
     loc_cell.selectionStyle = UITableViewCellSelectionStyleNone;
     loc_cell.textLabel.font = [UIFont systemFontOfSize:14];
@@ -81,10 +87,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        AccountInfoViewController *vc = [[AccountInfoViewController alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 1){
+        PrivacyViewController * privacyVc = [PrivacyViewController new];
+        privacyVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:privacyVc animated:YES];
+    }else if (indexPath.row == 1) {
         [SVProgressHUD showWithStatus:@"正在清理"];
         [self performSelector:@selector(stopClearCache) withObject:nil afterDelay:1];
     }else{

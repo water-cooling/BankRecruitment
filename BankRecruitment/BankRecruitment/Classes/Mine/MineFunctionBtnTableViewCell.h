@@ -23,5 +23,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *noReadCountLab;
 @property (weak, nonatomic) IBOutlet UIButton *settingBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageTop;
+@property (weak, nonatomic) IBOutlet UIButton *PersonInfoBtn;
 
 @end
