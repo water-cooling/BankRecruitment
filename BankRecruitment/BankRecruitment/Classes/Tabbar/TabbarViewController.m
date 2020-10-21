@@ -9,7 +9,7 @@
 #import "TabbarViewController.h"
 #import "FirstpageViewController.h"
 #import "LiveViewController.h"
-#import "QAViewController.h"
+#import "QAListViewController.h"
 #import "NewsViewController.h"
 #import "MineViewController.h"
 #import "VideoSelectViewController.h"
@@ -44,7 +44,7 @@
     liveVCNav.tabBarItem.title = @"课程";
     [liveVCNav.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:kColorSelect, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
-    QAViewController *QAPageVC = [[QAViewController alloc] init];
+    QAListViewController *QAPageVC = [[QAListViewController alloc] init];
     UINavigationController *QAPageVCNAV = [[UINavigationController alloc] initWithRootViewController:QAPageVC];
     [LdGlobalObj sharedInstanse].firstPageVC = FirstPageVC;
     QAPageVCNAV.tabBarItem.image = [[UIImage imageNamed:@"wd-w"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

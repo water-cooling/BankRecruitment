@@ -8,10 +8,10 @@
 
 #define MAX_LIMIT_TITLE_NUMS 20
 #define MAX_LIMIT_NUMS 90
-
 #import "SubmitQuestionViewController.h"
 #import "SPPageMenu.h"
 #import "UITextView+FGPlaceholder.h"
+#import <Foundation/Foundation.h>
 @interface SubmitQuestionViewController ()<SPPageMenuDelegate,UITextViewDelegate>
 @property (nonatomic, strong)  SPPageMenu*pageMenu;
 @property (nonatomic, strong)  UITextView*textView;
@@ -147,8 +147,9 @@
         return YES;
     }else{
         NSInteger len = text.length + caninputlen;
+        NSInteger max = MAX(len,0);
         //防止当text.length + caninputlen < 0时，使得rg.length为一个非法最大正数出错
-        NSRange rg = {0,MAX(len,0)};
+        NSRange rg = {0,static_cast<NSUInteger>(max)};
         
         if (rg.length > 0)
         {

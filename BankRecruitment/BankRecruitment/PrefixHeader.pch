@@ -12,6 +12,7 @@
 #ifdef __OBJC__
 #import "LdCommon.h"
 #import "LLRequestClass.h"
+#import "NewRequestClass.h"
 #import "UIView+Addition.h"
 #import "DefineConstant.h"
 #import "Masonry.h"
@@ -19,6 +20,7 @@
 #import "UIView+XLExtension.h"
 #import "RecruitMentShareViewController.h"
 #import "Common.h"
+#import "MJExtension.h"
 #endif
 
 

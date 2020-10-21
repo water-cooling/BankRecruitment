@@ -10,8 +10,10 @@
 #import "AFNetworking.h"
 
 #define kPreGetOrSendCount 30
+#define getQuestionCats     @"yikao/yk-question/getQuestionCats"//获取评论选择分类
 
-@implementation LLRequestClass
+
+@implementation NewRequestClass
 //发起POST请求直接调用
 + (void)postWithURL:(NSString *)url params:(NSDictionary *)params success:(HttpSuccess)success failure:(HttpFailure)failure {
     if(!url) {
@@ -62,11 +64,11 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:9];
     for(NSString *key in params.allKeys)
     {
-        [dict setObject:getISO8859withString([params objectForKey:key]) forKey:key];
+        [dict setObject:[params objectForKey:key] forKey:key];
     }
     
     NSLog(@"%@ %@", url, dict);
-    [manager POST:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:[[LdGlobalObj sharedInstanse].webNewAppIp stringByAppendingPathComponent:url] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (error){
@@ -83,6 +85,7 @@
     }
 
     NSLog(@"%@", url);
+    
     AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = nil;
     manager.securityPolicy = [AFSecurityPolicy defaultPolicy];
@@ -91,7 +94,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
     manager.requestSerializer.timeoutInterval = 60.0f;
-    [manager GET:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[[LdGlobalObj sharedInstanse].webNewAppIp stringByAppendingPathComponent:url] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if(error) {
@@ -103,20 +106,17 @@
 #pragma -mark sub functions
 
 /**
- 获取数据类别
+ 获取分类
  */
-+ (void)requestGetTypeByIType:(NSString *)IType success:(HttpSuccess)success failure:(HttpFailure)failure{
-//    NSString *url = [NSString stringWithFormat:@"%@?action=doGetType&IType=%@", [LdGlobalObj sharedInstanse].webAppIp, IType];
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:9];
-    [dict setObject:@"doGetType" forKey:@"action"];
-    [dict setObject:IType forKey:@"IType"];
-    [LLRequestClass postWithURL:[LdGlobalObj sharedInstanse].webAppIp params:dict success:^(id jsonData) {
++ (void)requestQuestionCats:(NSMutableDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure{
+    [NewRequestClass getWithURL:getQuestionCats success:^(id jsonData) {
         success(jsonData);
+
     } failure:^(NSError *error) {
         if (error) {
             failure(error);
         }
+
     }];
 }
-
 @end

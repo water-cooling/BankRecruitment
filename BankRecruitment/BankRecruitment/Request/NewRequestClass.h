@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewRequestClass : NSObject
-
+//获取评论选择分类
++ (void)requestQuestionCats:(NSMutableDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -6,14 +6,15 @@
 //  Copyright © 2020 LongLian. All rights reserved.
 //
 
-#import "QAViewController.h"
+#import "QAListViewController.h"
 #import "SPPageMenu.h"
 #import "QATableViewCell.h"
 #import "SubmitQuestionViewController.h"
 #import "MyQuestionViewController.h"
 #import "YLSPGoodsSearchView.h"
 #import "SearchViewController.h"
-@interface QAViewController ()<UITableViewDelegate,UITableViewDataSource,SPPageMenuDelegate,UISearchBarDelegate>
+#import "QACategoryListModel.h"
+@interface QAListViewController ()<UITableViewDelegate,UITableViewDataSource,SPPageMenuDelegate,UISearchBarDelegate>
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, strong)  SPPageMenu*pageMenu;
 @property (nonatomic, strong) NSMutableArray *dataArr;
@@ -25,7 +26,7 @@
 @property (nonatomic, strong) UIButton *signBtn;
 @end
 
-@implementation QAViewController
+@implementation QAListViewController
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
@@ -64,10 +65,29 @@
     self.searchListVc.view.frame = CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Height-StatusBarAndNavigationBarHeight-TabbarSafeBottomMargin);
     [self.view addSubview:self.searchListVc.view];
     [self setupChildView:YES];
+    [self getQuestionCatsquest];
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
     [self.searchView.SeachBar resignFirstResponder];
+}
+#pragma mark - NetWorking
+
+-(void)getQuestionCatsquest{
+    [NewRequestClass requestQuestionCats:nil success:^(id jsonData) {
+        NSDictionary *content=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        if (content[@"data"][@"response"][@"rows"]) {
+            NSMutableArray * arr = [QACategoryListModel mj_objectArrayWithKeyValuesArray:content[@"data"][@"response"][@"rows"]];
+            NSMutableArray *arrStr = [NSMutableArray array];
+            for (QACategoryListModel * model in arr) {
+                [arrStr addObject:model.questionCatCodeName];
+            }
+            [_pageMenu setItems:arrStr.copy selectedItemIndex:0];
+        };
+
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - UITextFieldActions
@@ -184,7 +204,6 @@
 - (SPPageMenu *)pageMenu {
     if (!_pageMenu) {
         _pageMenu = [SPPageMenu pageMenuWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, 50)];
-        [_pageMenu setItems:@[@"全部",@"待支付",@"已支付",@"已取消",@"已取消",@"已取消",@"已取消"] selectedItemIndex:0];
         _pageMenu.delegate = self;
         _pageMenu.itemTitleFont = [UIFont systemFontOfSize:16];
         _pageMenu.selectedItemTitleColor = [UIColor blackColor];
