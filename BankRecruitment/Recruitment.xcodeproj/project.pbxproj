@@ -14,6 +14,7 @@
 		2721BF8D24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2721BF8B24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib */; };
 		2759A09B2502879000B8891F /* HomeVideoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2759A0982502878F00B8891F /* HomeVideoViewController.mm */; };
 		2759A09C2502879000B8891F /* HomeVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2759A09A2502879000B8891F /* HomeVideoViewController.xib */; };
+		27A8E2DD2541C66D006AAEBF /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A8E2DC2541C66D006AAEBF /* NSString+Common.m */; };
 		27AA387124E1AB2500736AFA /* libUMessage_Sdk_1.5.0a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27AA385B24E1AB2400736AFA /* libUMessage_Sdk_1.5.0a.a */; };
 		27AA387224E1AB2500736AFA /* UMSocialSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 27AA385F24E1AB2400736AFA /* UMSocialSDKResources.bundle */; };
 		27AA387324E1AB2500736AFA /* UShareUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27AA386024E1AB2400736AFA /* UShareUI.framework */; };
@@ -565,6 +566,8 @@
 		2759A09A2502879000B8891F /* HomeVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVideoViewController.xib; sourceTree = "<group>"; };
 		27A8E2D5253F3721006AAEBF /* NewRequestClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewRequestClass.h; sourceTree = "<group>"; };
 		27A8E2D6253F3721006AAEBF /* NewRequestClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewRequestClass.m; sourceTree = "<group>"; };
+		27A8E2DB2541C66D006AAEBF /* NSString+Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
+		27A8E2DC2541C66D006AAEBF /* NSString+Common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
 		27AA385B24E1AB2400736AFA /* libUMessage_Sdk_1.5.0a.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.5.0a.a; sourceTree = "<group>"; };
 		27AA385C24E1AB2400736AFA /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		27AA385F24E1AB2400736AFA /* UMSocialSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResources.bundle; sourceTree = "<group>"; };
@@ -3063,6 +3066,8 @@
 				BEF8AED824F8E31200CDDF3B /* Common.m */,
 				BEB2A28A24E3D73700B3C098 /* UIView+XLExtension.h */,
 				BEB2A28924E3D73600B3C098 /* UIView+XLExtension.m */,
+				27A8E2DB2541C66D006AAEBF /* NSString+Common.h */,
+				27A8E2DC2541C66D006AAEBF /* NSString+Common.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3644,6 +3649,7 @@
 				60F90DCF1E88F77B00151728 /* MJRefreshLegendHeader.m in Sources */,
 				60F90D8D1E88F77B00151728 /* UIView+RoundedCorners.m in Sources */,
 				60369BB81EE797E500FFC158 /* OrderAddressTableViewCell.m in Sources */,
+				27A8E2DD2541C66D006AAEBF /* NSString+Common.m in Sources */,
 				60F90DEF1E88F77B00151728 /* UIViewController+SNToast.m in Sources */,
 				60F90DF31E88F77B00151728 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				BE88B90B24E1688E003F3B06 /* MASViewConstraint.m in Sources */,

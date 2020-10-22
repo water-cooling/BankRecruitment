@@ -52,7 +52,7 @@ typedef void (^BuyObjectSuccessBlock)();
 @property (strong, nonatomic) NSDateFormatter *formatter;
 @property (strong, nonatomic) NSString *firstExaminPaperEID;
 @property (nonatomic, strong) NSMutableArray *advList;
-
+@property (strong, nonatomic) NSString* sessionKey;
 @property (strong, nonatomic) NSString* user_id;
 @property (strong, nonatomic) NSString* user_mobile;
 @property (strong, nonatomic) NSString* user_name;

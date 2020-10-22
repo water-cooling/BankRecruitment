@@ -198,10 +198,7 @@
                 NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:self.loginView.phoneTextField.text, @"userLoginname", self.loginView.pwdTextField.text, @"userPassword", nil];
                 [defaults setObject:userLoginDict forKey:@"userLoginDict"];
                 [defaults synchronize];
-                    TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
-                    [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
-                    appDelegate.window.rootViewController = homePageVC;
-                    [appDelegate.window makeKeyAndVisible];
+                   
                 
                 [self NetworkPutMsgToken];
                 return;
@@ -222,6 +219,22 @@
         ZB_Toast(@"登录失败");
     }];
     
+}
+-(void)synchronizeLogin{
+    NSMutableDictionary * dict =[NSMutableDictionary dictionary];
+          [dict setValue:self.loginView.phoneTextField.text forKey:@"mobile"];
+           [dict setValue:self.loginView.pwdTextField.text forKey:@"password"];
+          NSString * sign = [[NSString stringWithFormat:@"__ACBadf%@",self.loginView.phoneTextField.text] stringByAppendingString:self.loginView.pwdTextField.text];
+          [dict setValue:[sign smallMD5] forKey:@"clientSign"];
+          [NewRequestClass requestLogin:dict success:^(id jsonData) {
+              [LdGlobalObj sharedInstanse].sessionKey = jsonData[@"data"][@"response"][@"sessionKey"];
+              TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
+            [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
+                appDelegate.window.rootViewController = homePageVC;
+                [appDelegate.window makeKeyAndVisible];
+          } failure:^(NSError *error) {
+              
+          }];
 }
 /*微信登录
 返回 中 如果 mobile 有值，则代表该用户 已经存在平台，直接转到首页即可
@@ -360,12 +373,10 @@
                                  BindPhoneViewController *vc = [[BindPhoneViewController alloc] init];
                                  [self.navigationController pushViewController:vc animated:YES];
                              }else{
+                                 
                                  [self saveAutoLoginMes];
                                  
-                                      TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
-                                     [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
-                                     appDelegate.window.rootViewController = homePageVC;
-                                     [appDelegate.window makeKeyAndVisible];
+                                
                                  
                                  [self NetworkPutMsgToken];
                              }
@@ -438,6 +449,7 @@
 - (void)saveAutoLoginMes{
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *userLoginDict = [NSDictionary dictionaryWithObjectsAndKeys:[LdGlobalObj sharedInstanse].user_mobile, @"userLoginname", self.pass, @"userPassword", nil];
+    [self synchronizeLogin];
     [defaults setObject:userLoginDict forKey:@"userLoginDict"];
     [defaults synchronize];
     

@@ -11,6 +11,19 @@
 
 #define kPreGetOrSendCount 30
 #define getQuestionCats     @"yikao/yk-question/getQuestionCats"//获取评论选择分类
+#define Recruitmentlogin   @"yikao/uc/login"//登录
+#define Recruitmentlogout  @"yikao/uc/logout"//登出
+#define getQuestionList @"yikao/yk-question/list"//问题列表
+#define addQuestion @"yikao/yk-question/addQuestion"//新增问题
+#define questionDetail @"api/yikao/yk-question/detail"//问题详情
+#define getMyQuestionList @"yikao/yk-question/myList"//我的问题列表
+#define getAnswerList @"yikao/yk-question-answer/list"//解答列表
+#define addAnswer @"yikao/yk-question-answer/addQuestionAnswer"//回答问题
+#define praiseAnswer @"yikao/yk-question-answer/praise"//点赞解答
+#define deleteAnswer @"ikao/yk-question-answer/del"//删除解答
+#define cancelPraiseAnswer @"yk-question-answer/praiseCancel"//取消点赞
+
+
 
 
 @implementation NewRequestClass
@@ -66,10 +79,11 @@
     {
         [dict setObject:[params objectForKey:key] forKey:key];
     }
-    
+    [dict setValue:@"767348035122757632" forKey:@"appId"];
     NSLog(@"%@ %@", url, dict);
-    [manager POST:[[LdGlobalObj sharedInstanse].webNewAppIp stringByAppendingPathComponent:url] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        success(responseObject);
+    [manager POST:[[LdGlobalObj sharedInstanse].webNewAppIp stringByAppendingString:url] parameters:dict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         id response =[NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        success(response);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (error){
             failure(error);
@@ -85,7 +99,7 @@
     }
 
     NSLog(@"%@", url);
-    
+    [url stringByAppendingString:@"?appId=767348035122757632"];
     AFHTTPSessionManager* manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = nil;
     manager.securityPolicy = [AFSecurityPolicy defaultPolicy];
@@ -117,6 +131,19 @@
             failure(error);
         }
 
+    }];
+}
+
+/**
+ 获取登录
+ */
++ (void)requestLogin:(NSMutableDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure{
+    [NewRequestClass postWithURL:Recruitmentlogin params:parameters success:^(id jsonData) {
+        success(jsonData);
+    } failure:^(NSError *error) {
+        if (error) {
+            failure(error);
+        }
     }];
 }
 @end

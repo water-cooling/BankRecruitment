@@ -21,6 +21,7 @@
 #import "RecruitMentShareViewController.h"
 #import "Common.h"
 #import "MJExtension.h"
+#import "NSString+Common.h"
 #endif
 
 
