@@ -103,8 +103,8 @@
     
     self.preVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 95, 40)];
     self.preVideoButton.backgroundColor = [UIColor colorWithHex:@"#F79B39"];
-    [self.preVideoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.preVideoButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.preVideoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.preVideoButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.preVideoButton setTitle:@"上一个知识点" forState:UIControlStateNormal];
     self.preVideoButton.layer.cornerRadius = 20;
     self.preVideoButton.layer.masksToBounds = YES;
@@ -114,7 +114,7 @@
     
     self.nextVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 95, 40)];
     [self.nextVideoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.nextVideoButton.titleLabel.font = [UIFont systemFontOfSize:14];
+    self.nextVideoButton.titleLabel.font = [UIFont systemFontOfSize:13];
     self.nextVideoButton.backgroundColor = KColorBlueText;
     [self.nextVideoButton setTitle:@"下一个知识点" forState:UIControlStateNormal];
     self.nextVideoButton.layer.cornerRadius = 20;

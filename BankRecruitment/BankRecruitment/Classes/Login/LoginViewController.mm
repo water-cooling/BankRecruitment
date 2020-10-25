@@ -199,7 +199,7 @@
                 [defaults setObject:userLoginDict forKey:@"userLoginDict"];
                 [defaults synchronize];
                    
-                
+                [self synchronizeLogin];
                 [self NetworkPutMsgToken];
                 return;
             }
@@ -277,12 +277,6 @@
                                [self.navigationController pushViewController:vc animated:YES];
                            }else{
                                [self saveAutoLoginMes];
-                               
-                                    TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
-                                   [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
-                                   appDelegate.window.rootViewController = homePageVC;
-                                   [appDelegate.window makeKeyAndVisible];
-                               
                                [self NetworkPutMsgToken];
                            }
                        }else{

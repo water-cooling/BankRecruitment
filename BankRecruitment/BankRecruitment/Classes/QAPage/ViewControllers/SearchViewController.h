@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface SearchViewController : UIViewController 
-
+#import "QuestionListModel.h"
+typedef void(^searchClickBlock)(QuestionListModel * model);
+@interface SearchViewController :BaseViewController
+@property (nonatomic ,copy)searchClickBlock block;
+@property (nonatomic ,copy)NSString *searchStr;
 @end

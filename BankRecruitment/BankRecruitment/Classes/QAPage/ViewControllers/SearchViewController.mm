@@ -7,11 +7,10 @@
 //
 
 #import "SearchViewController.h"
-
+#import "MJRefresh.h"
 @interface SearchViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, strong) NSMutableArray *dataArr;
-@property (nonatomic, assign) NSUInteger pageNo;
 @property (strong, nonatomic) UIImageView *placehodleImg;
 @property (strong, nonatomic) UILabel *placehodleTitle;
 @end
@@ -20,8 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initUI];
-    // Do any additional setup after loading the view.
 }
 -(void)initUI{
       [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,6 +48,50 @@
                   make.top.equalTo(self.placehodleImg.mas_bottom).offset(33);
               }];
 }
+
+-(void)setSearchStr:(NSString *)searchStr{
+    _searchStr = searchStr;
+    [self getQuestionListquest:searchStr];
+}
+
+-(void)getQuestionListquest:(NSString *)searchStr{
+    [MBAlerManager showLoadingInView:self.view];
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    [dict setValue:@(1) forKey:@"pageNo"];
+    [dict setValue:@(10) forKey:@"pageSize"];
+    [dict setValue:searchStr forKey:@"q"];
+    [NewRequestClass requestQuestionList:dict success:^(id jsonData) {
+       [MBAlerManager hideAlert];
+        if (jsonData[@"data"][@"response"][@"rows"]) {
+            for (NSDictionary *dict in jsonData[@"data"][@"response"][@"rows"]){
+                QuestionListModel * model = [QuestionListModel mj_objectWithKeyValues:dict];
+                [self.dataArr addObject:model];
+            }
+        };
+        if (self.dataArr.count == 0) {
+            self.tableview.hidden = YES;
+            self.placehodleImg.hidden = NO;
+            self.placehodleTitle.hidden = NO;
+        }else{
+            self.tableview.hidden = NO;
+            self.placehodleImg.hidden = YES;
+            self.placehodleTitle.hidden = YES;
+        }
+        [self.tableview reloadData];
+    } failure:^(NSError *error) {
+       if (self.dataArr.count == 0) {
+            self.tableview.hidden = YES;
+            self.placehodleImg.hidden = NO;
+            self.placehodleTitle.hidden = NO;
+        }else{
+            self.tableview.hidden = NO;
+            self.placehodleImg.hidden = YES;
+            self.placehodleTitle.hidden = YES;
+        }
+        [MBAlerManager hideAlert];
+    }];
+}
+
 #pragma -mark UITableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 35;
@@ -56,30 +100,37 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
-    //    return self.dataArr.count;
-
+   return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.imageView.image = [UIImage imageNamed:@"home_icon_search"];
-        cell.textLabel.text = @"中国银行";
+        QuestionListModel * model  = self.dataArr[indexPath.row];
+        cell.imageView.image = [UIImage imageNamed:@"搜索"];
+        cell.textLabel.text = model.title;
         cell.textLabel.font = [UIFont systemFontOfSize:13];
     }
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    QuestionListModel * model  = self.dataArr[indexPath.row];
+    if (self.block) {
+        self.block(model);
+    }
 }
 -(UITableView *)tableview{
     if (!_tableview) {
         _tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-TabbarSafeBottomMargin) style:UITableViewStylePlain];
         _tableview.delegate = self;
         _tableview.dataSource = self;
-        _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableview.backgroundColor = kColorBarGrayBackground;
+        _tableview.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        _tableview.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_tableview];
-        
+        _tableview.tableFooterView = [UIView new];
         if (@available(iOS 11.0, *)) {
             _tableview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
         }

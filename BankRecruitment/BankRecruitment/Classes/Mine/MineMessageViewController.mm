@@ -65,18 +65,16 @@
 {
     __weak typeof(self) weakSelf = self;
     
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+       MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+       self.tableView.mj_header = header;
+       self.tableView.mj_footer = footer;
     // 添加传统的上拉刷新
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    [self.tableView addLegendFooterWithRefreshingBlock:^{
-        [weakSelf footerRereshing];
-    }];
-    
-    [self.tableView addLegendHeaderWithRefreshingBlock:^{
-        [weakSelf headerRereshing];
-    }];
+  
     
     [self headerRereshing];
-    self.tableView.footer.hidden = NO;
+    
 }
 
 - (void)headerRereshing
@@ -98,30 +96,18 @@
 
 - (void)endTableRefreshing
 {
-    if(self.tableView.header.isRefreshing)
+    if(self.tableView.mj_header.isRefreshing)
     {
-        [self.tableView.header endRefreshing];
+        [self.tableView.mj_header endRefreshing];
     }
     
-    if(self.tableView.footer.isRefreshing)
+    if(self.tableView.mj_footer.isRefreshing)
     {
         // 拿到当前的上拉刷新控件，结束刷新状态
-        [self.tableView.footer endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     }
     
-    if(self.list.count%20 == 0)
-    {
-        self.tableView.footer.loadMoreButton.hidden = NO;
-    }
-    else
-    {
-        self.tableView.footer.loadMoreButton.hidden = YES;
-    }
-    
-    if(self.list.count == 0)
-    {
-        self.tableView.footer.loadMoreButton.hidden = YES;
-    }
+
 }
 
 #pragma -mark UITableView

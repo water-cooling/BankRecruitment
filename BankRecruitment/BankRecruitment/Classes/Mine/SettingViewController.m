@@ -123,26 +123,31 @@ self.app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"
     [self.navigationController presentViewController:alerView animated:YES completion:nil];
 }
 -(void)cleanUserInfo{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:@"userLoginDict"];
-    [defaults removeObjectForKey:@"VisitorID"];
-    [defaults synchronize];
-    [LdGlobalObj sharedInstanse].user_id = @"0";
-    [LdGlobalObj sharedInstanse].user_mobile = @"";
-    [LdGlobalObj sharedInstanse].user_name = @"";
-    [LdGlobalObj sharedInstanse].tech_id = @"";
-    [LdGlobalObj sharedInstanse].islive = NO;
-    [LdGlobalObj sharedInstanse].islogin = NO;
-    [LdGlobalObj sharedInstanse].istecher = NO;
-    [LdGlobalObj sharedInstanse].user_acc = @"";
-    [LdGlobalObj sharedInstanse].user_LastSign = @"";
-    [LdGlobalObj sharedInstanse].user_SignDays = @"";
-    self.tabBarController.selectedIndex = 0;
-    LoginViewController *homePageVC = [[LoginViewController alloc] init];
-       [LdGlobalObj sharedInstanse].loginVC = homePageVC;
-       homePageVC.modalPresentationStyle = UIModalPresentationFullScreen;
-    appDelegate.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:homePageVC];
-    [appDelegate.window makeKeyAndVisible];
+    [NewRequestClass requestLogOut:nil success:^(id jsonData) {
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:@"userLoginDict"];
+        [defaults removeObjectForKey:@"VisitorID"];
+        [defaults synchronize];
+        [LdGlobalObj sharedInstanse].user_id = @"0";
+        [LdGlobalObj sharedInstanse].user_mobile = @"";
+        [LdGlobalObj sharedInstanse].user_name = @"";
+        [LdGlobalObj sharedInstanse].tech_id = @"";
+        [LdGlobalObj sharedInstanse].islive = NO;
+        [LdGlobalObj sharedInstanse].islogin = NO;
+        [LdGlobalObj sharedInstanse].istecher = NO;
+        [LdGlobalObj sharedInstanse].user_acc = @"";
+        [LdGlobalObj sharedInstanse].user_LastSign = @"";
+        [LdGlobalObj sharedInstanse].user_SignDays = @"";
+        self.tabBarController.selectedIndex = 0;
+        LoginViewController *homePageVC = [[LoginViewController alloc] init];
+           [LdGlobalObj sharedInstanse].loginVC = homePageVC;
+           homePageVC.modalPresentationStyle = UIModalPresentationFullScreen;
+        appDelegate.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:homePageVC];
+        [appDelegate.window makeKeyAndVisible];
+    } failure:^(NSError *error) {
+        ZB_Toast(@"退出登录shibai");
+    }];
+    
     
 }
 - (void)popViewController{

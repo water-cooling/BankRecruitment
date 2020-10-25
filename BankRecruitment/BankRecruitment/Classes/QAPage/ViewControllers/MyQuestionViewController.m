@@ -8,6 +8,8 @@
 
 #import "MyQuestionViewController.h"
 #import "QATableViewCell.h"
+#import "MJRefresh.h"
+#import "QuestionDetailViewController.h"
 @interface MyQuestionViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, strong) NSMutableArray *dataArr;
@@ -24,11 +26,25 @@
     [super viewDidLoad];
     [self drawViews];
     [self initUI];
+    self.pageNo = 1;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"我要提问";
-    // Do any additional setup after loading the view.
+    self.title = @"我的问题";
+    [self setupRefreshTable:self.tableview needsFooterRefresh:YES];
+    [self getMyQuestionListquest];
 }
 
+#pragma mark --fresh
+-(void)reloadHeaderTableViewDataSource{
+        self.pageNo = 1;
+        [self.tableview.mj_footer resetNoMoreData];
+        [self.dataArr removeAllObjects];
+        [self getMyQuestionListquest];
+}
+
+-(void)reloadFooterTableViewDataSource{
+        self.pageNo ++;
+       [self getMyQuestionListquest];
+}
 - (void)drawViews{
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
@@ -67,25 +83,69 @@
           }];
 }
 
+-(void)getMyQuestionListquest{
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+       [dict setValue:@(self.pageNo) forKey:@"pageNo"];
+       [dict setValue:@(10) forKey:@"pageSize"];
+       [NewRequestClass requestGetMyQuestionList:dict success:^(id jsonData) {
+           [self.tableview.mj_header endRefreshing];
+           [self.tableview.mj_footer endRefreshing];
+           if (jsonData[@"data"][@"response"][@"rows"]) {
+               for (NSDictionary *dict in jsonData[@"data"][@"response"][@"rows"]){
+                   QuestionListModel * model = [QuestionListModel mj_objectWithKeyValues:dict];
+                   [self.dataArr addObject:model];
+               }
+               if (self.dataArr.count == 0) {
+                   self.tableview.hidden = YES;
+                   self.placehodleImg.hidden = NO;
+                   self.placehodleTitle.hidden = NO;
+                   [self.tableview.mj_footer endRefreshingWithNoMoreData];
+               }else{
+                   self.tableview.hidden = NO;
+                   self.placehodleImg.hidden = YES;
+                   self.placehodleTitle.hidden = YES;
+               }
+               [self.tableview reloadData];
+           };
+
+       } failure:^(NSError *error) {
+           if (self.dataArr.count == 0) {
+               self.tableview.hidden = YES;
+               self.placehodleImg.hidden = NO;
+               self.placehodleTitle.hidden = NO;
+               [self.tableview.mj_footer endRefreshingWithNoMoreData];
+           }else{
+               self.tableview.hidden = NO;
+               self.placehodleImg.hidden = YES;
+               self.placehodleTitle.hidden = YES;
+           }
+           
+       }];
+}
 #pragma -mark UITableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 120;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 10;
-    //    return self.dataArr.count;
+  return self.dataArr.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     QATableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"QATableViewCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    QuestionListModel * model  = self.dataArr[indexPath.section];
+    cell.model = model;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+  QuestionDetailViewController * detailVc = [QuestionDetailViewController new];
+     QuestionListModel * model  = self.dataArr[indexPath.section];
+     detailVc.questionId = model.questionId;
+     detailVc.hidesBottomBarWhenPushed = YES;
+     [self.navigationController pushViewController:detailVc animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

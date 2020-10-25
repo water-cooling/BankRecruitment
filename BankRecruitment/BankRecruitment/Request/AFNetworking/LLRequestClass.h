@@ -33,7 +33,7 @@
 /**
  重设密码
  */
-+ (void)requestResetPassWordByPassword:(NSString *)password success:(HttpSuccess)success failure:(HttpFailure)failure;
++ (void)requestResetPassWordByOldPwd:(NSString *)passOld NewPassword:(NSString *)password success:(HttpSuccess)success failure:(HttpFailure)failure;
 
 /**
  修改昵称

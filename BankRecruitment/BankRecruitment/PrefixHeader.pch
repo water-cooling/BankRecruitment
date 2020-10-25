@@ -22,6 +22,8 @@
 #import "Common.h"
 #import "MJExtension.h"
 #import "NSString+Common.h"
+#import "BaseViewController.h"
+#import "MBAlerManager.h"
 #endif
 
 

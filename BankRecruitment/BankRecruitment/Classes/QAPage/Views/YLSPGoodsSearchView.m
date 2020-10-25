@@ -19,7 +19,7 @@
         UIView * LeftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 0, 25, 20)];
         imageView.contentMode = UIViewContentModeRight;
-        imageView.image = [UIImage imageNamed:@"home_icon_search"];
+        imageView.image = [UIImage imageNamed:@"搜索"];
         [LeftView addSubview:imageView];
 
         self.SeachBar = [[UITextField alloc] init];
@@ -59,11 +59,7 @@
     return self;
 }
 
-
-
-
 - (void)showCanncelAnimation {
-    
     if (self.Style == SearchBarStyleCannel) {
         return;
     }
@@ -83,8 +79,6 @@
         self.Style = SearchBarStyleCannel;
     }];
 }
-
-
 - (void)showSearchViewAnimation {
     if (self.Style == SearchBarStyleNone) {
         return;
@@ -92,7 +86,7 @@
     
     [UIView animateWithDuration:0.25f animations:^{
         [self.QABtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self).offset(-(self.QABtn.width+15));
+            make.right.equalTo(self).offset(-15);
         }];
         [self.cancelBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self).offset(44);

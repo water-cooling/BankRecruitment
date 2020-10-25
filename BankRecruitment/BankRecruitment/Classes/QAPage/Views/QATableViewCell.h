@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "QuestionListModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface QATableViewCell : UITableViewCell
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *contactNumLab;
 @property (weak, nonatomic) IBOutlet UILabel *followNumLab;
 @property (weak, nonatomic) IBOutlet UILabel *questionTimeLab;
-
+@property (strong, nonatomic)  QuestionListModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

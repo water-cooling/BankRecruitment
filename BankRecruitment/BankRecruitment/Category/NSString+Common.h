@@ -39,5 +39,5 @@
 - (BOOL)wy_true;
 
 - (NSString *)smallMD5;
-
+- (CGSize)sizeWithFont:(CGFloat)fontSize textSizeWidht:(CGFloat)widht textSizeHeight:(CGFloat)height;
 @end

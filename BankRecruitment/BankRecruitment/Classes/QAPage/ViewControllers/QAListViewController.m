@@ -14,12 +14,16 @@
 #import "YLSPGoodsSearchView.h"
 #import "SearchViewController.h"
 #import "QACategoryListModel.h"
-@interface QAListViewController ()<UITableViewDelegate,UITableViewDataSource,SPPageMenuDelegate,UISearchBarDelegate>
+#import "QuestionListModel.h"
+#import "MJRefresh.h"
+#import "QuestionDetailViewController.h"
+@interface QAListViewController ()<UITableViewDelegate,UITableViewDataSource,SPPageMenuDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, strong)  SPPageMenu*pageMenu;
 @property (nonatomic, strong) NSMutableArray *dataArr;
+@property (nonatomic, strong) NSMutableArray *categoryArr;
 @property (nonatomic, assign) NSUInteger pageNo;
-@property (nonatomic, copy) NSString *status;
+@property (nonatomic, strong) QACategoryListModel *selectCodeModel;
 @property (nonatomic, strong) YLSPGoodsSearchView * searchView;
 @property (nonatomic, strong) SearchViewController * searchListVc;
 @property (nonatomic, strong) UIButton *QABtn;
@@ -38,12 +42,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.pageNo = 1;
     [self topView];
     [self initUI];
+    [self setupRefreshTable:self.tableview needsFooterRefresh:YES];
+    [self getQuestionCatsquest];
+}
+#pragma mark --fresh
+-(void)reloadHeaderTableViewDataSource{
+    self.pageNo = 1;
+    [self.tableview.mj_footer resetNoMoreData];
+    [self.dataArr removeAllObjects];
+    [self getQuestionListquest:self.selectCodeModel.questionCatCode];
+}
+
+-(void)reloadFooterTableViewDataSource{
+    self.pageNo ++;
+    [self getQuestionListquest:self.selectCodeModel.questionCatCode];
 }
 -(void)topView{
      self.searchView = [[YLSPGoodsSearchView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, StatusBarAndNavigationBarHeight)];
     [self.view addSubview:self.searchView];
+    self.searchView.SeachBar.delegate = self;
     [self.searchView.SeachBar addTarget:self action:@selector(textFieldChanged:) forControlEvents:UIControlEventEditingChanged];
     [self.searchView.QABtn addTarget:self action:@selector(myQuestionClick) forControlEvents:UIControlEventTouchUpInside];
        [self.searchView.cancelBtn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -63,9 +83,19 @@
 }];
     self.searchListVc = [SearchViewController new];
     self.searchListVc.view.frame = CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Height-StatusBarAndNavigationBarHeight-TabbarSafeBottomMargin);
+    MJWeakSelf;
+    self.searchListVc.block = ^(QuestionListModel *model) {
+        [weakSelf.searchView showSearchViewAnimation];
+        [weakSelf setupChildView: YES];
+        [weakSelf.searchView.SeachBar resignFirstResponder];
+        QuestionDetailViewController * detailVc = [QuestionDetailViewController new];
+        detailVc.questionId = model.questionId;
+        detailVc.hidesBottomBarWhenPushed = YES;
+        [weakSelf.navigationController pushViewController:detailVc animated:YES];
+    };
     [self.view addSubview:self.searchListVc.view];
     [self setupChildView:YES];
-    [self getQuestionCatsquest];
+    
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
@@ -74,21 +104,52 @@
 #pragma mark - NetWorking
 
 -(void)getQuestionCatsquest{
+    
     [NewRequestClass requestQuestionCats:nil success:^(id jsonData) {
         NSDictionary *content=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         if (content[@"data"][@"response"][@"rows"]) {
-            NSMutableArray * arr = [QACategoryListModel mj_objectArrayWithKeyValuesArray:content[@"data"][@"response"][@"rows"]];
+            self.categoryArr = [QACategoryListModel mj_objectArrayWithKeyValuesArray:content[@"data"][@"response"][@"rows"]];
             NSMutableArray *arrStr = [NSMutableArray array];
-            for (QACategoryListModel * model in arr) {
+            for (QACategoryListModel * model in self.categoryArr) {
                 [arrStr addObject:model.questionCatCodeName];
             }
             [_pageMenu setItems:arrStr.copy selectedItemIndex:0];
+            self.selectCodeModel = self.categoryArr.firstObject;
+          
         };
 
     } failure:^(NSError *error) {
         
     }];
 }
+-(void)getQuestionListquest:(NSString *)code{
+    [MBAlerManager showLoadingInView:self.view];
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    [dict setValue:@(self.pageNo) forKey:@"pageNo"];
+    [dict setValue:@(10) forKey:@"pageSize"];
+    [dict setValue:code forKey:@"questionCatCode"];
+    [NewRequestClass requestQuestionList:dict success:^(id jsonData) {
+        [MBAlerManager hideAlert];
+        [self.tableview.mj_header endRefreshing];
+        [self.tableview.mj_footer endRefreshing];
+        if (jsonData[@"data"][@"response"][@"rows"]) {
+            for (NSDictionary *dict in jsonData[@"data"][@"response"][@"rows"]){
+                QuestionListModel * model = [QuestionListModel mj_objectWithKeyValues:dict];
+                CGFloat height = [model.title sizeWithFont:14 textSizeWidht:Screen_Width-28 textSizeHeight:CGFLOAT_MAX].height;
+                model.Cellheight = 92+height;
+                [self.dataArr addObject:model];
+            }
+            if (self.dataArr.count == 0) {
+                [self.tableview.mj_footer endRefreshingWithNoMoreData];
+            }
+            [self.tableview reloadData];
+        };
+
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 #pragma mark - UITextFieldActions
 - (void)textFieldDidBegin:(UITextField *)field {
@@ -104,19 +165,13 @@
         return NO;
     }
     [textField resignFirstResponder];
-    [self setupChildView:YES];
-    [self.searchView showSearchViewAnimation];
+    self.searchListVc.searchStr = textField.text;
     return YES;
 }
-
 - (void)cancelBtnClicked:(UIButton *)sender {
-    if (self.searchView.SeachBar.text.length) {
         [self.searchView showSearchViewAnimation];
         [self setupChildView: YES];
         [self.searchView.SeachBar resignFirstResponder];
-    } else {
-        [self.navigationController popViewControllerAnimated:NO];
-    }
 }
 - (void)setupChildView:(BOOL)Send {
     if (Send) {
@@ -130,11 +185,12 @@
 }
 #pragma -mark UITableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 120;
+    QuestionListModel * model  = self.dataArr[indexPath.section];
+    return model.Cellheight;
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 10;
-    //    return self.dataArr.count;
+   
+   return self.dataArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -143,11 +199,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     QATableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"QATableViewCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    QuestionListModel * model  = self.dataArr[indexPath.section];
+    cell.model = model;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+    QuestionDetailViewController * detailVc = [QuestionDetailViewController new];
+    QuestionListModel * model  = self.dataArr[indexPath.section];
+    detailVc.questionId = model.questionId;
+    detailVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailVc animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -161,31 +224,10 @@
 }
 #pragma mark - SPPageMenuDelegate
 - (void)pageMenu:(SPPageMenu *)pageMenu itemSelectedAtIndex:(NSInteger)index{
-    switch (index) {
-        case 0:
-        {
-            self.status = @"";
-        }
-            break;
-        case 1:{
-            self.status = @"0";
-        }
-            break;
-        case 2:
-        {
-            self.status = @"1";
-        }
-            break;
-        case 3:
-        {
-            self.status = @"2";
-        }
-            break;
-        default:
-            break;
-    }
+    self.selectCodeModel = self.categoryArr[index];
     [self.dataArr removeAllObjects];
     self.pageNo = 1;
+    [self getQuestionListquest:self.selectCodeModel.questionCatCode];
 }
 
 -(void)signClick{
@@ -227,13 +269,6 @@
     }
     return _tableview;
 }
-- (NSMutableArray *)dataArr{
-    if (_dataArr == nil) {
-        _dataArr = [NSMutableArray array];
-    }
-    return _dataArr;
-}
-
 - (UIImage*)searchFieldBackgroundImage {
     UIColor*color = [UIColor colorWithHex:@"#F0F0F0"];
     CGFloat cornerRadius = 12.5;
@@ -251,6 +286,12 @@
     UIImage *image =UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+-(NSMutableArray *)dataArr{
+    if (!_dataArr) {
+        _dataArr = [NSMutableArray array];
+    }
+    return _dataArr;
 }
 
 - (UIButton *)signBtn {

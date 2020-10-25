@@ -175,12 +175,13 @@
 /**
  重设密码
  */
-+ (void)requestResetPassWordByPassword:(NSString *)password success:(HttpSuccess)success failure:(HttpFailure)failure{
++ (void)requestResetPassWordByOldPwd:(NSString *)passOld NewPassword:(NSString *)password success:(HttpSuccess)success failure:(HttpFailure)failure{
 //    NSString *url = [NSString stringWithFormat:@"%@?action=doUpPass&uid=%@&pass=%@", [LdGlobalObj sharedInstanse].webAppIp, [LdGlobalObj sharedInstanse].user_id, password];
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:9];
     [dict setObject:@"doUpPass" forKey:@"action"];
     [dict setObject:[LdGlobalObj sharedInstanse].user_id forKey:@"uid"];
     [dict setObject:password forKey:@"pass"];
+     [dict setObject:passOld forKey:@"passOld"];
     [LLRequestClass postWithURL:[LdGlobalObj sharedInstanse].webAppIp params:dict success:^(id jsonData) {
         success(jsonData);
     } failure:^(NSError *error) {

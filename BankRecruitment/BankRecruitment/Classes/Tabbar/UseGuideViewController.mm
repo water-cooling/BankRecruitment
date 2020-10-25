@@ -185,41 +185,48 @@
     NSMutableDictionary * dict =[NSMutableDictionary dictionary];
     [dict setValue:name forKey:@"mobile"];
      [dict setValue:password forKey:@"password"];
-    NSString * sign = [name stringByAppendingString:password];
+    
+    [LLRequestClass requestLoginByPhone:name Password:password success:^(id jsonData) {
+        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        NSLog(@"%@", contentArray);
+        if(contentArray.count > 0)
+        {
+            NSDictionary *contentDict = contentArray.firstObject;
+            NSString *result = [contentDict objectForKey:@"result"];
+            if([result isEqualToString:@"success"])
+            {
+                [LdGlobalObj sharedInstanse].user_id = contentDict[@"uid"];
+                [LdGlobalObj sharedInstanse].user_mobile = contentDict[@"mobile"];
+                [LdGlobalObj sharedInstanse].user_name = contentDict[@"pet"];
+                [LdGlobalObj sharedInstanse].tech_id = contentDict[@"tech"];
+                [LdGlobalObj sharedInstanse].islive = [contentDict[@"islive"] isEqualToString:@"是"] ? YES : NO ;
+                [LdGlobalObj sharedInstanse].istecher = [contentDict[@"istecher"] isEqualToString:@"是"] ? YES : NO ;
+                [LdGlobalObj sharedInstanse].user_acc = contentDict[@"acc"];
+                [LdGlobalObj sharedInstanse].user_LastSign = contentDict[@"LastSign"];
+                [LdGlobalObj sharedInstanse].user_SignDays = contentDict[@"SignDays"];
+                self.isLogined = YES;
+                [self synchronizeLoginName:name password:password];
+                return ;
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+-(void)synchronizeLoginName:(NSString *)name password:(NSString *)password{
+    NSString * sign = [[NSString stringWithFormat:@"__ACBadf%@",name] stringByAppendingString:password];
+    NSMutableDictionary * dict =[NSMutableDictionary dictionary];
+    [dict setValue:name forKey:@"mobile"];
+     [dict setValue:password forKey:@"password"];
     [dict setValue:[sign smallMD5] forKey:@"clientSign"];
     [NewRequestClass requestLogin:dict success:^(id jsonData) {
-        
+        [LdGlobalObj sharedInstanse].sessionKey = jsonData[@"data"][@"response"][@"sessionKey"];
     } failure:^(NSError *error) {
         
     }];
-//    [LLRequestClass requestLoginByPhone:name Password:password success:^(id jsonData) {
-//        NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
-//        NSLog(@"%@", contentArray);
-//        if(contentArray.count > 0)
-//        {
-//            NSDictionary *contentDict = contentArray.firstObject;
-//            NSString *result = [contentDict objectForKey:@"result"];
-//            if([result isEqualToString:@"success"])
-//            {
-//                [LdGlobalObj sharedInstanse].user_id = contentDict[@"uid"];
-//                [LdGlobalObj sharedInstanse].user_mobile = contentDict[@"mobile"];
-//                [LdGlobalObj sharedInstanse].user_name = contentDict[@"pet"];
-//                [LdGlobalObj sharedInstanse].tech_id = contentDict[@"tech"];
-//                [LdGlobalObj sharedInstanse].islive = [contentDict[@"islive"] isEqualToString:@"是"] ? YES : NO ;
-//                [LdGlobalObj sharedInstanse].istecher = [contentDict[@"istecher"] isEqualToString:@"是"] ? YES : NO ;
-//                [LdGlobalObj sharedInstanse].user_acc = contentDict[@"acc"];
-//                [LdGlobalObj sharedInstanse].user_LastSign = contentDict[@"LastSign"];
-//                [LdGlobalObj sharedInstanse].user_SignDays = contentDict[@"SignDays"];
-//                self.isLogined = YES;
-//                return ;
-//            }
-//        }
-//        
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@", error);
-//    }];
 }
-
 - (void)NetworkPutMsgToken
 {
     [LLRequestClass requestdoPutMsgTokenBytoken:[LdGlobalObj sharedInstanse].deviceToken Success:^(id jsonData) {

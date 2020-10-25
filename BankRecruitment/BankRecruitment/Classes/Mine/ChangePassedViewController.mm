@@ -63,13 +63,7 @@
         [SVProgressHUD dismissWithError:@"请输入原始密码和新密码" afterDelay:2.0f];
         return;
     }
-    
-    if(![passwd isEqualToString:self.prePassedTextField.text])
-    {
-        [SVProgressHUD show];
-        [SVProgressHUD dismissWithError:@"原始密码错误" afterDelay:2.0f];
-        return;
-    }
+
     if(![self.NewPassedTextField.text isEqualToString:self.reTryPassedTextField.text])
     {
         [SVProgressHUD show];
@@ -87,7 +81,7 @@
 #pragma mark -network
 - (void)requestSetPasswd:(NSString *)pass
 {
-    [LLRequestClass requestResetPassWordByPassword:pass success:^(id jsonData) {
+    [LLRequestClass requestResetPassWordByOldPwd:self.prePassedTextField.text NewPassword:self.NewPassedTextField.text  success:^(id jsonData) {
         NSArray *contentArray=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         NSLog(@"%@", contentArray);
         if(contentArray.count > 0)

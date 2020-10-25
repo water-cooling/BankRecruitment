@@ -8,8 +8,8 @@
 
 #import "DKSKeyboardView.h"
 #import "DKSTextView.h"
+#import "UITextView+FGPlaceholder.h"
 @interface DKSKeyboardView ()<UITextViewDelegate>
-@property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) DKSTextView *textView;
 @property (nonatomic, assign) CGFloat totalYOffset;
 @property (nonatomic, assign) float keyboardHeight; //键盘高度
@@ -39,7 +39,6 @@
 - (void)creatView {
     //输入视图
     self.textView.frame = CGRectMake(14, 10, Screen_Width-28, 30);
-    
 }
 #pragma mark ====== 改变输入框大小 ======
 - (void)changeFrame:(CGFloat)height {
@@ -47,8 +46,7 @@
     frame.size.height = height;
     self.textView.frame = frame; //改变输入框的frame
     //当输入框大小改变时，改变backView的frame
-    self.backView.frame = CGRectMake(0, 0, Screen_Width, height);
-    self.frame = CGRectMake(0,Screen_Height -StatusBarAndNavigationBarHeight - self.height - self.keyboardHeight, Screen_Width, self.height);
+    self.frame = CGRectMake(0,Screen_Height - height-20 - self.keyboardHeight, Screen_Width, self.height);
     //主要是为了改变VC的tableView的frame
     [self changeTableViewFrame];
 }
@@ -60,7 +58,8 @@
     [self removeBottomViewFromSupview];
     [UIView animateWithDuration:0.25 animations:^{
         //设置self的frame到最底部
-        self.frame = CGRectMake(0, Screen_Height - StatusBarAndNavigationBarHeight - self.height, Screen_Width, self.height);
+        self.textView.height = 30;
+        self.frame = CGRectMake(0, Screen_Height- self.height, Screen_Width, self.height);
         [self changeTableViewFrame];
     }];
 }
@@ -76,7 +75,7 @@
     //键盘的动画时长
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration delay:0 options:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue] animations:^{
-        self.frame = CGRectMake(0, endFrame.origin.y - self.backView.height - StatusBarAndNavigationBarHeight, Screen_Width, self.height);
+        self.frame = CGRectMake(0, endFrame.origin.y - self.height, Screen_Width, self.height);
         [self changeTableViewFrame];
     } completion:nil];
 }
@@ -85,7 +84,8 @@
 - (void)keyboardWillHide:(NSNotification *)notification {
     //如果是弹出了底部视图时
     [UIView animateWithDuration:0.25 animations:^{
-        self.frame = CGRectMake(0, Screen_Height - StatusBarAndNavigationBarHeight - self.height, Screen_Width, self.height);
+        self.textView.height = 30;
+        self.frame = CGRectMake(0, Screen_Height - self.height, Screen_Width, self.height);
         [self changeTableViewFrame];
     }];
 }
@@ -110,6 +110,7 @@
             [self.delegate textViewContentText:textView.text];
         }
         textView.text = @"";
+        [textView resignFirstResponder];
         /*这里返回NO，就代表return键值失效，即页面上按下return，
          不会出现换行，如果为yes，则输入页面会换行*/
         return NO;
@@ -122,6 +123,7 @@
 - (DKSTextView *)textView {
     if (!_textView) {
         _textView = [[DKSTextView alloc] init];
+        _textView.backgroundColor = [UIColor whiteColor];
         _textView.font = [UIFont systemFontOfSize:16];
         [_textView textValueDidChanged:^(CGFloat textHeight) {
             [self changeFrame:textHeight];
@@ -129,10 +131,11 @@
         _textView.maxNumberOfLines = 5;
         _textView.layer.cornerRadius = 4;
         _textView.layer.borderWidth = 1;
+        _textView.placeholder = @"请输入解答";
         _textView.layer.borderColor = [UIColor colorWithRed:0.88 green:0.88 blue:0.89 alpha:1.00].CGColor;
         _textView.delegate = self;
         _textView.returnKeyType = UIReturnKeySend;
-        [self.backView addSubview:_textView];
+        [self addSubview:_textView];
     }
     return _textView;
 }

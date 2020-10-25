@@ -430,14 +430,10 @@
     
     // 添加传统的上拉刷新
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
-    [self.tableView addLegendFooterWithRefreshingBlock:^{
-        [weakSelf footerRereshing];
-    }];
-    
-    [self.tableView addLegendHeaderWithRefreshingBlock:^{
-        [weakSelf headerRereshing];
-    }];
-    self.tableView.footer.hidden = YES;
+     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
+       MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
+       self.tableView.mj_header = header;
+       self.tableView.mj_footer = footer;
 }
 
 - (void)headerRereshing{

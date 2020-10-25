@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MyQuestionViewController : UIViewController
+@interface MyQuestionViewController : BaseViewController
 
 @end
 

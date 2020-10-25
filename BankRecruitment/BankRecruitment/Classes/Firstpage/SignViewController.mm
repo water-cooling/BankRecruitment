@@ -75,7 +75,7 @@
                 [LdGlobalObj sharedInstanse].user_SignDays = contentDict[@"SignDays"];
                 
                 self.signBtn.userInteractionEnabled = NO;
-                AlerSignView *signView = [[AlerSignView alloc] initWithFrame:CGRectMake(0, 0,0,0)withSignDay:contentDict[@"SignDays"]];
+                AlerSignView *signView = [[AlerSignView alloc] initWithFrame:CGRectMake(0, 0,Screen_Width,Screen_Height) withSignDay:contentDict[@"SignDays"]];
                 [self.view addSubview:signView];
                 self.signDayLab.text = [NSString stringWithFormat:@"已连续签到%@天", [LdGlobalObj sharedInstanse].user_SignDays];
                 [self.signBtn setTitle:self.signDayLab.text forState:0];

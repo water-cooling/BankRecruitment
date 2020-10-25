@@ -10,8 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QuestionDetailViewController : UIViewController
-
+@interface QuestionDetailViewController : BaseViewController
+@property (nonatomic,copy)NSString * questionId;
 @end
 
 NS_ASSUME_NONNULL_END

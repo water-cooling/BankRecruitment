@@ -181,4 +181,25 @@
             result[12], result[13], result[14], result[15]];
 }
 
+/**
+ 计算文字大小(size)
+
+ @param fontSize 文字大小
+ @param widht 文字宽度，如果为‘0’或者‘MAXFLOAT’或者‘CGFLOAT_MAX’，该方法为计算文字宽度
+ @param height 文字高度，如果为‘0’或者‘MAXFLOAT’或者‘CGFLOAT_MAX’，该方法为计算文字高度
+ @return 返回文字的size
+ */
+- (CGSize)sizeWithFont:(CGFloat)fontSize textSizeWidht:(CGFloat)widht textSizeHeight:(CGFloat)height {
+    
+    if (widht == MAXFLOAT || widht == CGFLOAT_MAX || widht == 0) {
+        CGRect rect = [self boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, height) options:NSStringDrawingTruncatesLastVisibleLine|   NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]} context:nil];
+        return CGSizeMake(rect.size.width + 8, height);
+    } else if (height == MAXFLOAT || height == CGFLOAT_MAX || height == 0) {
+        CGRect rect = [self boundingRectWithSize:CGSizeMake(widht, CGFLOAT_MAX) options:NSStringDrawingTruncatesLastVisibleLine|   NSStringDrawingUsesFontLeading |NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]} context:nil];
+        
+        return CGSizeMake(widht, rect.size.height + 8);
+    }
+    return CGSizeMake(0, 0);
+}
+
 @end
