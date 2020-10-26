@@ -45,7 +45,7 @@
         _textView.textColor = UIColorFromRGB(0x333333);
         _textView.font = [UIFont systemFontOfSize:13];
         _textView.textContainer.lineFragmentPadding = 0;
-        _textView.userInteractionEnabled = NO;
+        _textView.editable = NO;
         _textView.textContainerInset = UIEdgeInsetsZero;
     }
     return _textView;

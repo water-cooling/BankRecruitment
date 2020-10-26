@@ -366,6 +366,7 @@
   [NewRequestClass requestPraiseAnswer:dict success:^(id jsonData){
      if ([jsonData[@"data"][@"response"][@"flag"]boolValue]) {
          model.praiseNum +=1;
+         model.isPraised = YES;
          [self.tableview reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
         
             }
@@ -381,6 +382,7 @@
   [NewRequestClass requestPraiseCancel:dict success:^(id jsonData){
      if ([jsonData[@"data"][@"response"][@"flag"]boolValue]) {
          model.praiseNum -=1;
+         model.isPraised = NO;
          [self.tableview reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
             }
       } failure:^(NSError *error) {

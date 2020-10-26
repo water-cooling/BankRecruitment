@@ -431,33 +431,25 @@
     // 添加传统的上拉刷新
     // 设置回调（一旦进入刷新状态就会调用这个refreshingBlock）
      MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRereshing)];
-       MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRereshing)];
        self.tableView.mj_header = header;
-       self.tableView.mj_footer = footer;
+    
 }
 
 - (void)headerRereshing{
+    [self.inviteJobList removeAllObjects];
     [self getNetWork];
 }
 
-- (void)footerRereshing
-{
-}
 
-- (void)endTableRefreshing
-{
-    if(self.tableView.header.isRefreshing)
-    {
-        [self.tableView.header endRefreshing];
-    }
+
+- (void)endTableRefreshing{
+   
+        [self.tableView.mj_header endRefreshing];
     
-    if(self.tableView.footer.isRefreshing)
-    {
         // 拿到当前的上拉刷新控件，结束刷新状态
-        [self.tableView.footer endRefreshing];
-    }
+        [self.tableView.mj_footer endRefreshing];
     
-    //self.tableView.footer.loadMoreButton.hidden = YES;
+   
 }
 
 - (void)refreshTableView:(NSArray *)array{
@@ -802,7 +794,6 @@
 //获取招聘信息
 - (void)requestdoGetApplication{
     dispatch_group_enter(self.group);
-    self.inviteJobList = [NSMutableArray arrayWithCapacity:9];
     [LLRequestClass requestdoGetApplicationBySuccess:^(id jsonData) {
         NSDictionary *contentDic=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         if([contentDic[@"code"]intValue] == 200){
@@ -818,9 +809,12 @@
             }
 
         }
+        [self.tableView reloadData];
+        [self endTableRefreshing];
         dispatch_group_leave(self.group);
     } failure:^(NSError *error) {
         dispatch_group_leave(self.group);
+        [self endTableRefreshing];
     }];
 }
 
@@ -860,5 +854,11 @@
         [_signBtn addTarget:self action:@selector(signClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _signBtn;
+}
+-(NSMutableArray *)inviteJobList{
+    if (!_inviteJobList) {
+        _inviteJobList = [NSMutableArray array];
+    }
+    return _inviteJobList;
 }
 @end

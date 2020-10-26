@@ -159,8 +159,8 @@ static LdGlobalObj* _glbObj;
     //测试
     self.webAppIp = @"http://yhyk.project.njagan.org/bshApp/AppAction";
     self.webNewAppIp = @"http://ykv2-test.project.njagan.org/dw.yikao/api/";
-//    self.fileServIp = @"http://yhyk.project.njagan.org/";
-//    self.htmlServIp = @"http://yhyk.project.njagan.org/zlh5/";
+    self.fileServIp = @"http://yhyk.project.njagan.org/";
+  self.htmlServIp = @"http://yhyk.project.njagan.org/zlh5/";
     
 
     //

@@ -21,7 +21,7 @@
 #define addAnswer @"yikao/yk-question-answer/addQuestionAnswer"//回答问题
 #define praiseAnswer @"yikao/yk-question-answer/praise"//点赞解答
 #define deleteAnswer @"yikao/yk-question-answer/del"//删除解答
-#define cancelPraiseAnswer @"yk-question-answer/praiseCancel"//取消点赞
+#define cancelPraiseAnswer @"yikao/yk-question-answer/praiseCancel"//取消点赞
 
 
 

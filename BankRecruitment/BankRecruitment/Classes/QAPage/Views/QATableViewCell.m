@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.userSignLab.layer.cornerRadius = 12.5;
     self.userSignLab.layer.masksToBounds = YES;
     // Initialization code
