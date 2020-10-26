@@ -31,7 +31,6 @@
 		27AA387A24E1AB2500736AFA /* libUMSocialLog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27AA387024E1AB2400736AFA /* libUMSocialLog.a */; };
 		27AA388524E2F12300736AFA /* RegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AA388124E2F12200736AFA /* RegisterView.m */; };
 		27AA388624E2F12300736AFA /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AA388324E2F12200736AFA /* LoginView.m */; };
-		27F3FE9025432C4F004E6B76 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 27F3FE5F25432C4F004E6B76 /* LICENSE */; };
 		27F3FE9125432C4F004E6B76 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3FE6125432C4F004E6B76 /* UIScrollView+MJRefresh.m */; };
 		27F3FE9225432C4F004E6B76 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F3FE6225432C4F004E6B76 /* MJRefreshConst.m */; };
 		27F3FE9325432C4F004E6B76 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 27F3FE6625432C4F004E6B76 /* MJRefresh.bundle */; };
@@ -439,7 +438,6 @@
 		60F90DBF1E88F77B00151728 /* weather.plist in Resources */ = {isa = PBXBuildFile; fileRef = 60F90CA21E88F77A00151728 /* weather.plist */; };
 		60F90DC01E88F77B00151728 /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F90CA41E88F77A00151728 /* WeatherModel.m */; };
 		60F90DC11E88F77B00151728 /* HdMsgBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F90CA71E88F77A00151728 /* HdMsgBox.m */; };
-		60F90DC21E88F77B00151728 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 60F90CA81E88F77A00151728 /* LICENSE */; };
 		60F90DC31E88F77B00151728 /* LoadingHUDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F90CAA1E88F77A00151728 /* LoadingHUDView.m */; };
 		60F90DC51E88F77B00151728 /* progressHUDLoading.png in Resources */ = {isa = PBXBuildFile; fileRef = 60F90CAE1E88F77A00151728 /* progressHUDLoading.png */; };
 		60F90DC61E88F77B00151728 /* ToolTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 60F90CB01E88F77A00151728 /* ToolTipView.m */; };
@@ -3330,7 +3328,6 @@
 				60C110061ECAE60D00D9F7B3 /* IntelligenceTypeHeaderView.xib in Resources */,
 				6000BBA51E961DB400F38DC3 /* ErrorAnalysisViewController.xib in Resources */,
 				6000BB8A1E94F03500F38DC3 /* ExerciseReportViewController.xib in Resources */,
-				27F3FE9025432C4F004E6B76 /* LICENSE in Resources */,
 				60F90DB31E88F77B00151728 /* weather_cloudy@2x.png in Resources */,
 				60D542691E8F90C70004AA31 /* MockExamTableViewCell.xib in Resources */,
 				60D542341E8E79580004AA31 /* AnswerSheetViewController.xib in Resources */,
@@ -3384,7 +3381,6 @@
 				60209BAD1F73EA4A00E49A2B /* MockReportHeaderView.xib in Resources */,
 				60F90DF01E88F77B00151728 /* SVProgressHUD.bundle in Resources */,
 				60D542641E8F8FA20004AA31 /* MockExamTitleTableViewCell.xib in Resources */,
-				60F90DC21E88F77B00151728 /* LICENSE in Resources */,
 				60F90E281E88FAA200151728 /* MineViewController.xib in Resources */,
 				BEC1F48324E96A8900EADCC3 /* VideoTreeTableViewCell.xib in Resources */,
 				6000BB8F1E95CEC700F38DC3 /* ReportAnswerSheetTableViewCell.xib in Resources */,

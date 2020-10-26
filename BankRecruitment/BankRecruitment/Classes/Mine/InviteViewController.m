@@ -8,6 +8,7 @@
 
 #import "InviteViewController.h"
 #import "RecruitMentShareViewController.h"
+#import "InviteListViewController.h"
 @interface InviteViewController ()
 
 @end
@@ -30,12 +31,14 @@
      RecruitMentShareViewController * shareVc = [RecruitMentShareViewController new];
              shareVc.shareTitle = @"考银行就用银行易考！";
              shareVc.shareDesTitle = @"考银行就用银行易考！";
-        shareVc.onlyWeChat = YES;
+    shareVc.modalPresentationStyle = UIModalPresentationFullScreen;
           shareVc.shareWebUrl = webpageUrl;
        shareVc.hidesBottomBarWhenPushed = YES;
           [self.navigationController presentViewController:shareVc animated:YES completion:nil];
 }
 - (IBAction)inviteListClick:(id)sender {
+    InviteListViewController * inviteListVc = [InviteListViewController new];
+    [self.navigationController pushViewController:inviteListVc animated:YES];
 }
 - (void)backButtonPressed{
     [self.navigationController popViewControllerAnimated:YES];

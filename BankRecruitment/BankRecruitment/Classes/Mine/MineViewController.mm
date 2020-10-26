@@ -70,9 +70,9 @@
 - (void)shareToPlatformType{
 
   InviteViewController * shareVc = [InviteViewController new];
-    
+    shareVc.modalPresentationStyle = UIModalPresentationFullScreen;
     shareVc.hidesBottomBarWhenPushed = YES;
-       [self.navigationController presentViewController:shareVc animated:YES completion:nil];
+       [self.navigationController pushViewController:shareVc animated:YES];
 }
 
 - (void)titleCommonSwitchAction:(UISwitch *)commonSwitch
