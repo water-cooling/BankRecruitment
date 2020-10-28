@@ -36,6 +36,8 @@
           [self.navigationController presentViewController:shareVc animated:YES completion:nil];
 }
 - (IBAction)inviteListClick:(id)sender {
+    
+    
 }
 - (void)backButtonPressed{
     [self.navigationController popViewControllerAnimated:YES];
