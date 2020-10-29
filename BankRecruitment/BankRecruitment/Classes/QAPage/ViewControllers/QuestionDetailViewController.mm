@@ -257,7 +257,6 @@
 -(void)getAnswerListquest{
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
        [dict setValue:self.questionId forKey:@"ykQuestionId"];
-       [dict setValue:@(1) forKey:@"needIncrease"];
         [dict setValue:@(self.pageNo) forKey:@"pageNo"];
         [dict setValue:@(10) forKey:@"pageSize"];
        [NewRequestClass requestGetAnswerList:dict success:^(id jsonData) {

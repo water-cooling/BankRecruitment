@@ -14,6 +14,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *signBg;
 @property (weak, nonatomic) IBOutlet UIButton *signBtn;
 @property (nonatomic,strong)AlerSignView *signView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *signDayBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *signDayLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *signBtnTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleBottom;
 
 @end
 
@@ -32,8 +36,11 @@
      if(isSignAppToday([LdGlobalObj sharedInstanse].user_LastSign)){
          self.signBtn.userInteractionEnabled = NO;
          [self.signBtn setTitle:self.signDayLab.text forState:0];
-
      }
+    self.signDayBottom.constant = -120*kMulriple;
+    self.signDayLeft.constant = 40*kMulriple;
+    self.signBtnTop.constant = 130*kMulriple;
+    self.titleBottom.constant = 15*kMulriple;
     
     // Do any additional setup after loading the view from its nib.
 }

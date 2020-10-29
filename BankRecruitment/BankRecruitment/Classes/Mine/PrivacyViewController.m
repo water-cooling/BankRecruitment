@@ -24,8 +24,11 @@
     [backButton setImageEdgeInsets:UIEdgeInsetsMake(0, -6, 0, 10)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.view addSubview:self.textView];
+    
+    [self setIOS:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.left.bottom.right.equalTo(self.view);
+    make.top.equalTo(self.view).offset(StatusBarAndNavigationBarHeight);
     }];
     NSError *error;
     NSString *textFileContents = [NSString stringWithContentsOfFile:[[NSBundle mainBundle]pathForResource:@"银行易考最新隐私协议"ofType:@"txt"]encoding:NSUTF8StringEncoding error:&error];

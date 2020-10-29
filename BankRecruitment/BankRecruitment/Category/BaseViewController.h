@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)setupRefreshTable:(UIScrollView *)tableView needsFooterRefresh:(BOOL)isFooterRefresh;
 - (void)reloadHeaderTableViewDataSource;
 - (void)reloadFooterTableViewDataSource;
+-(void)setIOS:(UIScrollView *)scroller;
 @end
 
 NS_ASSUME_NONNULL_END

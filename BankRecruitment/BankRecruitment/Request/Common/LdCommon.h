@@ -23,6 +23,7 @@ const static NSString *APIKey = @"bd7a0d4add223891c4aee367f68961aa";
 
 #define kHttpRequestFailedShowTime 2
 
+#define kMulriple [UIScreen mainScreen].bounds.size.width / 375.0
 
 #define kDefaultSquareImage [UIImage imageNamed:@"LaunchImage"]
 #define kDefaultHorizontalRectangleImage [UIImage imageNamed:@"banner_default"]

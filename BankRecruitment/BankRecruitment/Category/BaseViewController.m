@@ -32,6 +32,13 @@
 -(void)backItemAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
+-(void)setIOS:(UIScrollView *)scroller{
+    if (@available(iOS 11.0, *)) {
+        scroller.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else{
+        
+    }
+}
 //设置下拉刷新项
 -(void)setupRefreshTable:(UIScrollView *)tableView needsFooterRefresh:(BOOL)isFooterRefresh{
     if (tableView == nil) {

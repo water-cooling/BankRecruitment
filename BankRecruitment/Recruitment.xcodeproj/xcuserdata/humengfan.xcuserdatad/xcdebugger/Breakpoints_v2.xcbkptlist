@@ -283,7 +283,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
                   endingLineNumber = "111"
-                  offsetFromSymbolStart = "476">
+                  offsetFromSymbolStart = "460">
                </Location>
                <Location
                   uuid = "D5118BB2-E256-45CC-A05B-51C03649A826 - f3f9e5b873732b10"
@@ -298,7 +298,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
                   endingLineNumber = "111"
-                  offsetFromSymbolStart = "1808">
+                  offsetFromSymbolStart = "2004">
                </Location>
                <Location
                   uuid = "D5118BB2-E256-45CC-A05B-51C03649A826 - 7db9100448326297"
@@ -313,41 +313,9 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "111"
                   endingLineNumber = "111"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "15">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "83C08370-AE28-495A-BEB3-90E4797F5A8C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BankRecruitment/Classes/QAPage/Views/QAContactTableViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "QAContactTableViewCell"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D2AF9834-1976-4F2C-8DA5-35A4F74D013E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BankRecruitment/Classes/QAPage/Views/QAContactTableViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "-setModel:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

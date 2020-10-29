@@ -17,6 +17,7 @@
 #import "QuestionListModel.h"
 #import "MJRefresh.h"
 #import "QuestionDetailViewController.h"
+#import "SignViewController.h"
 @interface QAListViewController ()<UITableViewDelegate,UITableViewDataSource,SPPageMenuDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UITableView *tableview;
 @property (nonatomic, strong)  SPPageMenu*pageMenu;
@@ -26,7 +27,7 @@
 @property (nonatomic, strong) QACategoryListModel *selectCodeModel;
 @property (nonatomic, strong) YLSPGoodsSearchView * searchView;
 @property (nonatomic, strong) SearchViewController * searchListVc;
-@property (nonatomic, strong) UIButton *QABtn;
+@property (nonatomic, strong) UIButton *submitBtn;
 @property (nonatomic, strong) UIButton *signBtn;
 @end
 
@@ -76,9 +77,14 @@
            make.top.equalTo(self.pageMenu.mas_bottom);
            make.bottom.equalTo(self.view).offset(-TabbarSafeBottomMargin);
        }];
-    [self.view addSubview:self.signBtn];
-  [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make){
-        make.centerY.equalTo(self.view).offset(100);
+        [self.view addSubview:self.signBtn];
+      [self.signBtn mas_makeConstraints:^(MASConstraintMaker *make){
+            make.centerY.equalTo(self.view).offset(100);
+          make.right.equalTo(self.view.mas_right).offset(-5);
+    }];
+    [self.view addSubview:self.submitBtn];
+  [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make){
+        make.top.equalTo(self.signBtn.mas_bottom).offset(20);
       make.right.equalTo(self.view.mas_right).offset(-5);
 }];
     self.searchListVc = [SearchViewController new];
@@ -230,10 +236,15 @@
     [self getQuestionListquest:self.selectCodeModel.questionCatCode];
 }
 
--(void)signClick{
+-(void)submitClick{
     SubmitQuestionViewController *submitVc = [SubmitQuestionViewController new];
     submitVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:submitVc animated:YES];
+}
+-(void)signClick{
+    SignViewController * signVC = [[SignViewController alloc]initWithNibName:@"SignViewController" bundle:nil];
+    signVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:signVC animated:YES];
 }
 
 -(void)myQuestionClick{
@@ -294,10 +305,18 @@
     return _dataArr;
 }
 
+- (UIButton *)submitBtn {
+    if (!_submitBtn) {
+        _submitBtn = [[UIButton alloc] init];
+        [_submitBtn setBackgroundImage:[UIImage imageNamed:@"tiwen"] forState:0];
+        [_submitBtn addTarget:self action:@selector(submitClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _submitBtn;
+}
 - (UIButton *)signBtn {
     if (!_signBtn) {
         _signBtn = [[UIButton alloc] init];
-        [_signBtn setBackgroundImage:[UIImage imageNamed:@"tiwen"] forState:0];
+        [_signBtn setBackgroundImage:[UIImage imageNamed:@"签到"] forState:0];
         [_signBtn addTarget:self action:@selector(signClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _signBtn;
