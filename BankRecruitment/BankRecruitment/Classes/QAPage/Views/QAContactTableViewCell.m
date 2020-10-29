@@ -12,8 +12,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     // Initialization code
 }
+
+//-(void)prepareForReuse{
+//    self.praiseBtn.selected = NO;
+//}
+
 -(void)setModel:(AnswerListModel *)model{
     _model = model;
     self.answerNameLab.text = model.answerUserNickName;
@@ -31,6 +37,7 @@
             }
         }else{
             if (self.praiseBlock) {
+                
                 self.praiseBlock(sender.selected);
             }
         }
