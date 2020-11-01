@@ -67,6 +67,7 @@
            make.height.mas_equalTo(214.5);
        }];
     self.headImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"head"]];
+    self.headImg.contentMode = UIViewContentModeScaleToFill;
     [headView addSubview:self.headImg];
     [self.headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(headView).offset(15);
@@ -239,7 +240,7 @@
 
 #pragma mark --NetWorking
 -(void)getQuestionDetailquest{
-    [MBAlerManager showLoadingInView:self.view];
+    [self.view showActivityViewAtCenter];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
        [dict setValue:self.questionId forKey:@"id"];
        [dict setValue:@(1) forKey:@"needIncrease"];
@@ -252,6 +253,7 @@
             }
        } failure:^(NSError *error) {
         ZB_Toast(@"请求失败");
+           [self.view hideActivityViewAtCenter];
        }];
 }
 -(void)getAnswerListquest{
@@ -262,7 +264,7 @@
        [NewRequestClass requestGetAnswerList:dict success:^(id jsonData) {
            [self.tableview.mj_footer endRefreshing];
            [self.tableview.mj_header endRefreshing];
-            [MBAlerManager hideAlert];
+         [self.view hideActivityViewAtCenter];
            if (jsonData[@"data"][@"response"][@"rows"]) {
                for (NSDictionary * dict in jsonData[@"data"][@"response"][@"rows"] ) {
                    AnswerListModel * model = [AnswerListModel mj_objectWithKeyValues:dict];
@@ -277,7 +279,7 @@
            }
            [self.tableview reloadData];
        } failure:^(NSError *error) {
-           [MBAlerManager hideAlert];
+           [self.view hideActivityViewAtCenter];
         ZB_Toast(@"请求失败");
        }];
 }
@@ -285,12 +287,12 @@
 #pragma mark ====== DKSKeyboardDelegate ======
 //发送的文案
 - (void)textViewContentText:(NSString *)textStr {
-    [MBAlerManager showLoadingInView:self.view];
+    [self.view showActivityViewAtCenter];
    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
    [dict setValue:textStr forKey:@"answerContent"];
    [dict setValue:self.questionId forKey:@"ykQuestionId"];
    [NewRequestClass requestAddAnswer:dict success:^(id jsonData) {
-       [MBAlerManager hideAlert];
+       [self.view hideActivityViewAtCenter];
        if ([jsonData[@"data"][@"response"][@"flag"]boolValue]) {
            ZB_Toast(@"解答成功");
            self.pageNo = 1;
@@ -301,7 +303,9 @@
            ZB_Toast([jsonData[@"messages"][0]message]);
        }
    } failure:^(NSError *error) {
+       [self.view hideActivityViewAtCenter];
     ZB_Toast(@"解答发送失败");
+       
    }];
 }
 
@@ -349,6 +353,8 @@
      if ([jsonData[@"data"][@"response"][@"flag"]boolValue]) {
          ZB_Toast(@"删除发言成功");
          [weakSelf.dataArr removeObject:model];
+         self.quesetionModel.answerNum -= 1;
+         self.contactNumLab.text = [NSString stringWithFormat:@"%ld",self.quesetionModel.answerNum];
          [weakSelf.tableview deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
         }
              [weakSelf.tableview reloadData];
@@ -409,6 +415,9 @@
         _tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableview.delegate = self;
         _tableview.dataSource = self;
+        _tableview.estimatedRowHeight =0;
+        _tableview.estimatedSectionHeaderHeight =0;
+        _tableview.estimatedSectionFooterHeight =0;
         _tableview.tableFooterView = [UIView new];
         _tableview.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         [_tableview registerNib:[UINib nibWithNibName:@"QAContactTableViewCell" bundle:nil] forCellReuseIdentifier:@"QAContactTableViewCell"];

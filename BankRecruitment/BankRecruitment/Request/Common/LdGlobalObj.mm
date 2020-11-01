@@ -26,7 +26,7 @@
 #import "BBAlertView.h"
 #import "UILabel+YGZExt.h"
 #import "MessageWordDetailViewController.h"
-
+#import "UIImage+CircleImage.h"
 #define _FIRST_RUN              @"_FIRST_RUN_"
 
 #define _SET_WEB_IP             @"SET_WEB_IP"
@@ -825,6 +825,20 @@ static LdGlobalObj* _glbObj;
     for (NSString *urlPara in array) {
         [self verifyAppStorePurchaseWithPaymentTransactionByreceiptString:urlPara];
     }
+}
+
++ (void)saveUserHeadImg:(UIImage *)img{
+    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[UIImage getDataFromImage:img] forKey: @"UserHeadImage"];
+}
++(UIImage *)getUserHeadImg{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData * imgData = [userDefaults dataForKey:@"UserHeadImage"];
+   return [UIImage imageWithData:imgData];
+}
++ (void)deleteUserHeadImg{
+     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:@"UserHeadImage"];
 }
 
 @end

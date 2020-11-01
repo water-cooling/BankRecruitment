@@ -39,7 +39,7 @@
      }
     self.signDayBottom.constant = -120*kMulriple;
     self.signDayLeft.constant = 40*kMulriple;
-    self.signBtnTop.constant = 130*kMulriple;
+    self.signBtnTop.constant = 145*kMulriple;
     self.titleBottom.constant = 15*kMulriple;
     
     // Do any additional setup after loading the view from its nib.

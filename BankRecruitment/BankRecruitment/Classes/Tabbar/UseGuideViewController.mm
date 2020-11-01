@@ -198,6 +198,7 @@
                 [LdGlobalObj sharedInstanse].user_id = contentDict[@"uid"];
                 [LdGlobalObj sharedInstanse].user_mobile = contentDict[@"mobile"];
                 [LdGlobalObj sharedInstanse].user_name = contentDict[@"pet"];
+                  [LdGlobalObj sharedInstanse].user_avatar = contentDict[@"pet"];
                 [LdGlobalObj sharedInstanse].tech_id = contentDict[@"tech"];
                 [LdGlobalObj sharedInstanse].islive = [contentDict[@"islive"] isEqualToString:@"是"] ? YES : NO ;
                 [LdGlobalObj sharedInstanse].istecher = [contentDict[@"istecher"] isEqualToString:@"是"] ? YES : NO ;
@@ -223,6 +224,7 @@
     [dict setValue:[sign smallMD5] forKey:@"clientSign"];
     [NewRequestClass requestLogin:dict success:^(id jsonData) {
         [LdGlobalObj sharedInstanse].sessionKey = jsonData[@"data"][@"response"][@"sessionKey"];
+        [LdGlobalObj sharedInstanse].user_avatar = jsonData[@"data"][@"response"][@"avatar"];
     } failure:^(NSError *error) {
         
     }];

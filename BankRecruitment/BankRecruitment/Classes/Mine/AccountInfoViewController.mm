@@ -15,6 +15,7 @@
 #import "AddressModel.h"
 #import "CreateAddressViewController.h"
 #import "HeadImageManager.h"
+#import "UIImage+CircleImage.h"
 
 @interface AccountInfoViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
@@ -128,7 +129,9 @@
              [HeadImageManager alertUploadHeaderImageActionSheet:self type:@"mine" imageSuccess:^(UIImage *image) {
             }];
             [HeadImageManager sharedInstance].imageHandle = ^(UIImage *image) {
-                 self.headImg = image;
+                [self.view showActivityViewAtCenter];
+                [self updateImgToServer:[image circleImage]];
+                
              };
           }else if(indexPath.section == 1){
               if (indexPath.row == 0) {
@@ -140,6 +143,41 @@
                 [self.navigationController pushViewController:vc animated:YES];
           }
    
+}
+
+-(void)updateImgToServer:(UIImage *)img{
+    
+    [NewRequestClass UpdataImg:img success:^(id jsonData) {
+        self.headImg = img;
+        if (jsonData[@"data"][@"response"][@"url"]){
+            NSString * url =  jsonData[@"data"][@"response"][@"url"];
+            [LdGlobalObj sharedInstanse].user_avatar = url;
+            [self updateImgUrlToServer:url];
+        }
+    } failure:^(NSError *error) {
+        if (error) {
+            [self.view hideActivityViewAtCenter];
+            [MBAlerManager showBriefAlert:@"上传头像失败"];
+        }
+    }];
+}
+
+-(void)updateImgUrlToServer:(NSString *)url{
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    [dict setValue:url?url : @"" forKey:@"avatarUrl"];
+    [NewRequestClass requestupdateImg:dict success:^(id jsonData) {
+        [self.view hideActivityViewAtCenter];
+        [LdGlobalObj saveUserHeadImg:self.headImg];
+        [MBAlerManager showBriefAlert:@"上传头像成功"];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"headChangeNotification" object:nil];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+      [self.view hideActivityViewAtCenter];
+        if (error) {
+            [MBAlerManager showBriefAlert:@"上传头像失败"];
+        }
+    }];
+    
 }
 
 - (void)popViewController

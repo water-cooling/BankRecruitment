@@ -8,7 +8,7 @@
 
 #import "NewRequestClass.h"
 #import "AFNetworking.h"
-
+#import "UIImage+CircleImage.h"
 #define kPreGetOrSendCount 30
 #define getQuestionCats     @"yikao/yk-question/getQuestionCats"//获取评论选择分类
 #define Recruitmentlogin   @"yikao/uc/login"//登录
@@ -22,8 +22,8 @@
 #define praiseAnswer @"yikao/yk-question-answer/praise"//点赞解答
 #define deleteAnswer @"yikao/yk-question-answer/del"//删除解答
 #define cancelPraiseAnswer @"yikao/yk-question-answer/praiseCancel"//取消点赞
-
-
+#define updateUrl @"yikao/uc/setAvatar"//更新头像
+#define updateImg @"comm/file/uploadFile"//上传头像
 
 
 @implementation NewRequestClass
@@ -276,4 +276,59 @@
     }];
 }
 
+
+
+/**
+ 更新头像
+ */
++ (void)requestupdateImg:(NSMutableDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure{
+    [NewRequestClass postWithURL:updateUrl params:parameters success:^(id jsonData) {
+        success(jsonData);
+    } failure:^(NSError *error) {
+        if (error) {
+            failure(error);
+        }
+    }];
+}
+/**
+上传头像头像
+*/
++(void)UpdataImg:(UIImage * )Img success:(HttpSuccess)success failure:(HttpFailure)failure{
+
+    NSString * url = [[LdGlobalObj sharedInstanse].webNewAppIp stringByAppendingString:updateImg];
+
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = 20;
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        NSDate *date = [NSDate date];
+        NSDateFormatter *formormat = [[NSDateFormatter alloc]init];
+        [formormat setDateFormat:@"HHmmss"];
+        NSString *dateString = [formormat stringFromDate:date];
+        
+        NSString *fileName = [NSString  stringWithFormat:@"%@.png",dateString];
+        NSData *imageData = UIImageJPEGRepresentation(Img, 1);
+        double scaleNum = (double)300*1024/imageData.length;
+        NSLog(@"图片压缩率：%f",scaleNum);
+        if(scaleNum <1){
+            imageData = UIImageJPEGRepresentation(Img, scaleNum);
+        }else{
+            imageData = UIImageJPEGRepresentation(Img, 0.1);
+        }
+        [formData  appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpg/png/jpeg"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"---%@",uploadProgress);
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (error) {
+            failure(error);
+        }
+    }];
+}
 @end

@@ -14,6 +14,7 @@
 		2721BF8C24E19FCC00BE8381 /* VideoSelectCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2721BF8A24E19FCC00BE8381 /* VideoSelectCollectionViewCell.m */; };
 		2721BF8D24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2721BF8B24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib */; };
 		27463F6A25458126004A5F10 /* MBAlerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 27463F6925458126004A5F10 /* MBAlerManager.m */; };
+		27463F6D254C69D7004A5F10 /* UIImage+CircleImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 27463F6C254C69D7004A5F10 /* UIImage+CircleImage.m */; };
 		2759A09B2502879000B8891F /* HomeVideoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2759A0982502878F00B8891F /* HomeVideoViewController.mm */; };
 		2759A09C2502879000B8891F /* HomeVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2759A09A2502879000B8891F /* HomeVideoViewController.xib */; };
 		27A8E2DD2541C66D006AAEBF /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A8E2DC2541C66D006AAEBF /* NSString+Common.m */; };
@@ -576,6 +577,8 @@
 		2721BF8B24E19FCC00BE8381 /* VideoSelectCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoSelectCollectionViewCell.xib; sourceTree = "<group>"; };
 		27463F6825458126004A5F10 /* MBAlerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlerManager.h; sourceTree = "<group>"; };
 		27463F6925458126004A5F10 /* MBAlerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlerManager.m; sourceTree = "<group>"; };
+		27463F6B254C69D7004A5F10 /* UIImage+CircleImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CircleImage.h"; sourceTree = "<group>"; };
+		27463F6C254C69D7004A5F10 /* UIImage+CircleImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CircleImage.m"; sourceTree = "<group>"; };
 		2759A0982502878F00B8891F /* HomeVideoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HomeVideoViewController.mm; sourceTree = "<group>"; };
 		2759A0992502879000B8891F /* HomeVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVideoViewController.h; sourceTree = "<group>"; };
 		2759A09A2502879000B8891F /* HomeVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVideoViewController.xib; sourceTree = "<group>"; };
@@ -3179,6 +3182,8 @@
 				27A8E2DC2541C66D006AAEBF /* NSString+Common.m */,
 				27A8E2E125431A93006AAEBF /* BaseViewController.h */,
 				27A8E2E225431A93006AAEBF /* BaseViewController.m */,
+				27463F6B254C69D7004A5F10 /* UIImage+CircleImage.h */,
+				27463F6C254C69D7004A5F10 /* UIImage+CircleImage.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3746,6 +3751,7 @@
 				60D7763F1F4EA68200AE92DE /* VideoViewController.mm in Sources */,
 				BEDAD62A253E79D900D4ADE5 /* PrivacyViewController.m in Sources */,
 				60F90E221E88FA9600151728 /* LiveViewController.mm in Sources */,
+				27463F6D254C69D7004A5F10 /* UIImage+CircleImage.m in Sources */,
 				60341ED01EA49BC3008E565B /* OutlineModel.mm in Sources */,
 				60494C9520BFEA8300BC5EE4 /* MessageWordDetailViewController.m in Sources */,
 				6076CCF81EC2F80C000A6968 /* MyCourseTableViewCell.m in Sources */,

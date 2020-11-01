@@ -29,7 +29,7 @@
         self.SeachBar.backgroundColor = [UIColor colorWithHex:@"#F6F6F6"];
         self.SeachBar.leftViewMode = UITextFieldViewModeAlways;
         self.SeachBar.borderStyle = UITextBorderStyleNone;
-        self.SeachBar.placeholder = @"搜索题目";
+        self.SeachBar.placeholder = @"搜索问题";
         self.SeachBar.textColor = [UIColor colorWithHex:@"#3B393A"];
         [self.SeachBar mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self).offset(13);

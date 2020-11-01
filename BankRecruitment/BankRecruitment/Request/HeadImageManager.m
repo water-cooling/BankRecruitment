@@ -70,6 +70,7 @@
     
     // 创建图片给选取控制器
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.modalPresentationStyle = UIModalPresentationFullScreen;
     [imagePicker.navigationBar setBackgroundColor:[UIColor whiteColor]];
     [imagePicker.navigationBar setTintColor:[UIColor blackColor]];
     imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;

@@ -95,6 +95,7 @@ BOOL isShowGloomy;//是否显示深色背景
         prestrainView = view;
         MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:gloomyView];
         hud.detailsLabelText = kLoadingMessage;
+        
         hud.removeFromSuperViewOnHide = YES;
         gloomyView.frame = view ? CGRectMake(0, 0, view.frame.size.width, view.frame.size.height):
         kDefaultRect;

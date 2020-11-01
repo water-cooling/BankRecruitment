@@ -228,6 +228,7 @@
           [dict setValue:[sign smallMD5] forKey:@"clientSign"];
           [NewRequestClass requestLogin:dict success:^(id jsonData) {
               [LdGlobalObj sharedInstanse].sessionKey = jsonData[@"data"][@"response"][@"sessionKey"];
+              [LdGlobalObj sharedInstanse].user_avatar = jsonData[@"data"][@"response"][@"avatar"];
               TabbarViewController *homePageVC = [[TabbarViewController alloc] init];
             [LdGlobalObj sharedInstanse].homePageVC = homePageVC;
                 appDelegate.window.rootViewController = homePageVC;

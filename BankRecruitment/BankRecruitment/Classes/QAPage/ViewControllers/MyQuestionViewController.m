@@ -29,6 +29,7 @@
     self.pageNo = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"我的问题";
+    [self setIOS:self.tableview];
     [self setupRefreshTable:self.tableview needsFooterRefresh:YES];
     [self getMyQuestionListquest];
 }
@@ -58,9 +59,6 @@
 }
 
 -(void)initUI{
-    [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
     self.placehodleImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"noData"]];
 
       self.placehodleTitle = [[UILabel alloc] init];
@@ -160,9 +158,12 @@
 
 -(UITableView *)tableview{
     if (!_tableview) {
-        _tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-TabbarSafeBottomMargin) style:UITableViewStylePlain];
+        _tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, StatusBarAndNavigationBarHeight, Screen_Width, Screen_Height-TabbarSafeBottomMargin-StatusBarAndNavigationBarHeight) style:UITableViewStylePlain];
         _tableview.delegate = self;
         _tableview.dataSource = self;
+        _tableview.estimatedRowHeight =0;
+        _tableview.estimatedSectionHeaderHeight =0;
+        _tableview.estimatedSectionFooterHeight =0;
         [_tableview registerNib:[UINib nibWithNibName:@"QATableViewCell" bundle:nil] forCellReuseIdentifier:@"QATableViewCell"];
         _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableview.backgroundColor = kColorBarGrayBackground;

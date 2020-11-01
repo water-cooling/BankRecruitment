@@ -33,7 +33,7 @@
     bottomView.backgroundColor = [UIColor whiteColor];
     [bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(-TabbarSafeBottomMargin);
+        make.bottom.equalTo(self.view).offset(-TabbarSafeBottomMargin-(_isTabbar?TABBAR_HEIGHT:0));
         make.height.mas_equalTo(160);
     }];
     UILabel *titleDesLab = [UILabel new];

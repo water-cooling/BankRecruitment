@@ -56,6 +56,7 @@ typedef void (^BuyObjectSuccessBlock)();
 @property (strong, nonatomic) NSString* user_id;
 @property (strong, nonatomic) NSString* user_mobile;
 @property (strong, nonatomic) NSString* user_name;
+@property (strong, nonatomic) NSString* user_avatar;
 @property (strong, nonatomic) NSString* tech_id;
 @property (assign, nonatomic) BOOL islive;
 @property (assign, nonatomic) BOOL islogin;
@@ -128,4 +129,7 @@ typedef void (^BuyObjectSuccessBlock)();
 - (void)processRemoteMessage:(RemoteMessageModel *)remoteMessageModel;
 - (void)payActionByType:(NSString *)buyType payID:(NSString *)payID;
 - (void)checkUnchekReceipt;
++(void)saveUserHeadImg:(UIImage * )img;
++(UIImage *)getUserHeadImg;
++(void)deleteUserHeadImg:(UIImage * )img;
 @end

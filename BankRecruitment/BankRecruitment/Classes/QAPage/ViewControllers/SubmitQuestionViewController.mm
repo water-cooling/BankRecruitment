@@ -125,23 +125,25 @@
         [MBAlerManager showBriefAlert:@"请输入内容"];
         return;
     }
-    [MBAlerManager showLoadingInView:self.view];
+    self.submitBtn.userInteractionEnabled = NO;
+    [self.view showActivityViewAtCenter];
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     [dict setValue:self.textView.text forKey:@"content"];
     [dict setValue:self.headlineTextView.text forKey:@"title"];
      [dict setValue:self.selectCodeModel.questionCatCode forKey:@"questionCatCode"];
     [NewRequestClass requestAddQuestion:dict success:^(id jsonData) {
-       
+        self.submitBtn.userInteractionEnabled = YES;
         if ([jsonData[@"data"][@"response"][@"flag"]boolValue] == 1) {
            ZB_Toast(@"发言成功");
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.view hideActivityViewAtCenter]; dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
         };
 
     } failure:^(NSError *error) {
         ZB_Toast(@"发言上传失败");
-        [MBAlerManager hideAlert];
+        self.submitBtn.userInteractionEnabled = YES;
+         [self.view hideActivityViewAtCenter];
     }];
 }
 
@@ -254,6 +256,7 @@
         _textView = [[UITextView alloc]init];
         _textView.textColor = UIColorFromRGB(0x8a8a8a);
         _textView.font = [UIFont systemFontOfSize:13];
+        _textView.inputAccessoryView = [self addToolbar];
         _textView.placeholder = @"请描述你的问题，描述越详细 教师回答越具体的哦！";
         _textView.zw_placeHolderColor = UIColorFromRGB(0x8a8a8a);
         _textView.delegate = self;
@@ -262,6 +265,19 @@
     }
     return _textView;
 }
+- (UIToolbar *)addToolbar
+{
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 35)];
+    toolbar.tintColor = [UIColor blueColor];
+    toolbar.backgroundColor = [UIColor lightGrayColor];
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *bar = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(textFieldDone)];
+    toolbar.items = @[space, bar];
+    return toolbar;
+}
+- (void)textFieldDone{
+    [self.view endEditing:YES];
+}
 
 -(UITextView *)headlineTextView{
     if (!_headlineTextView) {
@@ -269,6 +285,7 @@
         _headlineTextView.textColor = UIColorFromRGB(0x333333);
         _headlineTextView.font = [UIFont systemFontOfSize:13];
         _headlineTextView.placeholder = @"请输入标题";
+        _headlineTextView.inputAccessoryView = [self addToolbar];
         _headlineTextView.zw_placeHolderColor = UIColorFromRGB(0x8a8a8a);
         _headlineTextView.delegate = self;
         _headlineTextView.textContainer.lineFragmentPadding = 0;

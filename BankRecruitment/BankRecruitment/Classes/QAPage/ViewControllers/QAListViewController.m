@@ -29,6 +29,8 @@
 @property (nonatomic, strong) SearchViewController * searchListVc;
 @property (nonatomic, strong) UIButton *submitBtn;
 @property (nonatomic, strong) UIButton *signBtn;
+@property (strong, nonatomic) UIImageView *placehodleImg;
+@property (strong, nonatomic) UILabel *placehodleTitle;
 @end
 
 @implementation QAListViewController
@@ -46,6 +48,7 @@
     self.pageNo = 1;
     [self topView];
     [self initUI];
+    [self setIOS:self.tableview];
     [self setupRefreshTable:self.tableview needsFooterRefresh:YES];
     [self getQuestionCatsquest];
 }
@@ -101,7 +104,26 @@
     };
     [self.view addSubview:self.searchListVc.view];
     [self setupChildView:YES];
-    
+     self.placehodleImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"noData"]];
+          self.placehodleTitle = [[UILabel alloc] init];
+          self.placehodleTitle.font = [UIFont systemFontOfSize:15];
+          self.placehodleTitle.textAlignment = NSTextAlignmentCenter;
+            self.placehodleTitle.hidden = YES;
+              self.placehodleTitle.textColor = [UIColor colorWithHex:@"#999999"];
+              self.placehodleTitle.text = @"暂无数据";
+          [self.view addSubview:self.placehodleTitle];
+          [self.view addSubview:self.placehodleImg];
+        self.placehodleImg.hidden = YES;
+          [self.placehodleImg mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(self.view);
+                make.size.mas_equalTo(CGSizeMake(142, 104));
+            }];
+            [self.placehodleTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self.view);
+                  make.height.mas_equalTo(15);
+                  make.top.equalTo(self.placehodleImg.mas_bottom).offset(33);
+              }];
+
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
@@ -110,7 +132,6 @@
 #pragma mark - NetWorking
 
 -(void)getQuestionCatsquest{
-    
     [NewRequestClass requestQuestionCats:nil success:^(id jsonData) {
         NSDictionary *content=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
         if (content[@"data"][@"response"][@"rows"]) {
@@ -129,13 +150,13 @@
     }];
 }
 -(void)getQuestionListquest:(NSString *)code{
-    [MBAlerManager showLoadingInView:self.view];
+    [self.view showActivityViewAtCenter];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:@(self.pageNo) forKey:@"pageNo"];
     [dict setValue:@(10) forKey:@"pageSize"];
     [dict setValue:code forKey:@"questionCatCode"];
     [NewRequestClass requestQuestionList:dict success:^(id jsonData) {
-        [MBAlerManager hideAlert];
+        [self.view hideActivityViewAtCenter];
         [self.tableview.mj_header endRefreshing];
         [self.tableview.mj_footer endRefreshing];
         if (jsonData[@"data"][@"response"][@"rows"]) {
@@ -147,12 +168,22 @@
             }
             if (self.dataArr.count == 0) {
                 [self.tableview.mj_footer endRefreshingWithNoMoreData];
+                self.tableview.hidden = YES;
+                self.placehodleImg.hidden = NO;
+                self.placehodleTitle.hidden = NO;
+            }else{
+                self.tableview.hidden = NO;
+                self.placehodleImg.hidden = YES;
+                self.placehodleTitle.hidden = YES;
             }
             [self.tableview reloadData];
         };
 
     } failure:^(NSError *error) {
-        
+        [self.view hideActivityViewAtCenter];
+         self.tableview.hidden = YES;
+        self.placehodleImg.hidden = NO;
+        self.placehodleTitle.hidden = NO;
     }];
 }
 
@@ -181,9 +212,14 @@
 }
 - (void)setupChildView:(BOOL)Send {
     if (Send) {
-        [self.view sendSubviewToBack:self.searchListVc.view];
+        self.searchListVc.view.hidden = YES;
+        self.placehodleImg.hidden = NO;
+        self.placehodleTitle.hidden = NO;
     }else{
-        [self.view bringSubviewToFront:self.searchListVc.view];
+        self.searchListVc.view.hidden = NO;
+        self.placehodleImg.hidden = YES;
+        self.placehodleTitle.hidden = YES;
+        
     }
 }
 -(void)ReturnBack{
@@ -273,7 +309,9 @@
         _tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableview.backgroundColor = kColorBarGrayBackground;
         [self.view addSubview:_tableview];
-        
+        _tableview.estimatedRowHeight =0;
+        _tableview.estimatedSectionHeaderHeight =0;
+        _tableview.estimatedSectionFooterHeight =0;
         if (@available(iOS 11.0, *)) {
             _tableview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentAutomatic;
         }

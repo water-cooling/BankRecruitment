@@ -47,8 +47,11 @@
            make.width.mas_equalTo(43);
            make.height.mas_equalTo(43);
        }];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(headChange) name:@"headChangeNotification" object:nil];
 }
-
+-(void)headChange{
+    [self.tableView reloadData];
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableView reloadData];
@@ -65,14 +68,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+-(void)dealloc{
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)shareToPlatformType{
-
-  InviteViewController * shareVc = [InviteViewController new];
-    shareVc.modalPresentationStyle = UIModalPresentationFullScreen;
-    shareVc.hidesBottomBarWhenPushed = YES;
-       [self.navigationController pushViewController:shareVc animated:YES];
+    NSString *webpageUrl = @"http://yk.yinhangzhaopin.com/bshApp/download/index.jsp";
+        RecruitMentShareViewController * shareVc = [RecruitMentShareViewController new];
+    shareVc.isTabbar = YES;
+        shareVc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    shareVc.definesPresentationContext = YES;
+                shareVc.shareTitle = @"考银行就用银行易考！";
+                shareVc.shareDesTitle = @"考银行就用银行易考！";
+             shareVc.shareWebUrl = webpageUrl;
+          shareVc.hidesBottomBarWhenPushed = YES;
+             [self.navigationController presentViewController:shareVc animated:YES completion:nil];
 }
 
 - (void)titleCommonSwitchAction:(UISwitch *)commonSwitch
@@ -188,7 +198,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-        return 8;
+        return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -196,6 +206,17 @@
             MineFunctionBtnTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, MineFunctionBtnTableViewCell, @"MineFunctionBtnTableViewCell");
         loc_cell.nameLab.text = [LdGlobalObj sharedInstanse].user_name;
         loc_cell.telephoneLab.text = [LdGlobalObj sharedInstanse].user_mobile;
+        if ([LdGlobalObj getUserHeadImg]) {
+            loc_cell.headImg.image = [LdGlobalObj getUserHeadImg];
+        }else{
+            [loc_cell.headImg sd_setImageWithURL:[NSURL URLWithString:[LdGlobalObj sharedInstanse].user_avatar] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                if (image) {
+                    [LdGlobalObj saveUserHeadImg:image];
+                }else{
+                    loc_cell.headImg.image = [UIImage imageNamed:@"head"];
+                }
+            }];
+        }
             loc_cell.delegate = self;
         [loc_cell.settingBtn addTarget:self action:@selector(settingClick) forControlEvents:UIControlEventTouchUpInside];
         [loc_cell.messageBtn addTarget:self action:@selector(messageClick) forControlEvents:UIControlEventTouchUpInside];
@@ -214,16 +235,19 @@
             if(indexPath.row == 2){
                 loc_cell.titleCommonLabel.text = @"我的试卷";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"wdsj-icon"];
-            }else if(indexPath.row == 3){
+            }else if (indexPath.row == 3){
+            loc_cell.titleCommonLabel.text = @"好友分享";
+            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"yaoqing"];
+            }else if(indexPath.row == 4){
                 loc_cell.titleCommonLabel.text = @"我的收藏";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"sc-icon"];
-            }else if(indexPath.row == 4){
+            }else if(indexPath.row == 5){
                 loc_cell.titleCommonLabel.text = @"我的笔记";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"bj-icon"];
-            }else if (indexPath.row == 5){
+            }else if (indexPath.row == 6){
                 loc_cell.titleCommonLabel.text = @"APP分享";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"share-icon"];
-            }else if (indexPath.row == 6){
+            }else if (indexPath.row == 7){
                 loc_cell.titleCommonLabel.text = @"收货地址";
                            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"shdz-icon"];
             }else{
@@ -238,28 +262,32 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-   
-    if(indexPath.row == 2){
-            ExerciseHositoryViewController *vc = [[ExerciseHositoryViewController alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        else if (indexPath.row == 3){
+    if (indexPath.row == 2) {
+        ExerciseHositoryViewController *vc = [[ExerciseHositoryViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if(indexPath.row == 3){
+            InviteViewController * shareVc = [InviteViewController new];
+            shareVc.modalPresentationStyle = UIModalPresentationFullScreen;
+            shareVc.hidesBottomBarWhenPushed = YES;
+               [self.navigationController pushViewController:shareVc animated:YES];
+        }else if (indexPath.row == 4){
             CollectionQuestionViewController *vc = [[CollectionQuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (indexPath.row == 4){
+        else if (indexPath.row == 5){
             NoteQuestionViewController *vc = [[NoteQuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }else if(indexPath.row == 5){
-                [self shareToPlatformType];
         }else if(indexPath.row == 6){
+                [self shareToPlatformType];
+        }else if(indexPath.row == 7){
             AddressListViewController *vc = [[AddressListViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }else if(indexPath.row == 7){
+        }else if(indexPath.row == 8){
            NSString *qq = @"3004628600";
            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]]) {
                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]];

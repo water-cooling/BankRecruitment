@@ -24,6 +24,7 @@
 #import "NSString+Common.h"
 #import "BaseViewController.h"
 #import "MBAlerManager.h"
+#import "UIView+ActivityIndicator.h"
 #endif
 
 

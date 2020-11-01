@@ -51,17 +51,18 @@
 
 -(void)setSearchStr:(NSString *)searchStr{
     _searchStr = searchStr;
+    [self.dataArr removeAllObjects];
     [self getQuestionListquest:searchStr];
 }
 
 -(void)getQuestionListquest:(NSString *)searchStr{
-    [MBAlerManager showLoadingInView:self.view];
+    [self.view showActivityViewAtCenter];
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
     [dict setValue:@(1) forKey:@"pageNo"];
     [dict setValue:@(10) forKey:@"pageSize"];
     [dict setValue:searchStr forKey:@"q"];
     [NewRequestClass requestQuestionList:dict success:^(id jsonData) {
-       [MBAlerManager hideAlert];
+        [self.view hideActivityViewAtCenter];
         if (jsonData[@"data"][@"response"][@"rows"]) {
             for (NSDictionary *dict in jsonData[@"data"][@"response"][@"rows"]){
                 QuestionListModel * model = [QuestionListModel mj_objectWithKeyValues:dict];
@@ -88,7 +89,7 @@
             self.placehodleImg.hidden = YES;
             self.placehodleTitle.hidden = YES;
         }
-        [MBAlerManager hideAlert];
+       [self.view hideActivityViewAtCenter];
     }];
 }
 
@@ -126,6 +127,9 @@
         _tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-TabbarSafeBottomMargin) style:UITableViewStylePlain];
         _tableview.delegate = self;
         _tableview.dataSource = self;
+        _tableview.estimatedRowHeight =0;
+        _tableview.estimatedSectionHeaderHeight =0;
+        _tableview.estimatedSectionFooterHeight =0;
         _tableview.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         _tableview.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         _tableview.backgroundColor = [UIColor whiteColor];

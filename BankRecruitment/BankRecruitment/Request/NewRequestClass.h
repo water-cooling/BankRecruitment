@@ -49,6 +49,14 @@ NS_ASSUME_NONNULL_BEGIN
  取消点赞
  */
 + (void)requestPraiseCancel:(NSMutableDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure;
+/**
+ 更新头像
+ */
++ (void)requestupdateImg:(NSMutableDictionary *)parameters success:(HttpSuccess)success failure:(HttpFailure)failure;
+/**
+ 上传头像
+*/
++(void)UpdataImg:(UIImage * )Img success:(HttpSuccess)success failure:(HttpFailure)failure;
 @end
 
 NS_ASSUME_NONNULL_END
