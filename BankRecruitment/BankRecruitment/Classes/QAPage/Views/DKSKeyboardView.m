@@ -38,7 +38,7 @@
 
 - (void)creatView {
     //输入视图
-    self.textView.frame = CGRectMake(14, 10, Screen_Width-28, 30);
+    self.textView.frame = CGRectMake(14, 10, Screen_Width-28, 40);
 }
 #pragma mark ====== 改变输入框大小 ======
 - (void)changeFrame:(CGFloat)height {
@@ -58,7 +58,7 @@
     [self removeBottomViewFromSupview];
     [UIView animateWithDuration:0.25 animations:^{
         //设置self的frame到最底部
-        self.textView.height = 30;
+        self.textView.height = 40;
         self.frame = CGRectMake(0, Screen_Height- self.height, Screen_Width, self.height);
         [self changeTableViewFrame];
     }];
@@ -84,7 +84,7 @@
 - (void)keyboardWillHide:(NSNotification *)notification {
     //如果是弹出了底部视图时
     [UIView animateWithDuration:0.25 animations:^{
-        self.textView.height = 30;
+        self.textView.height = 40;
         self.frame = CGRectMake(0, Screen_Height - self.height, Screen_Width, self.height);
         [self changeTableViewFrame];
     }];
@@ -129,7 +129,7 @@
             [self changeFrame:textHeight];
         }];
         _textView.maxNumberOfLines = 5;
-        _textView.layer.cornerRadius = 4;
+        _textView.layer.cornerRadius = 17.5;
         _textView.layer.borderWidth = 1;
         _textView.placeholder = @"请输入解答";
         _textView.layer.borderColor = [UIColor colorWithRed:0.88 green:0.88 blue:0.89 alpha:1.00].CGColor;

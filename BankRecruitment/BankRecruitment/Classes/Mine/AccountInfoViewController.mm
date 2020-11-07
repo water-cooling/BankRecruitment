@@ -29,7 +29,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHex:@"#F3F3F3"];
     // Do any additional setup after loading the view from its nib.
-    
     [self drawViews];
 }
 
@@ -45,6 +44,7 @@
 
 - (void)drawViews{
     self.title = @"账号信息";
+    self.headImg = [LdGlobalObj getUserHeadImg];
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
     [backButton setImage:[UIImage imageNamed:@"calendar_btn_arrow_left"] forState:UIControlStateNormal];
@@ -85,6 +85,12 @@
             loc_cell.titleCommonLabel.text = @"头像";
             if (self.headImg) {
                 loc_cell.headImg.image = self.headImg;
+            }else{
+                [loc_cell.headImg sd_setImageWithURL:[NSURL URLWithString:[LdGlobalObj sharedInstanse].user_avatar ? [LdGlobalObj sharedInstanse].user_avatar :@""] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                    if (image) {
+                        [LdGlobalObj saveUserHeadImg:image];
+                    }
+                }];
             }
             loc_cell.titleDesLab.hidden = YES;
             loc_cell.headImg.hidden = NO;

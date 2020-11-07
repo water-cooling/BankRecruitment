@@ -71,7 +71,6 @@
     [self.view addSubview:self.typeLab];
     [self.typeLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.height.mas_equalTo(12);
         make.top.equalTo(self.view).offset(StatusBarHeight+15);
     }];
         self.imgLogo = [[UIImageView alloc] init];

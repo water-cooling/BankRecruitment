@@ -108,11 +108,12 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        QuestionListModel * model  = self.dataArr[indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:@"搜索"];
-        cell.textLabel.text = model.title;
-        cell.textLabel.font = [UIFont systemFontOfSize:13];
+      cell.imageView.image = [UIImage imageNamed:@"搜索"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    QuestionListModel * model  = self.dataArr[indexPath.row];
+          cell.textLabel.text = model.title;
+          cell.textLabel.font = [UIFont systemFontOfSize:13];
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

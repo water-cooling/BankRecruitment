@@ -131,8 +131,7 @@ self.app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"
         [LdGlobalObj sharedInstanse].user_id = @"0";
         [LdGlobalObj sharedInstanse].user_mobile = @"";
         [LdGlobalObj sharedInstanse].user_name = @"";
-        LdGlobalObj sharedInstanse].user_avatar = @"";
-       
+        [LdGlobalObj sharedInstanse].user_avatar = @"";
         [LdGlobalObj sharedInstanse].tech_id = @"";
         [LdGlobalObj sharedInstanse].islive = NO;
         [LdGlobalObj sharedInstanse].islogin = NO;
@@ -140,6 +139,7 @@ self.app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"
         [LdGlobalObj sharedInstanse].user_acc = @"";
         [LdGlobalObj sharedInstanse].user_LastSign = @"";
         [LdGlobalObj sharedInstanse].user_SignDays = @"";
+        [LdGlobalObj deleteUserHeadImg];
         self.tabBarController.selectedIndex = 0;
         LoginViewController *homePageVC = [[LoginViewController alloc] init];
            [LdGlobalObj sharedInstanse].loginVC = homePageVC;

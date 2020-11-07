@@ -51,13 +51,8 @@
     return YES;
 }
 
-- (void)publishButtonPressed
-{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *userLoginDict = [defaults objectForKey:@"userLoginDict"];
-    NSString *passwd = [userLoginDict objectForKey:@"userPassword"];
-    
-    if(strIsNullOrEmpty(self.prePassedTextField.text)||strIsNullOrEmpty(self.NewPassedTextField.text)||strIsNullOrEmpty(self.reTryPassedTextField.text))
+- (void)publishButtonPressed{
+if(strIsNullOrEmpty(self.prePassedTextField.text)||strIsNullOrEmpty(self.NewPassedTextField.text)||strIsNullOrEmpty(self.reTryPassedTextField.text))
     {
         [SVProgressHUD show];
         [SVProgressHUD dismissWithError:@"请输入原始密码和新密码" afterDelay:2.0f];
@@ -67,7 +62,7 @@
     if(![self.NewPassedTextField.text isEqualToString:self.reTryPassedTextField.text])
     {
         [SVProgressHUD show];
-        [SVProgressHUD dismissWithError:@"新旧密码不能一样哦" afterDelay:2.0f];
+        [SVProgressHUD dismissWithError:@"两次密码不一致" afterDelay:2.0f];
         return;
     }
     if(![self judgePassWordLegal:self.NewPassedTextField.text]){
@@ -99,10 +94,13 @@
                 [defaults synchronize];
                 
                 [self.navigationController popViewControllerAnimated:YES];
+            }else if ([result isEqualToString:@"fail"]){
+                NSString * msg = [contentDict objectForKey:@"msg"];
+                ZB_Toast(msg);
             }
         }
     } failure:^(NSError *error) {
-        
+        ZB_Toast(@"修改失败");
     }];
 }
 

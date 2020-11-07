@@ -131,5 +131,5 @@ typedef void (^BuyObjectSuccessBlock)();
 - (void)checkUnchekReceipt;
 +(void)saveUserHeadImg:(UIImage * )img;
 +(UIImage *)getUserHeadImg;
-+(void)deleteUserHeadImg:(UIImage * )img;
++(void)deleteUserHeadImg;
 @end

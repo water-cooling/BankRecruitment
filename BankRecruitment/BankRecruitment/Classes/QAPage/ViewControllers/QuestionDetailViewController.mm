@@ -28,13 +28,14 @@
 @property (nonatomic, assign) NSUInteger pageNo;
 @property (nonatomic, strong) DKSKeyboardView *keyView;
 @property (nonatomic, strong)  QuestionListModel * quesetionModel;
+@property (nonatomic, strong)  dispatch_group_t group;
 @end
 
 @implementation QuestionDetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.edgesForExtendedLayout = UIRectEdgeBottom;
+    self.group = dispatch_group_create();
     self.pageNo = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"详情";
@@ -46,7 +47,7 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     [self setupRefreshTable:self.tableview needsFooterRefresh:YES];
-    [self getQuestionDetailquest];
+    [self getData];
    
 }
 - (void)drawViews{
@@ -189,9 +190,9 @@
    [self.tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(self.view);
         make.top.equalTo(contactView.mas_bottom);
-        make.bottom.equalTo(self.view).offset(-50);
+        make.bottom.equalTo(self.view).offset(-60);
     }];
-    self.keyView = [[DKSKeyboardView alloc] initWithFrame:CGRectMake(0, self.view.height- 50, Screen_Width, 50)];
+    self.keyView = [[DKSKeyboardView alloc] initWithFrame:CGRectMake(0, self.view.height- 60, Screen_Width, 60)];
     //设置代理方法
     self.keyView.delegate = self;
     [self.view addSubview:_keyView];
@@ -200,11 +201,26 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)getData{
+     [self.view showActivityViewAtCenter];
+    dispatch_group_async(self.group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self getQuestionDetailquest:YES];
+    });
+dispatch_group_notify(self.group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.dataArr removeAllObjects];
+                [self getAnswerListquest];
+        });
+    });
+    
+    
+}
+
 #pragma mark --fresh
 -(void)reloadHeaderTableViewDataSource{
     self.pageNo = 1;
-    [self.tableview.mj_footer resetNoMoreData];
     [self.dataArr removeAllObjects];
+    [self.tableview.mj_footer resetNoMoreData];
     [self getAnswerListquest];
 }
 
@@ -225,34 +241,42 @@
     self.contactNumLab.text = [NSString stringWithFormat:@"%ld",self.quesetionModel.answerNum];
     self.questionTimeLab.text = self.quesetionModel.addTime;
     self.questionDetailContentLab.text = self.quesetionModel.content;
-    CGFloat titleHeight = [self.quesetionModel.title sizeWithFont:16 textSizeWidht:Screen_Width-25 textSizeHeight:CGFLOAT_MAX].height;
-    [self.questionContentLab mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(titleHeight);
-    }];
-    CGFloat contentHeight = [self.quesetionModel.content sizeWithFont:13 textSizeWidht:Screen_Width-28 textSizeHeight:CGFLOAT_MAX].height;
-      [self.questionDetailContentLab mas_updateConstraints:^(MASConstraintMaker *make) {
-          make.height.mas_equalTo(contentHeight );
-      }];
-    [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(144+titleHeight+contentHeight);
-    }];
+    if (!self.questionContentLab.text.length) {
+        CGFloat titleHeight = [self.quesetionModel.title sizeWithFont:16 textSizeWidht:Screen_Width-25 textSizeHeight:CGFLOAT_MAX].height;
+        [self.questionContentLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(titleHeight);
+        }];
+        CGFloat contentHeight = [self.quesetionModel.content sizeWithFont:13 textSizeWidht:Screen_Width-28 textSizeHeight:CGFLOAT_MAX].height;
+            [self.questionDetailContentLab mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(contentHeight );
+            }];
+          [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
+              make.height.mas_equalTo(144+titleHeight+contentHeight);
+          }];
+    }
 }
 
 #pragma mark --NetWorking
--(void)getQuestionDetailquest{
-    [self.view showActivityViewAtCenter];
+-(void)getQuestionDetailquest:(BOOL)isFresh{
+    if (isFresh) {
+        dispatch_group_enter(self.group);
+    }
     NSMutableDictionary * dict = [NSMutableDictionary dictionary];
        [dict setValue:self.questionId forKey:@"id"];
        [dict setValue:@(1) forKey:@"needIncrease"];
-        
        [NewRequestClass requestQuestionDetail:dict success:^(id jsonData) {
            if (jsonData[@"data"][@"response"][@"row"]) {
                    self.quesetionModel = [QuestionListModel mj_objectWithKeyValues:jsonData[@"data"][@"response"][@"row"]];
                [self initData];
-               [self getAnswerListquest];
+               if (isFresh) {
+                   dispatch_group_leave(self.group);
+               }
             }
        } failure:^(NSError *error) {
         ZB_Toast(@"请求失败");
+           if (isFresh) {
+               dispatch_group_leave(self.group);
+           }
            [self.view hideActivityViewAtCenter];
        }];
 }
@@ -296,9 +320,9 @@
        if ([jsonData[@"data"][@"response"][@"flag"]boolValue]) {
            ZB_Toast(@"解答成功");
            self.pageNo = 1;
+          
            [self.tableview.mj_footer resetNoMoreData];
-           [self.dataArr removeAllObjects];
-           [self getAnswerListquest];
+           [self getData];
        }else{
            ZB_Toast([jsonData[@"messages"][0]message]);
        }
@@ -353,11 +377,10 @@
      if ([jsonData[@"data"][@"response"][@"flag"]boolValue]) {
          ZB_Toast(@"删除发言成功");
          [weakSelf.dataArr removeObject:model];
-         self.quesetionModel.answerNum -= 1;
-         self.contactNumLab.text = [NSString stringWithFormat:@"%ld",self.quesetionModel.answerNum];
+         [weakSelf getQuestionDetailquest:NO];
          [weakSelf.tableview deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
         }
-             [weakSelf.tableview reloadData];
+            [weakSelf.tableview reloadData];
         } failure:^(NSError *error) {
           ZB_Toast(@"请求失败");
     }];

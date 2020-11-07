@@ -31,6 +31,7 @@
 @property (nonatomic, strong) UIButton *signBtn;
 @property (strong, nonatomic) UIImageView *placehodleImg;
 @property (strong, nonatomic) UILabel *placehodleTitle;
+
 @end
 
 @implementation QAListViewController
@@ -49,8 +50,9 @@
     [self topView];
     [self initUI];
     [self setIOS:self.tableview];
-    [self setupRefreshTable:self.tableview needsFooterRefresh:YES];
     [self getQuestionCatsquest];
+    [self setupRefreshTable:self.tableview needsFooterRefresh:YES];
+    
 }
 #pragma mark --fresh
 -(void)reloadHeaderTableViewDataSource{
@@ -212,9 +214,15 @@
 }
 - (void)setupChildView:(BOOL)Send {
     if (Send) {
-        self.searchListVc.view.hidden = YES;
-        self.placehodleImg.hidden = NO;
-        self.placehodleTitle.hidden = NO;
+        if (self.dataArr.count == 0) {
+            self.searchListVc.view.hidden = YES;
+            self.placehodleImg.hidden = NO;
+            self.placehodleTitle.hidden = NO;
+        }else{
+            self.searchListVc.view.hidden = YES;
+            self.placehodleImg.hidden = YES;
+            self.placehodleTitle.hidden = YES;
+        }
     }else{
         self.searchListVc.view.hidden = NO;
         self.placehodleImg.hidden = YES;

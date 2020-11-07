@@ -157,7 +157,7 @@ static LdGlobalObj* _glbObj;
 //    self.fileServIp     = @"http://yk.yinhangzhaopin.com/";
 //    self.htmlServIp     = @"http://yk.yinhangzhaopin.com/zlh5/";
     //测试
-    self.webAppIp = @"http://yhyk.project.njagan.org/bshApp/AppAction";
+    self.webAppIp = @"http://yk-test.project.njagan.org/bshApp/AppAction";
     self.webNewAppIp = @"http://ykv2-test.project.njagan.org/dw.yikao/api/";
     self.fileServIp = @"http://yhyk.project.njagan.org/";
   self.htmlServIp = @"http://yhyk.project.njagan.org/zlh5/";
@@ -316,7 +316,7 @@ static LdGlobalObj* _glbObj;
                     [model setDataWithDic:contentDict];
 
 //                    [LdGlobalObj sharedInstanse].VideoVC.isFirstLoad = NO;
-                    [LdGlobalObj sharedInstanse].homePageVC.selectedIndex = 2;
+                    [LdGlobalObj sharedInstanse].homePageVC.selectedIndex = 1;
                     [self performSelector:@selector(jumpVideoViewBy:) withObject:model afterDelay:0.3];
                 }
                 else if([remoteMessageModel.mType isEqualToString:@"全员推送模考"])
@@ -356,7 +356,7 @@ static LdGlobalObj* _glbObj;
                     [model setDataWithDic:contentDict];
 
 //                    [LdGlobalObj sharedInstanse].VideoVC.isFirstLoad = NO;
-                    [LdGlobalObj sharedInstanse].homePageVC.selectedIndex = 2;
+                    [LdGlobalObj sharedInstanse].homePageVC.selectedIndex = 1;
                     [self performSelector:@selector(jumpVideoViewBy:) withObject:model afterDelay:0.3];
                 }
             }
