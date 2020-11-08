@@ -198,7 +198,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-        return 9;
+        return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -235,19 +235,19 @@
             if(indexPath.row == 2){
                 loc_cell.titleCommonLabel.text = @"我的试卷";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"wdsj-icon"];
-            }else if (indexPath.row == 3){
-            loc_cell.titleCommonLabel.text = @"好友分享";
-            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"yaoqing"];
-            }else if(indexPath.row == 4){
+//            }else if (indexPath.row == 3){
+//            loc_cell.titleCommonLabel.text = @"好友分享";
+//            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"yaoqing"];
+            }else if(indexPath.row == 3){
                 loc_cell.titleCommonLabel.text = @"我的收藏";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"sc-icon"];
-            }else if(indexPath.row == 5){
+            }else if(indexPath.row == 4){
                 loc_cell.titleCommonLabel.text = @"我的笔记";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"bj-icon"];
-            }else if (indexPath.row == 6){
+            }else if (indexPath.row == 5){
                 loc_cell.titleCommonLabel.text = @"APP分享";
                 loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"share-icon"];
-            }else if (indexPath.row == 7){
+            }else if (indexPath.row == 6){
                 loc_cell.titleCommonLabel.text = @"收货地址";
                            loc_cell.titleCommonImageView.image = [UIImage imageNamed:@"shdz-icon"];
             }else{
@@ -267,27 +267,27 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else if(indexPath.row == 3){
-            InviteViewController * shareVc = [InviteViewController new];
-            shareVc.modalPresentationStyle = UIModalPresentationFullScreen;
-            shareVc.hidesBottomBarWhenPushed = YES;
-               [self.navigationController pushViewController:shareVc animated:YES];
-        }else if (indexPath.row == 4){
+//    }else if(indexPath.row == 3){
+//            InviteViewController * shareVc = [InviteViewController new];
+//            shareVc.modalPresentationStyle = UIModalPresentationFullScreen;
+//            shareVc.hidesBottomBarWhenPushed = YES;
+//               [self.navigationController pushViewController:shareVc animated:YES];
+        }else if (indexPath.row == 3){
             CollectionQuestionViewController *vc = [[CollectionQuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (indexPath.row == 5){
+        else if (indexPath.row == 4){
             NoteQuestionViewController *vc = [[NoteQuestionViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }else if(indexPath.row == 6){
+        }else if(indexPath.row == 5){
                 [self shareToPlatformType];
-        }else if(indexPath.row == 7){
+        }else if(indexPath.row == 6){
             AddressListViewController *vc = [[AddressListViewController alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
-        }else if(indexPath.row == 8){
+        }else if(indexPath.row == 7){
            NSString *qq = @"3004628600";
            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]]) {
                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"mqqwpa://im/chat?chat_type=wpa&uin=%@&version=1&src_type=web", qq]]];
