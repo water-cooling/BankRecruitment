@@ -362,7 +362,9 @@
 - (void)NetworkGetFirstContentsOutline
 {
     [LLRequestClass requestdoGetFirstBySuccess:^(id jsonData) {
-        NSDictionary *contentDict=[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+       id data =[NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil];
+        if ([data isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *contentDict = data;
         NSLog(@"%@", contentDict);
         NSString *result = contentDict[@"result"];
         if([result isEqualToString:@"success"])
@@ -377,6 +379,9 @@
             }
             
             [self.tableView reloadData];
+        }
+    }else{
+            
         }
         
     } failure:^(NSError *error) {
