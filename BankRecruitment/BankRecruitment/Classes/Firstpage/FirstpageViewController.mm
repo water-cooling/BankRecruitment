@@ -542,7 +542,7 @@
     UIImageView * img = (UIImageView *)ges.view;
     switch (img.tag-1000) {
         case 2:{
-            self.tabBarController.selectedIndex =2;
+            self.tabBarController.selectedIndex =3;
         }
             break;
         case 3:{
