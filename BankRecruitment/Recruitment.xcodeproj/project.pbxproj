@@ -3930,7 +3930,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.40;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z2F894585Y;
 				ENABLE_BITCODE = NO;
 				EXECUTABLE_PREFIX = "";
@@ -3959,7 +3959,7 @@
 					"$(PROJECT_DIR)/BankRecruitment/Request/UMSocial/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/BankRecruitment/Request/UMSocial/SocialLibraries/WeChat/WechatSDK",
 				);
-				MARKETING_VERSION = 1.39;
+				MARKETING_VERSION = 1.40;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DongwuEducation.longlian;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3980,7 +3980,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.40;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z2F894585Y;
 				ENABLE_BITCODE = NO;
 				EXECUTABLE_PREFIX = "";
@@ -4009,7 +4009,7 @@
 					"$(PROJECT_DIR)/BankRecruitment/Request/UMSocial/UMSocialSDKPlugin",
 					"$(PROJECT_DIR)/BankRecruitment/Request/UMSocial/SocialLibraries/WeChat/WechatSDK",
 				);
-				MARKETING_VERSION = 1.39;
+				MARKETING_VERSION = 1.40;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.DongwuEducation.longlian;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -22,8 +22,8 @@
     [super viewDidLoad];
     self.title =@"设置";
     self.view.backgroundColor= [UIColor whiteColor];
-NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-self.app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+NSDictionary*infoDictionary = [[NSBundle mainBundle] infoDictionary];
+self.app_Version= [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0.0f, 0.0f, 25.0f, 25.0f);
