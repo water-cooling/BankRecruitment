@@ -89,6 +89,8 @@
                 [loc_cell.headImg sd_setImageWithURL:[NSURL URLWithString:[LdGlobalObj sharedInstanse].user_avatar ? [LdGlobalObj sharedInstanse].user_avatar :@""] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
                     if (image) {
                         [LdGlobalObj saveUserHeadImg:image];
+                    }else{
+                        loc_cell.headImg.image = [UIImage imageNamed:@"head"];
                     }
                 }];
             }

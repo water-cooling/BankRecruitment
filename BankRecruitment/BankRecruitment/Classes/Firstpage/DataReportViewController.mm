@@ -7,7 +7,7 @@
 //
 
 #import "DataReportViewController.h"
-#import "AboutTableViewCell.h"
+#import "CalendarTableViewCell.h"
 #import "PurchedModel.h"
 #import "DateReportDetailViewController.h"
 
@@ -62,7 +62,7 @@
 #pragma -mark UITableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 70;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -72,16 +72,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AboutTableViewCell *cell = GET_TABLE_CELL_FROM_NIB(tableView, AboutTableViewCell, @"AboutTableViewCell");
+    CalendarTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, CalendarTableViewCell, @"CalendarTableViewCell");
+               loc_cell.accessoryType = UITableViewCellAccessoryNone;
     PurchedModel *model = self.list[indexPath.row];
-    cell.titleCommonLabel.text = model.Abstract;
-    return cell;
+    loc_cell.calendarTitleLabel.text = model.Abstract;
+       loc_cell.calendarTimeLabel.text = model.FeeDate;
+       loc_cell.editBtn.tag = indexPath.row;
+        [loc_cell.editBtn setImage:[UIImage imageNamed:@"zt"] forState:0];
+        [loc_cell.editBtn addTarget:self action:@selector(editClick:) forControlEvents:UIControlEventTouchUpInside];
+               return loc_cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     PurchedModel *model = self.list[indexPath.row];
+    DateReportDetailViewController *vc = [[DateReportDetailViewController alloc] init];
+    vc.purchedModel = model;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)editClick:(UIButton *)sender{
+    
+    PurchedModel *model = self.list[sender.tag];
     DateReportDetailViewController *vc = [[DateReportDetailViewController alloc] init];
     vc.purchedModel = model;
     [self.navigationController pushViewController:vc animated:YES];
