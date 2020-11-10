@@ -7,7 +7,7 @@
 //
 
 #import "WrongQuestionsViewController.h"
-#import "AboutTableViewCell.h"
+#import "CalendarTableViewCell.h"
 #import "PurchedModel.h"
 #import "WrongQuestionsSheetViewController.h"
 #import "WrongTreeViewController.h"
@@ -47,7 +47,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = kColorBarGrayBackground;
+    self.tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     
     if (@available(iOS 11.0, *)) {
@@ -63,7 +63,7 @@
 #pragma -mark UITableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 70;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -73,18 +73,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AboutTableViewCell *cell = GET_TABLE_CELL_FROM_NIB(tableView, AboutTableViewCell, @"AboutTableViewCell");
-    PurchedModel *model = self.list[indexPath.row];
-    cell.titleCommonLabel.text = model.Abstract;
-    return cell;
+    CalendarTableViewCell *loc_cell = GET_TABLE_CELL_FROM_NIB(tableView, CalendarTableViewCell, @"CalendarTableViewCell");
+            loc_cell.accessoryType = UITableViewCellAccessoryNone;
+             PurchedModel *model = self.list[indexPath.row];
+            loc_cell.calendarTitleLabel.text = model.Abstract;
+    loc_cell.calendarTimeLabel.text = model.FeeDate;
+    loc_cell.editBtn.tag = indexPath.row;
+     [loc_cell.editBtn setImage:[UIImage imageNamed:@"zt"] forState:0];
+     [loc_cell.editBtn addTarget:self action:@selector(editClick:) forControlEvents:UIControlEventTouchUpInside];
+            return loc_cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     PurchedModel *model = self.list[indexPath.row];
-    if([model.LinkID isEqualToString:[LdGlobalObj sharedInstanse].firstExaminPaperEID])
-    {
+    if([model.LinkID isEqualToString:[LdGlobalObj sharedInstanse].firstExaminPaperEID])    {
         WrongTreeViewController *vc = [[WrongTreeViewController alloc] init];
         vc.title = model.Abstract;
         [self.navigationController pushViewController:vc animated:YES];
@@ -95,6 +99,23 @@
         vc.purchedModel = model;
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+-(void)editClick:(UIButton *)sender{
+    PurchedModel *model = self.list[sender.tag];
+       if([model.LinkID isEqualToString:[LdGlobalObj sharedInstanse].firstExaminPaperEID])
+       {
+           WrongTreeViewController *vc = [[WrongTreeViewController alloc] init];
+           vc.title = model.Abstract;
+           [self.navigationController pushViewController:vc animated:YES];
+       }
+       else
+       {
+           WrongQuestionsSheetViewController *vc = [[WrongQuestionsSheetViewController alloc] init];
+           vc.purchedModel = model;
+           [self.navigationController pushViewController:vc animated:YES];
+       }
+    
 }
 
 #pragma -mark Network

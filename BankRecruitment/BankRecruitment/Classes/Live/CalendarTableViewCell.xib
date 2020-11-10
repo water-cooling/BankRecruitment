@@ -51,6 +51,7 @@
                     <constraint firstItem="KQp-Gh-yfv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rS9-xc-UKd"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="calendarTimeLabel" destination="E4P-Vi-dmd" id="4WO-WD-0gQ"/>
                 <outlet property="calendarTitleLabel" destination="HcY-3y-XcT" id="ms6-9i-9As"/>
@@ -58,7 +59,7 @@
                 <outlet property="editWidth" destination="Uts-Nd-ml8" id="Xh2-G0-pS3"/>
                 <outlet property="editheight" destination="Ub7-wR-DVI" id="Amk-bM-40G"/>
             </connections>
-            <point key="canvasLocation" x="-137.59999999999999" y="9.8950524737631191"/>
+            <point key="canvasLocation" x="83" y="0.0"/>
         </tableViewCell>
     </objects>
 </document>

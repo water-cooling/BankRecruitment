@@ -18,7 +18,7 @@
     _lineView.backgroundColor = kColorLineSepBackground;
     [self addSubview:_lineView];
     
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
